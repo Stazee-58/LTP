@@ -1,0 +1,213 @@
+"use client";
+
+import { motion, AnimatePresence } from "motion/react";
+import { X, Buildings, Clock, MapTrifold } from "@phosphor-icons/react";
+import { CATEGORY_LABELS, type Place } from "@/data/places";
+import type { Village } from "@/data/villages";
+
+interface VillagePanelProps {
+  village: Village;
+  places: Place[];
+  lang: "vi" | "en";
+  onClose: () => void;
+  onOpenPlace: (p: Place) => void;
+}
+
+const CATEGORY_COLORS: Record<string, string> = {
+  dinh: "#C9A84C",
+  chua: "#E07B54",
+  mieu: "#8A7DC8",
+  gieng: "#6BAF92",
+  cong_lang: "#e8a87c",
+  ao: "#5bb8d4",
+  nha_tho_ho: "#d4a0c0",
+};
+
+export default function VillagePanel({
+  village,
+  places,
+  lang,
+  onClose,
+  onOpenPlace,
+}: VillagePanelProps) {
+  const p = village.properties;
+
+  // Count by category
+  const categoryCounts = places.reduce<Record<string, number>>((acc, pl) => {
+    acc[pl.category] = (acc[pl.category] || 0) + 1;
+    return acc;
+  }, {});
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="detail-panel"
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{ type: "spring", stiffness: 280, damping: 32 }}
+        role="complementary"
+        aria-label={`Thông tin làng ${p.name}`}
+      >
+        {/* Close */}
+        <button
+          className="panel-close"
+          style={{ position: "absolute", top: 16, right: 16, zIndex: 10 }}
+          onClick={onClose}
+          aria-label="Đóng panel"
+          id="village-panel-close"
+        >
+          <X size={16} weight="bold" />
+        </button>
+
+        <div className="panel-body" style={{ paddingTop: 28 }}>
+          {/* Village header */}
+          <div className="village-panel-header" style={{ padding: 0, marginBottom: 20 }}>
+            <div
+              className="village-color-strip"
+              style={{ background: p.color }}
+            />
+            <h1 className="village-panel-name">{p.name}</h1>
+            <p className="village-panel-han">{p.name_han_nom}</p>
+            {p.name_old && (
+              <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 6 }}>
+                {lang === "en" ? "Also known as" : "Còn gọi là"}: {p.name_old}
+              </p>
+            )}
+          </div>
+
+          {/* Stats */}
+          <div className="village-stats">
+            <div className="stat-box">
+              <div className="stat-value">{p.area_ha} ha</div>
+              <div className="stat-label">{lang === "en" ? "Area" : "Diện tích"}</div>
+            </div>
+            <div className="stat-box">
+              <div className="stat-value">{p.established}</div>
+              <div className="stat-label">{lang === "en" ? "Est." : "Thành lập"}</div>
+            </div>
+            <div className="stat-box">
+              <div className="stat-value">{places.length}</div>
+              <div className="stat-label">{lang === "en" ? "Heritage sites" : "Di tích"}</div>
+            </div>
+            <div className="stat-box">
+              <div className="stat-value" style={{ color: "var(--sage-400)" }}>
+                {Object.keys(categoryCounts).length}
+              </div>
+              <div className="stat-label">{lang === "en" ? "Categories" : "Loại"}</div>
+            </div>
+          </div>
+
+          {/* Summary */}
+          <div className="panel-section-title" style={{ marginTop: 20 }}>
+            <Buildings size={12} style={{ display: "inline", marginRight: 5 }} />
+            {lang === "en" ? "Overview" : "Tổng quan"}
+          </div>
+          <p className="panel-description">{p.summary}</p>
+
+          {/* Categories breakdown */}
+          {Object.keys(categoryCounts).length > 0 && (
+            <>
+              <div className="panel-section-title">
+                <MapTrifold size={12} style={{ display: "inline", marginRight: 5 }} />
+                {lang === "en" ? "Heritage by type" : "Di tích theo loại"}
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 16 }}>
+                {Object.entries(categoryCounts).map(([cat, count]) => {
+                  const label = CATEGORY_LABELS[cat];
+                  return (
+                    <div
+                      key={cat}
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 5,
+                        padding: "4px 10px",
+                        background: `${CATEGORY_COLORS[cat] || "#C9A84C"}18`,
+                        border: `1px solid ${CATEGORY_COLORS[cat] || "#C9A84C"}44`,
+                        borderRadius: 100,
+                        fontSize: "0.75rem",
+                        color: CATEGORY_COLORS[cat] || "#C9A84C",
+                      }}
+                    >
+                      <span>{label?.icon}</span>
+                      <span>{lang === "en" ? label?.en : label?.vi}</span>
+                      <span
+                        style={{
+                          background: CATEGORY_COLORS[cat] || "#C9A84C",
+                          color: "#050d18",
+                          borderRadius: 100,
+                          padding: "1px 6px",
+                          fontWeight: 600,
+                          fontSize: "0.65rem",
+                        }}
+                      >
+                        {count}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          )}
+
+          {/* Place list */}
+          <div className="panel-section-title">
+            <Clock size={12} style={{ display: "inline", marginRight: 5 }} />
+            {lang === "en" ? "Heritage Sites" : "Danh sách di tích"}
+          </div>
+          <div>
+            {places.map((pl) => {
+              const cat = CATEGORY_LABELS[pl.category];
+              const color = CATEGORY_COLORS[pl.category] || "#C9A84C";
+              return (
+                <div
+                  key={pl.id}
+                  className="place-list-item"
+                  onClick={() => onOpenPlace(pl)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === "Enter" && onOpenPlace(pl)}
+                  aria-label={`Xem chi tiết ${pl.name}`}
+                >
+                  <div
+                    className="place-list-icon"
+                    style={{ borderColor: `${color}44`, background: `${color}18` }}
+                  >
+                    {cat?.icon}
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div className="place-list-name">{pl.name}</div>
+                    <div className="place-list-meta">
+                      {lang === "en" ? cat?.en : cat?.vi}
+                      {pl.built_year ? ` · ${pl.built_year}` : ""}
+                    </div>
+                  </div>
+                  {pl.rank && (
+                    <div
+                      style={{
+                        width: 8,
+                        height: 8,
+                        borderRadius: "50%",
+                        background: "#C9A84C",
+                        flexShrink: 0,
+                      }}
+                      title={pl.rank}
+                    />
+                  )}
+                </div>
+              );
+            })}
+            {places.length === 0 && (
+              <p className="panel-description" style={{ color: "var(--text-muted)" }}>
+                {lang === "en"
+                  ? "No heritage sites recorded yet for this village."
+                  : "Chưa có di tích nào được ghi chép cho làng này."}
+              </p>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
