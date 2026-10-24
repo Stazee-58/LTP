@@ -13,6 +13,7 @@ import FilterBar from "@/components/FilterBar";
 import VillageLegend from "@/components/VillageLegend";
 import LoadingScreen from "@/components/LoadingScreen";
 import AboutModal from "@/components/AboutModal";
+import { BUILDINGS_3D_GEOJSON } from "@/data/buildings3d";
 
 type PanelState =
   | { kind: "none" }
@@ -42,6 +43,7 @@ export default function MapPage() {
     gieng: "#6BAF92",
     cong_lang: "#e8a87c",
     ao: "#5bb8d4",
+    truong_hoc: "#38bdf8",
     nha_tho_ho: "#d4a0c0",
   };
 
@@ -258,6 +260,53 @@ export default function MapPage() {
         map.getCanvas().style.cursor = "";
       });
 
+      // ── 3D Buildings & Heritage Extrusion Layer
+      map.addSource("buildings-3d", {
+        type: "geojson",
+        data: BUILDINGS_3D_GEOJSON as GeoJSON.FeatureCollection,
+      });
+
+      map.addLayer({
+        id: "buildings-3d-layer",
+        type: "fill-extrusion",
+        source: "buildings-3d",
+        paint: {
+          "fill-extrusion-color": ["get", "color"],
+          "fill-extrusion-height": ["get", "height"],
+          "fill-extrusion-base": ["get", "base_height"],
+          "fill-extrusion-opacity": 0.85,
+        },
+      });
+
+      // Directional 3D light for realistic building shading
+      map.setLight({
+        anchor: "map",
+        color: "#ffffff",
+        intensity: 0.6,
+        position: [1.5, 90, 45],
+      });
+
+      map.on("mouseenter", "buildings-3d-layer", () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", "buildings-3d-layer", () => {
+        map.getCanvas().style.cursor = "";
+      });
+      map.on("click", "buildings-3d-layer", (e) => {
+        if (!e.features || !e.features.length) return;
+        const bName = e.features[0].properties?.name;
+        const bHeight = e.features[0].properties?.height;
+        if (bName) {
+          popupRef.current?.remove();
+          popupRef.current = new maplibregl.Popup({ offset: 12, closeButton: false })
+            .setLngLat(e.lngLat)
+            .setHTML(
+              `<div style="font-weight:600;font-size:12px;color:#C9A84C;">🏛️ ${bName}</div><div style="font-size:11px;color:#94a3b8;margin-top:2px;">Mô hình 3D cao: ${bHeight}m</div>`
+            )
+            .addTo(map);
+        }
+      });
+
       // ── Render place markers
       renderMarkers(map, new Set());
       setMapLoaded(true);
@@ -283,10 +332,25 @@ export default function MapPage() {
     if (!map) return;
     const next = !is3D;
     setIs3D(next);
-    map.easeTo({
-      ...(next ? VIEW_3D : VIEW_2D),
-      duration: 900,
-    });
+    if (next) {
+      map.easeTo({
+        pitch: 58,
+        bearing: -22,
+        duration: 1000,
+      });
+      if (map.getLayer("buildings-3d-layer")) {
+        map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.95);
+      }
+    } else {
+      map.easeTo({
+        pitch: 0,
+        bearing: 0,
+        duration: 1000,
+      });
+      if (map.getLayer("buildings-3d-layer")) {
+        map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.45);
+      }
+    }
   }, [is3D]);
 
   // ── flyTo from search

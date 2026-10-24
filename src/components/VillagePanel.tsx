@@ -20,6 +20,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   gieng: "#6BAF92",
   cong_lang: "#e8a87c",
   ao: "#5bb8d4",
+  truong_hoc: "#38bdf8",
   nha_tho_ho: "#d4a0c0",
 };
 
@@ -67,11 +68,16 @@ export default function VillagePanel({
               className="village-color-strip"
               style={{ background: p.color }}
             />
-            <h1 className="village-panel-name">{p.name}</h1>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+              <h1 className="village-panel-name">{p.name}</h1>
+              <span style={{ fontSize: "0.8rem", color: "#38bdf8", fontWeight: 500 }}>
+                {p.district}
+              </span>
+            </div>
             <p className="village-panel-han">{p.name_han_nom}</p>
             {p.name_old && (
               <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 6 }}>
-                {lang === "en" ? "Also known as" : "Còn gọi là"}: {p.name_old}
+                {lang === "en" ? "Historical name" : "Địa danh cổ"}: {p.name_old}
               </p>
             )}
           </div>
@@ -88,20 +94,40 @@ export default function VillagePanel({
             </div>
             <div className="stat-box">
               <div className="stat-value">{places.length}</div>
-              <div className="stat-label">{lang === "en" ? "Heritage sites" : "Di tích"}</div>
+              <div className="stat-label">{lang === "en" ? "Heritage & Schools" : "Địa điểm"}</div>
             </div>
             <div className="stat-box">
               <div className="stat-value" style={{ color: "var(--sage-400)" }}>
                 {Object.keys(categoryCounts).length}
               </div>
-              <div className="stat-label">{lang === "en" ? "Categories" : "Loại"}</div>
+              <div className="stat-label">{lang === "en" ? "Categories" : "Loại hình"}</div>
             </div>
           </div>
+
+          {/* 2025 Administrative Merger Card */}
+          {p.administrative_merger_2025 && (
+            <div
+              style={{
+                marginTop: 18,
+                padding: "10px 14px",
+                background: "rgba(56, 189, 248, 0.08)",
+                border: "1px solid rgba(56, 189, 248, 0.25)",
+                borderRadius: 8,
+              }}
+            >
+              <div style={{ fontSize: "0.7rem", fontWeight: 600, color: "#38bdf8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
+                🏛️ {lang === "en" ? "2024–2025 Administrative Merger" : "Sắp xếp đơn vị hành chính (hiệu lực 2025)"}
+              </div>
+              <p style={{ fontSize: "0.775rem", color: "var(--text-secondary)", lineHeight: 1.5, margin: 0 }}>
+                {p.administrative_merger_2025}
+              </p>
+            </div>
+          )}
 
           {/* Summary */}
           <div className="panel-section-title" style={{ marginTop: 20 }}>
             <Buildings size={12} style={{ display: "inline", marginRight: 5 }} />
-            {lang === "en" ? "Overview" : "Tổng quan"}
+            {lang === "en" ? "Overview" : "Tổng quan lịch sử"}
           </div>
           <p className="panel-description">{p.summary}</p>
 

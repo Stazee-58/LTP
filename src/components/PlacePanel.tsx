@@ -26,6 +26,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   gieng: "#6BAF92",
   cong_lang: "#e8a87c",
   ao: "#5bb8d4",
+  truong_hoc: "#38bdf8",
   nha_tho_ho: "#d4a0c0",
 };
 
