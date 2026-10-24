@@ -24,8 +24,8 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ hội truyền thống rước kiệu mùng 10 đến 12 tháng Hai âm lịch"],
     images: [
       {
-        url: "/images/village_gate.jpg",
-        caption: "Không gian cổ kính Đình Khương Hạ",
+        url: "/images/dinh_khuong_ha.jpg",
+        caption: "Toàn cảnh Đình Khương Hạ bên hồ bán nguyệt",
         credit: "Khảo sát thực địa 2024",
         year: 2024,
       },
@@ -54,10 +54,10 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ Phật Đản mùng 8 tháng Tư", "Lễ Vu Lan tháng Bảy âm lịch"],
     images: [
       {
-        url: "/images/historic_map.jpg",
-        caption: "Khuôn viên chùa Phụng Lộc",
+        url: "/images/chua_boc.jpg",
+        caption: "Khuôn viên chùa Phụng Lộc (Khương Hạ)",
         credit: "Tư liệu di sản",
-        year: 2023,
+        year: 2024,
       },
     ],
     sources: [{ citation: "Văn bia chùa Phụng Lộc & Địa chí Thanh Xuân, 2015", url: null, reliability: "cao" }],
@@ -82,8 +82,8 @@ export const SAMPLE_PLACES = [
     festivals: ["Nghi lễ tạ giếng đầu năm mới"],
     images: [
       {
-        url: "/images/village_gate.jpg",
-        caption: "Thành giếng cổ bằng đá ong",
+        url: "/images/cong_khuong_trung.jpg",
+        caption: "Không gian giếng cổ và ngõ xóm Khương Hạ",
         credit: "Ảnh khảo sát",
         year: 2024,
       },
@@ -198,7 +198,7 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ hội làng Khương Trung ngày 12 tháng Hai âm lịch"],
     images: [
       {
-        url: "/images/village_gate.jpg",
+        url: "/images/cong_khuong_trung.jpg",
         caption: "Đình làng Khương Trung số 245",
         credit: "Khảo sát thực địa 2024",
         year: 2024,
@@ -226,10 +226,10 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ cầu an đầu xuân rằm tháng Giêng", "Lễ Phật Đản mùng 8/4"],
     images: [
       {
-        url: "/images/historic_map.jpg",
+        url: "/images/chua_boc.jpg",
         caption: "Chùa Tiêu Dao - Khương Trung",
         credit: "Ảnh tư liệu",
-        year: 2023,
+        year: 2024,
       },
     ],
     sources: [{ citation: "Văn bia Tiêu Dao tự & Địa chí Hà Nội, 2005", url: null, reliability: "cao" }],
@@ -254,7 +254,7 @@ export const SAMPLE_PLACES = [
     festivals: ["Nơi cử hành nghi lễ đón rước kiệu làng"],
     images: [
       {
-        url: "/images/village_gate.jpg",
+        url: "/images/cong_khuong_trung.jpg",
         caption: "Cổng làng Khương Trung Cổ Thôn ngõ 211",
         credit: "Khảo sát ảnh 2024",
         year: 2024,
@@ -342,7 +342,7 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ hội mùa xuân ngày 14 tháng Giêng âm lịch"],
     images: [
       {
-        url: "/images/village_gate.jpg",
+        url: "/images/dinh_khuong_ha.jpg",
         caption: "Cung Tiền tế Đình Khương Đình",
         credit: "Ảnh khảo sát 2024",
         year: 2024,
@@ -370,10 +370,10 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ hội chùa Tam Huyền tháng Giêng"],
     images: [
       {
-        url: "/images/historic_map.jpg",
+        url: "/images/chua_boc.jpg",
         caption: "Không gian cổ tự Tam Huyền",
         credit: "Ảnh tư liệu",
-        year: 2023,
+        year: 2024,
       },
     ],
     sources: [{ citation: "Thiền uyển tập anh & Địa chí di tích Hà Nội, 2010", url: null, reliability: "cao" }],
@@ -458,7 +458,7 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ hội chiến thắng Đống Đa mùng 5 tháng Giêng", "Hội làng rằm tháng Chín"],
     images: [
       {
-        url: "/images/village_gate.jpg",
+        url: "/images/dinh_khuong_ha.jpg",
         caption: "Đình Khương Thượng ven hồ nước",
         credit: "Khảo sát thực địa 2024",
         year: 2024,
@@ -486,10 +486,10 @@ export const SAMPLE_PLACES = [
     festivals: ["Đại lễ tưởng niệm Quang Trung mùng 5 tháng Giêng"],
     images: [
       {
-        url: "/images/historic_map.jpg",
-        caption: "Cổng tam quan Chùa Bộc",
+        url: "/images/chua_boc.jpg",
+        caption: "Cổng tam quan Chùa Bộc di tích 1789",
         credit: "Bảo tàng Hà Nội",
-        year: 2023,
+        year: 2024,
       },
     ],
     sources: [{ citation: "Văn bia Chùa Bộc & Đại Nam nhất thống chí, 1998", url: null, reliability: "cao" }],
@@ -514,8 +514,8 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ hội kỷ niệm Chiến thắng Ngọc Hồi - Đống Đa mùng 5 Tết"],
     images: [
       {
-        url: "/images/historic_map.jpg",
-        caption: "Tượng đài Quang Trung tại Gò Đống Đa",
+        url: "/images/chua_boc.jpg",
+        caption: "Tượng đài Quang Trung tại Gò Đống Đa - Khương Thượng",
         credit: "Di tích Quốc gia",
         year: 2024,
       },
