@@ -13,6 +13,7 @@ import FilterBar from "@/components/FilterBar";
 import VillageLegend from "@/components/VillageLegend";
 import LoadingScreen from "@/components/LoadingScreen";
 import AboutModal from "@/components/AboutModal";
+import GoogleStreetView from "@/components/GoogleStreetView";
 import { BUILDINGS_3D_GEOJSON, LANDMARK_3D_POINTS } from "@/data/buildings3d";
 
 type PanelState =
@@ -204,6 +205,11 @@ export default function MapPage() {
           <div class="card-popup-3d-title">${p.name} ${hanNom}</div>
           <div class="card-popup-3d-desc">${p.desc || "Mô hình kiến trúc 3D chuẩn xác thực địa với ảnh chụp thực tế."}</div>
           ${
+            viewMode === "2d"
+              ? `<button id="btn-popup-open-3d" class="card-popup-3d-btn" style="background: linear-gradient(135deg, #c9a84c, #f59e0b); color: #000; font-weight: 700; margin-bottom: 6px;">🏛️ Mở xem mô hình 3D chi tiết →</button>`
+              : ""
+          }
+          ${
             p.place_slug
               ? `<button id="btn-popup-view-place" class="card-popup-3d-btn">Khám phá chi tiết di tích →</button>`
               : ""
@@ -213,25 +219,26 @@ export default function MapPage() {
     `;
   };
 
-  const setup3DPopupAction = useCallback((p: any) => {
-    setTimeout(() => {
-      const btn = document.getElementById("btn-popup-view-place");
-      if (btn && p.place_slug) {
-        btn.onclick = () => {
-          const found = SAMPLE_PLACES.find((x) => x.slug === p.place_slug);
-          if (found) {
-            setPanel({ kind: "place", data: found });
-            popupRef.current?.remove();
-          }
-        };
-      }
-    }, 50);
-  }, []);
-
-  // ── Khám phá trực tiếp công trình 3D từ thanh điều hướng
-  const focusBuilding3D = useCallback((p: any) => {
+  // ── Khám phá trực tiếp công trình 3D (tự động bật 3D nếu đang ở 2D)
+  const focusBuilding3D = useCallback((p: any, force3D = true) => {
     const map = mapRef.current;
     if (!map) return;
+
+    if (force3D) {
+      setViewMode("3d");
+      const container = mapContainerRef.current;
+      container?.classList.add("mode-3d-active");
+      if (map.getLayer("osm-buildings-3d")) {
+        map.setPaintProperty("osm-buildings-3d", "fill-extrusion-opacity", 0.92);
+      }
+      if (map.getLayer("buildings-3d-layer")) {
+        map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.95);
+      }
+      if (map.getLayer("street-3d-labels")) {
+        map.setPaintProperty("street-3d-labels", "text-opacity", 0.95);
+      }
+    }
+
     map.flyTo({
       center: p.center,
       zoom: 17.2,
@@ -251,10 +258,27 @@ export default function MapPage() {
       .setHTML(create3DPopupHTML(p))
       .addTo(map);
 
-    setup3DPopupAction(p);
-  }, [setup3DPopupAction]);
+    setTimeout(() => {
+      const btn3d = document.getElementById("btn-popup-open-3d");
+      if (btn3d) {
+        btn3d.onclick = () => {
+          focusBuilding3D(p, true);
+        };
+      }
+      const btn = document.getElementById("btn-popup-view-place");
+      if (btn && p.place_slug) {
+        btn.onclick = () => {
+          const found = SAMPLE_PLACES.find((x) => x.slug === p.place_slug);
+          if (found) {
+            setPanel({ kind: "place", data: found });
+            popupRef.current?.remove();
+          }
+        };
+      }
+    }, 50);
+  }, [viewMode]);
 
-  // ── Render elevated 3D landmark tags trực tiếp trên nóc mỗi công trình
+  // ── Render elevated 3D landmark tags trực tiếp trên nóc mỗi công trình (Hiện ở cả 2D & 3D)
   const render3DMarkers = useCallback(
     (map: maplibregl.Map, visible: boolean) => {
       markers3DRef.current.forEach((m) => m.remove());
@@ -291,7 +315,7 @@ export default function MapPage() {
               el.classList.add("is-active");
             }
           }
-          focusBuilding3D(prop);
+          focusBuilding3D(prop, true);
         });
 
         const marker = new maplibregl.Marker({
@@ -581,7 +605,7 @@ export default function MapPage() {
           ],
           "fill-extrusion-height": ["get", "h"],
           "fill-extrusion-base": 0,
-          "fill-extrusion-opacity": is3D ? 0.92 : 0.0,
+          "fill-extrusion-opacity": is3D ? 0.92 : 0.55,
           "fill-extrusion-vertical-gradient": true,
         },
       });
@@ -631,7 +655,7 @@ export default function MapPage() {
           "text-color": ["get", "color"],
           "text-halo-color": "#060e18",
           "text-halo-width": 2.5,
-          "text-opacity": is3D ? 0.95 : 0.4,
+          "text-opacity": is3D ? 0.95 : 0.75,
         },
       });
 
@@ -662,7 +686,7 @@ export default function MapPage() {
           "fill-extrusion-color": ["get", "color"],
           "fill-extrusion-height": ["get", "height"],
           "fill-extrusion-base": ["get", "base_height"],
-          "fill-extrusion-opacity": is3D ? 0.95 : 0.4,
+          "fill-extrusion-opacity": is3D ? 0.95 : 0.88,
           "fill-extrusion-vertical-gradient": true,
         },
       });
@@ -695,15 +719,31 @@ export default function MapPage() {
             .setHTML(create3DPopupHTML(p))
             .addTo(map);
 
-          setup3DPopupAction(p);
+          setTimeout(() => {
+            const btn3d = document.getElementById("btn-popup-open-3d");
+            if (btn3d) {
+              btn3d.onclick = () => {
+                focusBuilding3D(p, true);
+              };
+            }
+            const btn = document.getElementById("btn-popup-view-place");
+            if (btn && p.place_slug) {
+              btn.onclick = () => {
+                const found = SAMPLE_PLACES.find((x) => x.slug === p.place_slug);
+                if (found) {
+                  setPanel({ kind: "place", data: found });
+                  popupRef.current?.remove();
+                }
+              };
+            }
+          }, 50);
         }
       });
 
       // ── Render place markers
       renderMarkers(map, new Set());
-      if (is3D) {
-        render3DMarkers(map, true);
-      }
+      // ── Render 3D landmark markers in both 2D and 3D!
+      render3DMarkers(map, true);
       setMapLoaded(true);
     });
 
@@ -713,7 +753,7 @@ export default function MapPage() {
       map.remove();
       mapRef.current = null;
     };
-  }, [renderMarkers, setup3DPopupAction, render3DMarkers, is3D]);
+  }, [renderMarkers, render3DMarkers, is3D, focusBuilding3D]);
 
   // ── Re-render markers when filter changes
   useEffect(() => {
@@ -752,15 +792,15 @@ export default function MapPage() {
           duration: 900,
         });
         if (map.getLayer("osm-buildings-3d")) {
-          map.setPaintProperty("osm-buildings-3d", "fill-extrusion-opacity", 0.0);
+          map.setPaintProperty("osm-buildings-3d", "fill-extrusion-opacity", 0.55);
         }
         if (map.getLayer("buildings-3d-layer")) {
-          map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.35);
+          map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.88);
         }
         if (map.getLayer("street-3d-labels")) {
-          map.setPaintProperty("street-3d-labels", "text-opacity", 0.4);
+          map.setPaintProperty("street-3d-labels", "text-opacity", 0.75);
         }
-        render3DMarkers(map, false);
+        render3DMarkers(map, true);
         popupRef.current?.remove();
       } else if (mode === "3d") {
         container?.classList.add("mode-3d-active");
@@ -783,27 +823,11 @@ export default function MapPage() {
         }
         render3DMarkers(map, true);
       } else if (mode === "street") {
-        container?.classList.add("mode-3d-active");
-        map.easeTo({
-          center: currentStreet.center,
-          pitch: currentStreet.pitch,
-          bearing: currentStreet.bearing,
-          zoom: currentStreet.zoom,
-          duration: 1400,
-        });
-        if (map.getLayer("osm-buildings-3d")) {
-          map.setPaintProperty("osm-buildings-3d", "fill-extrusion-opacity", 0.95);
-        }
-        if (map.getLayer("buildings-3d-layer")) {
-          map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.98);
-        }
-        if (map.getLayer("street-3d-labels")) {
-          map.setPaintProperty("street-3d-labels", "text-opacity", 1.0);
-        }
-        render3DMarkers(map, true);
+        container?.classList.remove("mode-3d-active");
+        popupRef.current?.remove();
       }
     },
-    [currentStreet, render3DMarkers]
+    [render3DMarkers]
   );
 
   const selectStreet = useCallback((street: StreetViewPreset) => {
@@ -913,133 +937,67 @@ export default function MapPage() {
       {/* Map canvas */}
       <div id="map-container" ref={mapContainerRef} />
 
-      {/* UI Overlay */}
-      <div id="ui-overlay">
-        {/* Top navbar */}
-        <Navbar
-          lang={lang}
-          setLang={setLang}
-          onOpenAbout={() => setAboutOpen(true)}
-          viewMode={viewMode}
-          onSetViewMode={handleSetViewMode}
+      {/* Street View Mode - Google Maps 100% Authentic 360 Experience */}
+      {viewMode === "street" && (
+        <GoogleStreetView
+          street={currentStreet}
+          allStreets={STREET_VIEW_PRESETS}
+          onSelectStreet={selectStreet}
+          onClose={() => handleSetViewMode("3d")}
         />
+      )}
 
-        {/* Street View Mode HUD */}
-        {viewMode === "street" && (
-          <div className="street-view-hud">
-            <div className="street-view-header">
-              <div className="street-view-badge">
-                <span className="street-view-dot" />
-                <span>CHẾ ĐỘ STREET VIEW · GÓC NHÌN ĐƯỜNG PHỐ TẦM MẮT</span>
-              </div>
-              <div className="street-view-active-name">
-                {currentStreet.icon} {currentStreet.name}
-              </div>
-              <div className="street-view-sub">{currentStreet.desc}</div>
-            </div>
+      {/* UI Overlay (Normal 2D & 3D modes) */}
+      {viewMode !== "street" && (
+        <div id="ui-overlay">
+          {/* Top navbar */}
+          <Navbar
+            lang={lang}
+            setLang={setLang}
+            onOpenAbout={() => setAboutOpen(true)}
+            viewMode={viewMode}
+            onSetViewMode={handleSetViewMode}
+          />
 
-            <div className="street-view-routes">
-              {STREET_VIEW_PRESETS.map((s) => (
-                <button
-                  key={s.id}
-                  className={`street-route-chip ${currentStreet.id === s.id ? "active" : ""}`}
-                  onClick={() => selectStreet(s)}
-                >
-                  <span>{s.icon}</span>
-                  <span>{s.short_name}</span>
-                </button>
-              ))}
-            </div>
+          {/* Search bar */}
+          <SearchBar
+            lang={lang}
+            onSelect={handleSearchSelect}
+            places={SAMPLE_PLACES}
+            villages={VILLAGES_GEOJSON.features}
+            hasPanel={panel.kind !== "none"}
+          />
 
-            <div className="street-view-actions">
-              <button
-                className={`street-action-btn ${isAutoWalk ? "active" : ""}`}
-                onClick={toggleAutoWalk}
-                title="Tự động xoay và dạo bước ngắm phố cổ"
-              >
-                <span>{isAutoWalk ? "⏸️ Dừng dạo phố" : "🚶 Dạo phố tự động"}</span>
-              </button>
-              {currentStreet.image && (
-                <button
-                  className="street-action-btn"
-                  onClick={() => setShowStreetPhoto(!showStreetPhoto)}
-                >
-                  <span>📷 Ảnh chụp thực tế</span>
-                </button>
-              )}
-              <a
-                href={currentStreet.google_street_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="street-action-btn street-action-google"
-                title="Xem ảnh toàn cảnh 360 độ trên Google Maps"
-              >
-                <span>🌐 Mở Google 360°</span>
-                <span style={{ fontSize: "0.7rem" }}>↗</span>
-              </a>
-              <button
-                className="street-action-close"
-                onClick={() => handleSetViewMode("3d")}
-                title="Thoát chế độ Street View, trở lại toàn cảnh 3D"
-              >
-                ✕ Thoát
-              </button>
-            </div>
-
-            {/* Photo preview popover */}
-            {showStreetPhoto && currentStreet.image && (
-              <div className="street-photo-popover">
-                <button
-                  className="street-photo-close"
-                  onClick={() => setShowStreetPhoto(false)}
-                >
-                  ✕
-                </button>
-                <img
-                  src={currentStreet.image}
-                  alt={currentStreet.name}
-                  className="street-photo-img"
-                />
-                <div className="street-photo-caption">
-                  📍 {currentStreet.image_caption}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Search bar */}
-        <SearchBar
-          lang={lang}
-          onSelect={handleSearchSelect}
-          places={SAMPLE_PLACES}
-          villages={VILLAGES_GEOJSON.features}
-          hasPanel={panel.kind !== "none"}
-        />
-
-        {/* 3D Heritage Explorer Ribbon */}
-        {viewMode === "3d" && (
+          {/* 3D Heritage Explorer Ribbon - Hiện ở cả 2D và 3D */}
           <div className={`bar-3d-explorer${panel.kind !== "none" ? " has-panel" : ""}`}>
             <div className="bar-3d-header">
               <span className="bar-3d-dot" />
-              <span className="bar-3d-title">KIẾN TRÚC 3D ({LANDMARK_3D_POINTS.length})</span>
+              <span className="bar-3d-title">
+                {viewMode === "2d"
+                  ? `MÔ HÌNH KIẾN TRÚC 3D (${LANDMARK_3D_POINTS.length}) · BẤM ĐỂ MỞ XEM 3D`
+                  : `KIẾN TRÚC 3D (${LANDMARK_3D_POINTS.length})`}
+              </span>
             </div>
             <div className="bar-3d-scroll">
               {LANDMARK_3D_POINTS.map((f) => (
                 <button
                   key={f.id}
                   className="bar-3d-chip"
-                  onClick={() => focusBuilding3D(f)}
+                  onClick={() => focusBuilding3D(f, true)}
                   title={f.name}
                 >
                   <span className="bar-3d-chip-icon">{f.icon}</span>
                   <span className="bar-3d-chip-name">{f.short_name}</span>
                   <span className="bar-3d-chip-height">{f.height}m</span>
+                  {viewMode === "2d" && (
+                    <span style={{ fontSize: "0.65rem", color: "#38bdf8", marginLeft: "4px" }}>
+                      [Xem 3D]
+                    </span>
+                  )}
                 </button>
               ))}
             </div>
           </div>
-        )}
 
         {/* Category filter */}
         <FilterBar
@@ -1075,6 +1033,7 @@ export default function MapPage() {
           />
         )}
       </div>
+      )}
 
       {/* About Project Modal */}
       <AboutModal
