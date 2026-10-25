@@ -8,7 +8,7 @@ import { SAMPLE_PLACES, CATEGORY_LABELS, type Place } from "@/data/places";
 import VillagePanel from "@/components/VillagePanel";
 import PlacePanel from "@/components/PlacePanel";
 import SearchBar from "@/components/SearchBar";
-import Navbar from "@/components/Navbar";
+import Navbar, { type ViewMode } from "@/components/Navbar";
 import FilterBar from "@/components/FilterBar";
 import VillageLegend from "@/components/VillageLegend";
 import LoadingScreen from "@/components/LoadingScreen";
@@ -20,14 +20,142 @@ type PanelState =
   | { kind: "village"; data: Village }
   | { kind: "place"; data: Place };
 
-const VIEW_2D = { pitch: 0, bearing: 0 };
-const VIEW_3D = { pitch: 55, bearing: -25 };
+// ── Tuyến phố & Điểm dừng Street View thực tế
+export interface StreetViewPreset {
+  id: string;
+  name: string;
+  short_name: string;
+  icon: string;
+  village: string;
+  desc: string;
+  center: [number, number];
+  zoom: number;
+  pitch: number;
+  bearing: number;
+  image: string;
+  image_caption: string;
+  google_street_url: string;
+}
+
+export const STREET_VIEW_PRESETS: StreetViewPreset[] = [
+  {
+    id: "khuong-ha",
+    name: "Phố Khương Hạ (Làng Gừng)",
+    short_name: "Phố Khương Hạ",
+    icon: "🛣️",
+    village: "Khương Hạ · 姜下",
+    desc: "Trục xương sống di sản Làng Gừng: Đình Khương Hạ - Chùa Phụng Lộc - Giếng cổ - Cụm trường học ven sông Tô Lịch.",
+    center: [105.8153, 20.9912],
+    zoom: 18.2,
+    pitch: 78,
+    bearing: -15,
+    image: "/images/ngo_khuong_ha_real.jpg",
+    image_caption: "Ngõ phố Khương Hạ cổ kính với tường gạch đỏ truyền thống",
+    google_street_url: "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=20.9912,105.8153",
+  },
+  {
+    id: "khuong-trung",
+    name: "Phố Khương Trung (Cổ Thôn)",
+    short_name: "Phố Khương Trung",
+    icon: "🛣️",
+    village: "Khương Trung · 姜中",
+    desc: "Tuyến phố sầm uất với Cổng làng cổ ngõ 211, Cụm di tích Đình - Chùa Tiêu Dao.",
+    center: [105.8202, 20.9982],
+    zoom: 18.1,
+    pitch: 78,
+    bearing: -35,
+    image: "/images/chua_khuong_trung_real.jpg",
+    image_caption: "Cổng di tích và phố Khương Trung ngõ 211",
+    google_street_url: "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=20.9982,105.8202",
+  },
+  {
+    id: "bui-xuong-trach",
+    name: "Phố Bùi Xương Trạch",
+    short_name: "Phố Bùi Xương Trạch",
+    icon: "🛣️",
+    village: "Khương Đình · 姜亭",
+    desc: "Trục dân cư & văn hóa Khương Đình: Cổng làng Đình Khương Đình - Cổ tự Chùa Tam Huyền.",
+    center: [105.8188, 20.9882],
+    zoom: 18.2,
+    pitch: 78,
+    bearing: 25,
+    image: "/images/pho_khuong_dinh_real.jpg",
+    image_caption: "Phố Bùi Xương Trạch và cụm di tích Khương Đình",
+    google_street_url: "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=20.9882,105.8188",
+  },
+  {
+    id: "vu-tong-phan",
+    name: "Đường Vũ Tông Phan (Sông Tô Lịch)",
+    short_name: "Đường Vũ Tông Phan",
+    icon: "🌊",
+    village: "Ven Sông Tô Lịch",
+    desc: "Tuyến đường cảnh quan sinh thái dọc dòng sông Tô Lịch lịch sử phía nam Thăng Long xưa.",
+    center: [105.8150, 20.9935],
+    zoom: 18.0,
+    pitch: 76,
+    bearing: -25,
+    image: "/images/song_to_lich_real.jpg",
+    image_caption: "Đoạn sông Tô Lịch và hàng cây xanh đường Vũ Tông Phan",
+    google_street_url: "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=20.9935,105.8150",
+  },
+  {
+    id: "chua-boc-tay-son",
+    name: "Phố Chùa Bộc - Tây Sơn",
+    short_name: "Chùa Bộc - Tây Sơn",
+    icon: "🛣️",
+    village: "Khương Thượng · 姜上",
+    desc: "Trục học thuật & chiến địa di tích: Chùa Bộc, ĐH Thủy Lợi, ĐH Y Hà Nội và dấu tích chiến thắng Đống Đa.",
+    center: [105.8265, 21.0055],
+    zoom: 18.0,
+    pitch: 78,
+    bearing: -38,
+    image: "/images/pho_chua_boc_real.jpg",
+    image_caption: "Phố Chùa Bộc tấp nập bên tường rào di tích Chùa Bộc",
+    google_street_url: "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=21.0055,105.8265",
+  },
+  {
+    id: "cong-khuong-dinh",
+    name: "Cổng Làng Cổ Khương Đình",
+    short_name: "Cổng Làng Khương Đình",
+    icon: "🚪",
+    village: "Khương Đình · 姜亭",
+    desc: "Không gian cổng làng cổ kính ngõ 125 kết nối bờ sông Tô Lịch vào đình làng Khương Đình linh thiêng.",
+    center: [105.8166, 20.9880],
+    zoom: 18.3,
+    pitch: 80,
+    bearing: 42,
+    image: "/images/cong_khuong_dinh_real.jpg",
+    image_caption: "Cổng làng cổ Khương Đình rêu phong hàng trăm năm",
+    google_street_url: "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=20.9880,105.8166",
+  },
+];
+
+// ── Nhãn tên đường phố 3D nổi bật kiểu Google Maps
+export const STREET_LABELS_GEOJSON = {
+  type: "FeatureCollection" as const,
+  features: [
+    { type: "Feature" as const, properties: { name: "PHỐ KHƯƠNG HẠ", color: "#FBBF24" }, geometry: { type: "Point" as const, coordinates: [105.8153, 20.9912] } },
+    { type: "Feature" as const, properties: { name: "PHỐ KHƯƠNG TRUNG", color: "#FB923C" }, geometry: { type: "Point" as const, coordinates: [105.8202, 20.9982] } },
+    { type: "Feature" as const, properties: { name: "PHỐ BÙI XƯƠNG TRẠCH", color: "#34D399" }, geometry: { type: "Point" as const, coordinates: [105.8190, 20.9885] } },
+    { type: "Feature" as const, properties: { name: "ĐƯỜNG VŨ TÔNG PHAN", color: "#38BDF8" }, geometry: { type: "Point" as const, coordinates: [105.8145, 20.9930] } },
+    { type: "Feature" as const, properties: { name: "PHỐ CHÙA BỘC", color: "#C084FC" }, geometry: { type: "Point" as const, coordinates: [105.8270, 21.0084] } },
+    { type: "Feature" as const, properties: { name: "ĐƯỜNG TÂY SƠN", color: "#C084FC" }, geometry: { type: "Point" as const, coordinates: [105.8228, 21.0060] } },
+    { type: "Feature" as const, properties: { name: "ĐƯỜNG TRƯỜNG CHINH (VÀNH ĐAI 2)", color: "#F472B6" }, geometry: { type: "Point" as const, coordinates: [105.8260, 21.0016] } },
+    { type: "Feature" as const, properties: { name: "PHỐ TÔN THẤT TÙNG", color: "#C084FC" }, geometry: { type: "Point" as const, coordinates: [105.8305, 21.0045] } },
+    { type: "Feature" as const, properties: { name: "ĐƯỜNG KIM GIANG", color: "#38BDF8" }, geometry: { type: "Point" as const, coordinates: [105.8138, 20.9860] } },
+    { type: "Feature" as const, properties: { name: "PHỐ VƯƠNG THỪA VŨ", color: "#FB923C" }, geometry: { type: "Point" as const, coordinates: [105.8245, 21.0000] } },
+  ],
+};
 
 export default function MapPage() {
   const mapRef = useRef<maplibregl.Map | null>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const [is3D, setIs3D] = useState(false);
+  const [viewMode, setViewMode] = useState<ViewMode>("2d");
+  const is3D = viewMode === "3d" || viewMode === "street";
+  const [currentStreet, setCurrentStreet] = useState<StreetViewPreset>(STREET_VIEW_PRESETS[0]);
+  const [isAutoWalk, setIsAutoWalk] = useState(false);
+  const [showStreetPhoto, setShowStreetPhoto] = useState(false);
   const [panel, setPanel] = useState<PanelState>({ kind: "none" });
   const [activeCategories, setActiveCategories] = useState<Set<string>>(new Set());
   const [lang, setLang] = useState<"vi" | "en">("vi");
@@ -429,7 +557,85 @@ export default function MapPage() {
         });
       });
 
-      // ── 3D Buildings Footprint Outline & Extrusion Layer
+      // ── 1. Toàn bộ 9,167 khối nhà đô thị 3D thực tế theo bản đồ (OpenStreetMap 3D Fabric)
+      map.addSource("osm-buildings", {
+        type: "geojson",
+        data: "/data/osm_buildings_3d.json",
+      });
+
+      map.addLayer({
+        id: "osm-buildings-3d",
+        type: "fill-extrusion",
+        source: "osm-buildings",
+        minzoom: 13,
+        paint: {
+          "fill-extrusion-color": [
+            "interpolate",
+            ["linear"],
+            ["get", "h"],
+            9, "#182230",
+            13, "#1e2b3c",
+            18, "#28394e",
+            26, "#344964",
+            42, "#435d7e",
+          ],
+          "fill-extrusion-height": ["get", "h"],
+          "fill-extrusion-base": 0,
+          "fill-extrusion-opacity": is3D ? 0.92 : 0.0,
+          "fill-extrusion-vertical-gradient": true,
+        },
+      });
+
+      // Click vào khối nhà phố để xem thông tin
+      map.on("click", "osm-buildings-3d", (e) => {
+        if (!e.features || !e.features.length) return;
+        const name = e.features[0].properties?.name;
+        const h = e.features[0].properties?.h;
+        if (name) {
+          popupRef.current?.remove();
+          popupRef.current = new maplibregl.Popup({
+            offset: 12,
+            closeButton: true,
+            maxWidth: "260px",
+          })
+            .setLngLat(e.lngLat)
+            .setHTML(`
+              <div style="padding: 10px 14px; background: #0c1829; border-radius: 8px; color: #fff; font-size: 13px; border: 1px solid rgba(56,189,248,0.3);">
+                <div style="font-weight: 600; color: #38bdf8; margin-bottom: 3px;">🏢 ${name}</div>
+                <div style="font-size: 11px; color: #94a3b8;">Độ cao khối nhà: ~${h}m · Khu dân cư đô thị</div>
+              </div>
+            `)
+            .addTo(map);
+        }
+      });
+
+      // ── 2. Nhãn tên đường phố 3D nổi bật kiểu Google Maps
+      map.addSource("street-labels", {
+        type: "geojson",
+        data: STREET_LABELS_GEOJSON,
+      });
+
+      map.addLayer({
+        id: "street-3d-labels",
+        type: "symbol",
+        source: "street-labels",
+        minzoom: 14.2,
+        layout: {
+          "text-field": ["get", "name"],
+          "text-font": ["Open Sans Bold"],
+          "text-size": 11,
+          "text-letter-spacing": 0.06,
+          "text-transform": "uppercase",
+        },
+        paint: {
+          "text-color": ["get", "color"],
+          "text-halo-color": "#060e18",
+          "text-halo-width": 2.5,
+          "text-opacity": is3D ? 0.95 : 0.4,
+        },
+      });
+
+      // ── 3. 14 Công trình Di tích & Giáo dục Kiến trúc Đặc thù (Landmark 3D Models)
       map.addSource("buildings-3d", {
         type: "geojson",
         data: BUILDINGS_3D_GEOJSON as GeoJSON.FeatureCollection,
@@ -516,39 +722,113 @@ export default function MapPage() {
     }
   }, [activeCategories, mapLoaded, renderMarkers]);
 
-  // ── Toggle 2D / 3D
-  const toggle3D = useCallback(() => {
+  // ── Auto walk effect for Street View
+  useEffect(() => {
+    if (!isAutoWalk || viewMode !== "street") return;
+    const interval = setInterval(() => {
+      const map = mapRef.current;
+      if (!map) return;
+      map.setBearing(map.getBearing() + 0.35);
+    }, 45);
+    return () => clearInterval(interval);
+  }, [isAutoWalk, viewMode]);
+
+  // ── Switch View Mode (2D / 3D / Street View)
+  const handleSetViewMode = useCallback(
+    (mode: ViewMode) => {
+      setViewMode(mode);
+      const map = mapRef.current;
+      if (!map) return;
+
+      const container = mapContainerRef.current;
+
+      if (mode === "2d") {
+        container?.classList.remove("mode-3d-active");
+        setIsAutoWalk(false);
+        setShowStreetPhoto(false);
+        map.easeTo({
+          pitch: 0,
+          bearing: 0,
+          duration: 900,
+        });
+        if (map.getLayer("osm-buildings-3d")) {
+          map.setPaintProperty("osm-buildings-3d", "fill-extrusion-opacity", 0.0);
+        }
+        if (map.getLayer("buildings-3d-layer")) {
+          map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.35);
+        }
+        if (map.getLayer("street-3d-labels")) {
+          map.setPaintProperty("street-3d-labels", "text-opacity", 0.4);
+        }
+        render3DMarkers(map, false);
+        popupRef.current?.remove();
+      } else if (mode === "3d") {
+        container?.classList.add("mode-3d-active");
+        setIsAutoWalk(false);
+        setShowStreetPhoto(false);
+        map.easeTo({
+          pitch: 60,
+          bearing: -22,
+          zoom: Math.max(map.getZoom(), 15.8),
+          duration: 1200,
+        });
+        if (map.getLayer("osm-buildings-3d")) {
+          map.setPaintProperty("osm-buildings-3d", "fill-extrusion-opacity", 0.92);
+        }
+        if (map.getLayer("buildings-3d-layer")) {
+          map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.95);
+        }
+        if (map.getLayer("street-3d-labels")) {
+          map.setPaintProperty("street-3d-labels", "text-opacity", 0.95);
+        }
+        render3DMarkers(map, true);
+      } else if (mode === "street") {
+        container?.classList.add("mode-3d-active");
+        map.easeTo({
+          center: currentStreet.center,
+          pitch: currentStreet.pitch,
+          bearing: currentStreet.bearing,
+          zoom: currentStreet.zoom,
+          duration: 1400,
+        });
+        if (map.getLayer("osm-buildings-3d")) {
+          map.setPaintProperty("osm-buildings-3d", "fill-extrusion-opacity", 0.95);
+        }
+        if (map.getLayer("buildings-3d-layer")) {
+          map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.98);
+        }
+        if (map.getLayer("street-3d-labels")) {
+          map.setPaintProperty("street-3d-labels", "text-opacity", 1.0);
+        }
+        render3DMarkers(map, true);
+      }
+    },
+    [currentStreet, render3DMarkers]
+  );
+
+  const selectStreet = useCallback((street: StreetViewPreset) => {
+    setCurrentStreet(street);
+    setShowStreetPhoto(false);
+    setIsAutoWalk(false);
     const map = mapRef.current;
     if (!map) return;
-    const next = !is3D;
-    setIs3D(next);
-    const container = mapContainerRef.current;
-    if (next) {
-      container?.classList.add("mode-3d-active");
-      map.easeTo({
-        pitch: 62,
-        bearing: -22,
-        zoom: Math.max(map.getZoom(), 16),
-        duration: 1200,
-      });
-      if (map.getLayer("buildings-3d-layer")) {
-        map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.95);
-      }
-      render3DMarkers(map, true);
-    } else {
-      container?.classList.remove("mode-3d-active");
-      map.easeTo({
-        pitch: 0,
-        bearing: 0,
-        duration: 900,
-      });
-      if (map.getLayer("buildings-3d-layer")) {
-        map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.35);
-      }
-      render3DMarkers(map, false);
-      popupRef.current?.remove();
-    }
-  }, [is3D, render3DMarkers]);
+    map.flyTo({
+      center: street.center,
+      pitch: street.pitch,
+      bearing: street.bearing,
+      zoom: street.zoom,
+      duration: 1300,
+      essential: true,
+    });
+  }, []);
+
+  const toggleAutoWalk = () => {
+    setIsAutoWalk((prev) => !prev);
+  };
+
+  const toggle3D = useCallback(() => {
+    handleSetViewMode(viewMode === "2d" ? "3d" : "2d");
+  }, [handleSetViewMode, viewMode]);
 
   // ── flyTo from search
   const handleSearchSelect = useCallback(
@@ -640,9 +920,93 @@ export default function MapPage() {
           lang={lang}
           setLang={setLang}
           onOpenAbout={() => setAboutOpen(true)}
-          is3D={is3D}
-          onToggle3D={toggle3D}
+          viewMode={viewMode}
+          onSetViewMode={handleSetViewMode}
         />
+
+        {/* Street View Mode HUD */}
+        {viewMode === "street" && (
+          <div className="street-view-hud">
+            <div className="street-view-header">
+              <div className="street-view-badge">
+                <span className="street-view-dot" />
+                <span>CHẾ ĐỘ STREET VIEW · GÓC NHÌN ĐƯỜNG PHỐ TẦM MẮT</span>
+              </div>
+              <div className="street-view-active-name">
+                {currentStreet.icon} {currentStreet.name}
+              </div>
+              <div className="street-view-sub">{currentStreet.desc}</div>
+            </div>
+
+            <div className="street-view-routes">
+              {STREET_VIEW_PRESETS.map((s) => (
+                <button
+                  key={s.id}
+                  className={`street-route-chip ${currentStreet.id === s.id ? "active" : ""}`}
+                  onClick={() => selectStreet(s)}
+                >
+                  <span>{s.icon}</span>
+                  <span>{s.short_name}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="street-view-actions">
+              <button
+                className={`street-action-btn ${isAutoWalk ? "active" : ""}`}
+                onClick={toggleAutoWalk}
+                title="Tự động xoay và dạo bước ngắm phố cổ"
+              >
+                <span>{isAutoWalk ? "⏸️ Dừng dạo phố" : "🚶 Dạo phố tự động"}</span>
+              </button>
+              {currentStreet.image && (
+                <button
+                  className="street-action-btn"
+                  onClick={() => setShowStreetPhoto(!showStreetPhoto)}
+                >
+                  <span>📷 Ảnh chụp thực tế</span>
+                </button>
+              )}
+              <a
+                href={currentStreet.google_street_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="street-action-btn street-action-google"
+                title="Xem ảnh toàn cảnh 360 độ trên Google Maps"
+              >
+                <span>🌐 Mở Google 360°</span>
+                <span style={{ fontSize: "0.7rem" }}>↗</span>
+              </a>
+              <button
+                className="street-action-close"
+                onClick={() => handleSetViewMode("3d")}
+                title="Thoát chế độ Street View, trở lại toàn cảnh 3D"
+              >
+                ✕ Thoát
+              </button>
+            </div>
+
+            {/* Photo preview popover */}
+            {showStreetPhoto && currentStreet.image && (
+              <div className="street-photo-popover">
+                <button
+                  className="street-photo-close"
+                  onClick={() => setShowStreetPhoto(false)}
+                >
+                  ✕
+                </button>
+                <img
+                  src={currentStreet.image}
+                  alt={currentStreet.name}
+                  className="street-photo-img"
+                />
+                <div className="street-photo-caption">
+                  📍 {currentStreet.image_caption}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Search bar */}
         <SearchBar
@@ -654,7 +1018,7 @@ export default function MapPage() {
         />
 
         {/* 3D Heritage Explorer Ribbon */}
-        {is3D && (
+        {viewMode === "3d" && (
           <div className={`bar-3d-explorer${panel.kind !== "none" ? " has-panel" : ""}`}>
             <div className="bar-3d-header">
               <span className="bar-3d-dot" />

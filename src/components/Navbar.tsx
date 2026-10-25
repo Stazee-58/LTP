@@ -2,20 +2,24 @@
 
 import { Globe } from "@phosphor-icons/react";
 
+export type ViewMode = "2d" | "3d" | "street";
+
 interface NavbarProps {
   lang: "vi" | "en";
   setLang: (l: "vi" | "en") => void;
   onOpenAbout: () => void;
-  is3D: boolean;
-  onToggle3D: () => void;
+  viewMode: ViewMode;
+  onSetViewMode: (mode: ViewMode) => void;
+  is3D?: boolean;
+  onToggle3D?: () => void;
 }
 
 export default function Navbar({
   lang,
   setLang,
   onOpenAbout,
-  is3D,
-  onToggle3D,
+  viewMode,
+  onSetViewMode,
 }: NavbarProps) {
   return (
     <nav className="navbar" role="navigation" aria-label="Điều hướng chính">
@@ -30,25 +34,37 @@ export default function Navbar({
 
       {/* Right controls */}
       <div className="navbar-right">
-        {/* 2D / 3D Mode Switcher */}
-        <div className="nav-view-toggle" role="group" aria-label="Chuyển chế độ hiển thị 2D / 3D">
+        {/* 2D / 3D / Street View Mode Switcher */}
+        <div className="nav-view-toggle" role="group" aria-label="Chuyển chế độ hiển thị 2D / 3D / Street View">
           <button
             id="btn-nav-2d"
-            className={`nav-view-tab${!is3D ? " active" : ""}`}
-            onClick={() => is3D && onToggle3D()}
-            aria-pressed={!is3D}
+            className={`nav-view-tab${viewMode === "2d" ? " active" : ""}`}
+            onClick={() => onSetViewMode("2d")}
+            aria-pressed={viewMode === "2d"}
+            title="Bản đồ 2D phẳng toàn cảnh"
           >
             <span aria-hidden="true">🗺️</span>
             <span>2D</span>
           </button>
           <button
             id="btn-nav-3d"
-            className={`nav-view-tab${is3D ? " active" : ""}`}
-            onClick={() => !is3D && onToggle3D()}
-            aria-pressed={is3D}
+            className={`nav-view-tab${viewMode === "3d" ? " active" : ""}`}
+            onClick={() => onSetViewMode("3d")}
+            aria-pressed={viewMode === "3d"}
+            title="Phối cảnh không gian 3D đô thị"
           >
             <span aria-hidden="true">🏛️</span>
             <span>3D</span>
+          </button>
+          <button
+            id="btn-nav-street"
+            className={`nav-view-tab nav-tab-street${viewMode === "street" ? " active" : ""}`}
+            onClick={() => onSetViewMode("street")}
+            aria-pressed={viewMode === "street"}
+            title="Chế độ Street View dạo phố tầm mắt"
+          >
+            <span aria-hidden="true">🚶</span>
+            <span>Street View</span>
           </button>
         </div>
 
