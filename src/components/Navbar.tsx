@@ -6,9 +6,17 @@ interface NavbarProps {
   lang: "vi" | "en";
   setLang: (l: "vi" | "en") => void;
   onOpenAbout: () => void;
+  is3D: boolean;
+  onToggle3D: () => void;
 }
 
-export default function Navbar({ lang, setLang, onOpenAbout }: NavbarProps) {
+export default function Navbar({
+  lang,
+  setLang,
+  onOpenAbout,
+  is3D,
+  onToggle3D,
+}: NavbarProps) {
   return (
     <nav className="navbar" role="navigation" aria-label="Điều hướng chính">
       {/* Brand */}
@@ -22,6 +30,28 @@ export default function Navbar({ lang, setLang, onOpenAbout }: NavbarProps) {
 
       {/* Right controls */}
       <div className="navbar-right">
+        {/* 2D / 3D Mode Switcher */}
+        <div className="nav-view-toggle" role="group" aria-label="Chuyển chế độ hiển thị 2D / 3D">
+          <button
+            id="btn-nav-2d"
+            className={`nav-view-tab${!is3D ? " active" : ""}`}
+            onClick={() => is3D && onToggle3D()}
+            aria-pressed={!is3D}
+          >
+            <span aria-hidden="true">🗺️</span>
+            <span>2D</span>
+          </button>
+          <button
+            id="btn-nav-3d"
+            className={`nav-view-tab${is3D ? " active" : ""}`}
+            onClick={() => !is3D && onToggle3D()}
+            aria-pressed={is3D}
+          >
+            <span aria-hidden="true">🏛️</span>
+            <span>3D</span>
+          </button>
+        </div>
+
         {/* Language toggle */}
         <button
           id="lang-toggle"

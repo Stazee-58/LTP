@@ -140,11 +140,11 @@ export default function AboutModal({ open, onClose, lang }: AboutModalProps) {
                   <div className="merger-details-list">
                     <div className="merger-card">
                       <div className="merger-badge">Quận Đống Đa</div>
-                      <h4>Phường Khương Thượng → Phường Kim Liên (Mới)</h4>
+                      <h4>Phường Khương Thượng (Nhập một phần Phường Ngã Tư Sở)</h4>
                       <p>
                         {lang === "en"
-                          ? "Khuong Thuong Ward has officially merged with Kim Lien Ward and parts of Trung Tu to form the new Kim Lien Ward. The historic village boundary of Khuong Thuong (dating back to the 1789 Dong Da battle) is preserved on this map."
-                          : "Toàn bộ phường Khương Thượng cùng phường Kim Liên và một phần Trung Tự sáp nhập thành Phường Kim Liên mới. Bản đồ 'Làng Trong Phố' lưu giữ chính xác ranh giới lịch sử làng Khương Thượng quanh hồ Khương Thượng và phố Chùa Bộc."}
+                          ? "According to Resolution No. 1286/NQ-UBTVQH15, part of Nga Tu So Ward has been incorporated into Khuong Thuong Ward, expanding the historical heritage quadrant covering Thuy Loi University, Chua Boc Pagoda, Hanoi Medical University, and the historic Nga Tu So interchange."
+                          : "Theo Nghị quyết số 1286/NQ-UBTVQH15, điều chỉnh một phần diện tích và dân số phường Ngã Tư Sở sáp nhập vào phường Khương Thượng, mở rộng trọn vẹn không gian di sản từ ĐH Thủy Lợi, Chùa Bộc, ĐH Y Hà Nội đến nút giao lịch sử Ngã Tư Sở."}
                       </p>
                     </div>
 

@@ -13,7 +13,7 @@ import FilterBar from "@/components/FilterBar";
 import VillageLegend from "@/components/VillageLegend";
 import LoadingScreen from "@/components/LoadingScreen";
 import AboutModal from "@/components/AboutModal";
-import { BUILDINGS_3D_GEOJSON, BUILDINGS_3D_POINTS } from "@/data/buildings3d";
+import { BUILDINGS_3D_GEOJSON, LANDMARK_3D_POINTS } from "@/data/buildings3d";
 
 type PanelState =
   | { kind: "none" }
@@ -69,7 +69,7 @@ export default function MapPage() {
           <img src="${image}" alt="${p.name}" class="card-popup-3d-img" />
           <span class="card-popup-3d-badge" style="color:${p.color || '#C9A84C'};">${typeBadge}</span>
           <span class="card-popup-3d-badge-real">📷 Ảnh chụp thực tế</span>
-          <span class="card-popup-3d-height-tag">📐 Cao: ${p.height}m ${p.floors ? `(${p.floors} tầng)` : ''}</span>
+          <span class="card-popup-3d-height-tag">📐 Cao: ${p.height}m</span>
         </div>
         <div class="card-popup-3d-body">
           <div class="card-popup-3d-village">📍 ${p.village || "Làng trong Phố"}</div>
@@ -134,8 +134,7 @@ export default function MapPage() {
 
       if (!visible) return;
 
-      BUILDINGS_3D_GEOJSON.features.forEach((f) => {
-        const prop = f.properties;
+      LANDMARK_3D_POINTS.forEach((prop) => {
         const el = document.createElement("div");
         el.className = `marker-3d-tag type-${prop.type}`;
         el.setAttribute("data-building-id", prop.id);
@@ -342,23 +341,23 @@ export default function MapPage() {
           features: [
             {
               type: "Feature",
-              properties: { name: "Làng Khương Hạ", color: "#C9A84C" },
-              geometry: { type: "Point", coordinates: [105.8195, 20.9885] },
+              properties: { name: "Khương Thượng · 姜上", color: "#C084FC" },
+              geometry: { type: "Point", coordinates: [105.8265, 21.0048] },
             },
             {
               type: "Feature",
-              properties: { name: "Làng Khương Trung", color: "#E07B54" },
-              geometry: { type: "Point", coordinates: [105.8208, 20.9985] },
+              properties: { name: "Khương Trung · 姜中", color: "#FB923C" },
+              geometry: { type: "Point", coordinates: [105.8210, 20.9975] },
             },
             {
               type: "Feature",
-              properties: { name: "Làng Khương Đình", color: "#10b981" },
-              geometry: { type: "Point", coordinates: [105.8152, 20.9898] },
+              properties: { name: "Khương Đình · 姜亭", color: "#34D399" },
+              geometry: { type: "Point", coordinates: [105.8190, 20.9880] },
             },
             {
               type: "Feature",
-              properties: { name: "Làng Khương Thượng", color: "#8A7DC8" },
-              geometry: { type: "Point", coordinates: [105.8275, 21.0048] },
+              properties: { name: "Làng Khương Hạ · 姜下", color: "#FBBF24" },
+              geometry: { type: "Point", coordinates: [105.8160, 20.9912] },
             },
           ],
         },
@@ -371,14 +370,14 @@ export default function MapPage() {
         layout: {
           "text-field": ["get", "name"],
           "text-font": ["Open Sans Bold"],
-          "text-size": 15,
+          "text-size": 14,
           "text-anchor": "center",
           "text-offset": [0, 0],
         },
         paint: {
           "text-color": ["get", "color"],
           "text-halo-color": "#050d18",
-          "text-halo-width": 2.5,
+          "text-halo-width": 3,
           "text-opacity": 0.95,
         },
       });
@@ -426,12 +425,12 @@ export default function MapPage() {
         source: "buildings-3d",
         paint: {
           "line-color": ["get", "color"],
-          "line-width": 2,
+          "line-width": 1.5,
           "line-opacity": 0.85,
         },
       });
 
-      // 3D Architectural Volume
+      // 3D Architectural Volume with dynamic shading
       map.addLayer({
         id: "buildings-3d-layer",
         type: "fill-extrusion",
@@ -441,16 +440,16 @@ export default function MapPage() {
           "fill-extrusion-height": ["get", "height"],
           "fill-extrusion-base": ["get", "base_height"],
           "fill-extrusion-opacity": is3D ? 0.95 : 0.4,
-          "fill-extrusion-vertical-gradient": false,
+          "fill-extrusion-vertical-gradient": true,
         },
       });
 
       // Ambient directional light for natural architectural volume
       map.setLight({
         anchor: "map",
-        color: "#ffffff",
-        intensity: 0.48,
-        position: [1.2, 210, 45],
+        color: "#fffcf2",
+        intensity: 0.55,
+        position: [1.3, 215, 50],
       });
 
       map.on("mouseenter", "buildings-3d-layer", () => {
@@ -620,7 +619,13 @@ export default function MapPage() {
       {/* UI Overlay */}
       <div id="ui-overlay">
         {/* Top navbar */}
-        <Navbar lang={lang} setLang={setLang} onOpenAbout={() => setAboutOpen(true)} />
+        <Navbar
+          lang={lang}
+          setLang={setLang}
+          onOpenAbout={() => setAboutOpen(true)}
+          is3D={is3D}
+          onToggle3D={toggle3D}
+        />
 
         {/* Search bar */}
         <SearchBar
@@ -631,47 +636,24 @@ export default function MapPage() {
           hasPanel={panel.kind !== "none"}
         />
 
-        {/* 2D / 3D toggle */}
-        <div
-          className={`view-toggle${panel.kind !== "none" ? " has-panel" : ""}`}
-          style={{ pointerEvents: "auto" }}
-        >
-          <button
-            id="btn-2d"
-            className={`view-tab${!is3D ? " active" : ""}`}
-            onClick={() => !is3D || toggle3D()}
-            aria-pressed={!is3D}
-          >
-            2D
-          </button>
-          <button
-            id="btn-3d"
-            className={`view-tab${is3D ? " active" : ""}`}
-            onClick={() => is3D || toggle3D()}
-            aria-pressed={is3D}
-          >
-            3D
-          </button>
-        </div>
-
         {/* 3D Heritage Explorer Ribbon */}
         {is3D && (
           <div className={`bar-3d-explorer${panel.kind !== "none" ? " has-panel" : ""}`}>
             <div className="bar-3d-header">
               <span className="bar-3d-dot" />
-              <span className="bar-3d-title">CÔNG TRÌNH 3D THỰC TẾ ({BUILDINGS_3D_GEOJSON.features.length})</span>
+              <span className="bar-3d-title">KIẾN TRÚC 3D ({LANDMARK_3D_POINTS.length})</span>
             </div>
             <div className="bar-3d-scroll">
-              {BUILDINGS_3D_GEOJSON.features.map((f) => (
+              {LANDMARK_3D_POINTS.map((f) => (
                 <button
-                  key={f.properties.id}
+                  key={f.id}
                   className="bar-3d-chip"
-                  onClick={() => focusBuilding3D(f.properties)}
-                  title={f.properties.name}
+                  onClick={() => focusBuilding3D(f)}
+                  title={f.name}
                 >
-                  <span className="bar-3d-chip-icon">{f.properties.icon}</span>
-                  <span className="bar-3d-chip-name">{f.properties.short_name}</span>
-                  <span className="bar-3d-chip-height">{f.properties.height}m</span>
+                  <span className="bar-3d-chip-icon">{f.icon}</span>
+                  <span className="bar-3d-chip-name">{f.short_name}</span>
+                  <span className="bar-3d-chip-height">{f.height}m</span>
                 </button>
               ))}
             </div>

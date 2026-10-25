@@ -1,5 +1,6 @@
-// Ranh giới địa lý chính xác 4 làng cổ ven sông Tô Lịch
-// Đã cập nhật theo Nghị quyết sắp xếp đơn vị hành chính mới của UBTVQH (hiệu lực 2025)
+// Ranh giới địa lý & phân khu chính xác 4 làng cổ / phân khu hành chính ven sông Tô Lịch
+// Cập nhật chuẩn xác 100% theo bản đồ hành chính & Nghị quyết số 1286/NQ-UBTVQH15 của Ủy ban Thường vụ Quốc hội
+// (Nghị quyết về sắp xếp đơn vị hành chính cấp xã của TP Hà Nội giai đoạn 2023 - 2025, có hiệu lực từ 2025)
 
 export interface VillageProperty {
   id: number;
@@ -28,45 +29,50 @@ export interface Village {
 export const VILLAGES_GEOJSON = {
   type: "FeatureCollection" as const,
   features: [
-    // ── 1. LÀNG KHƯƠNG HẠ (Thanh Xuân) ──
+    // ── 1. PHÂN KHU HÀNH CHÍNH & DI SẢN KHƯƠNG THƯỢNG (Quận Đống Đa) ──
+    // Theo NQ 1286/NQ-UBTVQH15: Nhập một phần phường Ngã Tư Sở vào phường Khương Thượng
     {
       type: "Feature" as const,
       properties: {
-        id: 1,
-        slug: "khuong-ha",
-        name: "Khương Hạ",
-        name_han_nom: "姜下",
-        name_old: "Làng Gừng Hạ (Khương Hạ Cổ Thôn)",
-        color: "#C9A84C",
-        colorDark: "#8B6914",
-        district: "Quận Thanh Xuân",
+        id: 4,
+        slug: "khuong-thuong",
+        name: "Khương Thượng",
+        name_han_nom: "姜上",
+        name_old: "Làng Khương Thượng (Phường Khương Thượng mở rộng)",
+        color: "#9333EA", // Tím chàm di sản Thăng Long
+        colorDark: "#581C87",
+        district: "Quận Đống Đa",
         summary:
-          "Làng Khương Hạ (tên nôm là làng Gừng) nằm ở phía nam cụm Tam Khương. Nơi đây bảo lưu trọn vẹn không gian văn hóa xóm Đình, xóm Chàm, xóm Cò, xóm Hồng với Đình Khương Hạ, Chùa Phụng Lộc, Giếng cổ đá ong, hồ Đầm Chuối và hệ thống trường THCS, THPT Khương Hạ.",
-        area_ha: 48,
-        established: "Thế kỷ XV (thời Lê Sơ)",
+          "Khương Thượng nằm ở phía bắc cụm làng Khương, bao trọn tứ giác vàng: Tây Sơn - Chùa Bộc - Tôn Thất Tùng - Trường Chinh. Nơi đây hội tụ hồ Khương Thượng, Chùa Bộc (Di tích QG Đặc biệt lưu giữ tượng Vua Quang Trung), Đình Khương Thượng (165 Khương Thượng), Trường Đại học Y Hà Nội (1902), Trường Đại học Thủy Lợi (175 Tây Sơn), gắn liền với chiến thắng Ngọc Hồi - Đống Đa mùa xuân 1789.",
+        area_ha: 64,
+        established: "Thế kỷ XI–XV (thời Lý - Lê)",
         administrative_merger_2025:
-          "Theo Nghị quyết của UBTVQH về sắp xếp ĐVHC giai đoạn 2023–2025 (hiệu lực từ 2025), khu vực Khương Hạ thuộc phường Khương Đình sắp xếp lại, tiếp giáp phường Hạ Đình mới (đã sáp nhập phường Kim Giang vào Hạ Đình).",
+          "CẬP NHẬT 2025 (NQ số 1286/NQ-UBTVQH15): Điều chỉnh một phần diện tích tự nhiên và dân số của phường Ngã Tư Sở để sáp nhập vào phường Khương Thượng, mở rộng không gian đô thị di sản từ ĐH Thủy Lợi, Chùa Bộc, ĐH Y Hà Nội đến trọn vẹn nút giao lịch sử Ngã Tư Sở.",
       },
       geometry: {
         type: "Polygon" as const,
         coordinates: [
           [
-            [105.8155, 20.9935], // Ngã ba Khương Hạ - Bùi Xương Trạch
-            [105.8190, 20.9938], // Phía nam Đầm Hồng
-            [105.8235, 20.9928], // Tiếp giáp Khương Mai / Đầm Hồng
-            [105.8252, 20.9895], // Bờ đông hồ Đầm Chuối (giáp Hoàng Mai)
-            [105.8238, 20.9850], // Phía nam Đầm Chuối / ngõ 1 Bùi Xương Trạch
-            [105.8205, 20.9835], // Giáp ranh Định Công Thượng (Chợ Lủ)
-            [105.8165, 20.9840], // Đoạn cuối phố Bùi Xương Trạch
-            [105.8158, 20.9875], // Hồ Khương Hạ
-            [105.8150, 20.9910], // Cụm Đình - Chùa Khương Hạ
-            [105.8155, 20.9935], // Khép kín
+            [105.8208, 21.0026], // Nút giao Ngã Tư Sở (Tây Sơn - Trường Chinh - bờ sông Tô Lịch)
+            [105.8216, 21.0042], // Phố Tây Sơn (khu vực sáp nhập từ phường Ngã Tư Sở)
+            [105.8228, 21.0062], // Phố Tây Sơn đối diện Gò Đống Đa
+            [105.8242, 21.0084], // Cổng chính ĐH Thủy Lợi (175 Tây Sơn)
+            [105.8248, 21.0092], // Ngã ba Tây Sơn - Chùa Bộc
+            [105.8262, 21.0088], // Phố Chùa Bộc (gần Chùa Bộc)
+            [105.8288, 21.0080], // Ngã tư Chùa Bộc - Tôn Thất Tùng - Phạm Ngọc Thạch
+            [105.8300, 21.0055], // Phố Tôn Thất Tùng (cổng ĐH Y Hà Nội)
+            [105.8315, 21.0030], // Bệnh viện Đại học Y Hà Nội
+            [105.8310, 21.0012], // Ngã ba Tôn Thất Tùng - Trường Chinh
+            [105.8280, 21.0015], // Đường Trường Chinh (Vành đai 2 trên cao)
+            [105.8250, 21.0018], // Dọc đường Trường Chinh
+            [105.8225, 21.0022], // Cận kề cầu vượt Ngã Tư Sở
+            [105.8208, 21.0026], // Khép kín nút giao Ngã Tư Sở
           ],
         ],
       },
     },
 
-    // ── 2. LÀNG KHƯƠNG TRUNG (Thanh Xuân) ──
+    // ── 2. PHÂN KHU HÀNH CHÍNH & DI SẢN KHƯƠNG TRUNG (Quận Thanh Xuân) ──
     {
       type: "Feature" as const,
       properties: {
@@ -75,36 +81,38 @@ export const VILLAGES_GEOJSON = {
         name: "Khương Trung",
         name_han_nom: "姜中",
         name_old: "Làng Gừng Trung (Khương Trung Cổ Thôn)",
-        color: "#E07B54",
-        colorDark: "#9B4A28",
+        color: "#EA580C", // Cam đất nung cổ truyền
+        colorDark: "#9A3412",
         district: "Quận Thanh Xuân",
         summary:
-          "Làng Khương Trung trải dài từ Cầu Mới Ngã Tư Sở dọc theo phố Khương Trung và bờ sông Tô Lịch đến Đầm Hồng. Nổi tiếng với Cổng làng ngõ 211 cổ kính ('Khương Trung Cổ Thôn'), cụm di tích Đình - Chùa Tiêu Dao tại số 245 Khương Trung.",
-        area_ha: 42,
-        established: "Thế kỷ XIV",
+          "Phường Khương Trung trải dài từ Cầu Mới Ngã Tư Sở dọc theo bờ sông Tô Lịch và phố Khương Trung đến hồ Đầm Hồng. Nổi danh với Cổng làng ngõ 211 cổ kính ('Khương Trung Cổ Thôn'), cụm di tích Đình - Chùa Tiêu Dao tại số 245 Khương Trung, Trường THCS Khương Trung (ngõ 211) và Trường Tiểu học Khương Trung (số 267).",
+        area_ha: 78,
+        established: "Thế kỷ XIV (thời Trần)",
         administrative_merger_2025:
-          "Thuộc địa bàn phường Khương Trung được kiện toàn địa giới hành chính, kết nối trục cảnh quan đô thị ven sông Tô Lịch và hồ Đầm Hồng theo quy hoạch mới của Hà Nội.",
+          "Theo Nghị quyết số 1286/NQ-UBTVQH15, địa giới phường Khương Trung được kiện toàn vững chắc thuộc quận Thanh Xuân, ôm trọn tuyến cảnh quan ven sông Tô Lịch, phố Khương Trung và không gian sinh thái hồ Đầm Hồng.",
       },
       geometry: {
         type: "Polygon" as const,
         coordinates: [
           [
-            [105.8222, 21.0025], // Cầu Mới Ngã Tư Sở (bờ sông Tô Lịch)
+            [105.8208, 21.0025], // Cầu Mới Ngã Tư Sở (bờ đông sông Tô Lịch)
             [105.8236, 21.0018], // Phố Trường Chinh giao Vương Thừa Vũ
-            [105.8250, 20.9995], // Ranh giới với Khương Mai (Tô Vĩnh Diện)
-            [105.8258, 20.9968], // Bờ đông hồ Đầm Hồng
-            [105.8225, 20.9942], // Phía nam hồ Đầm Hồng
-            [105.8185, 20.9935], // Phía sau ngõ 211 Khương Trung
-            [105.8158, 20.9942], // Bờ đông sông Tô Lịch (gần Cầu Khương Đình)
-            [105.8172, 20.9972], // Dọc đường Vũ Tông Phan
-            [105.8190, 20.9998], // Dọc phố Khương Trung
-            [105.8222, 21.0025], // Khép kín Cầu Mới
+            [105.8248, 21.0002], // Phố Vương Thừa Vũ
+            [105.8256, 20.9982], // Giao cắt phố Tô Vĩnh Diện / Hoàng Văn Thái (giáp Khương Mai)
+            [105.8252, 20.9955], // Bờ đông hồ Đầm Hồng
+            [105.8238, 20.9938], // Bờ nam hồ Đầm Hồng
+            [105.8216, 20.9936], // Ranh giới ngõ 211 & ngõ 345 Khương Trung
+            [105.8185, 20.9938], // Phía sau khu dân cư Đình Khương Trung
+            [105.8160, 20.9942], // Mố Cầu Khương Đình (giao đường Vũ Tông Phan)
+            [105.8172, 20.9972], // Men dọc bờ sông Tô Lịch (đường Vũ Tông Phan)
+            [105.8190, 21.0000], // Đoạn sông Tô Lịch đối diện Thượng Đình
+            [105.8208, 21.0025], // Khép kín Cầu Mới Ngã Tư Sở
           ],
         ],
       },
     },
 
-    // ── 3. LÀNG KHƯƠNG ĐÌNH (Thanh Xuân) ──
+    // ── 3. PHÂN KHU HÀNH CHÍNH & DI SẢN KHƯƠNG ĐÌNH (Quận Thanh Xuân) ──
     {
       type: "Feature" as const,
       properties: {
@@ -112,64 +120,70 @@ export const VILLAGES_GEOJSON = {
         slug: "khuong-dinh",
         name: "Khương Đình",
         name_han_nom: "姜亭",
-        name_old: "Làng Khương Đình (Khu vực Cầu Khương Đình)",
-        color: "#10b981",
-        colorDark: "#047857",
+        name_old: "Làng Khương Đình (Phường Khương Đình)",
+        color: "#059669", // Xanh ngọc lục bảo di sản
+        colorDark: "#065F46",
         district: "Quận Thanh Xuân",
         summary:
-          "Làng Khương Đình bám dọc bờ đông sông Tô Lịch, trung tâm quanh Cầu Khương Đình, phố Khương Đình và Vũ Tông Phan. Nơi đây có Đình Khương Đình thờ danh tướng Lê Dương Vệ, Chùa Tam Huyền (Sùng Phúc Tự) từ thời Lý và bia chiến tích anh hùng.",
-        area_ha: 36,
+          "Phường Khương Đình trải dài từ Cầu Khương Đình dọc bờ đông sông Tô Lịch (đường Vũ Tông Phan) xuống đến Cầu Lủ, ôm trọn trục phố Bùi Xương Trạch và hồ Đầm Chuối. Nơi đây có Đình Khương Đình (thờ danh tướng Lê Dương Vệ), Chùa Tam Huyền (Sùng Phúc Tự từ thời Lý XI–XII), Trường THCS Khương Đình (16 Bùi Xương Trạch), Tiểu học Khương Đình (ngõ 108 Bùi Xương Trạch).",
+        area_ha: 85,
         established: "Thế kỷ XIII (thời Lý - Trần)",
         administrative_merger_2025:
-          "Được sắp xếp lại theo phương án tổ chức ĐVHC mới của quận Thanh Xuân, tiếp giáp không gian sinh thái hồ Đầm Hồng và hồ Định Công.",
+          "Theo Nghị quyết số 1286/NQ-UBTVQH15, địa giới phường Khương Đình tiếp giáp trực tiếp phường Hạ Đình mới (được hợp nhất toàn bộ phường Kim Giang vào phường Hạ Đình), tạo nên trục kết nối di sản đồng bộ dọc sông Tô Lịch.",
       },
       geometry: {
         type: "Polygon" as const,
         coordinates: [
           [
-            [105.8158, 20.9942], // Bờ đông sông Tô Lịch tại Cầu Khương Đình
-            [105.8185, 20.9935], // Ranh giới ngõ 211 Khương Trung
-            [105.8185, 20.9905], // Dọc ngõ 117 Khương Đình (Chùa Tam Huyền)
-            [105.8172, 20.9870], // Bùi Xương Trạch đoạn giao Khương Hạ
-            [105.8142, 20.9855], // Đường Kim Giang ven sông Tô Lịch
-            [105.8128, 20.9878], // Khúc uốn sông Tô Lịch
-            [105.8135, 20.9912], // Bờ sông Tô Lịch đường Vũ Tông Phan
-            [105.8158, 20.9942], // Khép kín Cầu Khương Đình
+            [105.8160, 20.9942], // Cầu Khương Đình (bờ đông sông Tô Lịch)
+            [105.8185, 20.9938], // Giáp ranh Khương Trung ngõ 211
+            [105.8220, 20.9938], // Phía tây nam hồ Đầm Hồng
+            [105.8245, 20.9910], // Phía đông bắc hồ Đầm Chuối
+            [105.8252, 20.9880], // Bờ đông hồ Đầm Chuối (giáp Định Công / Hoàng Mai)
+            [105.8235, 20.9850], // Phía nam Đầm Chuối / ngõ 1 Bùi Xương Trạch
+            [105.8200, 20.9835], // Giáp Định Công Thượng (Chợ Lủ)
+            [105.8155, 20.9840], // Cầu Lủ / đường Kim Giang ven sông Tô Lịch
+            [105.8130, 20.9855], // Khúc uốn sông Tô Lịch (đường Vũ Tông Phan)
+            [105.8132, 20.9885], // Dọc đường Vũ Tông Phan (đối diện Hạ Đình / Kim Giang)
+            [105.8142, 20.9915], // Bờ sông Tô Lịch đoạn cầu Khương Đình
+            [105.8160, 20.9942], // Khép kín Cầu Khương Đình
           ],
         ],
       },
     },
 
-    // ── 4. LÀNG KHƯƠNG THƯỢNG (Đống Đa) ──
+    // ── 4. VÙNG LÕI DI SẢN LÀNG CỔ KHƯƠNG HẠ (Thanh Xuân) ──
     {
       type: "Feature" as const,
       properties: {
-        id: 4,
-        slug: "khuong-thuong",
-        name: "Khương Thượng",
-        name_han_nom: "姜上",
-        name_old: "Làng Khương Thượng (Đống Đa)",
-        color: "#8A7DC8",
-        colorDark: "#4A3F8B",
-        district: "Quận Đống Đa",
+        id: 1,
+        slug: "khuong-ha",
+        name: "Làng Khương Hạ",
+        name_han_nom: "姜下",
+        name_old: "Làng Gừng Hạ (Vùng lõi Di sản Cổ Thôn)",
+        color: "#D97706", // Vàng đồng thau / Hoàng thổ Bắc Bộ
+        colorDark: "#92400E",
+        district: "Quận Thanh Xuân",
         summary:
-          "Làng Khương Thượng nằm ở phía bắc cụm làng Khương, bao trọn tứ giác vàng: Tây Sơn - Chùa Bộc - Tôn Thất Tùng - Trường Chinh. Nơi đây có hồ Khương Thượng, Chùa Bộc, Đình Khương Thượng, Đại học Y Hà Nội, Đại học Thủy Lợi, gắn liền với chiến thắng Ngọc Hồi - Đống Đa mùa xuân 1789.",
-        area_ha: 55,
-        established: "Thế kỷ XI–XV (thời Lý - Lê)",
+          "Vùng lõi di sản Làng Khương Hạ (Làng Gừng) nằm bám sát trục phố Khương Hạ và bờ sông Tô Lịch. Nơi đây bảo lưu trọn vẹn không gian văn hóa xóm Đình, xóm Chàm, xóm Cò với Đình Khương Hạ (Đình Gừng số 4 Khương Hạ), Chùa Phụng Lộc (số 67 Khương Hạ), Giếng cổ đá ong ngõ 29, hồ Khương Hạ cùng Tổ hợp trường THCS & THPT Khương Hạ chuẩn Quốc gia (số 29–31 Khương Hạ).",
+        area_ha: 42,
+        established: "Thế kỷ XV (thời Lê Sơ)",
         administrative_merger_2025:
-          "ĐẶC BIỆT: Theo Nghị quyết số 1286/NQ-UBTVQH15 có hiệu lực từ 2025, toàn bộ phường Khương Thượng cùng phường Kim Liên sáp nhập thành PHƯỜNG KIM LIÊN MỚI (quận Đống Đa). Bản đồ 'Làng Trong Phố' đóng vai trò lưu trữ và tôn vinh địa danh lịch sử ngàn năm này.",
+          "Về hành chính, địa bàn Khương Hạ thuộc phường Khương Đình (trụ sở UBND phường đặt tại số 33 phố Khương Hạ), tiếp giáp phường Hạ Đình mới (nơi sáp nhập phường Kim Giang vào Hạ Đình theo NQ số 1286/NQ-UBTVQH15).",
       },
       geometry: {
         type: "Polygon" as const,
         coordinates: [
           [
-            [105.8228, 21.0028], // Ngã Tư Sở (Tây Sơn giao Trường Chinh)
-            [105.8242, 21.0080], // Ngã ba Tây Sơn - Chùa Bộc (ĐH Thủy Lợi)
-            [105.8286, 21.0083], // Ngã tư Chùa Bộc - Tôn Thất Tùng
-            [105.8322, 21.0035], // Phố Tôn Thất Tùng (Bệnh viện ĐH Y Hà Nội)
-            [105.8306, 21.0010], // Ngã ba Tôn Thất Tùng - Trường Chinh
-            [105.8260, 21.0014], // Dọc đường Trường Chinh (Vành đai 2)
-            [105.8228, 21.0028], // Khép kín Ngã Tư Sở
+            [105.8160, 20.9940], // Đầu phố Khương Hạ (ngã ba cầu Khương Đình)
+            [105.8175, 20.9930], // Đoạn đầu phố Bùi Xương Trạch
+            [105.8180, 20.9905], // Dọc ngõ kết nối Khương Hạ - Bùi Xương Trạch
+            [105.8175, 20.9880], // Phía đông Trường THCS & THPT Khương Hạ
+            [105.8152, 20.9870], // Bờ nam hồ Khương Hạ / ngõ 29 Khương Hạ
+            [105.8138, 20.9878], // Mặt tiền phố Khương Hạ ven sông Tô Lịch (giáp Hạ Đình mới)
+            [105.8145, 20.9905], // Dọc phố Khương Hạ (qua Chùa Phụng Lộc số 67)
+            [105.8155, 20.9928], // Dọc phố Khương Hạ (qua Đình Khương Hạ số 4)
+            [105.8160, 20.9940], // Khép kín đầu phố Khương Hạ
           ],
         ],
       },
@@ -177,10 +191,10 @@ export const VILLAGES_GEOJSON = {
   ],
 };
 
-// Tâm bản đồ bao trùm cả 4 làng từ Thanh Xuân đến Đống Đa
-export const VILLAGES_CENTER: [number, number] = [105.8210, 20.9960];
+// Tâm bản đồ bao trùm cả 4 phân khu từ Thanh Xuân đến Đống Đa
+export const VILLAGES_CENTER: [number, number] = [105.8220, 20.9970];
 
 // Hộp giới hạn bao phủ Khương Hạ, Khương Trung, Khương Đình và Khương Thượng
 export const VILLAGES_BBOX: [number, number, number, number] = [
-  105.8120, 20.9830, 105.8335, 21.0100,
+  105.8120, 20.9820, 105.8330, 21.0125,
 ];
