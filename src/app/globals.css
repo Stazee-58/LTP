@@ -2318,6 +2318,66 @@ body {
   text-shadow: 0 1px 4px rgba(0,0,0,0.9);
 }
 
+/* ── Floating 3D Heritage Hotspots in Street View */
+.google-hotspots-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1004;
+  overflow: hidden;
+}
+
+.google-hotspot-badge {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  border-radius: 20px;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 12px rgba(56, 189, 248, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  animation: floatHotspot 3s ease-in-out infinite;
+}
+
+@keyframes floatHotspot {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-5px); }
+}
+
+.google-hotspot-badge:hover,
+.google-hotspot-badge.active {
+  background: rgba(56, 189, 248, 0.25);
+  border-color: #38bdf8;
+  box-shadow: 0 6px 22px rgba(56, 189, 248, 0.5);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.google-hotspot-badge .hotspot-icon {
+  font-size: 14px;
+}
+
+.google-hotspot-badge .hotspot-text {
+  color: #f8fafc;
+}
+
+.google-hotspot-badge .hotspot-dist {
+  font-size: 0.68rem;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
 /* ── Radar Minimap (Bottom-Left) */
 .google-streetview-minimap-wrapper {
   position: absolute;
