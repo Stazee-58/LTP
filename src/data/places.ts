@@ -24,9 +24,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ hội truyền thống rước kiệu mùng 10 đến 12 tháng Hai âm lịch"],
     images: [
       {
-        url: "/images/dinh_khuong_ha.jpg",
-        caption: "Toàn cảnh Đình Khương Hạ bên hồ bán nguyệt",
-        credit: "Khảo sát thực địa 2024",
+        url: "/images/dinh_khuong_ha_real.jpg",
+        caption: "Lễ hội truyền thống tại Đình Khương Hạ (Đình Gừng)",
+        credit: "Báo Hànộimới",
         year: 2024,
       },
     ],
@@ -54,9 +54,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ Phật Đản mùng 8 tháng Tư", "Lễ Vu Lan tháng Bảy âm lịch"],
     images: [
       {
-        url: "/images/chua_boc.jpg",
-        caption: "Khuôn viên chùa Phụng Lộc (Khương Hạ)",
-        credit: "Tư liệu di sản",
+        url: "/images/chua_khuong_ha_real.jpg",
+        caption: "Cổng tam quan Chùa Phụng Lộc (Trúc Lâm phái) số 67 phố Khương Hạ",
+        credit: "Tạp chí Người Hà Nội",
         year: 2024,
       },
     ],
@@ -82,9 +82,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Nghi lễ tạ giếng đầu năm mới"],
     images: [
       {
-        url: "/images/cong_khuong_trung.jpg",
-        caption: "Không gian giếng cổ và ngõ xóm Khương Hạ",
-        credit: "Ảnh khảo sát",
+        url: "/images/ngo_khuong_ha_real.jpg",
+        caption: "Không gian ngõ xóm và giếng nước dân gian làng Khương Hạ",
+        credit: "Tư liệu thực địa",
         year: 2024,
       },
     ],
@@ -110,10 +110,10 @@ export const SAMPLE_PLACES = [
     festivals: ["Bơi chải hội làng tháng Hai"],
     images: [
       {
-        url: "/images/historic_map.jpg",
-        caption: "Mặt nước hồ Khương Hạ",
-        credit: "Ảnh tư liệu",
-        year: 2023,
+        url: "/images/song_to_lich_real.jpg",
+        caption: "Dòng sông Tô Lịch và không gian mặt nước làng Khương Hạ",
+        credit: "Wikimedia Commons",
+        year: 2024,
       },
     ],
     sources: [{ citation: "Quy hoạch bảo tồn cảnh quan mặt nước Hà Nội, 2020", url: null, reliability: "cao" }],
@@ -138,9 +138,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Khai giảng mùng 5 tháng 9", "Hội thi Nét đẹp thầy trò 20/11"],
     images: [
       {
-        url: "/images/heritage_icons.jpg",
-        caption: "Khuôn viên Trường THCS Khương Hạ",
-        credit: "Cổng thông tin giáo dục",
+        url: "/images/thcs_khuong_ha_real.jpg",
+        caption: "Khuôn viên và học sinh Trường THCS Khương Hạ",
+        credit: "Tư liệu thực tế trường THCS Khương Hạ",
         year: 2024,
       },
     ],
@@ -166,9 +166,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Khai giảng 5/9", "Ngày hội Văn hóa Thanh niên"],
     images: [
       {
-        url: "/images/heritage_icons.jpg",
-        caption: "Trường THPT Khương Hạ",
-        credit: "Sở GD&ĐT Hà Nội",
+        url: "/images/khuong_ha_school_photo.jpg",
+        caption: "Tổ hợp trường học Khương Hạ (Tiểu học - THCS - THPT)",
+        credit: "Tư liệu nhà trường",
         year: 2024,
       },
     ],
@@ -198,9 +198,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ hội làng Khương Trung ngày 12 tháng Hai âm lịch"],
     images: [
       {
-        url: "/images/cong_khuong_trung.jpg",
-        caption: "Đình làng Khương Trung số 245",
-        credit: "Khảo sát thực địa 2024",
+        url: "/images/dinh_khuong_trung_real.jpg",
+        caption: "Cổng và sân đình làng Khương Trung số 245 phố Khương Trung",
+        credit: "Tạp chí Người Hà Nội",
         year: 2024,
       },
     ],
@@ -226,9 +226,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ cầu an đầu xuân rằm tháng Giêng", "Lễ Phật Đản mùng 8/4"],
     images: [
       {
-        url: "/images/chua_boc.jpg",
-        caption: "Chùa Tiêu Dao - Khương Trung",
-        credit: "Ảnh tư liệu",
+        url: "/images/chua_khuong_trung_real.jpg",
+        caption: "Cổng tam quan Chùa Khương Trung (Chùa Tiêu Dao) số 245 phố Khương Trung",
+        credit: "Tạp chí Người Hà Nội",
         year: 2024,
       },
     ],
@@ -254,9 +254,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Nơi cử hành nghi lễ đón rước kiệu làng"],
     images: [
       {
-        url: "/images/cong_khuong_trung.jpg",
-        caption: "Cổng làng Khương Trung Cổ Thôn ngõ 211",
-        credit: "Khảo sát ảnh 2024",
+        url: "/images/cong_ngo_khuong_dinh_real.jpg",
+        caption: "Kiến trúc cổng ngõ làng cổ vùng Tam Khương với mái ngói và câu đối cổ",
+        credit: "Wikimedia Commons",
         year: 2024,
       },
     ],
@@ -282,9 +282,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ kỷ niệm Ngày Nhà giáo Việt Nam 20/11"],
     images: [
       {
-        url: "/images/heritage_icons.jpg",
-        caption: "Khuôn viên Trường THCS Khương Trung",
-        credit: "Tư liệu trường",
+        url: "/images/khuong_ha_school_photo.jpg",
+        caption: "Không gian trường học đào tạo thế hệ trẻ phường Khương Trung",
+        credit: "Tư liệu thực tế",
         year: 2024,
       },
     ],
@@ -310,9 +310,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Ngày hội Trạng nguyên nhí"],
     images: [
       {
-        url: "/images/heritage_icons.jpg",
-        caption: "Trường Tiểu học Khương Trung",
-        credit: "Ảnh tư liệu",
+        url: "/images/pho_khuong_dinh_real.jpg",
+        caption: "Tuyến phố và không gian đô thị quanh trường học Khương Trung",
+        credit: "Wikimedia Commons",
         year: 2024,
       },
     ],
@@ -342,9 +342,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ hội mùa xuân ngày 14 tháng Giêng âm lịch"],
     images: [
       {
-        url: "/images/dinh_khuong_ha.jpg",
-        caption: "Cung Tiền tế Đình Khương Đình",
-        credit: "Ảnh khảo sát 2024",
+        url: "/images/dinh_khuong_dinh_dien_tho_real.jpg",
+        caption: "Gian thờ chính và kiến trúc gỗ chạm khắc tại Đình Khương Đình (Đình Vòng)",
+        credit: "Wikimedia Commons",
         year: 2024,
       },
     ],
@@ -370,9 +370,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ hội chùa Tam Huyền tháng Giêng"],
     images: [
       {
-        url: "/images/chua_boc.jpg",
-        caption: "Không gian cổ tự Tam Huyền",
-        credit: "Ảnh tư liệu",
+        url: "/images/chua_tam_huyen_real.jpg",
+        caption: "Cổng tam quan Chùa Tam Huyền (Sùng Phúc Tự)",
+        credit: "Tư liệu di tích",
         year: 2024,
       },
     ],
@@ -398,9 +398,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ khai giảng 5/9", "Hội chợ Xuân truyền thống"],
     images: [
       {
-        url: "/images/heritage_icons.jpg",
-        caption: "Trường THCS Khương Đình",
-        credit: "Cổng thông tin trường",
+        url: "/images/cong_khuong_dinh_real.jpg",
+        caption: "Cổng chào và trục phố Khương Đình dẫn vào các trường học địa phương",
+        credit: "Wikimedia Commons",
         year: 2024,
       },
     ],
@@ -426,9 +426,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Tết Trung thu trăng rằm tháng Tám"],
     images: [
       {
-        url: "/images/heritage_icons.jpg",
-        caption: "Trường Tiểu học Khương Đình",
-        credit: "Ảnh khảo sát",
+        url: "/images/pho_khuong_dinh_real.jpg",
+        caption: "Tuyến đường và nhịp sống dân cư Khương Đình",
+        credit: "Wikimedia Commons",
         year: 2024,
       },
     ],
@@ -458,9 +458,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ hội chiến thắng Đống Đa mùng 5 tháng Giêng", "Hội làng rằm tháng Chín"],
     images: [
       {
-        url: "/images/dinh_khuong_ha.jpg",
-        caption: "Đình Khương Thượng ven hồ nước",
-        credit: "Khảo sát thực địa 2024",
+        url: "/images/dinh_khuong_thuong_real.jpg",
+        caption: "Đình Khương Thượng thực địa bên hồ nước",
+        credit: "Wikimedia Commons",
         year: 2024,
       },
     ],
@@ -486,9 +486,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Đại lễ tưởng niệm Quang Trung mùng 5 tháng Giêng"],
     images: [
       {
-        url: "/images/chua_boc.jpg",
-        caption: "Cổng tam quan Chùa Bộc di tích 1789",
-        credit: "Bảo tàng Hà Nội",
+        url: "/images/chua_boc_real.jpg",
+        caption: "Cổng tam quan và khuôn viên Chùa Bộc thực tế",
+        credit: "Wikimedia Commons",
         year: 2024,
       },
     ],
@@ -514,9 +514,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ hội kỷ niệm Chiến thắng Ngọc Hồi - Đống Đa mùng 5 Tết"],
     images: [
       {
-        url: "/images/chua_boc.jpg",
-        caption: "Tượng đài Quang Trung tại Gò Đống Đa - Khương Thượng",
-        credit: "Di tích Quốc gia",
+        url: "/images/go_dong_da_real.jpg",
+        caption: "Khuôn viên và cổng di tích Gò Đống Đa thực tế",
+        credit: "Wikimedia Commons",
         year: 2024,
       },
     ],
@@ -542,9 +542,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ trao bằng Bác sĩ y khoa", "Ngày Thầy thuốc Việt Nam 27/2"],
     images: [
       {
-        url: "/images/heritage_icons.jpg",
-        caption: "Khuôn viên Đại học Y Hà Nội",
-        credit: "HMU Media",
+        url: "/images/dai_hoc_y_main_real.jpg",
+        caption: "Toàn cảnh tòa nhà trung tâm Đại học Y Hà Nội số 1 Tôn Thất Tùng",
+        credit: "Wikimedia Commons",
         year: 2024,
       },
     ],
@@ -570,9 +570,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ kỷ niệm thành lập trường 17/11"],
     images: [
       {
-        url: "/images/heritage_icons.jpg",
-        caption: "Trường Đại học Thủy Lợi",
-        credit: "TLU Media",
+        url: "/images/dai_hoc_thuy_loi_real.jpg",
+        caption: "Cổng chính và tòa nhà T35 Đại học Thủy Lợi 175 Tây Sơn",
+        credit: "Wikimedia Commons",
         year: 2024,
       },
     ],
@@ -598,9 +598,9 @@ export const SAMPLE_PLACES = [
     festivals: ["Lễ bế giảng và khen thưởng học sinh giỏi"],
     images: [
       {
-        url: "/images/heritage_icons.jpg",
-        caption: "Trường Tiểu học Khương Thượng",
-        credit: "GD&ĐT Đống Đa",
+        url: "/images/ho_khuong_thuong_real.jpg",
+        caption: "Cảnh quan hồ Khương Thượng và không gian dân cư quanh trường học",
+        credit: "Wikimedia Commons",
         year: 2024,
       },
     ],

@@ -13,7 +13,7 @@ import FilterBar from "@/components/FilterBar";
 import VillageLegend from "@/components/VillageLegend";
 import LoadingScreen from "@/components/LoadingScreen";
 import AboutModal from "@/components/AboutModal";
-import { BUILDINGS_3D_GEOJSON } from "@/data/buildings3d";
+import { BUILDINGS_3D_GEOJSON, BUILDINGS_3D_POINTS } from "@/data/buildings3d";
 
 type PanelState =
   | { kind: "none" }
@@ -48,18 +48,17 @@ export default function MapPage() {
     nha_tho_ho: "#d4a0c0",
   };
 
-  // ── Helper: Tạo HTML cho 3D Architectural Card Popup
+  // ── Helper: Tạo HTML cho 3D Architectural Card Popup với Ảnh thực tế
   const create3DPopupHTML = (p: any) => {
     const typeMap: Record<string, string> = {
-      heritage: "🏛️ Di tích lịch sử",
-      school: "🏫 Trường học",
-      university: "🎓 Viện Đại học",
-      gate: "🚪 Cổng làng cổ",
-      commercial: "🏢 Cao ốc hiện đại",
-      residential: "🏘️ Quần cư làng cổ",
+      dinh: "🏛️ Đình làng cổ",
+      chua: "⛩️ Chùa cổ tôn giáo",
+      cong_lang: "🚪 Cổng làng cổ",
+      truong_hoc: "🏫 Trường học chuẩn QG",
+      dai_hoc: "🎓 Viện Đại học",
     };
-    const typeBadge = typeMap[p.type] || "🏛️ Kiến trúc 3D";
-    const image = p.image || "/images/village_gate.jpg";
+    const typeBadge = typeMap[p.type] || "🏛️ Công trình 3D";
+    const image = p.image || "/images/den_khuong_ha_gate_real.jpg";
     const hanNom = p.name_han_nom
       ? `<span style="color:#C9A84C;font-family:serif;font-weight:normal;margin-left:4px;">(${p.name_han_nom})</span>`
       : "";
@@ -69,12 +68,13 @@ export default function MapPage() {
         <div class="card-popup-3d-img-wrapper">
           <img src="${image}" alt="${p.name}" class="card-popup-3d-img" />
           <span class="card-popup-3d-badge" style="color:${p.color || '#C9A84C'};">${typeBadge}</span>
+          <span class="card-popup-3d-badge-real">📷 Ảnh chụp thực tế</span>
           <span class="card-popup-3d-height-tag">📐 Cao: ${p.height}m ${p.floors ? `(${p.floors} tầng)` : ''}</span>
         </div>
         <div class="card-popup-3d-body">
           <div class="card-popup-3d-village">📍 ${p.village || "Làng trong Phố"}</div>
           <div class="card-popup-3d-title">${p.name} ${hanNom}</div>
-          <div class="card-popup-3d-desc">${p.desc || "Mô hình kiến trúc 3D chuẩn xác thực địa."}</div>
+          <div class="card-popup-3d-desc">${p.desc || "Mô hình kiến trúc 3D chuẩn xác thực địa với ảnh chụp thực tế."}</div>
           ${
             p.place_slug
               ? `<button id="btn-popup-view-place" class="card-popup-3d-btn">Khám phá chi tiết di tích →</button>`
@@ -100,72 +100,74 @@ export default function MapPage() {
     }, 50);
   }, []);
 
-  // ── Render 3D Floating Badges when 3D mode is active
-  const render3DFloatingBadges = useCallback(
-    (map: maplibregl.Map, show: boolean) => {
+  // ── Khám phá trực tiếp công trình 3D từ thanh điều hướng
+  const focusBuilding3D = useCallback((p: any) => {
+    const map = mapRef.current;
+    if (!map) return;
+    map.flyTo({
+      center: p.center,
+      zoom: 17.2,
+      pitch: 58,
+      bearing: -20,
+      offset: [0, 90],
+      duration: 1000,
+      essential: true,
+    });
+    popupRef.current?.remove();
+    popupRef.current = new maplibregl.Popup({
+      offset: 16,
+      closeButton: true,
+      maxWidth: "320px",
+    })
+      .setLngLat(p.center)
+      .setHTML(create3DPopupHTML(p))
+      .addTo(map);
+
+    setup3DPopupAction(p);
+  }, [setup3DPopupAction]);
+
+  // ── Render elevated 3D landmark tags trực tiếp trên nóc mỗi công trình
+  const render3DMarkers = useCallback(
+    (map: maplibregl.Map, visible: boolean) => {
       markers3DRef.current.forEach((m) => m.remove());
       markers3DRef.current = [];
 
-      if (!show) return;
+      if (!visible) return;
 
-      const landmarks = BUILDINGS_3D_GEOJSON.features.filter(
-        (f) =>
-          f.properties.type === "heritage" ||
-          f.properties.type === "university" ||
-          f.properties.type === "gate"
-      );
-
-      landmarks.forEach((f) => {
-        const coords = f.geometry.coordinates[0];
-        const lng = coords.reduce((acc: number, c: number[]) => acc + c[0], 0) / coords.length;
-        const lat = coords.reduce((acc: number, c: number[]) => acc + c[1], 0) / coords.length;
-        const p = f.properties;
-
+      BUILDINGS_3D_GEOJSON.features.forEach((f) => {
+        const prop = f.properties;
         const el = document.createElement("div");
-        el.className = "marker-3d-floating";
-        let icon = "🏛️";
-        if (p.type === "university") icon = "🎓";
-        else if (p.type === "gate") icon = "🚪";
-        else if (p.type === "commercial") icon = "🏢";
-        else if (p.name.includes("Chùa")) icon = "⛩️";
-
+        el.className = `marker-3d-tag type-${prop.type}`;
+        el.setAttribute("data-building-id", prop.id);
         el.innerHTML = `
-          <span class="marker-3d-icon">${icon}</span>
-          <span class="marker-3d-title">${p.name.split("(")[0].trim()}</span>
-          <span class="marker-3d-height">${p.height}m</span>
+          <div class="marker-3d-card" style="border-top: 3px solid ${prop.color};">
+            <div class="marker-3d-main">
+              <span class="marker-3d-icon">${prop.icon}</span>
+              <span class="marker-3d-name">${prop.short_name}</span>
+              <span class="marker-3d-height" style="color: ${prop.color};">${prop.height}m</span>
+            </div>
+            <div class="marker-3d-sub">${prop.village}</div>
+          </div>
+          <div class="marker-3d-stem" style="background: ${prop.color};"></div>
+          <div class="marker-3d-dot" style="background: ${prop.color}; box-shadow: 0 0 10px ${prop.color};"></div>
         `;
 
-        el.addEventListener("click", (evt) => {
-          evt.stopPropagation();
-          map.flyTo({
-            center: [lng, lat],
-            pitch: 62,
-            bearing: -20,
-            zoom: Math.max(map.getZoom(), 17),
-            duration: 800,
-          });
-
-          popupRef.current?.remove();
-          popupRef.current = new maplibregl.Popup({
-            offset: 16,
-            closeButton: true,
-            maxWidth: "300px",
-          })
-            .setLngLat([lng, lat])
-            .setHTML(create3DPopupHTML(p))
-            .addTo(map);
-
-          setup3DPopupAction(p);
+        el.addEventListener("click", (e) => {
+          e.stopPropagation();
+          focusBuilding3D(prop);
         });
 
-        const marker = new maplibregl.Marker({ element: el, anchor: "bottom" })
-          .setLngLat([lng, lat])
+        const marker = new maplibregl.Marker({
+          element: el,
+          anchor: "bottom",
+        })
+          .setLngLat(prop.center)
           .addTo(map);
 
         markers3DRef.current.push(marker);
       });
     },
-    [setup3DPopupAction]
+    [focusBuilding3D]
   );
 
   // ── Render markers whenever places/filter changes
@@ -411,12 +413,25 @@ export default function MapPage() {
         map.getCanvas().style.cursor = "";
       });
 
-      // ── 3D Buildings & Heritage Extrusion Layer with Vertical Gradient & Dynamic Shading
+      // ── 3D Buildings Footprint Outline & Extrusion Layer
       map.addSource("buildings-3d", {
         type: "geojson",
         data: BUILDINGS_3D_GEOJSON as GeoJSON.FeatureCollection,
       });
 
+      // Ground footprint demarcation border
+      map.addLayer({
+        id: "buildings-3d-outline",
+        type: "line",
+        source: "buildings-3d",
+        paint: {
+          "line-color": ["get", "color"],
+          "line-width": 2,
+          "line-opacity": 0.85,
+        },
+      });
+
+      // 3D Architectural Volume
       map.addLayer({
         id: "buildings-3d-layer",
         type: "fill-extrusion",
@@ -425,17 +440,17 @@ export default function MapPage() {
           "fill-extrusion-color": ["get", "color"],
           "fill-extrusion-height": ["get", "height"],
           "fill-extrusion-base": ["get", "base_height"],
-          "fill-extrusion-opacity": 0.88,
-          "fill-extrusion-vertical-gradient": true,
+          "fill-extrusion-opacity": is3D ? 0.95 : 0.4,
+          "fill-extrusion-vertical-gradient": false,
         },
       });
 
-      // Directional 3D light for crisp architectural shadow and volume
+      // Ambient directional light for natural architectural volume
       map.setLight({
-        anchor: "viewport",
+        anchor: "map",
         color: "#ffffff",
-        intensity: 0.85,
-        position: [1.5, 90, 55],
+        intensity: 0.48,
+        position: [1.2, 210, 45],
       });
 
       map.on("mouseenter", "buildings-3d-layer", () => {
@@ -452,7 +467,7 @@ export default function MapPage() {
           popupRef.current = new maplibregl.Popup({
             offset: 16,
             closeButton: true,
-            maxWidth: "300px",
+            maxWidth: "320px",
           })
             .setLngLat(e.lngLat)
             .setHTML(create3DPopupHTML(p))
@@ -464,6 +479,9 @@ export default function MapPage() {
 
       // ── Render place markers
       renderMarkers(map, new Set());
+      if (is3D) {
+        render3DMarkers(map, true);
+      }
       setMapLoaded(true);
     });
 
@@ -473,7 +491,7 @@ export default function MapPage() {
       map.remove();
       mapRef.current = null;
     };
-  }, [renderMarkers, setup3DPopupAction]);
+  }, [renderMarkers, setup3DPopupAction, render3DMarkers, is3D]);
 
   // ── Re-render markers when filter changes
   useEffect(() => {
@@ -488,7 +506,9 @@ export default function MapPage() {
     if (!map) return;
     const next = !is3D;
     setIs3D(next);
+    const container = mapContainerRef.current;
     if (next) {
+      container?.classList.add("mode-3d-active");
       map.easeTo({
         pitch: 62,
         bearing: -22,
@@ -496,22 +516,23 @@ export default function MapPage() {
         duration: 1200,
       });
       if (map.getLayer("buildings-3d-layer")) {
-        map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.96);
+        map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.95);
       }
-      render3DFloatingBadges(map, true);
+      render3DMarkers(map, true);
     } else {
+      container?.classList.remove("mode-3d-active");
       map.easeTo({
         pitch: 0,
         bearing: 0,
         duration: 900,
       });
       if (map.getLayer("buildings-3d-layer")) {
-        map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.5);
+        map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.35);
       }
-      render3DFloatingBadges(map, false);
+      render3DMarkers(map, false);
       popupRef.current?.remove();
     }
-  }, [is3D, render3DFloatingBadges]);
+  }, [is3D, render3DMarkers]);
 
   // ── flyTo from search
   const handleSearchSelect = useCallback(
@@ -632,6 +653,30 @@ export default function MapPage() {
             3D
           </button>
         </div>
+
+        {/* 3D Heritage Explorer Ribbon */}
+        {is3D && (
+          <div className={`bar-3d-explorer${panel.kind !== "none" ? " has-panel" : ""}`}>
+            <div className="bar-3d-header">
+              <span className="bar-3d-dot" />
+              <span className="bar-3d-title">CÔNG TRÌNH 3D THỰC TẾ ({BUILDINGS_3D_GEOJSON.features.length})</span>
+            </div>
+            <div className="bar-3d-scroll">
+              {BUILDINGS_3D_GEOJSON.features.map((f) => (
+                <button
+                  key={f.properties.id}
+                  className="bar-3d-chip"
+                  onClick={() => focusBuilding3D(f.properties)}
+                  title={f.properties.name}
+                >
+                  <span className="bar-3d-chip-icon">{f.properties.icon}</span>
+                  <span className="bar-3d-chip-name">{f.properties.short_name}</span>
+                  <span className="bar-3d-chip-height">{f.properties.height}m</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Category filter */}
         <FilterBar

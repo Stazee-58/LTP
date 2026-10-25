@@ -28,7 +28,7 @@ export default function AboutModal({ open, onClose, lang }: AboutModalProps) {
             {/* Header Hero Banner with authentic village image */}
             <div className="modal-hero-wrapper">
               <img
-                src="/images/village_gate.jpg"
+                src="/images/den_khuong_ha_gate_real.jpg"
                 alt="Cổng làng cổ Bắc Bộ"
                 className="modal-hero-img"
               />
@@ -97,15 +97,15 @@ export default function AboutModal({ open, onClose, lang }: AboutModalProps) {
                   {/* Photo Showcase */}
                   <div className="modal-gallery-grid">
                     <div className="gallery-card">
-                      <img src="/images/historic_map.jpg" alt="Bản đồ cổ địa chí" />
+                      <img src="/images/dinh_khuong_ha_real.jpg" alt="Lễ hội truyền thống Đình Khương Hạ" />
                       <div className="gallery-caption">
-                        {lang === "en" ? "Ancient Thang Long Maps (Le - Nguyen)" : "Địa chí & Bản đồ Thăng Long cổ"}
+                        {lang === "en" ? "Traditional Festival at Khuong Ha" : "Lễ hội truyền thống Đình Khương Hạ"}
                       </div>
                     </div>
                     <div className="gallery-card">
-                      <img src="/images/village_gate.jpg" alt="Cổng làng cổ" />
+                      <img src="/images/dinh_khuong_trung_real.jpg" alt="Đình làng Khương Trung và cây đa cổ" />
                       <div className="gallery-caption">
-                        {lang === "en" ? "Village Gate & Banyan Tree" : "Cổng làng Khương Trung & Cây đa cổ"}
+                        {lang === "en" ? "Khuong Trung Communal House & Banyan" : "Đình Khương Trung số 245 & Cây đa cổ"}
                       </div>
                     </div>
                   </div>
