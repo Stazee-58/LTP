@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+Display:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap');
 @import "tailwindcss";
 
 /* ============================================================
@@ -48,8 +48,8 @@
   --radius-md: 12px;
   --radius-lg: 20px;
 
-  --font-sans: 'Be Vietnam Pro', system-ui, sans-serif;
-  --font-serif: 'Noto Serif Display', Georgia, serif;
+  --font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Noto Serif', 'Be Vietnam Pro', Georgia, serif;
 }
 
 /* ============================================================
@@ -72,6 +72,8 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
 }
 
 /* ============================================================
@@ -1657,37 +1659,71 @@ body {
   display: none !important;
 }
 
+/* ============================================================
+   3D LANDMARK MARKERS (BẢN CŨ: CHỈ HIỆN THẺ KHI DI TRỎ CHUỘT VÀO)
+   ============================================================ */
 .marker-3d-tag {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
   pointer-events: auto;
   user-select: none;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.75));
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.75));
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), filter 0.22s ease;
   z-index: 25;
 }
 
-.marker-3d-tag:hover {
-  transform: scale(1.15) translateY(-5px);
-  filter: drop-shadow(0 14px 28px rgba(201, 168, 76, 0.5)) brightness(1.2);
-  z-index: 45;
+/* Vùng đệm rộng xung quanh chân kim để dễ rê chuột vào */
+.marker-3d-tag::before {
+  content: "";
+  position: absolute;
+  inset: -10px -16px;
+  border-radius: 20px;
+  z-index: 1;
 }
 
+.marker-3d-tag:hover,
+.marker-3d-tag.is-active {
+  z-index: 9999 !important;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.9));
+}
+
+/* Thẻ thông tin chi tiết (Bản cũ giữ nguyên thiết kế): MẶC ĐỊNH ẨN, CHỈ KHI DI TRỎ CHUỘT VÀO MỚI HIỆN */
 .marker-3d-card {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px) scale(0.95);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
   display: flex;
   flex-direction: column;
   gap: 2px;
   padding: 5px 11px;
   border-radius: 8px;
-  background: rgba(9, 18, 34, 0.94);
+  background: rgba(9, 18, 34, 0.95);
   border-left: 1px solid rgba(255, 255, 255, 0.16);
   border-right: 1px solid rgba(255, 255, 255, 0.16);
   border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(10px);
   white-space: nowrap;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.2s;
+  z-index: 100;
+}
+
+/* Khi di chuột vào (Desktop) hoặc chạm (Mobile) -> Ô thông tin trượt nhẹ lên và hiện rõ */
+.marker-3d-tag:hover .marker-3d-card,
+.marker-3d-tag.is-active .marker-3d-card {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(-2px) scale(1);
 }
 
 .marker-3d-main {
@@ -1702,11 +1738,11 @@ body {
 }
 
 .marker-3d-name {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans); /* Be Vietnam Pro chuẩn hệ dấu tiếng Việt, không bị lỗi dấu thanh */
   font-size: 0.8rem;
   font-weight: 700;
   color: #ffffff;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
 }
 
 .marker-3d-height {
@@ -1725,15 +1761,63 @@ body {
   padding-left: 20px;
 }
 
+/* Chân kim và chấm phát sáng trên nóc công trình */
 .marker-3d-stem {
   width: 2px;
   height: 16px;
   opacity: 0.85;
+  transition: height 0.2s ease, opacity 0.2s ease;
 }
 
 .marker-3d-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.marker-3d-tag:hover .marker-3d-dot,
+.marker-3d-tag.is-active .marker-3d-dot {
+  transform: scale(1.35);
+  filter: brightness(1.3);
+}
+
+/* ============================================================
+   TỐI ƯU TRÊN ĐIỆN THOẠI & TOUCH DEVICES
+   ============================================================ */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  .marker-3d-card {
+    padding: 3px 8px;
+    border-radius: 6px;
+    max-width: 190px;
+  }
+
+  .marker-3d-name {
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .marker-3d-icon {
+    font-size: 11px;
+  }
+
+  .marker-3d-height {
+    font-size: 0.525rem;
+    padding: 1px 4px;
+  }
+
+  /* Ẩn dòng tên làng trên điện thoại để ô thông tin mini siêu gọn */
+  .marker-3d-sub {
+    display: none;
+  }
+
+  .marker-3d-stem {
+    height: 10px;
+  }
+
+  .marker-3d-dot {
+    width: 5px;
+    height: 5px;
+  }
 }
 

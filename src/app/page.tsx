@@ -153,6 +153,16 @@ export default function MapPage() {
 
         el.addEventListener("click", (e) => {
           e.stopPropagation();
+          const isMobile = window.innerWidth <= 768 || window.matchMedia("(hover: none)").matches;
+          if (isMobile) {
+            const wasActive = el.classList.contains("is-active");
+            document.querySelectorAll(".marker-3d-tag.is-active").forEach((m) => {
+              if (m !== el) m.classList.remove("is-active");
+            });
+            if (!wasActive) {
+              el.classList.add("is-active");
+            }
+          }
           focusBuilding3D(prop);
         });
 
@@ -410,6 +420,13 @@ export default function MapPage() {
       });
       map.on("mouseleave", "villages-fill", () => {
         map.getCanvas().style.cursor = "";
+      });
+
+      // Dismiss active 3D tag on map click
+      map.on("click", () => {
+        document.querySelectorAll(".marker-3d-tag.is-active").forEach((m) => {
+          m.classList.remove("is-active");
+        });
       });
 
       // ── 3D Buildings Footprint Outline & Extrusion Layer
