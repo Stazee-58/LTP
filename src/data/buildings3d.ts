@@ -169,6 +169,36 @@ const RAW_BUILDINGS: Building3DFeature[] = [
   },
 
   // ============================================================
+  // TRƯỜNG THPT KHƯƠNG ĐÌNH - Ngách 29/78 phố Khương Hạ, P. Khương Đình
+  // Khối nhà học hiện đại 5 tầng cao 22m chuẩn Quốc gia
+  // ============================================================
+  {
+    type: "Feature",
+    properties: {
+      id: "thpt-khuong-dinh-main",
+      name: "Trường THPT Khương Đình (Khối nhà học 5 tầng)",
+      short_name: "THPT Khương Đình",
+      name_han_nom: "姜亭高級中學校",
+      height: 22,
+      base_height: 0,
+      floors: 5,
+      color: "#0284C7",
+      icon: "🏫",
+      type: "truong_hoc",
+      village: "Khương Đình",
+      image: "/images/thcs_khuong_ha_real.jpg",
+      desc: "Trường THPT công lập chuẩn Quốc gia thành lập 2020 tại ngách 29/78 phố Khương Hạ, phường Khương Đình.",
+      place_slug: "thpt-khuong-dinh",
+      center: [105.8160, 20.9885],
+      sub_part: "Khối nhà học 5 tầng",
+    },
+    geometry: {
+      type: "Polygon",
+      coordinates: [makeRect(105.8160, 20.9885, 44, 20, 0, 0)],
+    },
+  },
+
+  // ============================================================
   // 2. TRƯỜNG THCS KHƯƠNG TRUNG (Ngõ 211 phố Khương Trung)
   // Khối nhà chữ U trường đạt chuẩn Quốc gia
   // ============================================================
@@ -964,6 +994,20 @@ export const LANDMARK_3D_POINTS = [
     image: "/images/cong_khuong_dinh_real.jpg",
     desc: "Trường THCS số 16 phố Bùi Xương Trạch, phường Khương Đình.",
     place_slug: "thcs-khuong-dinh",
+  },
+  {
+    id: "thpt-khuong-dinh",
+    name: "Trường THPT Khương Đình",
+    short_name: "THPT Khương Đình",
+    type: "truong_hoc",
+    icon: "🏫",
+    height: 22,
+    color: "#0284C7",
+    village: "Khương Đình",
+    center: [105.8160, 20.9885] as [number, number],
+    image: "/images/thcs_khuong_ha_real.jpg",
+    desc: "Trường THPT công lập chuẩn Quốc gia tại ngách 29/78 phố Khương Hạ, phường Khương Đình.",
+    place_slug: "thpt-khuong-dinh",
   },
   {
     id: "dai-hoc-thuy-loi",

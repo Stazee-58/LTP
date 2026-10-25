@@ -2269,6 +2269,47 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 67,
+    "village_slug": "khuong-dinh",
+    "slug": "thpt-khuong-dinh",
+    "name": "Trường THPT Khương Đình",
+    "name_han_nom": "姜亭高級中學校",
+    "category": "truong_hoc",
+    "lat": 20.9885,
+    "lng": 105.816,
+    "built_year": 2020,
+    "deity": "Thiết chế giáo dục trung học phổ thông công lập hiện đại",
+    "rank": "Trường THPT công lập chuẩn Quốc gia",
+    "description": "Trường THPT Khương Đình tọa lạc tại ngách 29/78 phố Khương Hạ, thuộc địa bàn phường Khương Đình, quận Thanh Xuân. Được thành lập theo Quyết định số 2976/QĐ-UBND ngày 06/07/2020 của UBND Thành phố Hà Nội, trường là điểm sáng giáo dục trung học phổ thông công lập hiện đại với khuôn viên đồng bộ, phòng học thông minh, nhà thể chất đa năng và sân bóng đá, đáp ứng chương trình GDPT mới cho con em nhân dân địa phương.",
+    "description_en": "Khuong Dinh High School in Alley 29/78 Khuong Ha Street, Khuong Dinh Ward, was established in July 2020 by the Hanoi People's Committee. It is a premier modern public high school equipped with smart classrooms, multipurpose gymnasiums, and advanced educational facilities serving students across Thanh Xuan District.",
+    "festivals": [
+      "Lễ khai giảng 5/9",
+      "Ngày Nhà giáo Việt Nam 20/11",
+      "Hội trại Thanh niên"
+    ],
+    "images": [
+      {
+        "url": "/images/thcs_khuong_ha_real.jpg",
+        "caption": "Khuôn viên Trường THPT Khương Đình tại ngách 29/78 phố Khương Hạ, phường Khương Đình",
+        "credit": "Trường THPT Khương Đình",
+        "year": 2024
+      }
+    ],
+    "sources": [
+      {
+        "citation": "Quyết định số 2976/QĐ-UBND ngày 06/07/2020 của UBND Thành phố Hà Nội",
+        "url": "http://thptkhuongdinh.edu.vn",
+        "reliability": "cao"
+      },
+      {
+        "citation": "Sở Giáo dục và Đào tạo Hà Nội, 2024",
+        "url": null,
+        "reliability": "cao"
+      }
+    ],
+    "confidence": 5
+  },
+  {
+    "id": 68,
     "village_slug": "khuong-thuong",
     "slug": "dinh-khuong-thuong",
     "name": "Đình Khương Thượng",
@@ -2303,7 +2344,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 68,
+    "id": 69,
     "village_slug": "khuong-thuong",
     "slug": "mieu-quy-son",
     "name": "Miếu Quy Sơn (Gò Rùa Khương Thượng)",
@@ -2337,7 +2378,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 69,
+    "id": 70,
     "village_slug": "khuong-thuong",
     "slug": "chua-boc",
     "name": "Chùa Bộc (Sùng Phúc Tự)",
@@ -2378,7 +2419,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 70,
+    "id": 71,
     "village_slug": "khuong-thuong",
     "slug": "chua-phuc-khanh",
     "name": "Chùa Phúc Khánh (Chùa Sở / Cổ tự Ngã Tư Sở)",
@@ -2413,7 +2454,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 71,
+    "id": 72,
     "village_slug": "khuong-thuong",
     "slug": "chua-dong-quang",
     "name": "Chùa Đồng Quang (Chùa Đống Đa)",
@@ -2447,7 +2488,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 72,
+    "id": 73,
     "village_slug": "khuong-thuong",
     "slug": "go-dong-da",
     "name": "Gò Khương Thượng - Gò Đống Đa",
@@ -2481,7 +2522,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 73,
+    "id": 74,
     "village_slug": "khuong-thuong",
     "slug": "den-trung-liet",
     "name": "Đền Trung Liệt (Trên đỉnh Gò Đống Đa)",
@@ -2515,7 +2556,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 74,
+    "id": 75,
     "village_slug": "khuong-thuong",
     "slug": "tuong-dai-quang-trung",
     "name": "Tượng đài Hoàng đế Quang Trung & Nhà trưng bày Đống Đa",
@@ -2549,7 +2590,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 75,
+    "id": 76,
     "village_slug": "khuong-thuong",
     "slug": "cong-lang-khuong-thuong",
     "name": "Cổng làng Khương Thượng (Khương Thượng Đình Môn)",
@@ -2583,7 +2624,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 76,
+    "id": 77,
     "village_slug": "khuong-thuong",
     "slug": "cong-xom-dong-khuong-thuong",
     "name": "Cổng xóm Đông Khương Thượng (Ngõ 40 Tôn Thất Tùng)",
@@ -2617,7 +2658,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 77,
+    "id": 78,
     "village_slug": "khuong-thuong",
     "slug": "cong-xom-tay-khuong-thuong",
     "name": "Cổng xóm Tây Khương Thượng (Ngõ 123 Khương Thượng)",
@@ -2651,7 +2692,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 78,
+    "id": 79,
     "village_slug": "khuong-thuong",
     "slug": "cong-xom-nam-khuong-thuong",
     "name": "Cổng xóm Nam Khương Thượng (Ngõ 229 Tây Sơn)",
@@ -2685,7 +2726,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 79,
+    "id": 80,
     "village_slug": "khuong-thuong",
     "slug": "gieng-mat-rong-chua-boc",
     "name": "Giếng Mắt Rồng Chùa Bộc (Long Nhãn Cổ Tỉnh)",
@@ -2719,7 +2760,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 80,
+    "id": 81,
     "village_slug": "khuong-thuong",
     "slug": "gieng-co-mieu-quy-son",
     "name": "Giếng cổ Miếu Quy Sơn",
@@ -2753,7 +2794,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 81,
+    "id": 82,
     "village_slug": "khuong-thuong",
     "slug": "ho-khuong-thuong",
     "name": "Hồ Khương Thượng",
@@ -2787,7 +2828,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 82,
+    "id": 83,
     "village_slug": "khuong-thuong",
     "slug": "ho-ho-me",
     "name": "Hồ Hố Mẻ (Khuôn viên Đại học Y Hà Nội)",
@@ -2821,7 +2862,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 83,
+    "id": 84,
     "village_slug": "khuong-thuong",
     "slug": "nha-tho-ho-nguyen-khuong-thuong",
     "name": "Nhà thờ họ Nguyễn làng Khương Thượng",
@@ -2855,7 +2896,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 84,
+    "id": 85,
     "village_slug": "khuong-thuong",
     "slug": "nha-tho-ho-pham-khuong-thuong",
     "name": "Nhà thờ họ Phạm làng Khương Thượng",
@@ -2889,7 +2930,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 85,
+    "id": 86,
     "village_slug": "khuong-thuong",
     "slug": "nha-tho-ho-vu-khuong-thuong",
     "name": "Nhà thờ họ Vũ làng Khương Thượng",
@@ -2923,7 +2964,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 86,
+    "id": 87,
     "village_slug": "khuong-thuong",
     "slug": "dai-hoc-y-ha-noi",
     "name": "Trường Đại học Y Hà Nội (1902)",
@@ -2964,7 +3005,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 87,
+    "id": 88,
     "village_slug": "khuong-thuong",
     "slug": "benh-vien-dai-hoc-y",
     "name": "Bệnh viện Đại học Y Hà Nội",
@@ -2998,7 +3039,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 88,
+    "id": 89,
     "village_slug": "khuong-thuong",
     "slug": "dai-hoc-thuy-loi",
     "name": "Trường Đại học Thủy Lợi (1959)",
@@ -3039,7 +3080,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 89,
+    "id": 90,
     "village_slug": "khuong-thuong",
     "slug": "hoc-vien-ngan-hang",
     "name": "Học viện Ngân hàng (1961)",
@@ -3074,7 +3115,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 90,
+    "id": 91,
     "village_slug": "khuong-thuong",
     "slug": "dai-hoc-cong-doan",
     "name": "Trường Đại học Công đoàn (1946)",
@@ -3109,7 +3150,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 91,
+    "id": 92,
     "village_slug": "khuong-thuong",
     "slug": "tieu-hoc-khuong-thuong",
     "name": "Trường Tiểu học Khương Thượng",
@@ -3144,7 +3185,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "id": 92,
+    "id": 93,
     "village_slug": "khuong-thuong",
     "slug": "thcs-khuong-thuong",
     "name": "Trường THCS Khương Thượng",
