@@ -534,23 +534,23 @@ export default function MapPage() {
           features: [
             {
               type: "Feature",
-              properties: { name: "Khương Thượng · 姜上", color: "#C084FC" },
+              properties: { name: "Khương Thượng · 姜上\n(P. Khương Thượng mở rộng)", color: "#C084FC" },
               geometry: { type: "Point", coordinates: [105.8265, 21.0048] },
             },
             {
               type: "Feature",
-              properties: { name: "Khương Trung · 姜中", color: "#FB923C" },
+              properties: { name: "Khương Trung · 姜中\n(P. Khương Trung)", color: "#FB923C" },
               geometry: { type: "Point", coordinates: [105.8210, 20.9975] },
             },
             {
               type: "Feature",
-              properties: { name: "Khương Đình · 姜亭", color: "#34D399" },
-              geometry: { type: "Point", coordinates: [105.8190, 20.9880] },
+              properties: { name: "Khương Đình · 姜亭\n(P. Khương Đình)", color: "#34D399" },
+              geometry: { type: "Point", coordinates: [105.8195, 20.9885] },
             },
             {
               type: "Feature",
-              properties: { name: "Làng Khương Hạ · 姜下", color: "#FBBF24" },
-              geometry: { type: "Point", coordinates: [105.8160, 20.9912] },
+              properties: { name: "Làng Khương Hạ · 姜下\n(Sáp nhập P. Khương Đình)", color: "#FBBF24" },
+              geometry: { type: "Point", coordinates: [105.8152, 20.9912] },
             },
           ],
         },

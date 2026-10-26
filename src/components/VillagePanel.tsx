@@ -109,15 +109,28 @@ export default function VillagePanel({
             <div
               style={{
                 marginTop: 18,
-                padding: "10px 14px",
+                padding: "12px 14px",
                 background: "rgba(56, 189, 248, 0.08)",
                 border: "1px solid rgba(56, 189, 248, 0.25)",
                 borderRadius: 8,
               }}
             >
-              <div style={{ fontSize: "0.7rem", fontWeight: 600, color: "#38bdf8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
-                🏛️ {lang === "en" ? "2024–2025 Administrative Merger" : "Sắp xếp đơn vị hành chính (hiệu lực 2025)"}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "#38bdf8", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                  🏛️ {lang === "en" ? "Administrative Merger" : "Địa giới hành chính & Sáp nhập"}
+                </span>
+                {p.merger_badge && (
+                  <span style={{ fontSize: "0.68rem", fontWeight: 600, color: p.color, background: `${p.color}20`, padding: "2px 8px", borderRadius: 999 }}>
+                    {p.merger_badge}
+                  </span>
+                )}
               </div>
+              {p.new_administrative_name && (
+                <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-primary)", marginBottom: 4 }}>
+                  {lang === "en" ? "New Name: " : "Đơn vị hành chính: "}
+                  <span style={{ color: "#38bdf8" }}>{p.new_administrative_name}</span>
+                </div>
+              )}
               <p style={{ fontSize: "0.775rem", color: "var(--text-secondary)", lineHeight: 1.5, margin: 0 }}>
                 {p.administrative_merger_2025}
               </p>

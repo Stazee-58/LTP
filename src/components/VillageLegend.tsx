@@ -97,6 +97,29 @@ export default function VillageLegend({ villages, onSelect, lang = "vi" }: Villa
                       {count} di tích
                     </span>
                   </div>
+                  {p.merger_badge && (
+                    <div
+                      className="legend-merger-chip"
+                      style={{
+                        marginTop: 4,
+                        fontSize: "0.68rem",
+                        padding: "2px 7px",
+                        borderRadius: 999,
+                        width: "fit-content",
+                        fontWeight: 600,
+                        letterSpacing: "0.02em",
+                        color: p.color,
+                        background: `${p.color}15`,
+                        border: `1px solid ${p.color}35`,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 4,
+                      }}
+                    >
+                      <span style={{ fontSize: "0.62rem", opacity: 0.85 }}>●</span>
+                      {p.merger_badge}
+                    </div>
+                  )}
                 </div>
               </div>
             );

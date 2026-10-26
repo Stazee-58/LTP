@@ -14,6 +14,8 @@ export interface VillageProperty {
   area_ha: number;
   established: string;
   administrative_merger_2025: string;
+  merger_badge: string;
+  new_administrative_name: string;
   district: string;
 }
 
@@ -38,7 +40,9 @@ export const VILLAGES_GEOJSON = {
         slug: "khuong-thuong",
         name: "Khương Thượng",
         name_han_nom: "姜上",
-        name_old: "Làng Khương Thượng (Phường Khương Thượng mở rộng)",
+        name_old: "Làng Khương Thượng",
+        new_administrative_name: "Phường Khương Thượng mở rộng (Đống Đa)",
+        merger_badge: "P. Khương Thượng mở rộng",
         color: "#9333EA", // Tím chàm di sản Thăng Long
         colorDark: "#581C87",
         district: "Quận Đống Đa",
@@ -54,16 +58,18 @@ export const VILLAGES_GEOJSON = {
         coordinates: [
           [
             [105.8202, 21.0028], // Nút giao Ngã Tư Sở
-            [105.8214, 21.0050], // Phố Tây Sơn qua Chùa Phúc Khánh
-            [105.8228, 21.0070], // Phố Tây Sơn đối diện Thái Hà
+            [105.8212, 21.0045], // Phố Tây Sơn qua Chùa Phúc Khánh
+            [105.8225, 21.0065], // Phố Tây Sơn đối diện Thái Hà
             [105.8242, 21.0085], // Ngã tư Tây Sơn - Chùa Bộc (ĐH Thủy Lợi)
-            [105.8270, 21.0080], // Dọc phố Chùa Bộc (Chùa Bộc, Học viện Ngân hàng)
+            [105.8260, 21.0082], // Dọc phố Chùa Bộc (Học viện Ngân hàng)
+            [105.8280, 21.0076], // Phố Chùa Bộc (Chùa Bộc)
             [105.8300, 21.0072], // Ngã tư Chùa Bộc - Tôn Thất Tùng - Phạm Ngọc Thạch
-            [105.8315, 21.0045], // Phố Tôn Thất Tùng (Cổng Trường Đại học Y Hà Nội)
-            [105.8322, 21.0025], // Bệnh viện Đại học Y Hà Nội
+            [105.8312, 21.0050], // Phố Tôn Thất Tùng (Cổng Trường Đại học Y Hà Nội)
+            [105.8322, 21.0030], // Bệnh viện Đại học Y Hà Nội
             [105.8320, 21.0010], // Ngã ba Tôn Thất Tùng - Đại lộ Trường Chinh
-            [105.8270, 21.0014], // Đại lộ Trường Chinh (đường Vành đai 2 trên cao)
-            [105.8230, 21.0020], // Cầu vượt Ngã Tư Sở
+            [105.8285, 21.0012], // Đại lộ Trường Chinh (đường Vành đai 2 trên cao)
+            [105.8250, 21.0016], // Đại lộ Trường Chinh
+            [105.8225, 21.0022], // Cầu vượt Ngã Tư Sở
             [105.8202, 21.0028], // Khép kín nút giao Ngã Tư Sở
           ],
         ],
@@ -79,6 +85,8 @@ export const VILLAGES_GEOJSON = {
         name: "Khương Trung",
         name_han_nom: "姜中",
         name_old: "Làng Gừng Trung (Khương Trung Cổ Thôn)",
+        new_administrative_name: "Phường Khương Trung (Thanh Xuân)",
+        merger_badge: "Phường Khương Trung",
         color: "#EA580C", // Cam đất nung cổ truyền
         colorDark: "#9A3412",
         district: "Quận Thanh Xuân",
@@ -94,16 +102,22 @@ export const VILLAGES_GEOJSON = {
         coordinates: [
           [
             [105.8202, 21.0028], // Cầu Mới Ngã Tư Sở (bờ đông sông Tô Lịch)
+            [105.8225, 21.0022], // Đại lộ Trường Chinh
             [105.8236, 21.0018], // Phố Trường Chinh giao Vương Thừa Vũ
-            [105.8250, 21.0002], // Phố Vương Thừa Vũ
-            [105.8258, 20.9978], // Ranh giới với Khương Mai (Hoàng Văn Thái / Tô Vĩnh Diện)
-            [105.8252, 20.9952], // Phía đông hồ Đầm Hồng
-            [105.8232, 20.9935], // Bờ tây nam hồ Đầm Hồng (giao ranh giới Khương Đình)
-            [105.8215, 20.9934], // Ranh giới ngõ 211 & ngõ 345 Khương Trung
-            [105.8188, 20.9938], // Tuyến ranh giới giáp Khương Đình
+            [105.8244, 21.0008], // Phố Vương Thừa Vũ
+            [105.8250, 20.9998], // Phố Vương Thừa Vũ
+            [105.8256, 20.9982], // Giáp Khương Mai (phố Tô Vĩnh Diện / Hoàng Văn Thái)
+            [105.8254, 20.9965], // Ranh giới đông hồ Đầm Hồng
+            [105.8248, 20.9950], // Bờ đông hồ Đầm Hồng
+            [105.8235, 20.9938], // Phía nam hồ Đầm Hồng (giao ranh giới Khương Đình)
+            [105.8215, 20.9934], // Ranh giới ngõ 345 & ngõ 211 Khương Trung
+            [105.8188, 20.9936], // Ranh giới với Khương Đình (ngõ Bùi Xương Trạch)
+            [105.8172, 20.9939], // Phía sau khu dân cư Đình Khương Trung
             [105.8160, 20.9942], // Mố Cầu Khương Đình (giao đường Vũ Tông Phan)
-            [105.8174, 20.9972], // Men dọc bờ sông Tô Lịch (đường Vũ Tông Phan)
-            [105.8190, 21.0002], // Đoạn sông Tô Lịch đối diện Thượng Đình
+            [105.8168, 20.9960], // Men dọc bờ sông Tô Lịch (đường Vũ Tông Phan)
+            [105.8176, 20.9980], // Dọc đường Vũ Tông Phan đối diện Thượng Đình
+            [105.8188, 21.0002], // Đường Vũ Tông Phan
+            [105.8198, 21.0018], // Đầu đường Vũ Tông Phan
             [105.8202, 21.0028], // Khép kín Cầu Mới Ngã Tư Sở
           ],
         ],
@@ -118,7 +132,9 @@ export const VILLAGES_GEOJSON = {
         slug: "khuong-dinh",
         name: "Khương Đình",
         name_han_nom: "姜亭",
-        name_old: "Làng Khương Đình (Phường Khương Đình)",
+        name_old: "Làng Khương Đình",
+        new_administrative_name: "Phường Khương Đình (Thanh Xuân)",
+        merger_badge: "Hợp nhất: P. Khương Đình",
         color: "#059669", // Xanh ngọc lục bảo di sản
         colorDark: "#065F46",
         district: "Quận Thanh Xuân",
@@ -133,23 +149,26 @@ export const VILLAGES_GEOJSON = {
         type: "Polygon" as const,
         coordinates: [
           [
-            [105.8160, 20.9942], // Cầu Khương Đình (giao đường Vũ Tông Phan & sông Tô Lịch)
-            [105.8188, 20.9938], // Ranh giới phía bắc với Khương Trung
-            [105.8215, 20.9934], // Tuyến ranh giới ngõ 345 / 211
-            [105.8232, 20.9935], // Bờ tây nam hồ Đầm Hồng
-            [105.8240, 20.9908], // Tuyến ranh giới phía đông (Thanh Xuân - Hoàng Mai)
-            [105.8242, 20.9888], // Bờ đông hồ Đầm Chuối
-            [105.8236, 20.9868], // Phía đông nam Đầm Chuối
-            [105.8218, 20.9854], // Tuyến ranh giới phía nam giáp Định Công
-            [105.8195, 20.9847], // Phía nam ngõ 358 Bùi Xương Trạch
-            [105.8175, 20.9842], // Phía bắc Định Công Thượng
-            [105.8156, 20.9840], // Cầu Lủ (giao đường Vũ Tông Phan & sông Tô Lịch)
-            [105.8146, 20.9847], // Men theo đường Vũ Tông Phan dọc bờ sông Tô Lịch
-            [105.8139, 20.9858], // Đoạn sông Tô Lịch đối diện Kim Giang
-            [105.8136, 20.9877], // Đoạn sông Tô Lịch đối diện Hạ Đình
-            [105.8137, 20.9897], // Đường Vũ Tông Phan
-            [105.8143, 20.9913], // Cầu Khương Hạ
-            [105.8153, 20.9930], // Đường Vũ Tông Phan đoạn đối diện Khương Đình
+            [105.8160, 20.9942], // Cầu Khương Đình (giao đường Vũ Tông Phan)
+            [105.8172, 20.9939], // Ranh giới phía bắc với Khương Trung
+            [105.8188, 20.9936], // Ranh giới ngõ 345 / 211
+            [105.8205, 20.9932], // Ranh giới phía bắc về Đầm Hồng
+            [105.8215, 20.9926], // Phía nam hồ Đầm Hồng (đường nét đứt giáp Hoàng Mai)
+            [105.8220, 20.9912], // Đường nét đứt phía tây hồ Đầm Chuối / nghĩa trang
+            [105.8225, 20.9895], // Bờ đông khu dân cư Bùi Xương Trạch
+            [105.8222, 20.9878], // Phía đông Đầm Chuối
+            [105.8218, 20.9862], // Góc đông nam Đầm Chuối giáp Định Công
+            [105.8202, 20.9854], // Ranh giới phía nam giáp Định Công Thượng
+            [105.8185, 20.9848], // Tuyến ranh giới phía nam
+            [105.8168, 20.9844], // Tuyến ranh giới phía bắc Chợ Lủ
+            [105.8152, 20.9842], // Cầu Lủ (giao Vũ Tông Phan & sông Tô Lịch)
+            [105.8144, 20.9852], // Đường nét đứt men sông Tô Lịch (đường Vũ Tông Phan)
+            [105.8138, 20.9865], // Dọc bờ sông Tô Lịch đối diện Kim Giang
+            [105.8136, 20.9882], // Điểm giáp ranh phía nam Làng Khương Hạ (ngõ 29)
+            [105.8148, 20.9882], // Ranh giới phân chia Khương Đình - Khương Hạ (phía nam hồ Khương Hạ)
+            [105.8170, 20.9882], // Phía sau cụm trường Khương Hạ
+            [105.8172, 20.9905], // Ranh giới giữa phố Khương Hạ và phố Bùi Xương Trạch
+            [105.8170, 20.9930], // Đầu phố Bùi Xương Trạch
             [105.8160, 20.9942], // Khép kín Cầu Khương Đình
           ],
         ],
@@ -165,6 +184,8 @@ export const VILLAGES_GEOJSON = {
         name: "Làng Khương Hạ",
         name_han_nom: "姜下",
         name_old: "Làng Gừng Hạ (Vùng lõi Di sản Cổ Thôn)",
+        new_administrative_name: "Sáp nhập vào Phường Khương Đình (Thanh Xuân)",
+        merger_badge: "Sáp nhập P. Khương Đình",
         color: "#D97706", // Vàng đồng thau / Hoàng thổ Bắc Bộ
         colorDark: "#92400E",
         district: "Quận Thanh Xuân",
@@ -179,14 +200,16 @@ export const VILLAGES_GEOJSON = {
         type: "Polygon" as const,
         coordinates: [
           [
-            [105.8160, 20.9942], // Cầu Khương Đình (đầu phố Khương Hạ)
-            [105.8172, 20.9932], // Đầu phố Bùi Xương Trạch giáp Khương Hạ
-            [105.8174, 20.9905], // Phía sau Chùa Phụng Lộc
-            [105.8170, 20.9880], // Ranh giới phía đông cụm trường Khương Hạ
-            [105.8145, 20.9880], // Phía nam Hồ Khương Hạ / ngõ 29
-            [105.8137, 20.9897], // Bờ sông Tô Lịch (đường Khương Hạ)
-            [105.8143, 20.9913], // Cầu Khương Hạ
-            [105.8153, 20.9930], // Phố Khương Hạ (qua Đình Khương Hạ số 4)
+            [105.8160, 20.9942], // Cầu Khương Đình (đầu phố Khương Hạ & Vũ Tông Phan)
+            [105.8156, 20.9932], // Đường nét đứt men bờ đông sông Tô Lịch (phố Khương Hạ)
+            [105.8148, 20.9922], // Dọc phố Khương Hạ (qua Đình Khương Hạ số 4)
+            [105.8142, 20.9912], // Cầu Khương Hạ & hồ Cầu Khương Hạ
+            [105.8138, 20.9898], // Bờ sông Tô Lịch đối diện Hạ Đình
+            [105.8136, 20.9882], // Góc tây nam Làng Khương Hạ (ngõ 29 Khương Hạ)
+            [105.8148, 20.9882], // Tuyến phân chia nội bộ (phía nam hồ Khương Hạ)
+            [105.8170, 20.9882], // Ranh giới phía đông cụm trường THCS & THPT Khương Hạ
+            [105.8172, 20.9905], // Phía sau Chùa Phụng Lộc giáp Bùi Xương Trạch
+            [105.8170, 20.9930], // Tuyến phân chia phố Khương Hạ & Bùi Xương Trạch
             [105.8160, 20.9942], // Khép kín Cầu Khương Đình
           ],
         ],
