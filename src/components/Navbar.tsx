@@ -1,6 +1,6 @@
 "use client";
 
-import { Globe } from "@phosphor-icons/react";
+import { Globe, Info, MapTrifold, Buildings, Compass } from "@phosphor-icons/react";
 
 export type ViewMode = "2d" | "3d" | "street";
 
@@ -25,10 +25,17 @@ export default function Navbar({
     <nav className="navbar" role="navigation" aria-label="Điều hướng chính">
       {/* Brand */}
       <a href="/" className="navbar-brand" aria-label="Trang chủ Làng Trong Phố">
-        <div className="brand-mark" aria-hidden="true">村</div>
-        <div>
-          <div className="brand-text-vi">Làng Trong Phố</div>
-          <div className="brand-text-en">Village in the City · Hà Nội</div>
+        <div className="brand-mark" aria-hidden="true">
+          <span>村</span>
+        </div>
+        <div className="brand-copy">
+          <div className="brand-heading-row">
+            <span className="brand-text-vi">Làng Trong Phố</span>
+            <span className="brand-badge-count">93 Di tích</span>
+          </div>
+          <div className="brand-text-en">
+            {lang === "en" ? "4 Ancient Villages · Hanoi Heritage GIS" : "Di sản 4 Làng Cổ ven Sông Tô Lịch"}
+          </div>
         </div>
       </a>
 
@@ -43,7 +50,7 @@ export default function Navbar({
             aria-pressed={viewMode === "2d"}
             title="Bản đồ 2D phẳng toàn cảnh"
           >
-            <span aria-hidden="true">🗺️</span>
+            <MapTrifold size={15} weight={viewMode === "2d" ? "bold" : "regular"} />
             <span>2D</span>
           </button>
           <button
@@ -53,7 +60,7 @@ export default function Navbar({
             aria-pressed={viewMode === "3d"}
             title="Phối cảnh không gian 3D đô thị"
           >
-            <span aria-hidden="true">🏛️</span>
+            <Buildings size={15} weight={viewMode === "3d" ? "bold" : "regular"} />
             <span>3D</span>
           </button>
           <button
@@ -63,7 +70,7 @@ export default function Navbar({
             aria-pressed={viewMode === "street"}
             title="Chế độ Street View dạo phố tầm mắt"
           >
-            <span aria-hidden="true">🚶</span>
+            <Compass size={15} weight={viewMode === "street" ? "bold" : "regular"} />
             <span>Street View</span>
           </button>
         </div>
@@ -86,9 +93,11 @@ export default function Navbar({
           onClick={onOpenAbout}
           aria-label={lang === "en" ? "About the project" : "Về dự án"}
         >
-          {lang === "en" ? "About" : "Giới thiệu"}
+          <Info size={15} />
+          <span className="hidden sm:inline">{lang === "en" ? "About" : "Giới thiệu"}</span>
         </button>
       </div>
     </nav>
   );
 }
+

@@ -2,13 +2,23 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, MapPin, Calendar, Star, BookOpen, MusicNotes } from "@phosphor-icons/react";
+import { 
+  X, 
+  MapPin, 
+  Calendar, 
+  Star, 
+  BookOpen, 
+  MusicNotes, 
+  Compass, 
+  ArrowSquareOut 
+} from "@phosphor-icons/react";
 import { CATEGORY_LABELS, type Place } from "@/data/places";
 
 interface PlacePanelProps {
   place: Place;
   lang: "vi" | "en";
   onClose: () => void;
+  onOpenStreetView?: (place: Place) => void;
 }
 
 const CONFIDENCE_LABELS = {
@@ -30,7 +40,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   nha_tho_ho: "#d4a0c0",
 };
 
-export default function PlacePanel({ place, lang, onClose }: PlacePanelProps) {
+export default function PlacePanel({ place, lang, onClose, onOpenStreetView }: PlacePanelProps) {
   const [panelLang, setPanelLang] = useState<"vi" | "en">(lang);
 
   useEffect(() => {
@@ -50,17 +60,17 @@ export default function PlacePanel({ place, lang, onClose }: PlacePanelProps) {
         initial={{ x: "100%" }}
         animate={{ x: 0 }}
         exit={{ x: "100%" }}
-        transition={{ type: "spring", stiffness: 280, damping: 32 }}
+        transition={{ type: "spring", stiffness: 300, damping: 32 }}
         role="complementary"
         aria-label={`Chi tiết: ${place.name}`}
       >
-        {/* Hero image */}
+        {/* Hero image with rich gradient */}
         <div className="panel-header">
           {img && (
             <img
               className="panel-header-img"
               src={img.url}
-              alt={img.caption}
+              alt={img.caption || place.name}
               loading="lazy"
             />
           )}
@@ -73,21 +83,41 @@ export default function PlacePanel({ place, lang, onClose }: PlacePanelProps) {
           >
             <X size={16} weight="bold" />
           </button>
+          {img?.caption && (
+            <div className="panel-header-caption">
+              {img.caption}
+            </div>
+          )}
         </div>
 
         {/* Body */}
         <div className="panel-body">
-          {/* Category badge */}
-          <div
-            className="panel-category-badge"
-            style={{
-              background: `${color}22`,
-              border: `1px solid ${color}66`,
-              color: color,
-            }}
-          >
-            <span>{cat?.icon}</span>
-            <span>{lang === "en" ? cat?.en : cat?.vi}</span>
+          {/* Category badge & Village tag */}
+          <div className="panel-top-badges">
+            <div
+              className="panel-category-badge"
+              style={{
+                background: `${color}18`,
+                border: `1px solid ${color}55`,
+                color: color,
+              }}
+            >
+              <span>{cat?.icon}</span>
+              <span>{lang === "en" ? cat?.en : cat?.vi}</span>
+            </div>
+
+            <div className="panel-village-badge">
+              <MapPin size={11} weight="fill" />
+              <span>
+                {place.village_slug === "khuong-ha"
+                  ? "Khương Hạ"
+                  : place.village_slug === "khuong-trung"
+                  ? "Khương Trung"
+                  : place.village_slug === "khuong-dinh"
+                  ? "Khương Đình"
+                  : "Khương Thượng"}
+              </span>
+            </div>
           </div>
 
           {/* Names */}
@@ -96,24 +126,50 @@ export default function PlacePanel({ place, lang, onClose }: PlacePanelProps) {
             <p className="panel-name-han">{place.name_han_nom}</p>
           )}
 
+          {/* Quick Action Buttons: Street View + Google Maps */}
+          <div className="panel-actions-row">
+            {onOpenStreetView && (
+              <button
+                id="btn-place-streetview"
+                className="panel-btn-primary"
+                onClick={() => onOpenStreetView(place)}
+                title="Mở Street View dạo quanh di tích"
+              >
+                <Compass size={16} weight="bold" />
+                <span>{lang === "en" ? "Explore 360° View" : "Khám phá Street View 360°"}</span>
+              </button>
+            )}
+            <a
+              id="btn-place-google-maps"
+              className="panel-btn-secondary"
+              href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Mở vị trí trên Google Maps"
+            >
+              <ArrowSquareOut size={15} />
+              <span>{lang === "en" ? "Directions" : "Chỉ đường"}</span>
+            </a>
+          </div>
+
           {/* Meta chips */}
           <div className="panel-meta-row">
             {place.built_year && (
               <div className="meta-chip">
-                <Calendar size={12} />
-                <span>{lang === "en" ? "Built" : "Xây dựng"} {place.built_year}</span>
+                <Calendar size={12} weight="bold" />
+                <span>{lang === "en" ? "Built" : "Khởi dựng"}: {place.built_year}</span>
               </div>
             )}
             {place.deity && (
-              <div className="meta-chip">
-                <Star size={12} />
-                <span>{place.deity}</span>
+              <div className="meta-chip" title={place.deity}>
+                <Star size={12} weight="bold" />
+                <span className="truncate max-w-[220px]">{place.deity}</span>
               </div>
             )}
             {place.rank && (
               <div className="rank-badge">
                 <Star size={11} weight="fill" />
-                {place.rank}
+                <span>{place.rank}</span>
               </div>
             )}
           </div>
@@ -143,18 +199,18 @@ export default function PlacePanel({ place, lang, onClose }: PlacePanelProps) {
             style={{ borderTop: "none", marginTop: 0, paddingTop: 0 }}
           >
             <BookOpen size={12} style={{ display: "inline", marginRight: 5 }} />
-            {lang === "en" ? "About" : "Lịch sử & Mô tả"}
+            {lang === "en" ? "Historical Background" : "Lịch sử & Khảo cứu"}
           </div>
           <p className="panel-description">{desc}</p>
 
           {/* Festivals */}
-          {place.festivals.length > 0 && (
+          {place.festivals && place.festivals.length > 0 && (
             <>
               <div className="panel-section-title">
                 <MusicNotes size={12} style={{ display: "inline", marginRight: 5 }} />
-                {lang === "en" ? "Festivals & Events" : "Lễ hội"}
+                {lang === "en" ? "Festivals & Ceremonies" : "Lễ hội & Nghi lễ truyền thống"}
               </div>
-              <div>
+              <div className="festivals-container">
                 {place.festivals.map((f) => (
                   <span key={f} className="festival-tag">{f}</span>
                 ))}
@@ -165,21 +221,18 @@ export default function PlacePanel({ place, lang, onClose }: PlacePanelProps) {
           {/* Location */}
           <div className="panel-section-title">
             <MapPin size={12} style={{ display: "inline", marginRight: 5 }} />
-            {lang === "en" ? "Location" : "Vị trí"}
+            {lang === "en" ? "Geographic Coordinates" : "Tọa độ thực địa"}
           </div>
-          <p className="panel-description" style={{ fontSize: "0.8rem" }}>
-            {place.lat.toFixed(6)}°N, {place.lng.toFixed(6)}°E
-            <br />
-            {lang === "en" ? "Village" : "Làng"}: {
-              place.village_slug.split("-").map((w) =>
-                w.charAt(0).toUpperCase() + w.slice(1)
-              ).join(" ")
-            }
-          </p>
+          <div className="panel-coord-box">
+            <span className="panel-coord-num">{place.lat.toFixed(6)}°N, {place.lng.toFixed(6)}°E</span>
+            <span className="panel-coord-slug">
+              {place.village_slug.toUpperCase().replace("-", " ")}
+            </span>
+          </div>
 
           {/* Sources & confidence */}
           <div className="panel-section-title">
-            {lang === "en" ? "Sources & Reliability" : "Nguồn tư liệu & Độ tin cậy"}
+            {lang === "en" ? "Sources & Reliability" : "Nguồn tư liệu & Giám định"}
           </div>
           <div className="confidence-bar">
             {[1, 2, 3, 4, 5].map((i) => (
@@ -194,10 +247,10 @@ export default function PlacePanel({ place, lang, onClose }: PlacePanelProps) {
           </div>
           {place.sources.map((src, i) => (
             <p key={i} className="panel-description" style={{ fontSize: "0.75rem", marginTop: 8 }}>
-              {src.citation}
+              • {src.citation}
               {src.url && (
-                <a href={src.url} target="_blank" rel="noopener" style={{ color: "var(--amber-400)" }}>
-                  {" ↗"}
+                <a href={src.url} target="_blank" rel="noopener noreferrer" style={{ color: "var(--amber-400)", marginLeft: 4 }}>
+                  [Tư liệu gốc ↗]
                 </a>
               )}
             </p>
@@ -206,8 +259,8 @@ export default function PlacePanel({ place, lang, onClose }: PlacePanelProps) {
           {/* Photo credit */}
           {img?.credit && (
             <p style={{ fontSize: "0.68rem", color: "var(--text-muted)", marginTop: 16 }}>
-              {lang === "en" ? "Photo" : "Ảnh"}: {img.credit}
-              {img.year ? `, ${img.year}` : ""}
+              {lang === "en" ? "Photography credit" : "Nguồn ảnh tư liệu"}: {img.credit}
+              {img.year ? ` (${img.year})` : ""}
             </p>
           )}
         </div>

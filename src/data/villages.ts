@@ -53,20 +53,25 @@ export const VILLAGES_GEOJSON = {
         type: "Polygon" as const,
         coordinates: [
           [
-            [105.8208, 21.0026], // Nút giao Ngã Tư Sở (Tây Sơn - Trường Chinh - bờ sông Tô Lịch)
-            [105.8216, 21.0042], // Phố Tây Sơn (khu vực sáp nhập từ phường Ngã Tư Sở)
-            [105.8228, 21.0062], // Phố Tây Sơn đối diện Gò Đống Đa
-            [105.8242, 21.0084], // Cổng chính ĐH Thủy Lợi (175 Tây Sơn)
-            [105.8248, 21.0092], // Ngã ba Tây Sơn - Chùa Bộc
-            [105.8262, 21.0088], // Phố Chùa Bộc (gần Chùa Bộc)
-            [105.8288, 21.0080], // Ngã tư Chùa Bộc - Tôn Thất Tùng - Phạm Ngọc Thạch
-            [105.8300, 21.0055], // Phố Tôn Thất Tùng (cổng ĐH Y Hà Nội)
-            [105.8315, 21.0030], // Bệnh viện Đại học Y Hà Nội
-            [105.8310, 21.0012], // Ngã ba Tôn Thất Tùng - Trường Chinh
-            [105.8280, 21.0015], // Đường Trường Chinh (Vành đai 2 trên cao)
-            [105.8250, 21.0018], // Dọc đường Trường Chinh
-            [105.8225, 21.0022], // Cận kề cầu vượt Ngã Tư Sở
-            [105.8208, 21.0026], // Khép kín nút giao Ngã Tư Sở
+            [105.8200, 21.0028], // Nút giao Ngã Tư Sở
+            [105.8202, 21.0038], // Phố Tây Sơn qua Chùa Phúc Khánh (105.8205, 21.0035)
+            [105.8214, 21.0065], // Tây Sơn đối diện Thái Hà
+            [105.8220, 21.0078], // Tây Sơn ôm trọn ĐH Công Đoàn (105.8225, 21.0075)
+            [105.8225, 21.0098], // Tây Sơn qua Đặng Tiến Đông
+            [105.8228, 21.0112], // Chùa Đồng Quang (105.8232, 21.0108)
+            [105.8230, 21.0125], // Đỉnh bắc Gò Đống Đa & Đền Trung Liệt (105.8234, 21.0118)
+            [105.8248, 21.0122], // Phía đông Gò Đống Đa & Tượng đài Quang Trung (105.8240, 21.0110)
+            [105.8252, 21.0100], // Phía đông công viên Đống Đa
+            [105.8250, 21.0088], // Ngã ba Tây Sơn - Chùa Bộc ôm trọn ĐH Thủy Lợi (105.8242, 21.0085)
+            [105.8270, 21.0085], // Dọc phố Chùa Bộc (gần Chùa Bộc & HV Ngân hàng)
+            [105.8300, 21.0075], // Ngã tư Chùa Bộc - Phạm Ngọc Thạch - Đông Tác
+            [105.8315, 21.0055], // Phố Tôn Thất Tùng (cổng ĐH Y Hà Nội)
+            [105.8328, 21.0035], // Phía đông ĐH Y Hà Nội (105.8315, 21.0030)
+            [105.8330, 21.0015], // Bệnh viện Đại học Y Hà Nội (105.8320, 21.0018)
+            [105.8315, 21.0010], // Ngã ba Tôn Thất Tùng - Trường Chinh
+            [105.8270, 21.0014], // Đại lộ Trường Chinh (Vành đai 2 trên cao)
+            [105.8230, 21.0020], // Cầu vượt Ngã Tư Sở
+            [105.8200, 21.0028], // Khép kín nút giao Ngã Tư Sở
           ],
         ],
       },
@@ -95,18 +100,18 @@ export const VILLAGES_GEOJSON = {
         type: "Polygon" as const,
         coordinates: [
           [
-            [105.8208, 21.0025], // Cầu Mới Ngã Tư Sở (bờ đông sông Tô Lịch)
+            [105.8200, 21.0028], // Cầu Mới Ngã Tư Sở (bờ đông sông Tô Lịch)
             [105.8236, 21.0018], // Phố Trường Chinh giao Vương Thừa Vũ
             [105.8248, 21.0002], // Phố Vương Thừa Vũ
             [105.8256, 20.9982], // Giao cắt phố Tô Vĩnh Diện / Hoàng Văn Thái (giáp Khương Mai)
-            [105.8252, 20.9955], // Bờ đông hồ Đầm Hồng
-            [105.8238, 20.9938], // Bờ nam hồ Đầm Hồng
+            [105.8254, 20.9950], // Bờ đông hồ Đầm Hồng (105.8245, 20.9950)
+            [105.8238, 20.9936], // Bờ nam hồ Đầm Hồng
             [105.8216, 20.9936], // Ranh giới ngõ 211 & ngõ 345 Khương Trung
-            [105.8185, 20.9938], // Phía sau khu dân cư Đình Khương Trung
+            [105.8185, 20.9936], // Phía sau khu dân cư Đình Khương Trung
             [105.8160, 20.9942], // Mố Cầu Khương Đình (giao đường Vũ Tông Phan)
             [105.8172, 20.9972], // Men dọc bờ sông Tô Lịch (đường Vũ Tông Phan)
             [105.8190, 21.0000], // Đoạn sông Tô Lịch đối diện Thượng Đình
-            [105.8208, 21.0025], // Khép kín Cầu Mới Ngã Tư Sở
+            [105.8200, 21.0028], // Khép kín Cầu Mới Ngã Tư Sở
           ],
         ],
       },
@@ -135,17 +140,17 @@ export const VILLAGES_GEOJSON = {
         type: "Polygon" as const,
         coordinates: [
           [
-            [105.8160, 20.9942], // Cầu Khương Đình (bờ đông sông Tô Lịch)
-            [105.8185, 20.9938], // Giáp ranh Khương Trung ngõ 211
-            [105.8220, 20.9938], // Phía tây nam hồ Đầm Hồng
-            [105.8245, 20.9910], // Phía đông bắc hồ Đầm Chuối
-            [105.8252, 20.9880], // Bờ đông hồ Đầm Chuối (giáp Định Công / Hoàng Mai)
+            [105.8160, 20.9942], // Cầu Khương Đình
+            [105.8185, 20.9936], // Giáp ranh Khương Trung ngõ 211
+            [105.8220, 20.9936], // Tây nam hồ Đầm Hồng
+            [105.8248, 20.9910], // Đông bắc hồ Đầm Chuối
+            [105.8255, 20.9880], // Bờ đông hồ Đầm Chuối (105.8240, 20.9890) giáp Hoàng Mai
             [105.8235, 20.9850], // Phía nam Đầm Chuối / ngõ 1 Bùi Xương Trạch
             [105.8200, 20.9835], // Giáp Định Công Thượng (Chợ Lủ)
-            [105.8155, 20.9840], // Cầu Lủ / đường Kim Giang ven sông Tô Lịch
-            [105.8130, 20.9855], // Khúc uốn sông Tô Lịch (đường Vũ Tông Phan)
-            [105.8132, 20.9885], // Dọc đường Vũ Tông Phan (đối diện Hạ Đình / Kim Giang)
-            [105.8142, 20.9915], // Bờ sông Tô Lịch đoạn cầu Khương Đình
+            [105.8150, 20.9835], // Cầu Lủ (105.8155, 20.9840) qua sông Tô Lịch
+            [105.8110, 20.9870], // Bờ tây sông Tô Lịch (phố Khương Đình - Hạ Đình)
+            [105.8110, 20.9900], // Phố Khương Đình bao trọn Đình Vòng (105.8118, 20.9890) & Chùa Giàn (105.8122, 20.9885)
+            [105.8125, 20.9920], // Phía tây cầu Khương Đình
             [105.8160, 20.9942], // Khép kín Cầu Khương Đình
           ],
         ],
@@ -175,15 +180,15 @@ export const VILLAGES_GEOJSON = {
         type: "Polygon" as const,
         coordinates: [
           [
-            [105.8160, 20.9940], // Đầu phố Khương Hạ (ngã ba cầu Khương Đình)
-            [105.8175, 20.9930], // Đoạn đầu phố Bùi Xương Trạch
-            [105.8180, 20.9905], // Dọc ngõ kết nối Khương Hạ - Bùi Xương Trạch
-            [105.8175, 20.9880], // Phía đông Trường THCS & THPT Khương Hạ
-            [105.8152, 20.9870], // Bờ nam hồ Khương Hạ / ngõ 29 Khương Hạ
-            [105.8138, 20.9878], // Mặt tiền phố Khương Hạ ven sông Tô Lịch (giáp Hạ Đình mới)
-            [105.8145, 20.9905], // Dọc phố Khương Hạ (qua Chùa Phụng Lộc số 67)
-            [105.8155, 20.9928], // Dọc phố Khương Hạ (qua Đình Khương Hạ số 4)
-            [105.8160, 20.9940], // Khép kín đầu phố Khương Hạ
+            [105.8160, 20.9942], // Cầu Khương Đình (đầu phố Khương Hạ)
+            [105.8172, 20.9932], // Đầu phố Bùi Xương Trạch giáp Khương Hạ
+            [105.8174, 20.9905], // Phía sau Chùa Phụng Lộc
+            [105.8170, 20.9880], // Ranh giới phía đông cụm trường Khương Hạ
+            [105.8142, 20.9880], // Phía nam Hồ Khương Hạ / ngõ 29/78 (105.8152, 20.9892)
+            [105.8134, 20.9895], // Bờ sông Tô Lịch (phố Khương Hạ đối diện Hạ Đình)
+            [105.8132, 20.9912], // Hồ Cầu Khương Hạ & Cầu Khương Hạ (105.8138, 20.9912)
+            [105.8140, 20.9928], // Phố Khương Hạ (qua Đình Khương Hạ số 4)
+            [105.8160, 20.9942], // Khép kín Cầu Khương Đình
           ],
         ],
       },
@@ -196,5 +201,5 @@ export const VILLAGES_CENTER: [number, number] = [105.8220, 20.9970];
 
 // Hộp giới hạn bao phủ Khương Hạ, Khương Trung, Khương Đình và Khương Thượng
 export const VILLAGES_BBOX: [number, number, number, number] = [
-  105.8120, 20.9820, 105.8330, 21.0125,
+  105.8105, 20.9820, 105.8340, 21.0130,
 ];

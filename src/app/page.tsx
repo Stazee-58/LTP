@@ -1060,6 +1060,38 @@ export default function MapPage() {
             place={panel.data}
             lang={lang}
             onClose={() => setPanel({ kind: "none" })}
+            onOpenStreetView={(p) => {
+              const matchedPreset = STREET_VIEW_PRESETS.find(
+                (s) => s.id === p.slug || Math.hypot(s.center[0] - p.lng, s.center[1] - p.lat) < 0.003
+              );
+              if (matchedPreset) {
+                selectStreet(matchedPreset);
+              } else {
+                selectStreet({
+                  id: p.slug,
+                  name: p.name,
+                  short_name: p.name,
+                  icon: CATEGORY_LABELS[p.category]?.icon || "🏛️",
+                  village:
+                    p.village_slug === "khuong-ha"
+                      ? "Khương Hạ · 姜下"
+                      : p.village_slug === "khuong-trung"
+                      ? "Khương Trung · 姜中"
+                      : p.village_slug === "khuong-dinh"
+                      ? "Khương Đình · 姜亭"
+                      : "Khương Thượng · 姜上",
+                  desc: p.description,
+                  center: [p.lng, p.lat],
+                  zoom: 18.2,
+                  pitch: 78,
+                  bearing: 0,
+                  image: p.images[0]?.url || "/images/dinh_khuong_ha_real.jpg",
+                  image_caption: p.images[0]?.caption || p.name,
+                  google_street_url: `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${p.lat},${p.lng}`,
+                });
+              }
+              handleSetViewMode("street");
+            }}
           />
         )}
       </div>
