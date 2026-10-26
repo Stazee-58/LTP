@@ -51,18 +51,33 @@ for (const way of ways) {
     coords.push(first);
   }
 
-  // Determine height
-  let height = 12; // default ~3-4 floors
+  // Determine height based on real-world architecture in Hanoi
+  let height = 8.5; // default ~2.5 floors for urban residential houses
   if (way.tags.height) {
     const h = parseFloat(way.tags.height);
     if (!isNaN(h) && h > 0) height = h;
   } else if (way.tags['building:levels']) {
     const lv = parseFloat(way.tags['building:levels']);
-    if (!isNaN(lv) && lv > 0) height = lv * 3.3;
+    if (!isNaN(lv) && lv > 0) height = lv * 3.2;
   } else {
-    // Generate organic realistic height variation between 9m and 18m based on way id
-    const pseudoRand = (way.id % 7);
-    height = 10 + pseudoRand * 1.5; // 10, 11.5, 13, 14.5, 16, 17.5, 19
+    const bType = (way.tags.building || '').toLowerCase();
+    const name = (way.tags.name || '').toLowerCase();
+    if (bType === 'apartments' || name.includes('chung cư') || name.includes('tòa') || name.includes('c14')) {
+      height = 36 + (way.id % 4) * 3; // 36m - 45m for apartment towers
+    } else if (bType === 'university' || name.includes('đại học') || name.includes('học viện') || name.includes('t35')) {
+      height = 24 + (way.id % 5) * 3;
+    } else if (bType === 'hospital' || name.includes('bệnh viện') || name.includes('phòng khám')) {
+      height = 20 + (way.id % 3) * 2;
+    } else if (bType === 'school' || name.includes('trường') || name.includes('thcs') || name.includes('thpt') || name.includes('tiểu học')) {
+      height = 15 + (way.id % 3) * 1.5; // 4-5 floors
+    } else if (bType === 'commercial' || name.includes('vincom') || name.includes('siêu thị')) {
+      height = 26;
+    } else {
+      // Ordinary residential houses: 7.0m to 10.0m (2-3 floors)
+      // Keeps the 3D volume tightly grounded without severe camera perspective distortion
+      const pseudoRand = (way.id % 4);
+      height = 7.0 + pseudoRand * 1.0; // 7m, 8m, 9m, 10m
+    }
   }
 
   // Minimal properties to keep file size optimized

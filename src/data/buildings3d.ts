@@ -45,20 +45,38 @@ function makeRect(
   widthMeters: number,
   depthMeters: number,
   offsetXMeters = 0,
-  offsetYMeters = 0
+  offsetYMeters = 0,
+  angleDeg = 0
 ): number[][] {
   const cLng = centerLng + offsetXMeters * M_TO_DEG_LNG;
   const cLat = centerLat + offsetYMeters * M_TO_DEG_LAT;
-  const halfW = (widthMeters / 2) * M_TO_DEG_LNG;
-  const halfD = (depthMeters / 2) * M_TO_DEG_LAT;
+  const halfW = widthMeters / 2;
+  const halfD = depthMeters / 2;
 
-  return [
-    [cLng - halfW, cLat - halfD],
-    [cLng + halfW, cLat - halfD],
-    [cLng + halfW, cLat + halfD],
-    [cLng - halfW, cLat + halfD],
-    [cLng - halfW, cLat - halfD],
+  const corners: [number, number][] = [
+    [-halfW, -halfD],
+    [halfW, -halfD],
+    [halfW, halfD],
+    [-halfW, halfD],
+    [-halfW, -halfD],
   ];
+
+  if (!angleDeg) {
+    return corners.map(([x, y]) => [
+      cLng + x * M_TO_DEG_LNG,
+      cLat + y * M_TO_DEG_LAT,
+    ]);
+  }
+
+  const rad = (angleDeg * Math.PI) / 180;
+  const cos = Math.cos(rad);
+  const sin = Math.sin(rad);
+
+  return corners.map(([x, y]) => {
+    const rx = x * cos - y * sin;
+    const ry = x * sin + y * cos;
+    return [cLng + rx * M_TO_DEG_LNG, cLat + ry * M_TO_DEG_LAT];
+  });
 }
 
 // ────────────────────────────────────────────────────────────
@@ -92,7 +110,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8156, 20.9894, 52, 13, 0, 14)],
+      coordinates: [makeRect(105.8156, 20.9894, 52, 13, 0, 14, -36)],
     },
   },
   {
@@ -116,7 +134,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8156, 20.9894, 13, 34, -20, -5)],
+      coordinates: [makeRect(105.8156, 20.9894, 13, 34, -20, -5, -36)],
     },
   },
   {
@@ -140,7 +158,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8156, 20.9894, 13, 34, 20, -5)],
+      coordinates: [makeRect(105.8156, 20.9894, 13, 34, 20, -5, -36)],
     },
   },
   {
@@ -164,7 +182,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8156, 20.9894, 24, 18, 36, 6)],
+      coordinates: [makeRect(105.8156, 20.9894, 24, 18, 36, 6, -36)],
     },
   },
 
@@ -194,7 +212,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8160, 20.9885, 44, 20, 0, 0)],
+      coordinates: [makeRect(105.8160, 20.9885, 44, 20, 0, 0, -36)],
     },
   },
 
@@ -224,7 +242,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8217, 20.9977, 46, 12, 0, 12)],
+      coordinates: [makeRect(105.8217, 20.9977, 46, 12, 0, 12, -32)],
     },
   },
   {
@@ -248,7 +266,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8217, 20.9977, 12, 28, -17, -4)],
+      coordinates: [makeRect(105.8217, 20.9977, 12, 28, -17, -4, -32)],
     },
   },
   {
@@ -272,7 +290,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8217, 20.9977, 12, 28, 17, -4)],
+      coordinates: [makeRect(105.8217, 20.9977, 12, 28, 17, -4, -32)],
     },
   },
 
@@ -302,7 +320,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8204, 20.9902, 44, 12, 0, 10)],
+      coordinates: [makeRect(105.8204, 20.9902, 44, 12, 0, 10, -35)],
     },
   },
   {
@@ -326,7 +344,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8204, 20.9902, 12, 30, -16, -6)],
+      coordinates: [makeRect(105.8204, 20.9902, 12, 30, -16, -6, -35)],
     },
   },
 
@@ -356,7 +374,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8244, 21.0085, 26, 22, 0, 0)],
+      coordinates: [makeRect(105.8244, 21.0085, 26, 22, 0, 0, 45)],
     },
   },
   {
@@ -380,7 +398,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8244, 21.0085, 14, 12, 0, 0)],
+      coordinates: [makeRect(105.8244, 21.0085, 14, 12, 0, 0, 45)],
     },
   },
   {
@@ -404,7 +422,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8244, 21.0085, 54, 14, 0, -18)],
+      coordinates: [makeRect(105.8244, 21.0085, 54, 14, 0, -18, 45)],
     },
   },
 
@@ -434,7 +452,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8314, 21.0029, 48, 18, 0, -10)],
+      coordinates: [makeRect(105.8314, 21.0029, 48, 18, 0, -10, 5)],
     },
   },
   {
@@ -458,7 +476,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8314, 21.0029, 16, 14, 0, -10)],
+      coordinates: [makeRect(105.8314, 21.0029, 16, 14, 0, -10, 5)],
     },
   },
   {
@@ -482,7 +500,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8314, 21.0029, 58, 24, 6, 18)],
+      coordinates: [makeRect(105.8314, 21.0029, 58, 24, 6, 18, 5)],
     },
   },
 
@@ -512,7 +530,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8162, 20.9926, 32, 12, 0, 0)],
+      coordinates: [makeRect(105.8162, 20.9926, 32, 12, 0, 0, -38)],
     },
   },
   {
@@ -536,7 +554,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8162, 20.9926, 12, 18, 0, 12)],
+      coordinates: [makeRect(105.8162, 20.9926, 12, 18, 0, 12, -38)],
     },
   },
   {
@@ -560,7 +578,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8162, 20.9926, 18, 4, 0, -14)],
+      coordinates: [makeRect(105.8162, 20.9926, 18, 4, 0, -14, -38)],
     },
   },
 
@@ -590,7 +608,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8169, 20.9908, 16, 8, 0, -12)],
+      coordinates: [makeRect(105.8169, 20.9908, 16, 8, 0, -12, -38)],
     },
   },
   {
@@ -614,7 +632,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8169, 20.9908, 28, 18, 0, 5)],
+      coordinates: [makeRect(105.8169, 20.9908, 28, 18, 0, 5, -38)],
     },
   },
 
@@ -644,7 +662,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8198, 20.9968, 28, 14, 8, 0)],
+      coordinates: [makeRect(105.8198, 20.9968, 28, 14, 8, 0, -32)],
     },
   },
   {
@@ -669,7 +687,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8194, 20.9964, 24, 14, -10, 0)],
+      coordinates: [makeRect(105.8194, 20.9964, 24, 14, -10, 0, -32)],
     },
   },
 
@@ -699,7 +717,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8208, 20.9982, 14, 5, 0, 0)],
+      coordinates: [makeRect(105.8208, 20.9982, 14, 5, 0, 0, -32)],
     },
   },
   {
@@ -723,7 +741,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8208, 20.9982, 10, 4, 0, 0)],
+      coordinates: [makeRect(105.8208, 20.9982, 10, 4, 0, 0, -32)],
     },
   },
 
@@ -753,7 +771,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8182, 20.9915, 30, 12, 0, 0)],
+      coordinates: [makeRect(105.8182, 20.9915, 30, 12, 0, 0, -36)],
     },
   },
   {
@@ -777,7 +795,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8182, 20.9915, 12, 16, 0, 11)],
+      coordinates: [makeRect(105.8182, 20.9915, 12, 16, 0, 11, -36)],
     },
   },
 
@@ -807,7 +825,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8175, 20.9910, 15, 7, 0, -10)],
+      coordinates: [makeRect(105.8175, 20.9910, 15, 7, 0, -10, -36)],
     },
   },
   {
@@ -831,7 +849,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8175, 20.9910, 26, 16, 0, 4)],
+      coordinates: [makeRect(105.8175, 20.9910, 26, 16, 0, 4, -36)],
     },
   },
 
@@ -861,7 +879,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8247, 21.0036, 28, 12, 0, 0)],
+      coordinates: [makeRect(105.8247, 21.0036, 28, 12, 0, 0, 45)],
     },
   },
   {
@@ -885,7 +903,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8247, 21.0036, 12, 15, 0, 11)],
+      coordinates: [makeRect(105.8247, 21.0036, 12, 15, 0, 11, 45)],
     },
   },
 
@@ -915,7 +933,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8276, 21.0072, 18, 9, 0, -12)],
+      coordinates: [makeRect(105.8276, 21.0072, 18, 9, 0, -12, -65)],
     },
   },
   {
@@ -939,7 +957,7 @@ const RAW_BUILDINGS: Building3DFeature[] = [
     },
     geometry: {
       type: "Polygon",
-      coordinates: [makeRect(105.8276, 21.0072, 30, 18, 0, 5)],
+      coordinates: [makeRect(105.8276, 21.0072, 30, 18, 0, 5, -65)],
     },
   },
 ];

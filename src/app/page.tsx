@@ -628,15 +628,15 @@ export default function MapPage() {
             "interpolate",
             ["linear"],
             ["get", "h"],
-            9, "#182230",
-            13, "#1e2b3c",
-            18, "#28394e",
-            26, "#344964",
-            42, "#435d7e",
+            8, "#151d28",
+            12, "#1c2635",
+            18, "#253448",
+            26, "#31435c",
+            40, "#405775",
           ],
           "fill-extrusion-height": ["get", "h"],
           "fill-extrusion-base": 0,
-          "fill-extrusion-opacity": is3D ? 0.92 : 0.55,
+          "fill-extrusion-opacity": is3D ? 0.92 : 0.0,
           "fill-extrusion-vertical-gradient": true,
         },
       });
@@ -686,7 +686,7 @@ export default function MapPage() {
           "text-color": ["get", "color"],
           "text-halo-color": "#060e18",
           "text-halo-width": 2.5,
-          "text-opacity": is3D ? 0.95 : 0.75,
+          "text-opacity": is3D ? 0.95 : 0.0,
         },
       });
 
@@ -704,7 +704,7 @@ export default function MapPage() {
         paint: {
           "line-color": ["get", "color"],
           "line-width": 1.5,
-          "line-opacity": 0.85,
+          "line-opacity": is3D ? 0.85 : 0.0,
         },
       });
 
@@ -717,7 +717,7 @@ export default function MapPage() {
           "fill-extrusion-color": ["get", "color"],
           "fill-extrusion-height": ["get", "height"],
           "fill-extrusion-base": ["get", "base_height"],
-          "fill-extrusion-opacity": is3D ? 0.95 : 0.88,
+          "fill-extrusion-opacity": is3D ? 0.95 : 0.0,
           "fill-extrusion-vertical-gradient": true,
         },
       });
@@ -773,8 +773,8 @@ export default function MapPage() {
 
       // ── Render place markers
       renderMarkers(map, new Set());
-      // ── Render 3D landmark markers in both 2D and 3D!
-      render3DMarkers(map, true);
+      // ── Render 3D landmark markers only when in 3D mode!
+      render3DMarkers(map, is3D);
       setMapLoaded(true);
     });
 
@@ -820,18 +820,21 @@ export default function MapPage() {
         map.easeTo({
           pitch: 0,
           bearing: 0,
-          duration: 900,
+          duration: 800,
         });
         if (map.getLayer("osm-buildings-3d")) {
-          map.setPaintProperty("osm-buildings-3d", "fill-extrusion-opacity", 0.55);
+          map.setPaintProperty("osm-buildings-3d", "fill-extrusion-opacity", 0.0);
         }
         if (map.getLayer("buildings-3d-layer")) {
-          map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.88);
+          map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.0);
+        }
+        if (map.getLayer("buildings-3d-outline")) {
+          map.setPaintProperty("buildings-3d-outline", "line-opacity", 0.0);
         }
         if (map.getLayer("street-3d-labels")) {
-          map.setPaintProperty("street-3d-labels", "text-opacity", 0.75);
+          map.setPaintProperty("street-3d-labels", "text-opacity", 0.0);
         }
-        render3DMarkers(map, true);
+        render3DMarkers(map, false);
         popupRef.current?.remove();
       } else if (mode === "3d") {
         container?.classList.add("mode-3d-active");
@@ -848,6 +851,9 @@ export default function MapPage() {
         }
         if (map.getLayer("buildings-3d-layer")) {
           map.setPaintProperty("buildings-3d-layer", "fill-extrusion-opacity", 0.95);
+        }
+        if (map.getLayer("buildings-3d-outline")) {
+          map.setPaintProperty("buildings-3d-outline", "line-opacity", 0.85);
         }
         if (map.getLayer("street-3d-labels")) {
           map.setPaintProperty("street-3d-labels", "text-opacity", 0.95);
