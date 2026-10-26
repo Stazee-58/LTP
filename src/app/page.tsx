@@ -522,7 +522,7 @@ export default function MapPage() {
           "line-color": ["get", "color"],
           "line-width": 2.5,
           "line-opacity": 0.95,
-          "line-dasharray": [4, 2], // Vẽ đường nét đứt chuẩn bản đồ địa giới
+          "line-dasharray": [6, 2, 2, 2], // Vẽ đường gạch chấm gạch (dash-dot — · — ·) chuẩn vạch địa giới trên map
         },
       });
 

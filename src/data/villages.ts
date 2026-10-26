@@ -150,22 +150,22 @@ export const VILLAGES_GEOJSON = {
         coordinates: [
           [
             [105.8160, 20.9942], // Cầu Khương Đình (giao đường Vũ Tông Phan)
-            [105.8172, 20.9939], // Ranh giới phía bắc với Khương Trung
+            [105.8172, 20.9939], // Tuyến vạch ranh giới phía bắc với Khương Trung
             [105.8188, 20.9936], // Ranh giới ngõ 345 / 211
-            [105.8205, 20.9932], // Ranh giới phía bắc về Đầm Hồng
-            [105.8215, 20.9926], // Phía nam hồ Đầm Hồng (đường nét đứt giáp Hoàng Mai)
-            [105.8220, 20.9912], // Đường nét đứt phía tây hồ Đầm Chuối / nghĩa trang
-            [105.8225, 20.9895], // Bờ đông khu dân cư Bùi Xương Trạch
-            [105.8222, 20.9878], // Phía đông Đầm Chuối
-            [105.8218, 20.9862], // Góc đông nam Đầm Chuối giáp Định Công
-            [105.8202, 20.9854], // Ranh giới phía nam giáp Định Công Thượng
-            [105.8185, 20.9848], // Tuyến ranh giới phía nam
-            [105.8168, 20.9844], // Tuyến ranh giới phía bắc Chợ Lủ
+            [105.8205, 20.9932], // Tuyến ranh giới về phía hồ Đầm Hồng
+            [105.8215, 20.9926], // Phía nam hồ Đầm Hồng (điểm giáp ranh Thanh Xuân - Hoàng Mai)
+            [105.8215, 20.9918], // Tuyến vạch ranh giới phía đông
+            [105.8206, 20.9904], // Tuyến vạch ranh giới phía tây Đầm Chuối
+            [105.8195, 20.9892], // Tuyến vạch phía tây khu nhà C14 (362 Bùi Xương Trạch)
+            [105.8184, 20.9880], // Tuyến vạch qua ngõ Bùi Xương Trạch hướng về phía nam
+            [105.8175, 20.9868], // Tuyến vạch chạy dọc phía tây Nghĩa trang thôn Thượng (chuẩn vạch trên map)
+            [105.8168, 20.9856], // Điểm lượn giữa cụm dân cư và Nghĩa trang thôn Thượng
+            [105.8160, 20.9848], // Ngõ dẫn ra sông Tô Lịch tại phía bắc Cầu Lủ
             [105.8152, 20.9842], // Cầu Lủ (giao Vũ Tông Phan & sông Tô Lịch)
-            [105.8144, 20.9852], // Đường nét đứt men sông Tô Lịch (đường Vũ Tông Phan)
+            [105.8144, 20.9852], // Tuyến vạch men lòng sông Tô Lịch (đường Vũ Tông Phan)
             [105.8138, 20.9865], // Dọc bờ sông Tô Lịch đối diện Kim Giang
             [105.8136, 20.9882], // Điểm giáp ranh phía nam Làng Khương Hạ (ngõ 29)
-            [105.8148, 20.9882], // Ranh giới phân chia Khương Đình - Khương Hạ (phía nam hồ Khương Hạ)
+            [105.8148, 20.9882], // Tuyến phân chia nội bộ Khương Đình - Khương Hạ (phía nam hồ Khương Hạ)
             [105.8170, 20.9882], // Phía sau cụm trường Khương Hạ
             [105.8172, 20.9905], // Ranh giới giữa phố Khương Hạ và phố Bùi Xương Trạch
             [105.8170, 20.9930], // Đầu phố Bùi Xương Trạch
