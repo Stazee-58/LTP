@@ -521,7 +521,8 @@ export default function MapPage() {
         paint: {
           "line-color": ["get", "color"],
           "line-width": 2.5,
-          "line-opacity": 0.9,
+          "line-opacity": 0.95,
+          "line-dasharray": [4, 2], // Vẽ đường nét đứt chuẩn bản đồ địa giới
         },
       });
 
