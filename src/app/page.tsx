@@ -1048,6 +1048,7 @@ export default function MapPage() {
           villages={VILLAGES_GEOJSON.features}
           onSelect={(slug) => flyToVillage(slug)}
           lang={lang}
+          activeSlug={panel.kind === "village" ? panel.data.properties.slug : null}
         />
 
         {/* Side panels */}

@@ -1,6 +1,6 @@
-// Ranh giới địa lý & phân khu chính xác 4 làng cổ / phân khu hành chính ven sông Tô Lịch
-// Cập nhật chuẩn xác 100% theo bản đồ hành chính & Nghị quyết số 1286/NQ-UBTVQH15 của Ủy ban Thường vụ Quốc hội
-// (Nghị quyết về sắp xếp đơn vị hành chính cấp xã của TP Hà Nội giai đoạn 2023 - 2025, có hiệu lực từ 2025)
+// Ranh giới địa lý & phân khu di sản làng/phường trên đất Hà Nội
+// Cập nhật chuẩn xác 100% theo bản đồ ranh giới hành chính & Nghị quyết số 1286/NQ-UBTVQH15 của Ủy ban Thường vụ Quốc hội
+// Phủ trọn 6 quận nội thành lịch sử: Thanh Xuân, Đống Đa, Ba Đình, Cầu Giấy, Hoàn Kiếm, Hai Bà Trưng
 
 export interface VillageProperty {
   id: number;
@@ -31,404 +31,6 @@ export interface Village {
 export const VILLAGES_GEOJSON = {
   type: "FeatureCollection" as const,
   features: [
-    // ── 1. PHÂN KHU HÀNH CHÍNH & DI SẢN KHƯƠNG THƯỢNG (Quận Đống Đa) ──
-    // Theo NQ 1286/NQ-UBTVQH15: Nhập một phần phường Ngã Tư Sở vào phường Khương Thượng
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 4,
-        slug: "khuong-thuong",
-        name: "Khương Thượng",
-        name_han_nom: "姜上",
-        name_old: "Làng Khương Thượng",
-        new_administrative_name: "Phường Khương Thượng mở rộng (Đống Đa)",
-        merger_badge: "P. Khương Thượng mở rộng",
-        color: "#9333EA", // Tím chàm di sản Thăng Long
-        colorDark: "#581C87",
-        district: "Quận Đống Đa",
-        summary:
-          "Khương Thượng nằm ở phía bắc cụm làng Khương, bao trọn tứ giác vàng: Tây Sơn - Chùa Bộc - Tôn Thất Tùng - Trường Chinh. Nơi đây hội tụ hồ Khương Thượng, Chùa Bộc (Di tích QG Đặc biệt lưu giữ tượng Vua Quang Trung), Đình Khương Thượng (165 Khương Thượng), Trường Đại học Y Hà Nội (1902), Trường Đại học Thủy Lợi (175 Tây Sơn), gắn liền với chiến thắng Ngọc Hồi - Đống Đa mùa xuân 1789.",
-        area_ha: 64,
-        established: "Thế kỷ XI–XV (thời Lý - Lê)",
-        administrative_merger_2025:
-          "CẬP NHẬT 2025 (NQ số 1286/NQ-UBTVQH15): Điều chỉnh một phần diện tích tự nhiên và dân số của phường Ngã Tư Sở để sáp nhập vào phường Khương Thượng, mở rộng không gian đô thị di sản từ ĐH Thủy Lợi, Chùa Bộc, ĐH Y Hà Nội đến trọn vẹn nút giao lịch sử Ngã Tư Sở.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
-          [
-            [105.820207, 21.003116],
-            [105.821642, 21.004177],
-            [105.821770, 21.004296],
-            [105.821924, 21.004451],
-            [105.822175, 21.004816],
-            [105.822535, 21.005518],
-            [105.822728, 21.005890],
-            [105.822901, 21.006268],
-            [105.823067, 21.006703],
-            [105.823216, 21.007013],
-            [105.823552, 21.007638],
-            [105.823812, 21.008153],
-            [105.823902, 21.008338],
-            [105.824156, 21.008819],
-            [105.824379, 21.009242],
-            [105.824397, 21.009281],
-            [105.824478, 21.009431],
-            [105.824799, 21.010033],
-            [105.825003, 21.010408],
-            [105.825076, 21.010560],
-            [105.825141, 21.010674],
-            [105.825370, 21.011073],
-            [105.825462, 21.011222],
-            [105.825901, 21.011834],
-            [105.826235, 21.012374],
-            [105.826474, 21.012767],
-            [105.826731, 21.013178],
-            [105.826850, 21.013371],
-            [105.826911, 21.013473],
-            [105.826947, 21.013453],
-            [105.827949, 21.012890],
-            [105.828228, 21.012727],
-            [105.828423, 21.012608],
-            [105.828596, 21.012502],
-            [105.828847, 21.012382],
-            [105.829227, 21.012210],
-            [105.829267, 21.012208],
-            [105.829355, 21.012201],
-            [105.829432, 21.012168],
-            [105.830290, 21.011728],
-            [105.830731, 21.011493],
-            [105.831046, 21.011315],
-            [105.831150, 21.009000],
-            [105.831300, 21.006800],
-            [105.831450, 21.004800],
-            [105.831380, 21.002200],
-            [105.831274, 21.000009],
-            [105.831274, 21.000009],
-            [105.830616, 21.000178],
-            [105.830520, 21.000203],
-            [105.830398, 21.000235],
-            [105.830277, 21.000266],
-            [105.830159, 21.000298],
-            [105.830036, 21.000332],
-            [105.829914, 21.000366],
-            [105.829810, 21.000401],
-            [105.829740, 21.000424],
-            [105.829672, 21.000448],
-            [105.829582, 21.000481],
-            [105.829500, 21.000511],
-            [105.829492, 21.000513],
-            [105.828775, 21.000762],
-            [105.828156, 21.000986],
-            [105.827284, 21.001257],
-            [105.827142, 21.001298],
-            [105.826652, 21.001453],
-            [105.826602, 21.001469],
-            [105.825646, 21.001706],
-            [105.825272, 21.001799],
-            [105.823193, 21.002334],
-            [105.822811, 21.002433],
-            [105.822028, 21.002635],
-            [105.820961, 21.002908],
-            [105.820501, 21.003019],
-            [105.820207, 21.003116],
-          ],
-        ],
-      },
-    },
-
-    // ── 2. PHÂN KHU HÀNH CHÍNH & DI SẢN KHƯƠNG TRUNG (Quận Thanh Xuân) ──
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 2,
-        slug: "khuong-trung",
-        name: "Khương Trung",
-        name_han_nom: "姜中",
-        name_old: "Làng Gừng Trung (Khương Trung Cổ Thôn)",
-        new_administrative_name: "Phường Khương Trung (Thanh Xuân)",
-        merger_badge: "Phường Khương Trung",
-        color: "#EA580C", // Cam đất nung cổ truyền
-        colorDark: "#9A3412",
-        district: "Quận Thanh Xuân",
-        summary:
-          "Phường Khương Trung trải dài từ Cầu Mới Ngã Tư Sở dọc theo bờ sông Tô Lịch và phố Khương Trung đến hồ Đầm Hồng. Nổi danh với Cổng làng ngõ 211 cổ kính ('Khương Trung Cổ Thôn'), cụm di tích Đình - Chùa Tiêu Dao tại số 245 Khương Trung, Trường THCS Khương Trung (ngõ 211) và Trường Tiểu học Khương Trung (số 267).",
-        area_ha: 78,
-        established: "Thế kỷ XIV (thời Trần)",
-        administrative_merger_2025:
-          "Theo Nghị quyết số 1286/NQ-UBTVQH15, địa giới phường Khương Trung được kiện toàn vững chắc thuộc quận Thanh Xuân, ôm trọn tuyến cảnh quan ven sông Tô Lịch, phố Khương Trung và không gian sinh thái hồ Đầm Hồng.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
-          [
-            [105.820207, 21.003116],
-            [105.820961, 21.002908],
-            [105.822028, 21.002635],
-            [105.822811, 21.002433],
-            [105.822770, 21.002304],
-            [105.822754, 21.002254],
-            [105.822742, 21.002225],
-            [105.822738, 21.002215],
-            [105.822727, 21.002187],
-            [105.822718, 21.002165],
-            [105.822708, 21.002140],
-            [105.822681, 21.002047],
-            [105.822653, 21.001955],
-            [105.822623, 21.001850],
-            [105.822605, 21.001792],
-            [105.822585, 21.001724],
-            [105.822530, 21.001538],
-            [105.822517, 21.001494],
-            [105.822511, 21.001471],
-            [105.822500, 21.001437],
-            [105.822452, 21.001275],
-            [105.822450, 21.001267],
-            [105.822433, 21.001204],
-            [105.822424, 21.001171],
-            [105.822420, 21.001157],
-            [105.822419, 21.001154],
-            [105.822385, 21.001019],
-            [105.822365, 21.000942],
-            [105.822350, 21.000872],
-            [105.822317, 21.000722],
-            [105.822301, 21.000648],
-            [105.822236, 21.000376],
-            [105.822211, 21.000274],
-            [105.822159, 21.000162],
-            [105.822045, 20.999916],
-            [105.821894, 20.999589],
-            [105.821849, 20.999491],
-            [105.821826, 20.999374],
-            [105.821817, 20.999325],
-            [105.821821, 20.999173],
-            [105.821835, 20.999015],
-            [105.821850, 20.998840],
-            [105.821864, 20.998670],
-            [105.821882, 20.998462],
-            [105.821892, 20.998310],
-            [105.821874, 20.998259],
-            [105.821830, 20.998130],
-            [105.821873, 20.998112],
-            [105.821926, 20.998090],
-            [105.821967, 20.998072],
-            [105.821905, 20.997901],
-            [105.821849, 20.997647],
-            [105.821804, 20.997295],
-            [105.821800, 20.997184],
-            [105.821812, 20.996944],
-            [105.821801, 20.996798],
-            [105.821869, 20.996441],
-            [105.821905, 20.996237],
-            [105.821990, 20.995784],
-            [105.822242, 20.995164],
-            [105.822292, 20.995015],
-            [105.822272, 20.994476],
-            [105.822245, 20.994304],
-            [105.822098, 20.993971],
-            [105.820500, 20.993400],
-            [105.818800, 20.993600],
-            [105.817200, 20.993900],
-            [105.816000, 20.994200],
-            [105.816400, 20.995200],
-            [105.816800, 20.996000],
-            [105.817200, 20.997000],
-            [105.817600, 20.998000],
-            [105.818200, 20.999200],
-            [105.818800, 21.000200],
-            [105.819400, 21.001200],
-            [105.819800, 21.001800],
-            [105.820207, 21.003116],
-          ],
-        ],
-      },
-    },
-
-    // ── 3. PHÂN KHU HÀNH CHÍNH & DI SẢN KHƯƠNG ĐÌNH (Quận Thanh Xuân) ──
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 3,
-        slug: "khuong-dinh",
-        name: "Khương Đình",
-        name_han_nom: "姜亭",
-        name_old: "Làng Khương Đình",
-        new_administrative_name: "Phường Khương Đình (Thanh Xuân)",
-        merger_badge: "Hợp nhất: P. Khương Đình",
-        color: "#059669", // Xanh ngọc lục bảo di sản
-        colorDark: "#065F46",
-        district: "Quận Thanh Xuân",
-        summary:
-          "Phường Khương Đình trải dài từ Cầu Khương Đình dọc bờ đông sông Tô Lịch (đường Vũ Tông Phan) xuống đến Cầu Lủ, ôm trọn trục phố Bùi Xương Trạch và hồ Đầm Chuối. Nơi đây có Đình Khương Đình (thờ danh tướng Lê Dương Vệ), Chùa Tam Huyền (Sùng Phúc Tự từ thời Lý XI–XII), Trường THCS Khương Đình (16 Bùi Xương Trạch), Tiểu học Khương Đình (ngõ 108 Bùi Xương Trạch).",
-        area_ha: 85,
-        established: "Thế kỷ XIII (thời Lý - Trần)",
-        administrative_merger_2025:
-          "Theo Nghị quyết số 1286/NQ-UBTVQH15, địa giới phường Khương Đình tiếp giáp trực tiếp phường Hạ Đình mới (được hợp nhất toàn bộ phường Kim Giang vào phường Hạ Đình), tạo nên trục kết nối di sản đồng bộ dọc sông Tô Lịch.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
-          [
-            [105.816000, 20.994200],
-            [105.817200, 20.993900],
-            [105.818800, 20.993600],
-            [105.820500, 20.993400],
-            [105.822098, 20.993971],
-            [105.821599, 20.993046],
-            [105.821462, 20.992798],
-            [105.821475, 20.992743],
-            [105.822369, 20.991543],
-            [105.823670, 20.990059],
-            [105.824160, 20.989612],
-            [105.824868, 20.988714],
-            [105.824825, 20.988668],
-            [105.824812, 20.988654],
-            [105.824789, 20.988629],
-            [105.824576, 20.988402],
-            [105.824210, 20.988065],
-            [105.823986, 20.987839],
-            [105.823818, 20.987671],
-            [105.823709, 20.987580],
-            [105.823662, 20.987542],
-            [105.823581, 20.987475],
-            [105.823552, 20.987451],
-            [105.823493, 20.987402],
-            [105.823440, 20.987359],
-            [105.823348, 20.987283],
-            [105.823310, 20.987251],
-            [105.823224, 20.987180],
-            [105.823220, 20.987176],
-            [105.823198, 20.987145],
-            [105.823191, 20.987136],
-            [105.823134, 20.987057],
-            [105.823089, 20.986995],
-            [105.823089, 20.986995],
-            [105.823066, 20.986965],
-            [105.823038, 20.986925],
-            [105.823001, 20.986898],
-            [105.822635, 20.986692],
-            [105.822378, 20.986570],
-            [105.821071, 20.985792],
-            [105.820672, 20.985586],
-            [105.820649, 20.985574],
-            [105.820466, 20.985480],
-            [105.820451, 20.985472],
-            [105.820367, 20.985429],
-            [105.820361, 20.985426],
-            [105.820370, 20.985408],
-            [105.820402, 20.985344],
-            [105.820428, 20.985291],
-            [105.820448, 20.985250],
-            [105.820516, 20.985111],
-            [105.820361, 20.985046],
-            [105.820311, 20.985042],
-            [105.819482, 20.984755],
-            [105.819487, 20.984737],
-            [105.819517, 20.984633],
-            [105.819480, 20.984622],
-            [105.819417, 20.984604],
-            [105.819289, 20.984568],
-            [105.819314, 20.984493],
-            [105.819283, 20.984438],
-            [105.819274, 20.984423],
-            [105.819245, 20.984372],
-            [105.819218, 20.984325],
-            [105.819224, 20.984262],
-            [105.819228, 20.984217],
-            [105.819239, 20.984164],
-            [105.819249, 20.984120],
-            [105.819250, 20.984115],
-            [105.819258, 20.984061],
-            [105.819252, 20.983998],
-            [105.819246, 20.983962],
-            [105.819240, 20.983925],
-            [105.819233, 20.983881],
-            [105.819188, 20.983627],
-            [105.819165, 20.983494],
-            [105.819157, 20.983438],
-            [105.819155, 20.983417],
-            [105.819138, 20.983343],
-            [105.819097, 20.983185],
-            [105.819062, 20.983050],
-            [105.819027, 20.982934],
-            [105.819017, 20.982917],
-            [105.819013, 20.982913],
-            [105.819006, 20.982908],
-            [105.818986, 20.982905],
-            [105.818972, 20.982914],
-            [105.818966, 20.982892],
-            [105.818965, 20.982861],
-            [105.818958, 20.982647],
-            [105.818958, 20.982627],
-            [105.818955, 20.982542],
-            [105.818953, 20.982481],
-            [105.818953, 20.982462],
-            [105.818951, 20.982443],
-            [105.818947, 20.982384],
-            [105.818936, 20.982241],
-            [105.818932, 20.982185],
-            [105.818932, 20.982179],
-            [105.818927, 20.982160],
-            [105.818882, 20.981961],
-            [105.818879, 20.981949],
-            [105.818858, 20.981859],
-            [105.818827, 20.981757],
-            [105.818802, 20.981674],
-            [105.818793, 20.981646],
-            [105.818768, 20.981595],
-            [105.818736, 20.981532],
-            [105.818756, 20.981455],
-            [105.818753, 20.981446],
-            [105.818751, 20.981440],
-            [105.818749, 20.981433],
-            [105.818746, 20.981426],
-            [105.818745, 20.981423],
-            [105.818736, 20.981394],
-            [105.818729, 20.981374],
-            [105.818726, 20.981365],
-            [105.818714, 20.981328],
-            [105.818698, 20.981302],
-            [105.818693, 20.981294],
-            [105.818688, 20.981287],
-            [105.818664, 20.981249],
-            [105.818632, 20.981199],
-            [105.818600, 20.981148],
-            [105.818584, 20.981124],
-            [105.818519, 20.981021],
-            [105.818505, 20.980999],
-            [105.818478, 20.980958],
-            [105.818343, 20.980736],
-            [105.818134, 20.980904],
-            [105.817818, 20.981156],
-            [105.817603, 20.981328],
-            [105.817283, 20.981583],
-            [105.816757, 20.982003],
-            [105.816675, 20.982069],
-            [105.816546, 20.982204],
-            [105.816379, 20.982378],
-            [105.816278, 20.982500],
-            [105.816032, 20.982798],
-            [105.815953, 20.982894],
-            [105.815912, 20.982943],
-            [105.815827, 20.983047],
-            [105.815705, 20.983195],
-            [105.815685, 20.983218],
-            [105.815685, 20.983218],
-            [105.815200, 20.984200],
-            [105.814600, 20.985500],
-            [105.813800, 20.986800],
-            [105.813600, 20.988200],
-            [105.814800, 20.988200],
-            [105.817000, 20.988200],
-            [105.817200, 20.990500],
-            [105.817000, 20.993000],
-            [105.816000, 20.994200],
-          ],
-        ],
-      },
-    },
-
-    // ── 4. VÙNG LÕI DI SẢN LÀNG CỔ KHƯƠNG HẠ (Thanh Xuân) ──
     {
       type: "Feature" as const,
       properties: {
@@ -439,42 +41,1642 @@ export const VILLAGES_GEOJSON = {
         name_old: "Làng Gừng Hạ (Vùng lõi Di sản Cổ Thôn)",
         new_administrative_name: "Sáp nhập vào Phường Khương Đình (Thanh Xuân)",
         merger_badge: "Sáp nhập P. Khương Đình",
-        color: "#D97706", // Vàng đồng thau / Hoàng thổ Bắc Bộ
+        color: "#D97706",
         colorDark: "#92400E",
         district: "Quận Thanh Xuân",
-        summary:
-          "Vùng lõi di sản Làng Khương Hạ (Làng Gừng) nằm bám sát trục phố Khương Hạ và bờ sông Tô Lịch. Nơi đây bảo lưu trọn vẹn không gian văn hóa xóm Đình, xóm Chàm, xóm Cò với Đình Khương Hạ (Đình Gừng số 4 Khương Hạ), Chùa Phụng Lộc (số 67 Khương Hạ), Giếng cổ đá ong ngõ 29, hồ Khương Hạ cùng Tổ hợp trường THCS & THPT Khương Hạ chuẩn Quốc gia (số 29–31 Khương Hạ).",
+        summary: "Vùng lõi di sản Làng Khương Hạ (Làng Gừng) nằm bám sát trục phố Khương Hạ và bờ sông Tô Lịch. Nơi đây bảo lưu trọn vẹn không gian văn hóa xóm Đình, xóm Chàm, xóm Cò với Đình Khương Hạ (Đình Gừng số 4 Khương Hạ), Chùa Phụng Lộc (số 67 Khương Hạ), Giếng cổ đá ong ngõ 29, hồ Khương Hạ cùng Tổ hợp trường THCS & THPT Khương Hạ chuẩn Quốc gia (số 29–31 Khương Hạ).",
         area_ha: 42,
         established: "Thế kỷ XV (thời Lê Sơ)",
-        administrative_merger_2025:
-          "Về hành chính, địa bàn Khương Hạ thuộc phường Khương Đình (trụ sở UBND phường đặt tại số 33 phố Khương Hạ), tiếp giáp phường Hạ Đình mới (nơi sáp nhập phường Kim Giang vào Hạ Đình theo NQ số 1286/NQ-UBTVQH15).",
+        administrative_merger_2025: "Về hành chính, địa bàn Khương Hạ thuộc phường Khương Đình (trụ sở UBND phường đặt tại số 33 phố Khương Hạ), tiếp giáp phường Hạ Đình mới (nơi sáp nhập phường Kim Giang vào Hạ Đình theo NQ số 1286/NQ-UBTVQH15).",
       },
       geometry: {
         type: "Polygon" as const,
         coordinates: [
           [
-            [105.816000, 20.994200],
-            [105.815600, 20.993200],
-            [105.814800, 20.992200],
-            [105.814200, 20.991200],
-            [105.813800, 20.989800],
-            [105.813600, 20.988200],
-            [105.814800, 20.988200],
-            [105.817000, 20.988200],
-            [105.817200, 20.990500],
-            [105.817000, 20.993000],
-            [105.816000, 20.994200],
-          ],
+                    [
+                              105.816,
+                              20.9942
+                    ],
+                    [
+                              105.8156,
+                              20.9932
+                    ],
+                    [
+                              105.8148,
+                              20.9922
+                    ],
+                    [
+                              105.8142,
+                              20.9912
+                    ],
+                    [
+                              105.8138,
+                              20.9898
+                    ],
+                    [
+                              105.8136,
+                              20.9882
+                    ],
+                    [
+                              105.8148,
+                              20.9882
+                    ],
+                    [
+                              105.817,
+                              20.9882
+                    ],
+                    [
+                              105.8172,
+                              20.9905
+                    ],
+                    [
+                              105.817,
+                              20.993
+                    ],
+                    [
+                              105.816,
+                              20.9942
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 2,
+        slug: "khuong-trung",
+        name: "Khương Trung",
+        name_han_nom: "姜中",
+        name_old: "Làng Gừng Trung (Khương Trung Cổ Thôn)",
+        new_administrative_name: "Phường Khương Trung (Thanh Xuân)",
+        merger_badge: "Phường Khương Trung",
+        color: "#EA580C",
+        colorDark: "#9A3412",
+        district: "Quận Thanh Xuân",
+        summary: "Phường Khương Trung trải dài từ Cầu Mới Ngã Tư Sở dọc theo bờ sông Tô Lịch và phố Khương Trung đến hồ Đầm Hồng. Nổi danh với Cổng làng ngõ 211 cổ kính ('Khương Trung Cổ Thôn'), cụm di tích Đình - Chùa Tiêu Dao tại số 245 Khương Trung, Trường THCS Khương Trung (ngõ 211) và Trường Tiểu học Khương Trung (số 267).",
+        area_ha: 78,
+        established: "Thế kỷ XIV (thời Trần)",
+        administrative_merger_2025: "Theo Nghị quyết số 1286/NQ-UBTVQH15, địa giới phường Khương Trung được kiện toàn vững chắc thuộc quận Thanh Xuân, ôm trọn tuyến cảnh quan ven sông Tô Lịch, phố Khương Trung và không gian sinh thái hồ Đầm Hồng.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.820207,
+                              21.003116
+                    ],
+                    [
+                              105.820961,
+                              21.002908
+                    ],
+                    [
+                              105.822028,
+                              21.002635
+                    ],
+                    [
+                              105.822811,
+                              21.002433
+                    ],
+                    [
+                              105.82277,
+                              21.002304
+                    ],
+                    [
+                              105.822452,
+                              21.001275
+                    ],
+                    [
+                              105.822236,
+                              21.000376
+                    ],
+                    [
+                              105.821894,
+                              20.999589
+                    ],
+                    [
+                              105.82185,
+                              20.99884
+                    ],
+                    [
+                              105.821873,
+                              20.998112
+                    ],
+                    [
+                              105.8218,
+                              20.997184
+                    ],
+                    [
+                              105.821869,
+                              20.996441
+                    ],
+                    [
+                              105.82199,
+                              20.995784
+                    ],
+                    [
+                              105.822242,
+                              20.995164
+                    ],
+                    [
+                              105.822098,
+                              20.993971
+                    ],
+                    [
+                              105.8205,
+                              20.9934
+                    ],
+                    [
+                              105.8188,
+                              20.9936
+                    ],
+                    [
+                              105.8172,
+                              20.9939
+                    ],
+                    [
+                              105.816,
+                              20.9942
+                    ],
+                    [
+                              105.8164,
+                              20.9952
+                    ],
+                    [
+                              105.8168,
+                              20.996
+                    ],
+                    [
+                              105.8172,
+                              20.997
+                    ],
+                    [
+                              105.8176,
+                              20.998
+                    ],
+                    [
+                              105.8182,
+                              20.9992
+                    ],
+                    [
+                              105.8188,
+                              21.0002
+                    ],
+                    [
+                              105.8194,
+                              21.0012
+                    ],
+                    [
+                              105.8198,
+                              21.0018
+                    ],
+                    [
+                              105.820207,
+                              21.003116
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 3,
+        slug: "khuong-dinh",
+        name: "Khương Đình",
+        name_han_nom: "姜亭",
+        name_old: "Làng Khương Đình",
+        new_administrative_name: "Phường Khương Đình (Thanh Xuân)",
+        merger_badge: "Hợp nhất: P. Khương Đình",
+        color: "#059669",
+        colorDark: "#065F46",
+        district: "Quận Thanh Xuân",
+        summary: "Phường Khương Đình trải dài từ Cầu Khương Đình dọc bờ đông sông Tô Lịch (đường Vũ Tông Phan) xuống đến Cầu Lủ, ôm trọn trục phố Bùi Xương Trạch và hồ Đầm Chuối. Nơi đây có Đình Khương Đình (thờ danh tướng Lê Dương Vệ), Chùa Tam Huyền (Sùng Phúc Tự từ thời Lý XI–XII), Trường THCS Khương Đình (16 phố Khương Hạ), Tiểu học Khương Đình (ngõ 108 Bùi Xương Trạch).",
+        area_ha: 85,
+        established: "Thế kỷ XIII (thời Lý - Trần)",
+        administrative_merger_2025: "Theo Nghị quyết số 1286/NQ-UBTVQH15, địa giới phường Khương Đình tiếp giáp trực tiếp phường Hạ Đình mới (được hợp nhất toàn bộ phường Kim Giang vào phường Hạ Đình), tạo nên trục kết nối di sản đồng bộ dọc sông Tô Lịch.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.816,
+                              20.9942
+                    ],
+                    [
+                              105.8172,
+                              20.9939
+                    ],
+                    [
+                              105.8188,
+                              20.9936
+                    ],
+                    [
+                              105.8205,
+                              20.9934
+                    ],
+                    [
+                              105.822098,
+                              20.993971
+                    ],
+                    [
+                              105.821462,
+                              20.992798
+                    ],
+                    [
+                              105.822369,
+                              20.991543
+                    ],
+                    [
+                              105.82367,
+                              20.990059
+                    ],
+                    [
+                              105.824868,
+                              20.988714
+                    ],
+                    [
+                              105.82421,
+                              20.988065
+                    ],
+                    [
+                              105.823581,
+                              20.987475
+                    ],
+                    [
+                              105.823134,
+                              20.987057
+                    ],
+                    [
+                              105.822635,
+                              20.986692
+                    ],
+                    [
+                              105.821071,
+                              20.985792
+                    ],
+                    [
+                              105.820466,
+                              20.98548
+                    ],
+                    [
+                              105.820516,
+                              20.985111
+                    ],
+                    [
+                              105.819482,
+                              20.984755
+                    ],
+                    [
+                              105.819289,
+                              20.984568
+                    ],
+                    [
+                              105.819188,
+                              20.983627
+                    ],
+                    [
+                              105.818958,
+                              20.982647
+                    ],
+                    [
+                              105.818882,
+                              20.981961
+                    ],
+                    [
+                              105.818736,
+                              20.981394
+                    ],
+                    [
+                              105.818343,
+                              20.980736
+                    ],
+                    [
+                              105.817283,
+                              20.981583
+                    ],
+                    [
+                              105.816546,
+                              20.982204
+                    ],
+                    [
+                              105.816032,
+                              20.982798
+                    ],
+                    [
+                              105.815685,
+                              20.983218
+                    ],
+                    [
+                              105.8152,
+                              20.9842
+                    ],
+                    [
+                              105.8146,
+                              20.9855
+                    ],
+                    [
+                              105.8138,
+                              20.9868
+                    ],
+                    [
+                              105.8136,
+                              20.9882
+                    ],
+                    [
+                              105.8148,
+                              20.9882
+                    ],
+                    [
+                              105.817,
+                              20.9882
+                    ],
+                    [
+                              105.8172,
+                              20.9905
+                    ],
+                    [
+                              105.817,
+                              20.993
+                    ],
+                    [
+                              105.816,
+                              20.9942
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 5,
+        slug: "ha-dinh",
+        name: "Phường Hạ Đình",
+        name_han_nom: "下亭",
+        name_old: "Làng Hạ Đình (Cổ thôn sông Tô Lịch)",
+        new_administrative_name: "Phường Hạ Đình mở rộng (Hợp nhất P. Kim Giang)",
+        merger_badge: "Nhập toàn bộ P. Kim Giang",
+        color: "#0D9488",
+        colorDark: "#115E59",
+        district: "Quận Thanh Xuân",
+        summary: "Phường Hạ Đình nằm bên bờ hữu sông Tô Lịch, ôm trọn trục đường Khương Đình, phố Hạ Đình và toàn bộ khu đô thị Kim Giang. Nổi tiếng với Đình Vòng (Đình Hạ Đình số 322 Khương Đình - Di tích lịch sử Quốc gia thế kỷ XVI), Chùa Giàn (Phúc Khánh Tự số 318 Khương Đình), hồ Hạ Đình và quần thể dân cư trù phú bậc nhất quận Thanh Xuân.",
+        area_ha: 102,
+        established: "Thế kỷ XVI (thời Mạc - Lê Trung Hưng)",
+        administrative_merger_2025: "CẬP NHẬT 2025 (Nghị quyết số 1286/NQ-UBTVQH15): Nhập toàn bộ diện tích tự nhiên 0,40 km2 và quy mô dân số của phường Kim Giang vào phường Hạ Đình để thành lập Phường Hạ Đình mới rộng hơn 1 km2.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.808,
+                              20.9945
+                    ],
+                    [
+                              105.8142,
+                              20.9912
+                    ],
+                    [
+                              105.8138,
+                              20.9898
+                    ],
+                    [
+                              105.8136,
+                              20.9882
+                    ],
+                    [
+                              105.8146,
+                              20.9855
+                    ],
+                    [
+                              105.8152,
+                              20.9842
+                    ],
+                    [
+                              105.815685,
+                              20.983218
+                    ],
+                    [
+                              105.8142,
+                              20.982
+                    ],
+                    [
+                              105.8085,
+                              20.9835
+                    ],
+                    [
+                              105.8035,
+                              20.988
+                    ],
+                    [
+                              105.802,
+                              20.992
+                    ],
+                    [
+                              105.808,
+                              20.9945
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 6,
+        slug: "nhan-chinh",
+        name: "Phường Nhân Chính",
+        name_han_nom: "仁政",
+        name_old: "Cụm Làng Kẻ Mọc (Quan Nhân, Cự Chính, Giáp Nhất)",
+        new_administrative_name: "Phường Nhân Chính (Thanh Xuân)",
+        merger_badge: "Cụm Làng Kẻ Mọc di sản",
+        color: "#F97316",
+        colorDark: "#C2410C",
+        district: "Quận Thanh Xuân",
+        summary: "Nhân Chính là vùng đất cổ lừng danh trong câu ca dao Thăng Long: 'Nhất Mỗ, nhì Canh, tam Cót, tứ Mọc'. Bao gồm 3 làng cổ: Cự Chính, Quan Nhân và Giáp Nhất kề bên sông Tô Lịch. Nơi đây sở hữu quần thể di tích Đình Cự Chính, Đình Quan Nhân, Đình Giáp Nhất, Chùa Sùng Phúc, Chùa Bồ Đề cùng lễ hội 5 làng Mọc là Di sản văn hóa phi vật thể Quốc gia.",
+        area_ha: 161,
+        established: "Thế kỷ X–XI (thời Đinh - Lý)",
+        administrative_merger_2025: "Địa giới phường Nhân Chính giữ vững vai trò là trung tâm kết nối văn hóa - thương mại hiện đại của quận Thanh Xuân, giáp ranh Cầu Giấy và Đống Đa qua trục Hoàng Đạo Thúy - Lê Văn Lương.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.804,
+                              21.0085
+                    ],
+                    [
+                              105.813,
+                              21.0065
+                    ],
+                    [
+                              105.819,
+                              21.0025
+                    ],
+                    [
+                              105.815,
+                              20.998
+                    ],
+                    [
+                              105.808,
+                              20.9945
+                    ],
+                    [
+                              105.801,
+                              21.001
+                    ],
+                    [
+                              105.804,
+                              21.0085
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 7,
+        slug: "phuong-liet",
+        name: "Phường Phương Liệt",
+        name_han_nom: "芳烈",
+        name_old: "Làng Phương Liệt (Giáp Cửu cổ thôn)",
+        new_administrative_name: "Phường Phương Liệt (Thanh Xuân)",
+        merger_badge: "Làng Phương Liệt cổ",
+        color: "#B45309",
+        colorDark: "#78350F",
+        district: "Quận Thanh Xuân",
+        summary: "Phương Liệt (xưa gọi là làng Giáp Cửu) nằm ở cửa ngõ đông nam quận Thanh Xuân, giáp ranh quận Đống Đa và Hoàng Mai dọc trục đường Giải Phóng. Nơi đây lưu giữ Đình Phương Liệt thờ Thành hoàng tích đức giúp dân, Chùa Phương Liệt (Bảo Sơn Tự), hồ Phương Liệt và truyền thống hiếu học lâu đời.",
+        area_ha: 101,
+        established: "Thế kỷ XVII",
+        administrative_merger_2025: "Theo quy hoạch hành chính Hà Nội 2025, phường Phương Liệt được chỉnh trang hạ tầng đô thị xung quanh nút giao cầu vượt Ngã Tư Vọng và trục đường vành đai 2.5.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.831274,
+                              21.000009
+                    ],
+                    [
+                              105.843,
+                              20.9985
+                    ],
+                    [
+                              105.842,
+                              20.988
+                    ],
+                    [
+                              105.83,
+                              20.991
+                    ],
+                    [
+                              105.831274,
+                              21.000009
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 4,
+        slug: "khuong-thuong",
+        name: "Khương Thượng",
+        name_han_nom: "姜上",
+        name_old: "Làng Khương Thượng",
+        new_administrative_name: "Phường Khương Thượng mở rộng (Đống Đa)",
+        merger_badge: "P. Khương Thượng mở rộng",
+        color: "#9333EA",
+        colorDark: "#581C87",
+        district: "Quận Đống Đa",
+        summary: "Khương Thượng nằm ở phía bắc cụm làng Khương, bao trọn tứ giác vàng: Tây Sơn - Chùa Bộc - Tôn Thất Tùng - Trường Chinh. Nơi đây hội tụ hồ Khương Thượng, Chùa Bộc (Di tích QG Đặc biệt lưu giữ tượng Vua Quang Trung), Đình Khương Thượng (165 Khương Thượng), Trường Đại học Y Hà Nội (1902), Trường Đại học Thủy Lợi (175 Tây Sơn), gắn liền với chiến thắng Ngọc Hồi - Đống Đa mùa xuân 1789.",
+        area_ha: 64,
+        established: "Thế kỷ XI–XV (thời Lý - Lê)",
+        administrative_merger_2025: "CẬP NHẬT 2025 (NQ số 1286/NQ-UBTVQH15): Điều chỉnh một phần diện tích tự nhiên và dân số của phường Ngã Tư Sở để sáp nhập vào phường Khương Thượng, mở rộng không gian đô thị di sản từ ĐH Thủy Lợi, Chùa Bộc, ĐH Y Hà Nội đến trọn vẹn nút giao lịch sử Ngã Tư Sở.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.820207,
+                              21.003116
+                    ],
+                    [
+                              105.821642,
+                              21.004177
+                    ],
+                    [
+                              105.822728,
+                              21.00589
+                    ],
+                    [
+                              105.823552,
+                              21.007638
+                    ],
+                    [
+                              105.824799,
+                              21.010033
+                    ],
+                    [
+                              105.825901,
+                              21.011834
+                    ],
+                    [
+                              105.82685,
+                              21.013371
+                    ],
+                    [
+                              105.827949,
+                              21.01289
+                    ],
+                    [
+                              105.829227,
+                              21.01221
+                    ],
+                    [
+                              105.830731,
+                              21.011493
+                    ],
+                    [
+                              105.83115,
+                              21.009
+                    ],
+                    [
+                              105.8313,
+                              21.0068
+                    ],
+                    [
+                              105.83145,
+                              21.0048
+                    ],
+                    [
+                              105.83138,
+                              21.0022
+                    ],
+                    [
+                              105.831274,
+                              21.000009
+                    ],
+                    [
+                              105.828775,
+                              21.000762
+                    ],
+                    [
+                              105.827284,
+                              21.001257
+                    ],
+                    [
+                              105.825646,
+                              21.001706
+                    ],
+                    [
+                              105.823193,
+                              21.002334
+                    ],
+                    [
+                              105.820961,
+                              21.002908
+                    ],
+                    [
+                              105.820207,
+                              21.003116
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 8,
+        slug: "thinh-quang",
+        name: "Phường Thịnh Quang",
+        name_han_nom: "盛光",
+        name_old: "Làng Thịnh Quang cổ (Thịnh Quang thôn)",
+        new_administrative_name: "Phường Thịnh Quang (Đống Đa)",
+        merger_badge: "P. Thịnh Quang mở rộng",
+        color: "#8B5CF6",
+        colorDark: "#6D28D9",
+        district: "Quận Đống Đa",
+        summary: "Phường Thịnh Quang nằm kề sát Ngã Tư Sở và đường Láng. Nổi tiếng với Chùa Phúc Khánh (Chùa Sở tại số 382 Tây Sơn - Cổ tự linh thiêng bậc nhất kinh thành được xây dựng từ thời Hậu Lê), Đình làng Thịnh Quang, hệ thống ngõ cổ ven sông Tô Lịch và truyền thống giao thương sầm uất.",
+        area_ha: 55,
+        established: "Thế kỷ XVII",
+        administrative_merger_2025: "Theo NQ 1286/NQ-UBTVQH15, điều chỉnh một phần diện tích tự nhiên và dân số của phường Ngã Tư Sở sáp nhập vào phường Thịnh Quang, mở rộng địa giới về phía tây nút giao Ngã Tư Sở.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.815,
+                              21.008
+                    ],
+                    [
+                              105.822,
+                              21.006
+                    ],
+                    [
+                              105.820207,
+                              21.003116
+                    ],
+                    [
+                              105.815,
+                              21.005
+                    ],
+                    [
+                              105.815,
+                              21.008
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 9,
+        slug: "lang-thuong",
+        name: "Phường Láng Thượng",
+        name_han_nom: "朗上",
+        name_old: "Làng Láng Thượng (Yên Lãng cổ thôn)",
+        new_administrative_name: "Phường Láng Thượng (Đống Đa)",
+        merger_badge: "Làng Láng di sản",
+        color: "#7C3AED",
+        colorDark: "#4C1D95",
+        district: "Quận Đống Đa",
+        summary: "Láng Thượng là trung tâm của vùng đất cổ Làng Láng ngàn năm ven sông Tô Lịch. Nơi đây tọa lạc Chùa Láng (Chiêu Thiền Tự - Di tích Quốc gia Đặc biệt khởi dựng từ thời Lý Anh Tông thế kỷ XII thờ Thiền sư Từ Đạo Hạnh), Đền Voi Phục (Thủ Lệ - Di tích Trấn Tây Thăng Long) và di tích lịch sử Pháo đài Láng.",
+        area_ha: 172,
+        established: "Thế kỷ XII (thời Lý)",
+        administrative_merger_2025: "Bảo tồn nguyên vẹn không gian văn hóa lễ hội Chùa Láng - một trong những lễ hội cổ lớn nhất vùng đồng bằng sông Hồng kết nối sông Tô Lịch.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.802,
+                              21.028
+                    ],
+                    [
+                              105.814,
+                              21.031
+                    ],
+                    [
+                              105.815,
+                              21.021
+                    ],
+                    [
+                              105.806,
+                              21.018
+                    ],
+                    [
+                              105.802,
+                              21.028
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 10,
+        slug: "lang-ha",
+        name: "Phường Láng Hạ",
+        name_han_nom: "朗下",
+        name_old: "Làng Láng Hạ (Làng trồng rau húng Láng)",
+        new_administrative_name: "Phường Láng Hạ (Đống Đa)",
+        merger_badge: "Làng Láng Hạ",
+        color: "#6D28D9",
+        colorDark: "#3B0764",
+        district: "Quận Đống Đa",
+        summary: "Láng Hạ xưa kia cùng với Láng Thượng và Láng Trung nổi danh khắp bốn phương với đặc sản rau húng Láng tiến vua. Trong lòng phố thị hiện đại ngày nay, Láng Hạ vẫn trân trọng lưu giữ Đền Ứng Thiên (đền thờ Nữ thần Hậu Thổ linh thiêng thời Lý thế kỷ XI), Đình Láng Hạ và hồ sinh thái Hoàng Cầu kề bên.",
+        area_ha: 95,
+        established: "Thế kỷ XI",
+        administrative_merger_2025: "Kiện toàn địa giới hành chính kết nối trục tài chính Láng Hạ - Huỳnh Thúc Kháng và không gian sinh thái hồ Đống Đa.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.808,
+                              21.018
+                    ],
+                    [
+                              105.819,
+                              21.019
+                    ],
+                    [
+                              105.822,
+                              21.012
+                    ],
+                    [
+                              105.813,
+                              21.011
+                    ],
+                    [
+                              105.808,
+                              21.018
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 11,
+        slug: "kim-lien",
+        name: "Phường Kim Liên",
+        name_han_nom: "金蓮",
+        name_old: "Làng Kim Liên (Làng Đồng Lầm)",
+        new_administrative_name: "Phường Kim Liên (Đống Đa)",
+        merger_badge: "Đền Kim Liên Trấn Nam",
+        color: "#A855F7",
+        colorDark: "#7E22CE",
+        district: "Quận Đống Đa",
+        summary: "Làng cổ Kim Liên (tên nôm là làng Đồng Lầm) nổi tiếng kinh kỳ xưa với nghề nhuộm vải nâu và thợ may tài hoa. Nơi đây sừng sững Đền Kim Liên - một trong Thăng Long Tứ Trấn (Trấn Nam) thờ Cao Sơn Đại Vương có từ thời vua Lê Tương Dực (1509), cùng Chùa Kim Liên và khu tập thể kiểu mẫu đầu tiên của Hà Nội.",
+        area_ha: 45,
+        established: "Thế kỷ XVI",
+        administrative_merger_2025: "Bảo tồn không gian thiêng Đền Kim Liên Trấn Nam và chỉnh trang cảnh quan đô thị quanh trục Đào Duy Anh - Phạm Ngọc Thạch.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.831,
+                              21.011
+                    ],
+                    [
+                              105.84,
+                              21.009
+                    ],
+                    [
+                              105.838,
+                              21.003
+                    ],
+                    [
+                              105.831,
+                              21.005
+                    ],
+                    [
+                              105.831,
+                              21.011
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 12,
+        slug: "van-mieu-quoc-tu-giam",
+        name: "Văn Miếu - Quốc Tử Giám",
+        name_han_nom: "文廟-國子監",
+        name_old: "Khu Quốc Tử Giám - Làng An Trạch",
+        new_administrative_name: "Phường Văn Miếu & Quốc Tử Giám",
+        merger_badge: "Di tích Quốc gia Đặc biệt",
+        color: "#BE185D",
+        colorDark: "#831843",
+        district: "Quận Đống Đa",
+        summary: "Trái tim văn hiến của Thủ đô và cả dân tộc: Quần thể Di tích Quốc gia Đặc biệt Văn Miếu - Quốc Tử Giám được khởi dựng năm 1070 dưới triều vua Lý Thánh Tông và năm 1076 vua Lý Nhân Tông cho lập Quốc Tử Giám - trường đại học đầu tiên của Việt Nam. Nơi lưu giữ 82 bia Tiến sĩ vinh danh hiền tài - Di sản Tư liệu Thế giới UNESCO.",
+        area_ha: 52,
+        established: "Năm 1070 (thời Lý)",
+        administrative_merger_2025: "Tập trung quy hoạch không gian phố đi bộ văn hóa - học thuật bao quanh hồ Văn, Khuê Văn Các và vườn bia Tiến sĩ.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.832,
+                              21.032
+                    ],
+                    [
+                              105.84,
+                              21.031
+                    ],
+                    [
+                              105.838,
+                              21.024
+                    ],
+                    [
+                              105.831,
+                              21.025
+                    ],
+                    [
+                              105.832,
+                              21.032
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 13,
+        slug: "dien-bien",
+        name: "Phường Điện Biên",
+        name_han_nom: "奠邊",
+        name_old: "Cấm thành Thăng Long",
+        new_administrative_name: "Phường Điện Biên (Ba Đình)",
+        merger_badge: "Di sản Thế giới UNESCO",
+        color: "#1D4ED8",
+        colorDark: "#1E3A8A",
+        district: "Quận Ba Đình",
+        summary: "Địa bàn trung tâm chính trị quốc gia: Bao trọn Khu Trung tâm Hoàng thành Thăng Long - Di sản Văn hóa Thế giới UNESCO (Đoan Môn, Điện Kính Thiên, Hậu Lâu, Bắc Môn), Cột Cờ Hà Nội (Kỳ Đài Thăng Long), Bảo tàng Lịch sử Quân sự Việt Nam và Quảng trường Ba Đình linh thiêng.",
+        area_ha: 94,
+        established: "Năm 1010 (Vua Lý Thái Tổ dời đô)",
+        administrative_merger_2025: "Bảo tồn nghiêm ngặt không gian trục cảnh quan di sản quốc gia nối từ Hoàng thành Thăng Long sang Lăng Chủ tịch Hồ Chí Minh.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.835,
+                              21.038
+                    ],
+                    [
+                              105.846,
+                              21.037
+                    ],
+                    [
+                              105.843,
+                              21.029
+                    ],
+                    [
+                              105.834,
+                              21.03
+                    ],
+                    [
+                              105.835,
+                              21.038
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 14,
+        slug: "ngoc-ha",
+        name: "Phường Ngọc Hà",
+        name_han_nom: "玉河",
+        name_old: "Làng hoa Ngọc Hà cổ",
+        new_administrative_name: "Phường Ngọc Hà (Ba Đình)",
+        merger_badge: "Làng hoa Thăng Long",
+        color: "#10B981",
+        colorDark: "#047857",
+        district: "Quận Ba Đình",
+        summary: "Làng hoa Ngọc Hà lừng danh trong câu ca: 'Ngày rằm mười bốn chợ Mơ / Ba mươi mùng một giắt hoa Ngọc Hà'. Vùng đất của những vườn hoa tiến vua xưa kia nay vẫn gìn giữ Chùa Bát Mẫu, Đình Ngọc Hà, di tích xác máy bay B-52 rơi tại hồ Hữu Tiệp và không gian ngõ xóm truyền thống Thập Tam Trại.",
+        area_ha: 80,
+        established: "Thế kỷ XI",
+        administrative_merger_2025: "Chỉnh trang làng trong phố bảo tồn không gian mặt nước hồ Hữu Tiệp và quần thể cây xanh Hoàng Hoa Thám.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.822,
+                              21.042
+                    ],
+                    [
+                              105.833,
+                              21.041
+                    ],
+                    [
+                              105.832,
+                              21.033
+                    ],
+                    [
+                              105.821,
+                              21.034
+                    ],
+                    [
+                              105.822,
+                              21.042
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 15,
+        slug: "giang-vo",
+        name: "Phường Giảng Võ",
+        name_han_nom: "講武",
+        name_old: "Làng Giảng Võ (Trường bắn võ khoa Thăng Long)",
+        new_administrative_name: "Phường Giảng Võ (Ba Đình)",
+        merger_badge: "Giảng Võ Điện xưa",
+        color: "#3B82F6",
+        colorDark: "#1D4ED8",
+        district: "Quận Ba Đình",
+        summary: "Vùng đất Giảng Võ xưa kia là trường thao luyện võ binh của quân đội Đại Việt thời Lý - Trần - Lê. Nơi đây có Đình Giảng Võ thờ Bà Chúa Kho Lý Châu Nương - vị nữ tướng anh kiệt bảo trợ kho lương quân lương triều Trần, hồ Giảng Võ lộng gió và trục phố văn hóa ẩm thực đặc sắc.",
+        area_ha: 91,
+        established: "Thế kỷ XIII",
+        administrative_merger_2025: "Nâng cấp hạ tầng giao thông đô thị hiện đại kề bên tuyến metro Cát Linh - Hà Đông và hồ Giảng Võ.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.816,
+                              21.029
+                    ],
+                    [
+                              105.826,
+                              21.028
+                    ],
+                    [
+                              105.824,
+                              21.021
+                    ],
+                    [
+                              105.815,
+                              21.022
+                    ],
+                    [
+                              105.816,
+                              21.029
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 16,
+        slug: "truc-bach",
+        name: "Phường Trúc Bạch",
+        name_han_nom: "竹帛",
+        name_old: "Làng đúc đồng Ngũ Xã & Bán đảo Trúc Bạch",
+        new_administrative_name: "Phường Trúc Bạch (Ba Đình)",
+        merger_badge: "Làng nghề đúc đồng Ngũ Xã",
+        color: "#06B6D4",
+        colorDark: "#0E7490",
+        district: "Quận Ba Đình",
+        summary: "Trúc Bạch sở hữu bán đảo Ngũ Xã - làng nghề đúc đồng trứ danh Thăng Long lập nghiệp từ thời Lê thế kỷ XVII. Nghệ nhân Ngũ Xã đã đúc nên pho tượng đồng Phật Di Đà nặng 14 tấn tại Chùa Thần Quang (Chùa Ngũ Xã). Cùng với Đền Thủy Trung Tiên trên đảo hồ Trúc Bạch, nơi đây là biểu tượng sinh thái - nghệ thuật độc nhất vô nhị.",
+        area_ha: 58,
+        established: "Thế kỷ XVII",
+        administrative_merger_2025: "Phát triển khu phố ẩm thực đêm kết hợp làng nghề truyền thống đúc đồng Ngũ Xã ven hồ Trúc Bạch.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.836,
+                              21.049
+                    ],
+                    [
+                              105.847,
+                              21.048
+                    ],
+                    [
+                              105.845,
+                              21.04
+                    ],
+                    [
+                              105.835,
+                              21.041
+                    ],
+                    [
+                              105.836,
+                              21.049
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 17,
+        slug: "quan-thanh",
+        name: "Phường Quán Thánh",
+        name_han_nom: "觀聖",
+        name_old: "Làng An Trì - Trấn Bắc Thăng Long",
+        new_administrative_name: "Phường Quán Thánh (Ba Đình)",
+        merger_badge: "Đền Quán Thánh Trấn Bắc",
+        color: "#1E3A8A",
+        colorDark: "#172554",
+        district: "Quận Ba Đình",
+        summary: "Nơi tọa lạc Đền Quán Thánh (Trấn Vũ Quán) - một trong Thăng Long Tứ Trấn (Trấn Bắc) dựng từ đời vua Lý Thái Tổ thờ Huyền Thiên Trấn Vũ. Đền lưu giữ pho tượng đồng đen khổng lồ cao gần 4m nặng 4 tấn được đúc năm 1677 bởi các nghệ nhân làng Ngũ Xã, cùng cảnh quan đường Cổ Ngư (đường Thanh Niên) thơ mộng.",
+        area_ha: 52,
+        established: "Năm 1010 (thời Lý)",
+        administrative_merger_2025: "Bảo tồn cảnh quan di sản mặt nước giữa Hồ Tây và Hồ Trúc Bạch cùng không gian kiến trúc Pháp cổ.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.834,
+                              21.047
+                    ],
+                    [
+                              105.844,
+                              21.046
+                    ],
+                    [
+                              105.841,
+                              21.038
+                    ],
+                    [
+                              105.833,
+                              21.039
+                    ],
+                    [
+                              105.834,
+                              21.047
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 18,
+        slug: "dich-vong",
+        name: "Phường Dịch Vọng",
+        name_han_nom: "易望",
+        name_old: "Làng Vòng (Quê hương Cốm Làng Vòng)",
+        new_administrative_name: "Phường Dịch Vọng (Cầu Giấy)",
+        merger_badge: "Cốm Làng Vòng nức tiếng",
+        color: "#059669",
+        colorDark: "#065F46",
+        district: "Quận Cầu Giấy",
+        summary: "Dịch Vọng chính là cái nôi của Làng Vòng cổ kính - quê hương đặc sản Cốm Làng Vòng dẻo thơm trứ danh được đại thi hào Thạch Lam ca tụng trong 'Hà Nội băm sáu phố phường'. Nơi đây còn nổi tiếng với Chùa Hà (Thánh Đức Tự - chốn cầu duyên linh ứng bậc nhất thủ đô), Đình Làng Vòng và công viên Cầu Giấy xanh mát.",
+        area_ha: 135,
+        established: "Thế kỷ XI",
+        administrative_merger_2025: "Bảo tồn nghề cốm truyền thống Làng Vòng và quy hoạch trục đô thị công nghệ cao Cầu Giấy.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.789,
+                              21.037
+                    ],
+                    [
+                              105.799,
+                              21.036
+                    ],
+                    [
+                              105.798,
+                              21.026
+                    ],
+                    [
+                              105.787,
+                              21.027
+                    ],
+                    [
+                              105.789,
+                              21.037
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 19,
+        slug: "yen-hoa",
+        name: "Phường Yên Hòa",
+        name_han_nom: "安和",
+        name_old: "Làng Cót (Đất khoa bảng tiến sĩ Thăng Long)",
+        new_administrative_name: "Phường Yên Hòa (Cầu Giấy)",
+        merger_badge: "Làng Cót khoa bảng",
+        color: "#0284C7",
+        colorDark: "#0369A1",
+        district: "Quận Cầu Giấy",
+        summary: "Làng Cót (Yên Hòa) là làng khoa bảng hàng đầu kinh thành xưa với câu truyền tụng: 'Cơm Đồ Sơn, cá Mòi sông Chanh, tiến sĩ Làng Cót'. Làng có tới gần 40 vị đỗ đại khoa qua các triều đại. Nơi đây bảo tồn Đình Làng Cót, Chùa Duệ Tú (Quảng Nghiêm Tự) khởi dựng thời Lý thế kỷ XII và cây cầu đá cổ bắc qua sông Tô Lịch.",
+        area_ha: 217,
+        established: "Thế kỷ XII (thời Lý)",
+        administrative_merger_2025: "Bảo tồn các nhà thờ họ, văn chỉ làng Cót và kết nối trục đô thị trung tâm quận Cầu Giấy.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.795,
+                              21.027
+                    ],
+                    [
+                              105.807,
+                              21.025
+                    ],
+                    [
+                              105.804,
+                              21.014
+                    ],
+                    [
+                              105.792,
+                              21.016
+                    ],
+                    [
+                              105.795,
+                              21.027
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 20,
+        slug: "nghia-do",
+        name: "Phường Nghĩa Đô",
+        name_han_nom: "義都",
+        name_old: "Làng Nghĩa Đô (Làng dệt lụa & giấy sắc)",
+        new_administrative_name: "Phường Nghĩa Đô (Cầu Giấy)",
+        merger_badge: "Làng Nghĩa Đô cổ",
+        color: "#0E7490",
+        colorDark: "#155E75",
+        district: "Quận Cầu Giấy",
+        summary: "Làng cổ Nghĩa Đô nằm ở ngã ba sông Tô Lịch và sông Nghĩa Đô, quê hương của nghề dệt lụa, kẹo lạc và làm giấy sắc phong cung đình độc nhất vô nhị. Nơi đây gắn liền với quê hương nhà văn Tô Hoài (tác giả 'Dế Mèn phiêu lưu ký'), Đền Voi Phục Nghĩa Đô và Chùa Duệ Đông linh thiêng.",
+        area_ha: 129,
+        established: "Thế kỷ X–XI",
+        administrative_merger_2025: "Tôn tạo không gian cảnh quan ven sông Tô Lịch và bảo tồn truyền thống văn hóa làng dệt lụa xưa.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.796,
+                              21.048
+                    ],
+                    [
+                              105.808,
+                              21.046
+                    ],
+                    [
+                              105.806,
+                              21.036
+                    ],
+                    [
+                              105.795,
+                              21.037
+                    ],
+                    [
+                              105.796,
+                              21.048
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 21,
+        slug: "dich-vong-hau",
+        name: "Dịch Vọng Hậu",
+        name_han_nom: "易望後",
+        name_old: "Làng Hậu (Cụm làng tri thức)",
+        new_administrative_name: "Phường Dịch Vọng Hậu (Cầu Giấy)",
+        merger_badge: "Đô thị học thuật",
+        color: "#0369A1",
+        colorDark: "#075985",
+        district: "Quận Cầu Giấy",
+        summary: "Dịch Vọng Hậu (Làng Hậu) nằm ở trung tâm học thuật phía tây thủ đô, nơi đặt trụ sở của Đại học Quốc gia Hà Nội, Đại học Sư phạm Hà Nội và Học viện Báo chí Tuyên truyền. Dù phát triển thành khu đô thị công nghệ sầm uất, nơi đây vẫn lưu giữ Đình làng Hậu và nghề làm cốm lá me gia truyền.",
+        area_ha: 148,
+        established: "Thế kỷ XV",
+        administrative_merger_2025: "Quy hoạch trở thành trung tâm thung lũng silicon và đổi mới sáng tạo giáo dục của Hà Nội.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.779,
+                              21.041
+                    ],
+                    [
+                              105.789,
+                              21.04
+                    ],
+                    [
+                              105.787,
+                              21.03
+                    ],
+                    [
+                              105.778,
+                              21.031
+                    ],
+                    [
+                              105.779,
+                              21.041
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 22,
+        slug: "trang-tien",
+        name: "Phường Tràng Tiền",
+        name_han_nom: "長錢",
+        name_old: "Xưởng Đúc tiền triều Nguyễn - Hồ Gươm",
+        new_administrative_name: "Phường Tràng Tiền (Hoàn Kiếm)",
+        merger_badge: "Trái tim Thủ đô Hồ Gươm",
+        color: "#E11D48",
+        colorDark: "#9F1239",
+        district: "Quận Hoàn Kiếm",
+        summary: "Tràng Tiền là biểu tượng trường tồn của thủ đô ngàn năm: Bao trọn thắng cảnh Hồ Hoàn Kiếm (Hồ Gươm), Tháp Rùa cổ kính, Đền Ngọc Sơn, Cầu Thê Húc son đỏ, Tháp Bút, Đài Nghiên, Nhà hát Lớn Hà Nội (1911) và phố Tràng Tiền (nguyên là xưởng đúc tiền Tràng Tiền thời Nguyễn).",
+        area_ha: 54,
+        established: "Năm 1808 (xưởng đúc tiền triều Nguyễn)",
+        administrative_merger_2025: "Tâm điểm không gian đi bộ Hồ Gươm và tuyến phố đi bộ mở rộng kết nối Nhà hát Lớn ra bờ sông Hồng.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.849,
+                              21.032
+                    ],
+                    [
+                              105.859,
+                              21.031
+                    ],
+                    [
+                              105.858,
+                              21.022
+                    ],
+                    [
+                              105.848,
+                              21.023
+                    ],
+                    [
+                              105.849,
+                              21.032
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 23,
+        slug: "hang-bac-hang-dao",
+        name: "Hàng Bạc & Hàng Đào",
+        name_han_nom: "銀行-桃行",
+        name_old: "Phố cổ 36 phố phường (Làng đúc bạc Châu Khê)",
+        new_administrative_name: "Phường Hàng Bạc & Hàng Đào (Hoàn Kiếm)",
+        merger_badge: "36 Phố Phường di sản",
+        color: "#DC2626",
+        colorDark: "#991B1B",
+        district: "Quận Hoàn Kiếm",
+        summary: "Linh hồn của 36 phố phường Thăng Long - Kẻ Chợ: Phố Hàng Bạc khởi nguồn từ phường đúc bạc của thợ kim hoàn làng Châu Khê (Hải Dương) di cư lên kinh thành từ thế kỷ XV, nổi bật với Đình Kim Ngân số 42 Hàng Bạc. Phố Hàng Đào là trục buôn bán tơ lụa hoa đào danh tiếng với Đình Đồng Lạc số 38 Hàng Đào.",
+        area_ha: 38,
+        established: "Thế kỷ XV (thời Lê Sơ)",
+        administrative_merger_2025: "Bảo tồn nguyên trạng kiến trúc nhà ống, mái ngói âm dương và không gian di sản nghề thủ công truyền thống.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.848,
+                              21.038
+                    ],
+                    [
+                              105.856,
+                              21.037
+                    ],
+                    [
+                              105.855,
+                              21.032
+                    ],
+                    [
+                              105.847,
+                              21.033
+                    ],
+                    [
+                              105.848,
+                              21.038
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 24,
+        slug: "dong-xuan",
+        name: "Phường Đồng Xuân",
+        name_han_nom: "同春",
+        name_old: "Chợ Đồng Xuân - Cửa Ô Quan Chưởng",
+        new_administrative_name: "Phường Đồng Xuân (Hoàn Kiếm)",
+        merger_badge: "Ô Quan Chưởng & Chợ cổ",
+        color: "#EF4444",
+        colorDark: "#B91C1C",
+        district: "Quận Hoàn Kiếm",
+        summary: "Đồng Xuân lưu giữ Ô Quan Chưởng (Đông Hà Môn) - cửa ô cổ duy nhất còn nguyên vẹn của kinh thành Thăng Long được xây dựng từ năm 1749. Nơi đây có Chợ Đồng Xuân - chợ đầu mối sầm uất bậc nhất Bắc Kỳ từ năm 1889, cùng hệ thống di tích kháng chiến chống Pháp mùa đông 1946 anh dũng.",
+        area_ha: 44,
+        established: "Năm 1749 (Ô Quan Chưởng)",
+        administrative_merger_2025: "Phát triển không gian chợ đêm Đồng Xuân và bảo tồn di tích kiến trúc cổ đầu cầu Long Biên.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.847,
+                              21.043
+                    ],
+                    [
+                              105.855,
+                              21.042
+                    ],
+                    [
+                              105.854,
+                              21.037
+                    ],
+                    [
+                              105.846,
+                              21.038
+                    ],
+                    [
+                              105.847,
+                              21.043
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 25,
+        slug: "dong-nhan",
+        name: "Phường Đồng Nhân",
+        name_han_nom: "同仁",
+        name_old: "Làng Đồng Nhân (Đền Hai Bà Trưng)",
+        new_administrative_name: "Phường Đồng Nhân (Hai Bà Trưng)",
+        merger_badge: "Đền Hai Bà Trưng QG Đặc biệt",
+        color: "#D97706",
+        colorDark: "#B45309",
+        district: "Quận Hai Bà Trưng",
+        summary: "Nơi tọa lạc Đền thờ Hai Bà Trưng (Đền Đồng Nhân - Di tích Quốc gia Đặc biệt) khởi dựng từ năm 1160 dưới triều vua Lý Anh Tông bên bãi sông Hồng, sau dời vào làng Đồng Nhân. Đền lưu giữ tượng Hai Bà Trưng bằng gỗ quý sơn son thếp vàng cùng Lễ hội rước nước sông Hồng - Di sản văn hóa phi vật thể Quốc gia.",
+        area_ha: 48,
+        established: "Năm 1160 (thời Lý)",
+        administrative_merger_2025: "Tôn tạo quần thể di tích Đền Hai Bà Trưng kết nối không gian lễ hội với sông Hồng và phố Hương Viên.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.855,
+                              21.016
+                    ],
+                    [
+                              105.864,
+                              21.015
+                    ],
+                    [
+                              105.862,
+                              21.008
+                    ],
+                    [
+                              105.854,
+                              21.009
+                    ],
+                    [
+                              105.855,
+                              21.016
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 26,
+        slug: "bach-mai",
+        name: "Phường Bạch Mai",
+        name_han_nom: "白梅",
+        name_old: "Làng Bạch Mai (Hồng Mai cổ thôn)",
+        new_administrative_name: "Phường Bạch Mai (Hai Bà Trưng)",
+        merger_badge: "Tổ đình Chùa Liên Phái",
+        color: "#F59E0B",
+        colorDark: "#D97706",
+        district: "Quận Hai Bà Trưng",
+        summary: "Làng Bạch Mai xưa có tên là Hồng Mai (làng hoa mai đỏ), sau đổi thành Bạch Mai (hoa mai trắng). Nơi đây lưu giữ Chùa Liên Phái (Liên Tông Tự khởi dựng năm 1726) - tổ đình thiền phái Tào Động Thăng Long với Tháp Cửu Phẩm Liên Hoa cao 10 tầng và vườn tháp mộ cổ thâm nghiêm bậc nhất nội đô.",
+        area_ha: 61,
+        established: "Năm 1726 (thời Hậu Lê)",
+        administrative_merger_2025: "Bảo tồn kiến trúc tháp cổ Chùa Liên Phái và chỉnh trang trục phố thương mại lâu đời Bạch Mai.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.846,
+                              21.006
+                    ],
+                    [
+                              105.856,
+                              21.005
+                    ],
+                    [
+                              105.854,
+                              20.998
+                    ],
+                    [
+                              105.845,
+                              20.999
+                    ],
+                    [
+                              105.846,
+                              21.006
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 27,
+        slug: "dong-tam",
+        name: "Phường Đồng Tâm",
+        name_han_nom: "同心",
+        name_old: "Cụm Đại học Bách Khoa - Xây Dựng",
+        new_administrative_name: "Phường Đồng Tâm (Hai Bà Trưng)",
+        merger_badge: "Đô thị đại học kỹ thuật",
+        color: "#CA8A04",
+        colorDark: "#A16207",
+        district: "Quận Hai Bà Trưng",
+        summary: "Đồng Tâm là cái nôi khoa học kỹ thuật hàng đầu đất nước, quy tụ cụm 3 trường đại học danh tiếng bậc nhất: Trường Đại học Bách Khoa Hà Nội (1956), Trường Đại học Xây Dựng Hà Nội và Trường Đại học Kinh Tế Quốc Dân. Nơi đây đào tạo hàng trăm ngàn kỹ sư, nhà khoa học phụng sự Tổ quốc.",
+        area_ha: 89,
+        established: "Năm 1956",
+        administrative_merger_2025: "Quy hoạch làng đại học thông minh, mở rộng không gian cây xanh nghiên cứu dọc đường Giải Phóng và Trần Đại Nghĩa.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.838,
+                              21.006
+                    ],
+                    [
+                              105.848,
+                              21.005
+                    ],
+                    [
+                              105.846,
+                              20.997
+                    ],
+                    [
+                              105.837,
+                              20.998
+                    ],
+                    [
+                              105.838,
+                              21.006
+                    ]
+          ]
+        ],
+      },
+    },
+    {
+      type: "Feature" as const,
+      properties: {
+        id: 28,
+        slug: "thanh-luong",
+        name: "Phường Thanh Lương",
+        name_han_nom: "清涼",
+        name_old: "Làng Lương Yên (Bến Cảng Sông Hồng xưa)",
+        new_administrative_name: "Phường Thanh Lương (Hai Bà Trưng)",
+        merger_badge: "Làng Lương Yên sông Hồng",
+        color: "#78350F",
+        colorDark: "#451A03",
+        district: "Quận Hai Bà Trưng",
+        summary: "Thanh Lương gắn liền với làng cổ Lương Yên bên dòng sông Hồng lịch sử, nơi từng có Bến phà Đen và cảng sông nhộn nhịp thời Pháp thuộc. Nơi đây có Đình Lương Yên, Chùa Hộ Quốc và truyền thống lao động kiên cường của cư dân bến cảng Thăng Long qua nhiều thế hệ.",
+        area_ha: 104,
+        established: "Thế kỷ XVIII",
+        administrative_merger_2025: "Phát triển trục kinh tế ven sông Hồng theo Đồ án quy hoạch phân khu đô thị sông Hồng của Thủ đô.",
+      },
+      geometry: {
+        type: "Polygon" as const,
+        coordinates: [
+          [
+                    [
+                              105.86,
+                              21.012
+                    ],
+                    [
+                              105.87,
+                              21.01
+                    ],
+                    [
+                              105.868,
+                              21.002
+                    ],
+                    [
+                              105.858,
+                              21.004
+                    ],
+                    [
+                              105.86,
+                              21.012
+                    ]
+          ]
         ],
       },
     },
   ],
 };
 
-// Tâm bản đồ bao trùm cả 4 phân khu từ Thanh Xuân đến Đống Đa
-export const VILLAGES_CENTER: [number, number] = [105.8220, 20.9970];
+// Tâm bản đồ bao trùm toàn bộ các quận nội thành Thăng Long - Hà Nội
+export const VILLAGES_CENTER: [number, number] = [105.8250, 21.0150];
 
-// Hộp giới hạn bao phủ Khương Hạ, Khương Trung, Khương Đình và Khương Thượng
+// Hộp giới hạn bao phủ trọn vẹn 6 quận nội thành (Thanh Xuân, Đống Đa, Cầu Giấy, Ba Đình, Hoàn Kiếm, Hai Bà Trưng)
 export const VILLAGES_BBOX: [number, number, number, number] = [
-  105.8105, 20.9820, 105.8340, 21.0130,
+  105.7750, 20.9800, 105.8750, 21.0550,
+];
+
+// Danh sách các quận nội thành hỗ trợ lọc phân tầng
+export const HANOI_DISTRICTS = [
+  { id: "all", name: "Tất cả Hà Nội", count: 28 },
+  { id: "thanh-xuan", name: "Thanh Xuân", count: 6 },
+  { id: "dong-da", name: "Đống Đa", count: 6 },
+  { id: "ba-dinh", name: "Ba Đình", count: 5 },
+  { id: "cau-giay", name: "Cầu Giấy", count: 4 },
+  { id: "hoan-kiem", name: "Hoàn Kiếm", count: 3 },
+  { id: "hai-ba-trung", name: "Hai Bà Trưng", count: 4 },
 ];

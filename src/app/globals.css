@@ -437,19 +437,21 @@ body {
   position: absolute;
   bottom: 30px;
   left: 24px;
-  background: rgba(8, 14, 22, 0.94);
-  border: 1px solid rgba(201, 168, 76, 0.28);
-  border-radius: 12px;
+  background: rgba(8, 14, 22, 0.95);
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  border-radius: 14px;
   padding: 14px 16px;
-  width: 250px;
-  backdrop-filter: blur(14px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  width: 310px;
+  max-width: calc(100vw - 48px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   z-index: 25;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .village-legend.is-collapsed {
   padding-bottom: 12px;
+  width: 260px;
 }
 
 .legend-header-wrapper {
@@ -520,10 +522,130 @@ body {
   letter-spacing: 0.02em;
 }
 
+/* District Filter Tabs */
+.legend-district-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.legend-district-tab {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  color: #94a3b8;
+  font-size: 0.65rem;
+  padding: 2px 7px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.legend-district-tab:hover {
+  background: rgba(201, 168, 76, 0.1);
+  border-color: rgba(201, 168, 76, 0.3);
+  color: #e2e8f0;
+}
+
+.legend-district-tab.is-active {
+  background: rgba(201, 168, 76, 0.2);
+  border-color: rgba(201, 168, 76, 0.55);
+  color: #fde68a;
+  font-weight: 600;
+}
+
+.legend-district-tab .tab-count {
+  font-size: 0.58rem;
+  opacity: 0.75;
+}
+
+/* Quick Search Box */
+.legend-search-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  border-radius: 6px;
+  padding: 4px 8px;
+  margin-bottom: 8px;
+  transition: border-color 0.15s ease;
+}
+
+.legend-search-box:focus-within {
+  border-color: rgba(201, 168, 76, 0.5);
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.legend-search-icon {
+  color: var(--amber-400);
+  flex-shrink: 0;
+}
+
+.legend-search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f8fafc;
+  font-size: 0.68rem;
+  width: 100%;
+}
+
+.legend-search-input::placeholder {
+  color: #64748b;
+}
+
+.legend-search-clear {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.legend-search-clear:hover {
+  color: #fff;
+}
+
 .legend-list {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  max-height: 280px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 2px;
+}
+
+.legend-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.legend-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.legend-list::-webkit-scrollbar-thumb {
+  background: rgba(201, 168, 76, 0.35);
+  border-radius: 4px;
+}
+
+.legend-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 168, 76, 0.6);
+}
+
+.legend-empty {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  text-align: center;
+  padding: 18px 8px;
 }
 
 .legend-item {
@@ -542,6 +664,11 @@ body {
   background: rgba(201, 168, 76, 0.08);
   border-color: rgba(201, 168, 76, 0.3);
   transform: translateX(2px);
+}
+
+.legend-item.is-active {
+  background: rgba(201, 168, 76, 0.15);
+  border-color: rgba(201, 168, 76, 0.5);
 }
 
 .legend-color-ring {

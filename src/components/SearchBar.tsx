@@ -42,10 +42,18 @@ export default function SearchBar({
 
   const matchedVillages = q.length < 1 ? [] : villages.filter((v) => {
     const haystack = normalize(
-      [v.properties.name, v.properties.name_han_nom, v.properties.name_old, v.properties.summary].join(" ")
+      [
+        v.properties.name,
+        v.properties.name_han_nom,
+        v.properties.name_old,
+        v.properties.district,
+        v.properties.summary,
+        v.properties.new_administrative_name,
+        v.properties.merger_badge,
+      ].join(" ")
     );
     return haystack.includes(q);
-  }).slice(0, 4);
+  }).slice(0, 6);
 
   const hasResults = matchedPlaces.length > 0 || matchedVillages.length > 0;
 
@@ -145,7 +153,7 @@ export default function SearchBar({
                   <div>
                     <div className="search-result-name">{v.properties.name}</div>
                     <div className="search-result-meta">
-                      {v.properties.name_han_nom} · {lang === "en" ? "Village" : "Làng"}
+                      {v.properties.name_han_nom} · {v.properties.district}
                     </div>
                   </div>
                 </div>
