@@ -47,13 +47,15 @@ export default function SearchBar({
         v.properties.name_han_nom,
         v.properties.name_old,
         v.properties.district,
+        v.properties.region_name,
+        v.properties.craft_tradition,
         v.properties.summary,
         v.properties.new_administrative_name,
         v.properties.merger_badge,
       ].join(" ")
     );
     return haystack.includes(q);
-  }).slice(0, 6);
+  }).slice(0, 8);
 
   const hasResults = matchedPlaces.length > 0 || matchedVillages.length > 0;
 
@@ -152,8 +154,13 @@ export default function SearchBar({
                   </div>
                   <div>
                     <div className="search-result-name">{v.properties.name}</div>
-                    <div className="search-result-meta">
-                      {v.properties.name_han_nom} · {v.properties.district}
+                    <div className="search-result-meta" style={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                      <span>{v.properties.name_han_nom} · {v.properties.district}</span>
+                      {v.properties.craft_tradition && (
+                        <span style={{ fontSize: "0.68rem", color: "rgba(255, 255, 255, 0.72)" }}>
+                          {v.properties.craft_tradition}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>

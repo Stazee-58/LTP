@@ -487,8 +487,8 @@ export default function MapPage() {
         ],
       },
       center: VILLAGES_CENTER,
-      zoom: 15.2,
-      minZoom: 13,
+      zoom: 12.6,
+      minZoom: 10.5,
       maxZoom: 20,
     });
 
@@ -531,28 +531,28 @@ export default function MapPage() {
         type: "geojson",
         data: {
           type: "FeatureCollection",
-          features: [
-            {
-              type: "Feature",
-              properties: { name: "Khương Thượng · 姜上\n(P. Khương Thượng mở rộng)", color: "#C084FC" },
-              geometry: { type: "Point", coordinates: [105.8265, 21.0048] },
-            },
-            {
-              type: "Feature",
-              properties: { name: "Khương Trung · 姜中\n(P. Khương Trung)", color: "#FB923C" },
-              geometry: { type: "Point", coordinates: [105.8210, 20.9975] },
-            },
-            {
-              type: "Feature",
-              properties: { name: "Khương Đình · 姜亭\n(P. Khương Đình)", color: "#34D399" },
-              geometry: { type: "Point", coordinates: [105.8195, 20.9885] },
-            },
-            {
-              type: "Feature",
-              properties: { name: "Làng Khương Hạ · 姜下\n(Sáp nhập P. Khương Đình)", color: "#FBBF24" },
-              geometry: { type: "Point", coordinates: [105.8152, 20.9912] },
-            },
-          ],
+          features: VILLAGES_GEOJSON.features.map((v) => {
+            const coords = v.geometry.coordinates[0];
+            let sumLng = 0;
+            let sumLat = 0;
+            coords.forEach(([lng, lat]) => {
+              sumLng += lng;
+              sumLat += lat;
+            });
+            const cLng = sumLng / coords.length;
+            const cLat = sumLat / coords.length;
+            return {
+              type: "Feature" as const,
+              properties: {
+                name: `${v.properties.name} · ${v.properties.name_han_nom}\n(${v.properties.craft_tradition ? v.properties.craft_tradition.slice(0, 26) + "..." : v.properties.merger_badge})`,
+                color: v.properties.color,
+              },
+              geometry: {
+                type: "Point" as const,
+                coordinates: [cLng, cLat],
+              },
+            };
+          }),
         },
       });
 

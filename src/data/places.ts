@@ -1,11 +1,11 @@
-// Danh mục di tích văn hóa, lịch sử, đình chùa và đền miếu các làng cổ Hà Nội
+// Danh mục di tích văn hóa, lịch sử, đình chùa và đền miếu 7 Vùng làng cổ Thăng Long - Hà Nội
 // Đã chuẩn hóa tọa độ GPS chính xác thực địa tại Hà Nội
 // Bao gồm: Đình làng, Chùa cổ, Đền · Miếu · Di tích lịch sử văn hóa
 
 export const SAMPLE_PLACES = [
   {
     "id": 1,
-    "village_slug": "khuong-ha",
+    "village_slug": "lang-khuong-dinh",
     "slug": "dinh-khuong-ha",
     "name": "Đình Khương Hạ (Đình Gừng)",
     "name_han_nom": "姜下亭 (亭姜下)",
@@ -44,7 +44,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 2,
-    "village_slug": "khuong-ha",
+    "village_slug": "lang-khuong-dinh",
     "slug": "chua-khuong-ha",
     "name": "Chùa Khương Hạ (Phụng Lộc Tự)",
     "name_han_nom": "奉祿寺",
@@ -79,7 +79,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 3,
-    "village_slug": "khuong-ha",
+    "village_slug": "lang-khuong-dinh",
     "slug": "den-khuong-ha",
     "name": "Đền Tam Phủ (Khương Linh Từ)",
     "name_han_nom": "姜靈祠 · 三府殿",
@@ -114,7 +114,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 4,
-    "village_slug": "khuong-ha",
+    "village_slug": "lang-khuong-dinh",
     "slug": "mieu-ba-chua-vuc-lang",
     "name": "Miếu Bà Chúa Vực Lăng (Miếu Thổ Thần Khương Hạ)",
     "name_han_nom": "域陵廟 · 土神靈祠",
@@ -149,7 +149,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 5,
-    "village_slug": "khuong-trung",
+    "village_slug": "lang-khuong-dinh",
     "slug": "dinh-khuong-trung",
     "name": "Đình Khương Trung",
     "name_han_nom": "姜中亭 (亭姜中)",
@@ -183,7 +183,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 6,
-    "village_slug": "khuong-trung",
+    "village_slug": "lang-khuong-dinh",
     "slug": "chua-khuong-trung",
     "name": "Chùa Khương Trung (Chùa Tiêu Dao / Sùng Phúc Tự)",
     "name_han_nom": "逍遙寺 · 崇福寺",
@@ -218,7 +218,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 7,
-    "village_slug": "khuong-trung",
+    "village_slug": "lang-khuong-dinh",
     "slug": "mieu-thanh-hoang-khuong-trung",
     "name": "Miếu Thành Hoàng Khương Trung (Miếu Hai Vị Tướng)",
     "name_han_nom": "姜中神祠 · 兩位將軍廟",
@@ -252,7 +252,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 8,
-    "village_slug": "khuong-trung",
+    "village_slug": "lang-khuong-dinh",
     "slug": "den-than-nong-khuong-trung",
     "name": "Đền Thần Nông Khương Trung",
     "name_han_nom": "姜中神農祠",
@@ -286,7 +286,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 9,
-    "village_slug": "khuong-trung",
+    "village_slug": "lang-khuong-dinh",
     "slug": "mieu-ngu-hanh-khuong-trung",
     "name": "Miếu Ngũ Hành Khương Trung",
     "name_han_nom": "姜中五行靈祠",
@@ -320,7 +320,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 10,
-    "village_slug": "khuong-dinh",
+    "village_slug": "lang-khuong-dinh",
     "slug": "dinh-khuong-dinh",
     "name": "Đình Vòng (Đình Khương Đình - Đình Hạ Đình)",
     "name_han_nom": "下亭亭 · 望亭",
@@ -354,7 +354,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 11,
-    "village_slug": "khuong-dinh",
+    "village_slug": "lang-khuong-dinh",
     "slug": "chua-tam-huyen",
     "name": "Chùa Tam Huyền (Sùng Phúc Tự)",
     "name_han_nom": "三玄寺 · 崇福寺",
@@ -389,7 +389,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 12,
-    "village_slug": "khuong-dinh",
+    "village_slug": "lang-khuong-dinh",
     "slug": "dinh-vong-ha-dinh",
     "name": "Đình Vòng (Đình Hạ Đình - Số 322 Khương Đình)",
     "name_han_nom": "下亭亭 (望亭)",
@@ -423,7 +423,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 13,
-    "village_slug": "khuong-dinh",
+    "village_slug": "lang-khuong-dinh",
     "slug": "chua-gian-ha-dinh",
     "name": "Chùa Giàn (Phúc Khánh Tự Hạ Đình - Số 318 Khương Đình)",
     "name_han_nom": "福慶寺 · 下亭寺",
@@ -458,7 +458,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 14,
-    "village_slug": "khuong-dinh",
+    "village_slug": "lang-khuong-dinh",
     "slug": "den-than-nong-khuong-dinh",
     "name": "Đền Thần Nông & Miếu Thổ Thần Khương Đình",
     "name_han_nom": "姜亭神農祠 · 土神廟",
@@ -492,7 +492,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 15,
-    "village_slug": "khuong-dinh",
+    "village_slug": "lang-khuong-dinh",
     "slug": "mieu-ba-chua-thuong-ngan",
     "name": "Miếu Bà Chúa Thượng Ngàn Khương Đình",
     "name_han_nom": "上岸聖母靈祠",
@@ -526,7 +526,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 16,
-    "village_slug": "khuong-thuong",
+    "village_slug": "lang-khuong-thuong",
     "slug": "dinh-khuong-thuong",
     "name": "Đình Khương Thượng",
     "name_han_nom": "姜上亭 (亭姜上)",
@@ -561,7 +561,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 17,
-    "village_slug": "khuong-thuong",
+    "village_slug": "lang-khuong-thuong",
     "slug": "mieu-quy-son",
     "name": "Miếu Quy Sơn (Gò Rùa Khương Thượng)",
     "name_han_nom": "龜山靈祠",
@@ -595,7 +595,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 18,
-    "village_slug": "khuong-thuong",
+    "village_slug": "lang-khuong-thuong",
     "slug": "chua-boc",
     "name": "Chùa Bộc (Sùng Phúc Tự)",
     "name_han_nom": "崇福寺 · 礡寺",
@@ -636,7 +636,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 19,
-    "village_slug": "khuong-thuong",
+    "village_slug": "lang-khuong-thuong",
     "slug": "chua-phuc-khanh",
     "name": "Chùa Phúc Khánh (Chùa Sở / Cổ tự Ngã Tư Sở)",
     "name_han_nom": "福慶寺 · 楚寺",
@@ -671,7 +671,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 20,
-    "village_slug": "khuong-thuong",
+    "village_slug": "lang-khuong-thuong",
     "slug": "chua-dong-quang",
     "name": "Chùa Đồng Quang (Chùa Đống Đa)",
     "name_han_nom": "同光寺 · 棟多寺",
@@ -705,7 +705,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 21,
-    "village_slug": "khuong-thuong",
+    "village_slug": "lang-khuong-thuong",
     "slug": "go-dong-da",
     "name": "Gò Khương Thượng - Gò Đống Đa",
     "name_han_nom": "棟多丘 · 姜上丘",
@@ -739,7 +739,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 22,
-    "village_slug": "khuong-thuong",
+    "village_slug": "lang-khuong-thuong",
     "slug": "den-trung-liet",
     "name": "Đền Trung Liệt (Trên đỉnh Gò Đống Đa)",
     "name_han_nom": "忠烈祠 (棟多丘頂)",
@@ -773,7 +773,7 @@ export const SAMPLE_PLACES = [
   },
   {
     "id": 23,
-    "village_slug": "khuong-thuong",
+    "village_slug": "lang-khuong-thuong",
     "slug": "tuong-dai-quang-trung",
     "name": "Tượng đài Hoàng đế Quang Trung & Nhà trưng bày Đống Đa",
     "name_han_nom": "光中皇帝銅像 · 棟多展覽室",
@@ -806,7 +806,7 @@ export const SAMPLE_PLACES = [
     "confidence": 5
   },
   {
-    "village_slug": "ha-dinh",
+    "village_slug": "lang-thuong-dinh-ha-dinh",
     "slug": "dinh-ha-dinh",
     "name": "Đình Hạ Đình",
     "name_han_nom": "下亭亭",
@@ -840,7 +840,7 @@ export const SAMPLE_PLACES = [
     "id": 24
   },
   {
-    "village_slug": "ha-dinh",
+    "village_slug": "lang-thuong-dinh-ha-dinh",
     "slug": "chua-kim-giang",
     "name": "Chùa Kim Giang (Quang Khánh Tự)",
     "name_han_nom": "光慶寺",
@@ -875,7 +875,7 @@ export const SAMPLE_PLACES = [
     "id": 25
   },
   {
-    "village_slug": "nhan-chinh",
+    "village_slug": "lang-nhan-chinh",
     "slug": "dinh-cu-chinh",
     "name": "Đình Cự Chính",
     "name_han_nom": "巨政亭",
@@ -909,7 +909,7 @@ export const SAMPLE_PLACES = [
     "id": 26
   },
   {
-    "village_slug": "nhan-chinh",
+    "village_slug": "lang-nhan-chinh",
     "slug": "chua-quan-nhan",
     "name": "Chùa Quan Nhân (Sùng Phúc Tự)",
     "name_han_nom": "崇福寺",
@@ -943,7 +943,7 @@ export const SAMPLE_PLACES = [
     "id": 27
   },
   {
-    "village_slug": "phuong-liet",
+    "village_slug": "lang-khuong-dinh",
     "slug": "dinh-phuong-liet",
     "name": "Đình Phương Liệt (Đình Vọng Liệt)",
     "name_han_nom": "芳烈亭",
@@ -977,7 +977,7 @@ export const SAMPLE_PLACES = [
     "id": 28
   },
   {
-    "village_slug": "thinh-quang",
+    "village_slug": "lang-thinh-quang",
     "slug": "chua-phuc-khanh",
     "name": "Chùa Phúc Khánh (Chùa Sở)",
     "name_han_nom": "福慶寺",
@@ -1012,7 +1012,7 @@ export const SAMPLE_PLACES = [
     "id": 29
   },
   {
-    "village_slug": "lang-thuong",
+    "village_slug": "lang-lang",
     "slug": "chua-lang",
     "name": "Chùa Láng (Chiêu Thiền Tự)",
     "name_han_nom": "昭禪寺",
@@ -1046,7 +1046,7 @@ export const SAMPLE_PLACES = [
     "id": 30
   },
   {
-    "village_slug": "lang-thuong",
+    "village_slug": "lang-thu-le",
     "slug": "den-voi-phuc-thu-le",
     "name": "Đền Voi Phục (Trấn Tây Thăng Long)",
     "name_han_nom": "伏象祠",
@@ -1080,7 +1080,7 @@ export const SAMPLE_PLACES = [
     "id": 31
   },
   {
-    "village_slug": "lang-ha",
+    "village_slug": "lang-lang",
     "slug": "dinh-ung-thien",
     "name": "Đền Ứng Thiên (Đình Láng Hạ)",
     "name_han_nom": "應天祠",
@@ -1114,7 +1114,7 @@ export const SAMPLE_PLACES = [
     "id": 32
   },
   {
-    "village_slug": "kim-lien",
+    "village_slug": "lang-kim-lien",
     "slug": "den-kim-lien",
     "name": "Đền Kim Liên (Trấn Nam Thăng Long)",
     "name_han_nom": "金蓮祠",
@@ -1148,7 +1148,7 @@ export const SAMPLE_PLACES = [
     "id": 33
   },
   {
-    "village_slug": "van-mieu-quoc-tu-giam",
+    "village_slug": "lang-hao-nam",
     "slug": "van-mieu-quoc-tu-giam-monument",
     "name": "Văn Miếu - Quốc Tử Giám",
     "name_han_nom": "文廟國子監",
@@ -1183,7 +1183,7 @@ export const SAMPLE_PLACES = [
     "id": 34
   },
   {
-    "village_slug": "van-mieu-quoc-tu-giam",
+    "village_slug": "lang-hao-nam",
     "slug": "bich-cau-dao-quan",
     "name": "Bích Câu Đạo Quán",
     "name_han_nom": "碧溝道觀",
@@ -1217,7 +1217,7 @@ export const SAMPLE_PLACES = [
     "id": 35
   },
   {
-    "village_slug": "dien-bien",
+    "village_slug": "lang-ngoc-ha",
     "slug": "hoang-thanh-thang-long",
     "name": "Hoàng thành Thăng Long",
     "name_han_nom": "昇龍皇城",
@@ -1252,7 +1252,7 @@ export const SAMPLE_PLACES = [
     "id": 36
   },
   {
-    "village_slug": "dien-bien",
+    "village_slug": "lang-ngoc-ha",
     "slug": "cot-co-ha-noi",
     "name": "Cột cờ Hà Nội (Kỳ Đài Thăng Long)",
     "name_han_nom": "河內旗臺",
@@ -1287,7 +1287,7 @@ export const SAMPLE_PLACES = [
     "id": 37
   },
   {
-    "village_slug": "ngoc-ha",
+    "village_slug": "lang-ngoc-ha",
     "slug": "dinh-ngoc-ha",
     "name": "Đình Ngọc Hà",
     "name_han_nom": "玉河亭",
@@ -1321,7 +1321,7 @@ export const SAMPLE_PLACES = [
     "id": 38
   },
   {
-    "village_slug": "giang-vo",
+    "village_slug": "lang-giang-vo",
     "slug": "dinh-giang-vo",
     "name": "Đình Giảng Võ",
     "name_han_nom": "講武亭",
@@ -1355,7 +1355,7 @@ export const SAMPLE_PLACES = [
     "id": 39
   },
   {
-    "village_slug": "truc-bach",
+    "village_slug": "lang-yen-phu",
     "slug": "den-quan-thanh",
     "name": "Đền Quán Thánh (Trấn Bắc Thăng Long)",
     "name_han_nom": "真武觀",
@@ -1389,7 +1389,7 @@ export const SAMPLE_PLACES = [
     "id": 40
   },
   {
-    "village_slug": "truc-bach",
+    "village_slug": "lang-yen-phu",
     "slug": "chua-tran-quoc",
     "name": "Chùa Trấn Quốc (Khai Quốc Tự)",
     "name_han_nom": "鎮國寺",
@@ -1424,7 +1424,7 @@ export const SAMPLE_PLACES = [
     "id": 41
   },
   {
-    "village_slug": "quan-thanh",
+    "village_slug": "lang-yen-phu",
     "slug": "chinh-bac-mon-thanh-ha-noi",
     "name": "Cửa Bắc thành Hà Nội (Chính Bắc Môn)",
     "name_han_nom": "正北門",
@@ -1458,7 +1458,7 @@ export const SAMPLE_PLACES = [
     "id": 42
   },
   {
-    "village_slug": "dich-vong",
+    "village_slug": "lang-dich-vong",
     "slug": "chua-ha",
     "name": "Chùa Hà (Thánh Đức Tự)",
     "name_han_nom": "聖德寺",
@@ -1493,7 +1493,7 @@ export const SAMPLE_PLACES = [
     "id": 43
   },
   {
-    "village_slug": "yen-hoa",
+    "village_slug": "lang-cot",
     "slug": "dinh-hoa-muc",
     "name": "Đình Hòa Mục",
     "name_han_nom": "和睦亭",
@@ -1527,7 +1527,7 @@ export const SAMPLE_PLACES = [
     "id": 44
   },
   {
-    "village_slug": "nghia-do",
+    "village_slug": "lang-nghia-do",
     "slug": "dinh-nghia-do",
     "name": "Đình Nghĩa Đô (Đình Bái Ân)",
     "name_han_nom": "義都亭",
@@ -1561,7 +1561,7 @@ export const SAMPLE_PLACES = [
     "id": 45
   },
   {
-    "village_slug": "dich-vong-hau",
+    "village_slug": "lang-dich-vong",
     "slug": "dinh-hau-lang-vong",
     "name": "Đình Hậu (Làng Cốm Vòng)",
     "name_han_nom": "後村亭",
@@ -1595,7 +1595,7 @@ export const SAMPLE_PLACES = [
     "id": 46
   },
   {
-    "village_slug": "trang-tien",
+    "village_slug": "lang-luong-yen",
     "slug": "nha-hat-lon-ha-noi",
     "name": "Nhà hát Lớn Hà Nội",
     "name_han_nom": "河內大劇院",
@@ -1629,7 +1629,7 @@ export const SAMPLE_PLACES = [
     "id": 47
   },
   {
-    "village_slug": "hang-bac-hang-dao",
+    "village_slug": "lang-dong-xa",
     "slug": "den-ngoc-son-hoan-kiem",
     "name": "Đền Ngọc Sơn & Hồ Hoàn Kiếm",
     "name_han_nom": "玉山祠",
@@ -1663,7 +1663,7 @@ export const SAMPLE_PLACES = [
     "id": 48
   },
   {
-    "village_slug": "hang-bac-hang-dao",
+    "village_slug": "lang-dong-xa",
     "slug": "dinh-kim-ngan-hang-bac",
     "name": "Đình Kim Ngân (42 Hàng Bạc)",
     "name_han_nom": "金銀亭",
@@ -1697,7 +1697,7 @@ export const SAMPLE_PLACES = [
     "id": 49
   },
   {
-    "village_slug": "dong-xuan",
+    "village_slug": "lang-dong-xa",
     "slug": "den-bach-ma-hang-buom",
     "name": "Đền Bạch Mã (Trấn Đông Thăng Long)",
     "name_han_nom": "白馬祠",
@@ -1731,7 +1731,7 @@ export const SAMPLE_PLACES = [
     "id": 50
   },
   {
-    "village_slug": "dong-nhan",
+    "village_slug": "lang-luong-yen",
     "slug": "den-hai-ba-trung-dong-nhan",
     "name": "Đền Hai Bà Trưng (Đền Đồng Nhân)",
     "name_han_nom": "徵王祠",
@@ -1765,7 +1765,7 @@ export const SAMPLE_PLACES = [
     "id": 51
   },
   {
-    "village_slug": "bach-mai",
+    "village_slug": "lang-bach-mai",
     "slug": "chua-lien-phai",
     "name": "Chùa Liên Phái (Liên Tông Tự)",
     "name_han_nom": "蓮宗寺",
@@ -1799,7 +1799,7 @@ export const SAMPLE_PLACES = [
     "id": 52
   },
   {
-    "village_slug": "thanh-luong",
+    "village_slug": "lang-luong-yen",
     "slug": "dinh-luong-yen",
     "name": "Đình Lương Yên",
     "name_han_nom": "涼安亭",

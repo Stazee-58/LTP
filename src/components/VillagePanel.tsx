@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import { X, Buildings, Clock, MapTrifold } from "@phosphor-icons/react";
+import { X, Buildings, Clock, MapTrifold, Sparkle } from "@phosphor-icons/react";
 import { CATEGORY_LABELS, type Place } from "@/data/places";
 import type { Village } from "@/data/villages";
 
@@ -68,17 +68,58 @@ export default function VillagePanel({
               className="village-color-strip"
               style={{ background: p.color }}
             />
-            <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 10, flexWrap: "wrap" }}>
               <h1 className="village-panel-name">{p.name}</h1>
-              <span style={{ fontSize: "0.8rem", color: "#38bdf8", fontWeight: 500 }}>
+              <span style={{ fontSize: "0.8rem", color: p.color, fontWeight: 600 }}>
                 {p.district}
               </span>
+              {p.region_name && (
+                <span
+                  style={{
+                    fontSize: "0.72rem",
+                    color: "rgba(255, 255, 255, 0.75)",
+                    background: "rgba(255, 255, 255, 0.08)",
+                    padding: "2px 8px",
+                    borderRadius: 999,
+                    border: "1px solid rgba(255, 255, 255, 0.15)",
+                  }}
+                >
+                  {p.region_name.split("(")[0].trim()}
+                </span>
+              )}
             </div>
             <p className="village-panel-han">{p.name_han_nom}</p>
             {p.name_old && (
               <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 6 }}>
                 {lang === "en" ? "Historical name" : "Địa danh cổ"}: {p.name_old}
               </p>
+            )}
+
+            {/* Craft Tradition Highlight Box */}
+            {p.craft_tradition && (
+              <div
+                style={{
+                  marginTop: 10,
+                  padding: "10px 14px",
+                  background: `${p.color}15`,
+                  border: `1px solid ${p.color}35`,
+                  borderRadius: 8,
+                  fontSize: "0.82rem",
+                  color: "#fff",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  lineHeight: 1.4,
+                }}
+              >
+                <Sparkle size={18} weight="fill" style={{ color: p.color, flexShrink: 0 }} />
+                <div>
+                  <div style={{ fontSize: "0.68rem", fontWeight: 700, color: p.color, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 2 }}>
+                    {lang === "en" ? "Cultural Heritage & Craft" : "Đặc trưng di sản & Làng nghề"}
+                  </div>
+                  <div style={{ fontWeight: 500 }}>{p.craft_tradition}</div>
+                </div>
+              </div>
             )}
           </div>
 
