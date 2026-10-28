@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Làng Trong Phố — Bản đồ di sản Khương Hạ, Khương Trung, Khương Đình, Khương Thượng",
+  title: "LÀNG TRONG PHỐ",
   description:
-    "Khám phá bốn làng cổ trong lòng Hà Nội hiện đại: Khương Hạ, Khương Trung, Khương Đình, Khương Thượng. Bản đồ tương tác lưu giữ di sản kiến trúc và văn hóa làng quê Bắc Bộ.",
-  keywords: ["Làng trong phố", "Khương Hạ", "Khương Trung", "Khương Đình", "Khương Thượng", "bản đồ di sản Hà Nội", "làng cổ Hà Nội"],
+    "Bản đồ di sản văn hóa 7 Vùng làng cổ Thăng Long - Hà Nội. Khám phá 58 làng di sản truyền thống và các di tích lịch sử đình, chùa cổ kính.",
+  keywords: ["Làng trong phố", "LÀNG TRONG PHỐ", "bản đồ di sản Hà Nội", "làng cổ Hà Nội", "Thập tam trại"],
   openGraph: {
-    title: "Làng Trong Phố — Bản đồ di sản Hà Nội",
-    description: "Bốn làng cổ trong lòng đô thị: Khương Hạ, Khương Trung, Khương Đình, Khương Thượng.",
+    title: "LÀNG TRONG PHỐ",
+    description: "Bản đồ di sản 7 Vùng làng cổ Thăng Long - Hà Nội.",
     type: "website",
     locale: "vi_VN",
   },

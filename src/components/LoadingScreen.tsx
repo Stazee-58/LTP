@@ -16,15 +16,7 @@ export default function LoadingScreen() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        Làng Trong Phố
-      </motion.div>
-      <motion.div
-        className="loading-sub"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        Khương Hạ · Khương Trung · Khương Đình · Khương Thượng
+        LÀNG TRONG PHỐ
       </motion.div>
       <motion.div
         initial={{ opacity: 0, scaleX: 0.5 }}

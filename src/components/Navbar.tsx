@@ -30,11 +30,11 @@ export default function Navbar({
         </div>
         <div className="brand-copy">
           <div className="brand-heading-row">
-            <span className="brand-text-vi">Làng Trong Phố</span>
-            <span className="brand-badge-count">93 Di tích</span>
+            <span className="brand-text-vi">LÀNG TRONG PHỐ</span>
+            <span className="brand-badge-count">58 Làng Di sản</span>
           </div>
           <div className="brand-text-en">
-            {lang === "en" ? "4 Ancient Villages · Hanoi Heritage GIS" : "Di sản 4 Làng Cổ ven Sông Tô Lịch"}
+            {lang === "en" ? "Hanoi Heritage GIS · 7 Regions" : "Bản đồ Di sản 7 Vùng Làng Cổ Hà Nội"}
           </div>
         </div>
       </a>
