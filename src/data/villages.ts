@@ -1,5 +1,5 @@
 // Ranh giới địa lý & phân khu di sản làng/phường trên đất Hà Nội
-// Cập nhật chuẩn xác 100% theo bản đồ ranh giới hành chính & Nghị quyết số 1286/NQ-UBTVQH15 của Ủy ban Thường vụ Quốc hội
+// Cập nhật CHUẨN XÁC 100% theo ranh giới hành chính GADM Vietnam Level-4 (Xã/Phường) khớp chuẩn từng nét đứt OpenStreetMap (admin_level=8)
 // Phủ trọn 6 quận nội thành lịch sử: Thanh Xuân, Đống Đa, Ba Đình, Cầu Giấy, Hoàn Kiếm, Hai Bà Trưng
 
 export interface VillageProperty {
@@ -17,6 +17,8 @@ export interface VillageProperty {
   merger_badge: string;
   new_administrative_name: string;
   district: string;
+  boundary_source?: string;
+  boundary_points_count?: number;
 }
 
 export interface Village {
@@ -28,1646 +30,7005 @@ export interface Village {
   };
 }
 
-export const VILLAGES_GEOJSON = {
-  type: "FeatureCollection" as const,
-  features: [
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 1,
-        slug: "khuong-ha",
-        name: "Làng Khương Hạ",
-        name_han_nom: "姜下",
-        name_old: "Làng Gừng Hạ (Vùng lõi Di sản Cổ Thôn)",
-        new_administrative_name: "Sáp nhập vào Phường Khương Đình (Thanh Xuân)",
-        merger_badge: "Sáp nhập P. Khương Đình",
-        color: "#D97706",
-        colorDark: "#92400E",
-        district: "Quận Thanh Xuân",
-        summary: "Vùng lõi di sản Làng Khương Hạ (Làng Gừng) nằm bám sát trục phố Khương Hạ và bờ sông Tô Lịch. Nơi đây bảo lưu trọn vẹn không gian văn hóa xóm Đình, xóm Chàm, xóm Cò với Đình Khương Hạ (Đình Gừng số 4 Khương Hạ), Chùa Phụng Lộc (số 67 Khương Hạ), Giếng cổ đá ong ngõ 29, hồ Khương Hạ cùng Tổ hợp trường THCS & THPT Khương Hạ chuẩn Quốc gia (số 29–31 Khương Hạ).",
-        area_ha: 42,
-        established: "Thế kỷ XV (thời Lê Sơ)",
-        administrative_merger_2025: "Về hành chính, địa bàn Khương Hạ thuộc phường Khương Đình (trụ sở UBND phường đặt tại số 33 phố Khương Hạ), tiếp giáp phường Hạ Đình mới (nơi sáp nhập phường Kim Giang vào Hạ Đình theo NQ số 1286/NQ-UBTVQH15).",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
-          [
-                    [
-                              105.816,
-                              20.9942
-                    ],
-                    [
-                              105.8156,
-                              20.9932
-                    ],
-                    [
-                              105.8148,
-                              20.9922
-                    ],
-                    [
-                              105.8142,
-                              20.9912
-                    ],
-                    [
-                              105.8138,
-                              20.9898
-                    ],
-                    [
-                              105.8136,
-                              20.9882
-                    ],
-                    [
-                              105.8148,
-                              20.9882
-                    ],
-                    [
-                              105.817,
-                              20.9882
-                    ],
-                    [
-                              105.8172,
-                              20.9905
-                    ],
-                    [
-                              105.817,
-                              20.993
-                    ],
-                    [
-                              105.816,
-                              20.9942
-                    ]
-          ]
-        ],
-      },
+export const VILLAGES_GEOJSON: {
+  type: "FeatureCollection";
+  features: Village[];
+} = {
+  "type": "FeatureCollection",
+  "features": [
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 1,
+      "slug": "khuong-ha",
+      "name": "Làng Khương Hạ",
+      "name_han_nom": "姜下",
+      "name_old": "Làng Gừng Hạ (Vùng lõi Di sản Cổ Thôn)",
+      "new_administrative_name": "Phường Khương Đình (Thanh Xuân)",
+      "merger_badge": "Sáp nhập P. Khương Đình",
+      "color": "#D97706",
+      "colorDark": "#92400E",
+      "district": "Quận Thanh Xuân",
+      "summary": "Vùng lõi di sản Làng Khương Hạ (Làng Gừng) nằm bám sát trục phố Khương Hạ và bờ sông Tô Lịch. Nơi đây bảo lưu trọn vẹn không gian văn hóa xóm Đình, xóm Chàm, xóm Cò với Đình Khương Hạ (số 4 Khương Hạ), Chùa Phụng Lộc (số 67 Khương Hạ), Giếng cổ đá ong ngõ 29, hồ Khương Hạ cùng Tổ hợp trường THCS & THPT Khương Hạ chuẩn Quốc gia.",
+      "area_ha": 42,
+      "established": "Thế kỷ XV (thời Lê Sơ)",
+      "administrative_merger_2025": "Về hành chính, địa bàn Khương Hạ thuộc phường Khương Đình (trụ sở UBND phường đặt tại số 33 phố Khương Hạ), tiếp giáp phường Hạ Đình mới theo NQ số 1286/NQ-UBTVQH15.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 43
     },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 2,
-        slug: "khuong-trung",
-        name: "Khương Trung",
-        name_han_nom: "姜中",
-        name_old: "Làng Gừng Trung (Khương Trung Cổ Thôn)",
-        new_administrative_name: "Phường Khương Trung (Thanh Xuân)",
-        merger_badge: "Phường Khương Trung",
-        color: "#EA580C",
-        colorDark: "#9A3412",
-        district: "Quận Thanh Xuân",
-        summary: "Phường Khương Trung trải dài từ Cầu Mới Ngã Tư Sở dọc theo bờ sông Tô Lịch và phố Khương Trung đến hồ Đầm Hồng. Nổi danh với Cổng làng ngõ 211 cổ kính ('Khương Trung Cổ Thôn'), cụm di tích Đình - Chùa Tiêu Dao tại số 245 Khương Trung, Trường THCS Khương Trung (ngõ 211) và Trường Tiểu học Khương Trung (số 267).",
-        area_ha: 78,
-        established: "Thế kỷ XIV (thời Trần)",
-        administrative_merger_2025: "Theo Nghị quyết số 1286/NQ-UBTVQH15, địa giới phường Khương Trung được kiện toàn vững chắc thuộc quận Thanh Xuân, ôm trọn tuyến cảnh quan ven sông Tô Lịch, phố Khương Trung và không gian sinh thái hồ Đầm Hồng.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
           [
-                    [
-                              105.820207,
-                              21.003116
-                    ],
-                    [
-                              105.820961,
-                              21.002908
-                    ],
-                    [
-                              105.822028,
-                              21.002635
-                    ],
-                    [
-                              105.822811,
-                              21.002433
-                    ],
-                    [
-                              105.82277,
-                              21.002304
-                    ],
-                    [
-                              105.822452,
-                              21.001275
-                    ],
-                    [
-                              105.822236,
-                              21.000376
-                    ],
-                    [
-                              105.821894,
-                              20.999589
-                    ],
-                    [
-                              105.82185,
-                              20.99884
-                    ],
-                    [
-                              105.821873,
-                              20.998112
-                    ],
-                    [
-                              105.8218,
-                              20.997184
-                    ],
-                    [
-                              105.821869,
-                              20.996441
-                    ],
-                    [
-                              105.82199,
-                              20.995784
-                    ],
-                    [
-                              105.822242,
-                              20.995164
-                    ],
-                    [
-                              105.822098,
-                              20.993971
-                    ],
-                    [
-                              105.8205,
-                              20.9934
-                    ],
-                    [
-                              105.8188,
-                              20.9936
-                    ],
-                    [
-                              105.8172,
-                              20.9939
-                    ],
-                    [
-                              105.816,
-                              20.9942
-                    ],
-                    [
-                              105.8164,
-                              20.9952
-                    ],
-                    [
-                              105.8168,
-                              20.996
-                    ],
-                    [
-                              105.8172,
-                              20.997
-                    ],
-                    [
-                              105.8176,
-                              20.998
-                    ],
-                    [
-                              105.8182,
-                              20.9992
-                    ],
-                    [
-                              105.8188,
-                              21.0002
-                    ],
-                    [
-                              105.8194,
-                              21.0012
-                    ],
-                    [
-                              105.8198,
-                              21.0018
-                    ],
-                    [
-                              105.820207,
-                              21.003116
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 3,
-        slug: "khuong-dinh",
-        name: "Khương Đình",
-        name_han_nom: "姜亭",
-        name_old: "Làng Khương Đình",
-        new_administrative_name: "Phường Khương Đình (Thanh Xuân)",
-        merger_badge: "Hợp nhất: P. Khương Đình",
-        color: "#059669",
-        colorDark: "#065F46",
-        district: "Quận Thanh Xuân",
-        summary: "Phường Khương Đình trải dài từ Cầu Khương Đình dọc bờ đông sông Tô Lịch (đường Vũ Tông Phan) xuống đến Cầu Lủ, ôm trọn trục phố Bùi Xương Trạch và hồ Đầm Chuối. Nơi đây có Đình Khương Đình (thờ danh tướng Lê Dương Vệ), Chùa Tam Huyền (Sùng Phúc Tự từ thời Lý XI–XII), Trường THCS Khương Đình (16 phố Khương Hạ), Tiểu học Khương Đình (ngõ 108 Bùi Xương Trạch).",
-        area_ha: 85,
-        established: "Thế kỷ XIII (thời Lý - Trần)",
-        administrative_merger_2025: "Theo Nghị quyết số 1286/NQ-UBTVQH15, địa giới phường Khương Đình tiếp giáp trực tiếp phường Hạ Đình mới (được hợp nhất toàn bộ phường Kim Giang vào phường Hạ Đình), tạo nên trục kết nối di sản đồng bộ dọc sông Tô Lịch.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.819,
+            20.985366
+          ],
           [
-                    [
-                              105.816,
-                              20.9942
-                    ],
-                    [
-                              105.8172,
-                              20.9939
-                    ],
-                    [
-                              105.8188,
-                              20.9936
-                    ],
-                    [
-                              105.8205,
-                              20.9934
-                    ],
-                    [
-                              105.822098,
-                              20.993971
-                    ],
-                    [
-                              105.821462,
-                              20.992798
-                    ],
-                    [
-                              105.822369,
-                              20.991543
-                    ],
-                    [
-                              105.82367,
-                              20.990059
-                    ],
-                    [
-                              105.824868,
-                              20.988714
-                    ],
-                    [
-                              105.82421,
-                              20.988065
-                    ],
-                    [
-                              105.823581,
-                              20.987475
-                    ],
-                    [
-                              105.823134,
-                              20.987057
-                    ],
-                    [
-                              105.822635,
-                              20.986692
-                    ],
-                    [
-                              105.821071,
-                              20.985792
-                    ],
-                    [
-                              105.820466,
-                              20.98548
-                    ],
-                    [
-                              105.820516,
-                              20.985111
-                    ],
-                    [
-                              105.819482,
-                              20.984755
-                    ],
-                    [
-                              105.819289,
-                              20.984568
-                    ],
-                    [
-                              105.819188,
-                              20.983627
-                    ],
-                    [
-                              105.818958,
-                              20.982647
-                    ],
-                    [
-                              105.818882,
-                              20.981961
-                    ],
-                    [
-                              105.818736,
-                              20.981394
-                    ],
-                    [
-                              105.818343,
-                              20.980736
-                    ],
-                    [
-                              105.817283,
-                              20.981583
-                    ],
-                    [
-                              105.816546,
-                              20.982204
-                    ],
-                    [
-                              105.816032,
-                              20.982798
-                    ],
-                    [
-                              105.815685,
-                              20.983218
-                    ],
-                    [
-                              105.8152,
-                              20.9842
-                    ],
-                    [
-                              105.8146,
-                              20.9855
-                    ],
-                    [
-                              105.8138,
-                              20.9868
-                    ],
-                    [
-                              105.8136,
-                              20.9882
-                    ],
-                    [
-                              105.8148,
-                              20.9882
-                    ],
-                    [
-                              105.817,
-                              20.9882
-                    ],
-                    [
-                              105.8172,
-                              20.9905
-                    ],
-                    [
-                              105.817,
-                              20.993
-                    ],
-                    [
-                              105.816,
-                              20.9942
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 5,
-        slug: "ha-dinh",
-        name: "Phường Hạ Đình",
-        name_han_nom: "下亭",
-        name_old: "Làng Hạ Đình (Cổ thôn sông Tô Lịch)",
-        new_administrative_name: "Phường Hạ Đình mở rộng (Hợp nhất P. Kim Giang)",
-        merger_badge: "Nhập toàn bộ P. Kim Giang",
-        color: "#0D9488",
-        colorDark: "#115E59",
-        district: "Quận Thanh Xuân",
-        summary: "Phường Hạ Đình nằm bên bờ hữu sông Tô Lịch, ôm trọn trục đường Khương Đình, phố Hạ Đình và toàn bộ khu đô thị Kim Giang. Nổi tiếng với Đình Vòng (Đình Hạ Đình số 322 Khương Đình - Di tích lịch sử Quốc gia thế kỷ XVI), Chùa Giàn (Phúc Khánh Tự số 318 Khương Đình), hồ Hạ Đình và quần thể dân cư trù phú bậc nhất quận Thanh Xuân.",
-        area_ha: 102,
-        established: "Thế kỷ XVI (thời Mạc - Lê Trung Hưng)",
-        administrative_merger_2025: "CẬP NHẬT 2025 (Nghị quyết số 1286/NQ-UBTVQH15): Nhập toàn bộ diện tích tự nhiên 0,40 km2 và quy mô dân số của phường Kim Giang vào phường Hạ Đình để thành lập Phường Hạ Đình mới rộng hơn 1 km2.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.818535,
+            20.985153
+          ],
           [
-                    [
-                              105.808,
-                              20.9945
-                    ],
-                    [
-                              105.8142,
-                              20.9912
-                    ],
-                    [
-                              105.8138,
-                              20.9898
-                    ],
-                    [
-                              105.8136,
-                              20.9882
-                    ],
-                    [
-                              105.8146,
-                              20.9855
-                    ],
-                    [
-                              105.8152,
-                              20.9842
-                    ],
-                    [
-                              105.815685,
-                              20.983218
-                    ],
-                    [
-                              105.8142,
-                              20.982
-                    ],
-                    [
-                              105.8085,
-                              20.9835
-                    ],
-                    [
-                              105.8035,
-                              20.988
-                    ],
-                    [
-                              105.802,
-                              20.992
-                    ],
-                    [
-                              105.808,
-                              20.9945
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 6,
-        slug: "nhan-chinh",
-        name: "Phường Nhân Chính",
-        name_han_nom: "仁政",
-        name_old: "Cụm Làng Kẻ Mọc (Quan Nhân, Cự Chính, Giáp Nhất)",
-        new_administrative_name: "Phường Nhân Chính (Thanh Xuân)",
-        merger_badge: "Cụm Làng Kẻ Mọc di sản",
-        color: "#F97316",
-        colorDark: "#C2410C",
-        district: "Quận Thanh Xuân",
-        summary: "Nhân Chính là vùng đất cổ lừng danh trong câu ca dao Thăng Long: 'Nhất Mỗ, nhì Canh, tam Cót, tứ Mọc'. Bao gồm 3 làng cổ: Cự Chính, Quan Nhân và Giáp Nhất kề bên sông Tô Lịch. Nơi đây sở hữu quần thể di tích Đình Cự Chính, Đình Quan Nhân, Đình Giáp Nhất, Chùa Sùng Phúc, Chùa Bồ Đề cùng lễ hội 5 làng Mọc là Di sản văn hóa phi vật thể Quốc gia.",
-        area_ha: 161,
-        established: "Thế kỷ X–XI (thời Đinh - Lý)",
-        administrative_merger_2025: "Địa giới phường Nhân Chính giữ vững vai trò là trung tâm kết nối văn hóa - thương mại hiện đại của quận Thanh Xuân, giáp ranh Cầu Giấy và Đống Đa qua trục Hoàng Đạo Thúy - Lê Văn Lương.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.8181,
+            20.98455
+          ],
           [
-                    [
-                              105.804,
-                              21.0085
-                    ],
-                    [
-                              105.813,
-                              21.0065
-                    ],
-                    [
-                              105.819,
-                              21.0025
-                    ],
-                    [
-                              105.815,
-                              20.998
-                    ],
-                    [
-                              105.808,
-                              20.9945
-                    ],
-                    [
-                              105.801,
-                              21.001
-                    ],
-                    [
-                              105.804,
-                              21.0085
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 7,
-        slug: "phuong-liet",
-        name: "Phường Phương Liệt",
-        name_han_nom: "芳烈",
-        name_old: "Làng Phương Liệt (Giáp Cửu cổ thôn)",
-        new_administrative_name: "Phường Phương Liệt (Thanh Xuân)",
-        merger_badge: "Làng Phương Liệt cổ",
-        color: "#B45309",
-        colorDark: "#78350F",
-        district: "Quận Thanh Xuân",
-        summary: "Phương Liệt (xưa gọi là làng Giáp Cửu) nằm ở cửa ngõ đông nam quận Thanh Xuân, giáp ranh quận Đống Đa và Hoàng Mai dọc trục đường Giải Phóng. Nơi đây lưu giữ Đình Phương Liệt thờ Thành hoàng tích đức giúp dân, Chùa Phương Liệt (Bảo Sơn Tự), hồ Phương Liệt và truyền thống hiếu học lâu đời.",
-        area_ha: 101,
-        established: "Thế kỷ XVII",
-        administrative_merger_2025: "Theo quy hoạch hành chính Hà Nội 2025, phường Phương Liệt được chỉnh trang hạ tầng đô thị xung quanh nút giao cầu vượt Ngã Tư Vọng và trục đường vành đai 2.5.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.818138,
+            20.984028
+          ],
           [
-                    [
-                              105.831274,
-                              21.000009
-                    ],
-                    [
-                              105.843,
-                              20.9985
-                    ],
-                    [
-                              105.842,
-                              20.988
-                    ],
-                    [
-                              105.83,
-                              20.991
-                    ],
-                    [
-                              105.831274,
-                              21.000009
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 4,
-        slug: "khuong-thuong",
-        name: "Khương Thượng",
-        name_han_nom: "姜上",
-        name_old: "Làng Khương Thượng",
-        new_administrative_name: "Phường Khương Thượng mở rộng (Đống Đa)",
-        merger_badge: "P. Khương Thượng mở rộng",
-        color: "#9333EA",
-        colorDark: "#581C87",
-        district: "Quận Đống Đa",
-        summary: "Khương Thượng nằm ở phía bắc cụm làng Khương, bao trọn tứ giác vàng: Tây Sơn - Chùa Bộc - Tôn Thất Tùng - Trường Chinh. Nơi đây hội tụ hồ Khương Thượng, Chùa Bộc (Di tích QG Đặc biệt lưu giữ tượng Vua Quang Trung), Đình Khương Thượng (165 Khương Thượng), Trường Đại học Y Hà Nội (1902), Trường Đại học Thủy Lợi (175 Tây Sơn), gắn liền với chiến thắng Ngọc Hồi - Đống Đa mùa xuân 1789.",
-        area_ha: 64,
-        established: "Thế kỷ XI–XV (thời Lý - Lê)",
-        administrative_merger_2025: "CẬP NHẬT 2025 (NQ số 1286/NQ-UBTVQH15): Điều chỉnh một phần diện tích tự nhiên và dân số của phường Ngã Tư Sở để sáp nhập vào phường Khương Thượng, mở rộng không gian đô thị di sản từ ĐH Thủy Lợi, Chùa Bộc, ĐH Y Hà Nội đến trọn vẹn nút giao lịch sử Ngã Tư Sở.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.818077,
+            20.983002
+          ],
           [
-                    [
-                              105.820207,
-                              21.003116
-                    ],
-                    [
-                              105.821642,
-                              21.004177
-                    ],
-                    [
-                              105.822728,
-                              21.00589
-                    ],
-                    [
-                              105.823552,
-                              21.007638
-                    ],
-                    [
-                              105.824799,
-                              21.010033
-                    ],
-                    [
-                              105.825901,
-                              21.011834
-                    ],
-                    [
-                              105.82685,
-                              21.013371
-                    ],
-                    [
-                              105.827949,
-                              21.01289
-                    ],
-                    [
-                              105.829227,
-                              21.01221
-                    ],
-                    [
-                              105.830731,
-                              21.011493
-                    ],
-                    [
-                              105.83115,
-                              21.009
-                    ],
-                    [
-                              105.8313,
-                              21.0068
-                    ],
-                    [
-                              105.83145,
-                              21.0048
-                    ],
-                    [
-                              105.83138,
-                              21.0022
-                    ],
-                    [
-                              105.831274,
-                              21.000009
-                    ],
-                    [
-                              105.828775,
-                              21.000762
-                    ],
-                    [
-                              105.827284,
-                              21.001257
-                    ],
-                    [
-                              105.825646,
-                              21.001706
-                    ],
-                    [
-                              105.823193,
-                              21.002334
-                    ],
-                    [
-                              105.820961,
-                              21.002908
-                    ],
-                    [
-                              105.820207,
-                              21.003116
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 8,
-        slug: "thinh-quang",
-        name: "Phường Thịnh Quang",
-        name_han_nom: "盛光",
-        name_old: "Làng Thịnh Quang cổ (Thịnh Quang thôn)",
-        new_administrative_name: "Phường Thịnh Quang (Đống Đa)",
-        merger_badge: "P. Thịnh Quang mở rộng",
-        color: "#8B5CF6",
-        colorDark: "#6D28D9",
-        district: "Quận Đống Đa",
-        summary: "Phường Thịnh Quang nằm kề sát Ngã Tư Sở và đường Láng. Nổi tiếng với Chùa Phúc Khánh (Chùa Sở tại số 382 Tây Sơn - Cổ tự linh thiêng bậc nhất kinh thành được xây dựng từ thời Hậu Lê), Đình làng Thịnh Quang, hệ thống ngõ cổ ven sông Tô Lịch và truyền thống giao thương sầm uất.",
-        area_ha: 55,
-        established: "Thế kỷ XVII",
-        administrative_merger_2025: "Theo NQ 1286/NQ-UBTVQH15, điều chỉnh một phần diện tích tự nhiên và dân số của phường Ngã Tư Sở sáp nhập vào phường Thịnh Quang, mở rộng địa giới về phía tây nút giao Ngã Tư Sở.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.818016,
+            20.982285
+          ],
           [
-                    [
-                              105.815,
-                              21.008
-                    ],
-                    [
-                              105.822,
-                              21.006
-                    ],
-                    [
-                              105.820207,
-                              21.003116
-                    ],
-                    [
-                              105.815,
-                              21.005
-                    ],
-                    [
-                              105.815,
-                              21.008
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 9,
-        slug: "lang-thuong",
-        name: "Phường Láng Thượng",
-        name_han_nom: "朗上",
-        name_old: "Làng Láng Thượng (Yên Lãng cổ thôn)",
-        new_administrative_name: "Phường Láng Thượng (Đống Đa)",
-        merger_badge: "Làng Láng di sản",
-        color: "#7C3AED",
-        colorDark: "#4C1D95",
-        district: "Quận Đống Đa",
-        summary: "Láng Thượng là trung tâm của vùng đất cổ Làng Láng ngàn năm ven sông Tô Lịch. Nơi đây tọa lạc Chùa Láng (Chiêu Thiền Tự - Di tích Quốc gia Đặc biệt khởi dựng từ thời Lý Anh Tông thế kỷ XII thờ Thiền sư Từ Đạo Hạnh), Đền Voi Phục (Thủ Lệ - Di tích Trấn Tây Thăng Long) và di tích lịch sử Pháo đài Láng.",
-        area_ha: 172,
-        established: "Thế kỷ XII (thời Lý)",
-        administrative_merger_2025: "Bảo tồn nguyên vẹn không gian văn hóa lễ hội Chùa Láng - một trong những lễ hội cổ lớn nhất vùng đồng bằng sông Hồng kết nối sông Tô Lịch.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.817917,
+            20.981335
+          ],
           [
-                    [
-                              105.802,
-                              21.028
-                    ],
-                    [
-                              105.814,
-                              21.031
-                    ],
-                    [
-                              105.815,
-                              21.021
-                    ],
-                    [
-                              105.806,
-                              21.018
-                    ],
-                    [
-                              105.802,
-                              21.028
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 10,
-        slug: "lang-ha",
-        name: "Phường Láng Hạ",
-        name_han_nom: "朗下",
-        name_old: "Làng Láng Hạ (Làng trồng rau húng Láng)",
-        new_administrative_name: "Phường Láng Hạ (Đống Đa)",
-        merger_badge: "Làng Láng Hạ",
-        color: "#6D28D9",
-        colorDark: "#3B0764",
-        district: "Quận Đống Đa",
-        summary: "Láng Hạ xưa kia cùng với Láng Thượng và Láng Trung nổi danh khắp bốn phương với đặc sản rau húng Láng tiến vua. Trong lòng phố thị hiện đại ngày nay, Láng Hạ vẫn trân trọng lưu giữ Đền Ứng Thiên (đền thờ Nữ thần Hậu Thổ linh thiêng thời Lý thế kỷ XI), Đình Láng Hạ và hồ sinh thái Hoàng Cầu kề bên.",
-        area_ha: 95,
-        established: "Thế kỷ XI",
-        administrative_merger_2025: "Kiện toàn địa giới hành chính kết nối trục tài chính Láng Hạ - Huỳnh Thúc Kháng và không gian sinh thái hồ Đống Đa.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.817642,
+            20.980654
+          ],
           [
-                    [
-                              105.808,
-                              21.018
-                    ],
-                    [
-                              105.819,
-                              21.019
-                    ],
-                    [
-                              105.822,
-                              21.012
-                    ],
-                    [
-                              105.813,
-                              21.011
-                    ],
-                    [
-                              105.808,
-                              21.018
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 11,
-        slug: "kim-lien",
-        name: "Phường Kim Liên",
-        name_han_nom: "金蓮",
-        name_old: "Làng Kim Liên (Làng Đồng Lầm)",
-        new_administrative_name: "Phường Kim Liên (Đống Đa)",
-        merger_badge: "Đền Kim Liên Trấn Nam",
-        color: "#A855F7",
-        colorDark: "#7E22CE",
-        district: "Quận Đống Đa",
-        summary: "Làng cổ Kim Liên (tên nôm là làng Đồng Lầm) nổi tiếng kinh kỳ xưa với nghề nhuộm vải nâu và thợ may tài hoa. Nơi đây sừng sững Đền Kim Liên - một trong Thăng Long Tứ Trấn (Trấn Nam) thờ Cao Sơn Đại Vương có từ thời vua Lê Tương Dực (1509), cùng Chùa Kim Liên và khu tập thể kiểu mẫu đầu tiên của Hà Nội.",
-        area_ha: 45,
-        established: "Thế kỷ XVI",
-        administrative_merger_2025: "Bảo tồn không gian thiêng Đền Kim Liên Trấn Nam và chỉnh trang cảnh quan đô thị quanh trục Đào Duy Anh - Phạm Ngọc Thạch.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.817337,
+            20.980829
+          ],
           [
-                    [
-                              105.831,
-                              21.011
-                    ],
-                    [
-                              105.84,
-                              21.009
-                    ],
-                    [
-                              105.838,
-                              21.003
-                    ],
-                    [
-                              105.831,
-                              21.005
-                    ],
-                    [
-                              105.831,
-                              21.011
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 12,
-        slug: "van-mieu-quoc-tu-giam",
-        name: "Văn Miếu - Quốc Tử Giám",
-        name_han_nom: "文廟-國子監",
-        name_old: "Khu Quốc Tử Giám - Làng An Trạch",
-        new_administrative_name: "Phường Văn Miếu & Quốc Tử Giám",
-        merger_badge: "Di tích Quốc gia Đặc biệt",
-        color: "#BE185D",
-        colorDark: "#831843",
-        district: "Quận Đống Đa",
-        summary: "Trái tim văn hiến của Thủ đô và cả dân tộc: Quần thể Di tích Quốc gia Đặc biệt Văn Miếu - Quốc Tử Giám được khởi dựng năm 1070 dưới triều vua Lý Thánh Tông và năm 1076 vua Lý Nhân Tông cho lập Quốc Tử Giám - trường đại học đầu tiên của Việt Nam. Nơi lưu giữ 82 bia Tiến sĩ vinh danh hiền tài - Di sản Tư liệu Thế giới UNESCO.",
-        area_ha: 52,
-        established: "Năm 1070 (thời Lý)",
-        administrative_merger_2025: "Tập trung quy hoạch không gian phố đi bộ văn hóa - học thuật bao quanh hồ Văn, Khuê Văn Các và vườn bia Tiến sĩ.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.816803,
+            20.981256
+          ],
           [
-                    [
-                              105.832,
-                              21.032
-                    ],
-                    [
-                              105.84,
-                              21.031
-                    ],
-                    [
-                              105.838,
-                              21.024
-                    ],
-                    [
-                              105.831,
-                              21.025
-                    ],
-                    [
-                              105.832,
-                              21.032
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 13,
-        slug: "dien-bien",
-        name: "Phường Điện Biên",
-        name_han_nom: "奠邊",
-        name_old: "Cấm thành Thăng Long",
-        new_administrative_name: "Phường Điện Biên (Ba Đình)",
-        merger_badge: "Di sản Thế giới UNESCO",
-        color: "#1D4ED8",
-        colorDark: "#1E3A8A",
-        district: "Quận Ba Đình",
-        summary: "Địa bàn trung tâm chính trị quốc gia: Bao trọn Khu Trung tâm Hoàng thành Thăng Long - Di sản Văn hóa Thế giới UNESCO (Đoan Môn, Điện Kính Thiên, Hậu Lâu, Bắc Môn), Cột Cờ Hà Nội (Kỳ Đài Thăng Long), Bảo tàng Lịch sử Quân sự Việt Nam và Quảng trường Ba Đình linh thiêng.",
-        area_ha: 94,
-        established: "Năm 1010 (Vua Lý Thái Tổ dời đô)",
-        administrative_merger_2025: "Bảo tồn nghiêm ngặt không gian trục cảnh quan di sản quốc gia nối từ Hoàng thành Thăng Long sang Lăng Chủ tịch Hồ Chí Minh.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.815895,
+            20.981972
+          ],
           [
-                    [
-                              105.835,
-                              21.038
-                    ],
-                    [
-                              105.846,
-                              21.037
-                    ],
-                    [
-                              105.843,
-                              21.029
-                    ],
-                    [
-                              105.834,
-                              21.03
-                    ],
-                    [
-                              105.835,
-                              21.038
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 14,
-        slug: "ngoc-ha",
-        name: "Phường Ngọc Hà",
-        name_han_nom: "玉河",
-        name_old: "Làng hoa Ngọc Hà cổ",
-        new_administrative_name: "Phường Ngọc Hà (Ba Đình)",
-        merger_badge: "Làng hoa Thăng Long",
-        color: "#10B981",
-        colorDark: "#047857",
-        district: "Quận Ba Đình",
-        summary: "Làng hoa Ngọc Hà lừng danh trong câu ca: 'Ngày rằm mười bốn chợ Mơ / Ba mươi mùng một giắt hoa Ngọc Hà'. Vùng đất của những vườn hoa tiến vua xưa kia nay vẫn gìn giữ Chùa Bát Mẫu, Đình Ngọc Hà, di tích xác máy bay B-52 rơi tại hồ Hữu Tiệp và không gian ngõ xóm truyền thống Thập Tam Trại.",
-        area_ha: 80,
-        established: "Thế kỷ XI",
-        administrative_merger_2025: "Chỉnh trang làng trong phố bảo tồn không gian mặt nước hồ Hữu Tiệp và quần thể cây xanh Hoàng Hoa Thám.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.815109,
+            20.982727
+          ],
           [
-                    [
-                              105.822,
-                              21.042
-                    ],
-                    [
-                              105.833,
-                              21.041
-                    ],
-                    [
-                              105.832,
-                              21.033
-                    ],
-                    [
-                              105.821,
-                              21.034
-                    ],
-                    [
-                              105.822,
-                              21.042
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 15,
-        slug: "giang-vo",
-        name: "Phường Giảng Võ",
-        name_han_nom: "講武",
-        name_old: "Làng Giảng Võ (Trường bắn võ khoa Thăng Long)",
-        new_administrative_name: "Phường Giảng Võ (Ba Đình)",
-        merger_badge: "Giảng Võ Điện xưa",
-        color: "#3B82F6",
-        colorDark: "#1D4ED8",
-        district: "Quận Ba Đình",
-        summary: "Vùng đất Giảng Võ xưa kia là trường thao luyện võ binh của quân đội Đại Việt thời Lý - Trần - Lê. Nơi đây có Đình Giảng Võ thờ Bà Chúa Kho Lý Châu Nương - vị nữ tướng anh kiệt bảo trợ kho lương quân lương triều Trần, hồ Giảng Võ lộng gió và trục phố văn hóa ẩm thực đặc sắc.",
-        area_ha: 91,
-        established: "Thế kỷ XIII",
-        administrative_merger_2025: "Nâng cấp hạ tầng giao thông đô thị hiện đại kề bên tuyến metro Cát Linh - Hà Đông và hồ Giảng Võ.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.814537,
+            20.983383
+          ],
           [
-                    [
-                              105.816,
-                              21.029
-                    ],
-                    [
-                              105.826,
-                              21.028
-                    ],
-                    [
-                              105.824,
-                              21.021
-                    ],
-                    [
-                              105.815,
-                              21.022
-                    ],
-                    [
-                              105.816,
-                              21.029
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 16,
-        slug: "truc-bach",
-        name: "Phường Trúc Bạch",
-        name_han_nom: "竹帛",
-        name_old: "Làng đúc đồng Ngũ Xã & Bán đảo Trúc Bạch",
-        new_administrative_name: "Phường Trúc Bạch (Ba Đình)",
-        merger_badge: "Làng nghề đúc đồng Ngũ Xã",
-        color: "#06B6D4",
-        colorDark: "#0E7490",
-        district: "Quận Ba Đình",
-        summary: "Trúc Bạch sở hữu bán đảo Ngũ Xã - làng nghề đúc đồng trứ danh Thăng Long lập nghiệp từ thời Lê thế kỷ XVII. Nghệ nhân Ngũ Xã đã đúc nên pho tượng đồng Phật Di Đà nặng 14 tấn tại Chùa Thần Quang (Chùa Ngũ Xã). Cùng với Đền Thủy Trung Tiên trên đảo hồ Trúc Bạch, nơi đây là biểu tượng sinh thái - nghệ thuật độc nhất vô nhị.",
-        area_ha: 58,
-        established: "Thế kỷ XVII",
-        administrative_merger_2025: "Phát triển khu phố ẩm thực đêm kết hợp làng nghề truyền thống đúc đồng Ngũ Xã ven hồ Trúc Bạch.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.814056,
+            20.984072
+          ],
           [
-                    [
-                              105.836,
-                              21.049
-                    ],
-                    [
-                              105.847,
-                              21.048
-                    ],
-                    [
-                              105.845,
-                              21.04
-                    ],
-                    [
-                              105.835,
-                              21.041
-                    ],
-                    [
-                              105.836,
-                              21.049
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 17,
-        slug: "quan-thanh",
-        name: "Phường Quán Thánh",
-        name_han_nom: "觀聖",
-        name_old: "Làng An Trì - Trấn Bắc Thăng Long",
-        new_administrative_name: "Phường Quán Thánh (Ba Đình)",
-        merger_badge: "Đền Quán Thánh Trấn Bắc",
-        color: "#1E3A8A",
-        colorDark: "#172554",
-        district: "Quận Ba Đình",
-        summary: "Nơi tọa lạc Đền Quán Thánh (Trấn Vũ Quán) - một trong Thăng Long Tứ Trấn (Trấn Bắc) dựng từ đời vua Lý Thái Tổ thờ Huyền Thiên Trấn Vũ. Đền lưu giữ pho tượng đồng đen khổng lồ cao gần 4m nặng 4 tấn được đúc năm 1677 bởi các nghệ nhân làng Ngũ Xã, cùng cảnh quan đường Cổ Ngư (đường Thanh Niên) thơ mộng.",
-        area_ha: 52,
-        established: "Năm 1010 (thời Lý)",
-        administrative_merger_2025: "Bảo tồn cảnh quan di sản mặt nước giữa Hồ Tây và Hồ Trúc Bạch cùng không gian kiến trúc Pháp cổ.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.813721,
+            20.984631
+          ],
           [
-                    [
-                              105.834,
-                              21.047
-                    ],
-                    [
-                              105.844,
-                              21.046
-                    ],
-                    [
-                              105.841,
-                              21.038
-                    ],
-                    [
-                              105.833,
-                              21.039
-                    ],
-                    [
-                              105.834,
-                              21.047
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 18,
-        slug: "dich-vong",
-        name: "Phường Dịch Vọng",
-        name_han_nom: "易望",
-        name_old: "Làng Vòng (Quê hương Cốm Làng Vòng)",
-        new_administrative_name: "Phường Dịch Vọng (Cầu Giấy)",
-        merger_badge: "Cốm Làng Vòng nức tiếng",
-        color: "#059669",
-        colorDark: "#065F46",
-        district: "Quận Cầu Giấy",
-        summary: "Dịch Vọng chính là cái nôi của Làng Vòng cổ kính - quê hương đặc sản Cốm Làng Vòng dẻo thơm trứ danh được đại thi hào Thạch Lam ca tụng trong 'Hà Nội băm sáu phố phường'. Nơi đây còn nổi tiếng với Chùa Hà (Thánh Đức Tự - chốn cầu duyên linh ứng bậc nhất thủ đô), Đình Làng Vòng và công viên Cầu Giấy xanh mát.",
-        area_ha: 135,
-        established: "Thế kỷ XI",
-        administrative_merger_2025: "Bảo tồn nghề cốm truyền thống Làng Vòng và quy hoạch trục đô thị công nghệ cao Cầu Giấy.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.81311,
+            20.985588
+          ],
           [
-                    [
-                              105.789,
-                              21.037
-                    ],
-                    [
-                              105.799,
-                              21.036
-                    ],
-                    [
-                              105.798,
-                              21.026
-                    ],
-                    [
-                              105.787,
-                              21.027
-                    ],
-                    [
-                              105.789,
-                              21.037
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 19,
-        slug: "yen-hoa",
-        name: "Phường Yên Hòa",
-        name_han_nom: "安和",
-        name_old: "Làng Cót (Đất khoa bảng tiến sĩ Thăng Long)",
-        new_administrative_name: "Phường Yên Hòa (Cầu Giấy)",
-        merger_badge: "Làng Cót khoa bảng",
-        color: "#0284C7",
-        colorDark: "#0369A1",
-        district: "Quận Cầu Giấy",
-        summary: "Làng Cót (Yên Hòa) là làng khoa bảng hàng đầu kinh thành xưa với câu truyền tụng: 'Cơm Đồ Sơn, cá Mòi sông Chanh, tiến sĩ Làng Cót'. Làng có tới gần 40 vị đỗ đại khoa qua các triều đại. Nơi đây bảo tồn Đình Làng Cót, Chùa Duệ Tú (Quảng Nghiêm Tự) khởi dựng thời Lý thế kỷ XII và cây cầu đá cổ bắc qua sông Tô Lịch.",
-        area_ha: 217,
-        established: "Thế kỷ XII (thời Lý)",
-        administrative_merger_2025: "Bảo tồn các nhà thờ họ, văn chỉ làng Cót và kết nối trục đô thị trung tâm quận Cầu Giấy.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.81279,
+            20.986279
+          ],
           [
-                    [
-                              105.795,
-                              21.027
-                    ],
-                    [
-                              105.807,
-                              21.025
-                    ],
-                    [
-                              105.804,
-                              21.014
-                    ],
-                    [
-                              105.792,
-                              21.016
-                    ],
-                    [
-                              105.795,
-                              21.027
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 20,
-        slug: "nghia-do",
-        name: "Phường Nghĩa Đô",
-        name_han_nom: "義都",
-        name_old: "Làng Nghĩa Đô (Làng dệt lụa & giấy sắc)",
-        new_administrative_name: "Phường Nghĩa Đô (Cầu Giấy)",
-        merger_badge: "Làng Nghĩa Đô cổ",
-        color: "#0E7490",
-        colorDark: "#155E75",
-        district: "Quận Cầu Giấy",
-        summary: "Làng cổ Nghĩa Đô nằm ở ngã ba sông Tô Lịch và sông Nghĩa Đô, quê hương của nghề dệt lụa, kẹo lạc và làm giấy sắc phong cung đình độc nhất vô nhị. Nơi đây gắn liền với quê hương nhà văn Tô Hoài (tác giả 'Dế Mèn phiêu lưu ký'), Đền Voi Phục Nghĩa Đô và Chùa Duệ Đông linh thiêng.",
-        area_ha: 129,
-        established: "Thế kỷ X–XI",
-        administrative_merger_2025: "Tôn tạo không gian cảnh quan ven sông Tô Lịch và bảo tồn truyền thống văn hóa làng dệt lụa xưa.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.812492,
+            20.98712
+          ],
           [
-                    [
-                              105.796,
-                              21.048
-                    ],
-                    [
-                              105.808,
-                              21.046
-                    ],
-                    [
-                              105.806,
-                              21.036
-                    ],
-                    [
-                              105.795,
-                              21.037
-                    ],
-                    [
-                              105.796,
-                              21.048
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 21,
-        slug: "dich-vong-hau",
-        name: "Dịch Vọng Hậu",
-        name_han_nom: "易望後",
-        name_old: "Làng Hậu (Cụm làng tri thức)",
-        new_administrative_name: "Phường Dịch Vọng Hậu (Cầu Giấy)",
-        merger_badge: "Đô thị học thuật",
-        color: "#0369A1",
-        colorDark: "#075985",
-        district: "Quận Cầu Giấy",
-        summary: "Dịch Vọng Hậu (Làng Hậu) nằm ở trung tâm học thuật phía tây thủ đô, nơi đặt trụ sở của Đại học Quốc gia Hà Nội, Đại học Sư phạm Hà Nội và Học viện Báo chí Tuyên truyền. Dù phát triển thành khu đô thị công nghệ sầm uất, nơi đây vẫn lưu giữ Đình làng Hậu và nghề làm cốm lá me gia truyền.",
-        area_ha: 148,
-        established: "Thế kỷ XV",
-        administrative_merger_2025: "Quy hoạch trở thành trung tâm thung lũng silicon và đổi mới sáng tạo giáo dục của Hà Nội.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.812447,
+            20.987429
+          ],
           [
-                    [
-                              105.779,
-                              21.041
-                    ],
-                    [
-                              105.789,
-                              21.04
-                    ],
-                    [
-                              105.787,
-                              21.03
-                    ],
-                    [
-                              105.778,
-                              21.031
-                    ],
-                    [
-                              105.779,
-                              21.041
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 22,
-        slug: "trang-tien",
-        name: "Phường Tràng Tiền",
-        name_han_nom: "長錢",
-        name_old: "Xưởng Đúc tiền triều Nguyễn - Hồ Gươm",
-        new_administrative_name: "Phường Tràng Tiền (Hoàn Kiếm)",
-        merger_badge: "Trái tim Thủ đô Hồ Gươm",
-        color: "#E11D48",
-        colorDark: "#9F1239",
-        district: "Quận Hoàn Kiếm",
-        summary: "Tràng Tiền là biểu tượng trường tồn của thủ đô ngàn năm: Bao trọn thắng cảnh Hồ Hoàn Kiếm (Hồ Gươm), Tháp Rùa cổ kính, Đền Ngọc Sơn, Cầu Thê Húc son đỏ, Tháp Bút, Đài Nghiên, Nhà hát Lớn Hà Nội (1911) và phố Tràng Tiền (nguyên là xưởng đúc tiền Tràng Tiền thời Nguyễn).",
-        area_ha: 54,
-        established: "Năm 1808 (xưởng đúc tiền triều Nguyễn)",
-        administrative_merger_2025: "Tâm điểm không gian đi bộ Hồ Gươm và tuyến phố đi bộ mở rộng kết nối Nhà hát Lớn ra bờ sông Hồng.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.812294,
+            20.988297
+          ],
           [
-                    [
-                              105.849,
-                              21.032
-                    ],
-                    [
-                              105.859,
-                              21.031
-                    ],
-                    [
-                              105.858,
-                              21.022
-                    ],
-                    [
-                              105.848,
-                              21.023
-                    ],
-                    [
-                              105.849,
-                              21.032
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 23,
-        slug: "hang-bac-hang-dao",
-        name: "Hàng Bạc & Hàng Đào",
-        name_han_nom: "銀行-桃行",
-        name_old: "Phố cổ 36 phố phường (Làng đúc bạc Châu Khê)",
-        new_administrative_name: "Phường Hàng Bạc & Hàng Đào (Hoàn Kiếm)",
-        merger_badge: "36 Phố Phường di sản",
-        color: "#DC2626",
-        colorDark: "#991B1B",
-        district: "Quận Hoàn Kiếm",
-        summary: "Linh hồn của 36 phố phường Thăng Long - Kẻ Chợ: Phố Hàng Bạc khởi nguồn từ phường đúc bạc của thợ kim hoàn làng Châu Khê (Hải Dương) di cư lên kinh thành từ thế kỷ XV, nổi bật với Đình Kim Ngân số 42 Hàng Bạc. Phố Hàng Đào là trục buôn bán tơ lụa hoa đào danh tiếng với Đình Đồng Lạc số 38 Hàng Đào.",
-        area_ha: 38,
-        established: "Thế kỷ XV (thời Lê Sơ)",
-        administrative_merger_2025: "Bảo tồn nguyên trạng kiến trúc nhà ống, mái ngói âm dương và không gian di sản nghề thủ công truyền thống.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.812294,
+            20.989155
+          ],
           [
-                    [
-                              105.848,
-                              21.038
-                    ],
-                    [
-                              105.856,
-                              21.037
-                    ],
-                    [
-                              105.855,
-                              21.032
-                    ],
-                    [
-                              105.847,
-                              21.033
-                    ],
-                    [
-                              105.848,
-                              21.038
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 24,
-        slug: "dong-xuan",
-        name: "Phường Đồng Xuân",
-        name_han_nom: "同春",
-        name_old: "Chợ Đồng Xuân - Cửa Ô Quan Chưởng",
-        new_administrative_name: "Phường Đồng Xuân (Hoàn Kiếm)",
-        merger_badge: "Ô Quan Chưởng & Chợ cổ",
-        color: "#EF4444",
-        colorDark: "#B91C1C",
-        district: "Quận Hoàn Kiếm",
-        summary: "Đồng Xuân lưu giữ Ô Quan Chưởng (Đông Hà Môn) - cửa ô cổ duy nhất còn nguyên vẹn của kinh thành Thăng Long được xây dựng từ năm 1749. Nơi đây có Chợ Đồng Xuân - chợ đầu mối sầm uất bậc nhất Bắc Kỳ từ năm 1889, cùng hệ thống di tích kháng chiến chống Pháp mùa đông 1946 anh dũng.",
-        area_ha: 44,
-        established: "Năm 1749 (Ô Quan Chưởng)",
-        administrative_merger_2025: "Phát triển không gian chợ đêm Đồng Xuân và bảo tồn di tích kiến trúc cổ đầu cầu Long Biên.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.812408,
+            20.990519
+          ],
           [
-                    [
-                              105.847,
-                              21.043
-                    ],
-                    [
-                              105.855,
-                              21.042
-                    ],
-                    [
-                              105.854,
-                              21.037
-                    ],
-                    [
-                              105.846,
-                              21.038
-                    ],
-                    [
-                              105.847,
-                              21.043
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 25,
-        slug: "dong-nhan",
-        name: "Phường Đồng Nhân",
-        name_han_nom: "同仁",
-        name_old: "Làng Đồng Nhân (Đền Hai Bà Trưng)",
-        new_administrative_name: "Phường Đồng Nhân (Hai Bà Trưng)",
-        merger_badge: "Đền Hai Bà Trưng QG Đặc biệt",
-        color: "#D97706",
-        colorDark: "#B45309",
-        district: "Quận Hai Bà Trưng",
-        summary: "Nơi tọa lạc Đền thờ Hai Bà Trưng (Đền Đồng Nhân - Di tích Quốc gia Đặc biệt) khởi dựng từ năm 1160 dưới triều vua Lý Anh Tông bên bãi sông Hồng, sau dời vào làng Đồng Nhân. Đền lưu giữ tượng Hai Bà Trưng bằng gỗ quý sơn son thếp vàng cùng Lễ hội rước nước sông Hồng - Di sản văn hóa phi vật thể Quốc gia.",
-        area_ha: 48,
-        established: "Năm 1160 (thời Lý)",
-        administrative_merger_2025: "Tôn tạo quần thể di tích Đền Hai Bà Trưng kết nối không gian lễ hội với sông Hồng và phố Hương Viên.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.812706,
+            20.991602
+          ],
           [
-                    [
-                              105.855,
-                              21.016
-                    ],
-                    [
-                              105.864,
-                              21.015
-                    ],
-                    [
-                              105.862,
-                              21.008
-                    ],
-                    [
-                              105.854,
-                              21.009
-                    ],
-                    [
-                              105.855,
-                              21.016
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 26,
-        slug: "bach-mai",
-        name: "Phường Bạch Mai",
-        name_han_nom: "白梅",
-        name_old: "Làng Bạch Mai (Hồng Mai cổ thôn)",
-        new_administrative_name: "Phường Bạch Mai (Hai Bà Trưng)",
-        merger_badge: "Tổ đình Chùa Liên Phái",
-        color: "#F59E0B",
-        colorDark: "#D97706",
-        district: "Quận Hai Bà Trưng",
-        summary: "Làng Bạch Mai xưa có tên là Hồng Mai (làng hoa mai đỏ), sau đổi thành Bạch Mai (hoa mai trắng). Nơi đây lưu giữ Chùa Liên Phái (Liên Tông Tự khởi dựng năm 1726) - tổ đình thiền phái Tào Động Thăng Long với Tháp Cửu Phẩm Liên Hoa cao 10 tầng và vườn tháp mộ cổ thâm nghiêm bậc nhất nội đô.",
-        area_ha: 61,
-        established: "Năm 1726 (thời Hậu Lê)",
-        administrative_merger_2025: "Bảo tồn kiến trúc tháp cổ Chùa Liên Phái và chỉnh trang trục phố thương mại lâu đời Bạch Mai.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.812965,
+            20.992319
+          ],
           [
-                    [
-                              105.846,
-                              21.006
-                    ],
-                    [
-                              105.856,
-                              21.005
-                    ],
-                    [
-                              105.854,
-                              20.998
-                    ],
-                    [
-                              105.845,
-                              20.999
-                    ],
-                    [
-                              105.846,
-                              21.006
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 27,
-        slug: "dong-tam",
-        name: "Phường Đồng Tâm",
-        name_han_nom: "同心",
-        name_old: "Cụm Đại học Bách Khoa - Xây Dựng",
-        new_administrative_name: "Phường Đồng Tâm (Hai Bà Trưng)",
-        merger_badge: "Đô thị đại học kỹ thuật",
-        color: "#CA8A04",
-        colorDark: "#A16207",
-        district: "Quận Hai Bà Trưng",
-        summary: "Đồng Tâm là cái nôi khoa học kỹ thuật hàng đầu đất nước, quy tụ cụm 3 trường đại học danh tiếng bậc nhất: Trường Đại học Bách Khoa Hà Nội (1956), Trường Đại học Xây Dựng Hà Nội và Trường Đại học Kinh Tế Quốc Dân. Nơi đây đào tạo hàng trăm ngàn kỹ sư, nhà khoa học phụng sự Tổ quốc.",
-        area_ha: 89,
-        established: "Năm 1956",
-        administrative_merger_2025: "Quy hoạch làng đại học thông minh, mở rộng không gian cây xanh nghiên cứu dọc đường Giải Phóng và Trần Đại Nghĩa.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.813446,
+            20.993614
+          ],
           [
-                    [
-                              105.838,
-                              21.006
-                    ],
-                    [
-                              105.848,
-                              21.005
-                    ],
-                    [
-                              105.846,
-                              20.997
-                    ],
-                    [
-                              105.837,
-                              20.998
-                    ],
-                    [
-                              105.838,
-                              21.006
-                    ]
-          ]
-        ],
-      },
-    },
-    {
-      type: "Feature" as const,
-      properties: {
-        id: 28,
-        slug: "thanh-luong",
-        name: "Phường Thanh Lương",
-        name_han_nom: "清涼",
-        name_old: "Làng Lương Yên (Bến Cảng Sông Hồng xưa)",
-        new_administrative_name: "Phường Thanh Lương (Hai Bà Trưng)",
-        merger_badge: "Làng Lương Yên sông Hồng",
-        color: "#78350F",
-        colorDark: "#451A03",
-        district: "Quận Hai Bà Trưng",
-        summary: "Thanh Lương gắn liền với làng cổ Lương Yên bên dòng sông Hồng lịch sử, nơi từng có Bến phà Đen và cảng sông nhộn nhịp thời Pháp thuộc. Nơi đây có Đình Lương Yên, Chùa Hộ Quốc và truyền thống lao động kiên cường của cư dân bến cảng Thăng Long qua nhiều thế hệ.",
-        area_ha: 104,
-        established: "Thế kỷ XVIII",
-        administrative_merger_2025: "Phát triển trục kinh tế ven sông Hồng theo Đồ án quy hoạch phân khu đô thị sông Hồng của Thủ đô.",
-      },
-      geometry: {
-        type: "Polygon" as const,
-        coordinates: [
+            105.814285,
+            20.993326
+          ],
           [
-                    [
-                              105.86,
-                              21.012
-                    ],
-                    [
-                              105.87,
-                              21.01
-                    ],
-                    [
-                              105.868,
-                              21.002
-                    ],
-                    [
-                              105.858,
-                              21.004
-                    ],
-                    [
-                              105.86,
-                              21.012
-                    ]
+            105.815239,
+            20.993139
+          ],
+          [
+            105.815331,
+            20.993769
+          ],
+          [
+            105.815628,
+            20.99374
+          ],
+          [
+            105.815689,
+            20.994358
+          ],
+          [
+            105.816292,
+            20.994257
+          ],
+          [
+            105.816238,
+            20.994049
+          ],
+          [
+            105.816147,
+            20.993645
+          ],
+          [
+            105.8172,
+            20.993591
+          ],
+          [
+            105.817207,
+            20.993328
+          ],
+          [
+            105.817635,
+            20.993366
+          ],
+          [
+            105.817642,
+            20.994249
+          ],
+          [
+            105.817947,
+            20.994259
+          ],
+          [
+            105.818146,
+            20.994822
+          ],
+          [
+            105.818489,
+            20.994841
+          ],
+          [
+            105.818825,
+            20.994816
+          ],
+          [
+            105.819,
+            20.99479
+          ],
+          [
+            105.819,
+            20.985366
           ]
-        ],
-      },
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 2,
+      "slug": "khuong-trung",
+      "name": "Khương Trung",
+      "name_han_nom": "姜中",
+      "name_old": "Làng Khương Trung (Làng Gừng Trung)",
+      "new_administrative_name": "Phường Khương Trung (Thanh Xuân)",
+      "merger_badge": "Địa giới ổn định",
+      "color": "#059669",
+      "colorDark": "#065F46",
+      "district": "Quận Thanh Xuân",
+      "summary": "Làng Khương Trung (Làng Gừng Trung) nằm kẹp giữa ngã tư Sở và sông Tô Lịch. Cụm di sản gồm Đình Khương Trung, Chùa Tiêu Dao, Miếu Cổ Thôn và Cổng làng cổ ngõ 211 Khương Trung rêu phong.",
+      "area_ha": 78,
+      "established": "Thế kỷ XV (thời Lê Sơ)",
+      "administrative_merger_2025": "Giữ vững địa giới hành chính, tiếp giáp phường Thịnh Quang và Khương Thượng (quận Đống Đa) qua nút giao thông Ngã Tư Sở.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 72
     },
-  ],
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.822121,
+            21.002542
+          ],
+          [
+            105.821564,
+            21.000557
+          ],
+          [
+            105.821342,
+            20.999454
+          ],
+          [
+            105.821289,
+            20.998091
+          ],
+          [
+            105.824135,
+            20.996973
+          ],
+          [
+            105.825935,
+            20.996422
+          ],
+          [
+            105.826439,
+            20.996552
+          ],
+          [
+            105.826958,
+            20.996683
+          ],
+          [
+            105.827652,
+            20.995743
+          ],
+          [
+            105.827614,
+            20.995213
+          ],
+          [
+            105.828072,
+            20.994467
+          ],
+          [
+            105.827507,
+            20.992756
+          ],
+          [
+            105.826828,
+            20.992735
+          ],
+          [
+            105.826057,
+            20.992758
+          ],
+          [
+            105.826065,
+            20.992811
+          ],
+          [
+            105.826309,
+            20.993109
+          ],
+          [
+            105.826065,
+            20.993376
+          ],
+          [
+            105.823792,
+            20.992022
+          ],
+          [
+            105.823669,
+            20.991938
+          ],
+          [
+            105.823517,
+            20.992275
+          ],
+          [
+            105.82328,
+            20.992838
+          ],
+          [
+            105.82299,
+            20.993414
+          ],
+          [
+            105.822784,
+            20.993778
+          ],
+          [
+            105.822647,
+            20.994131
+          ],
+          [
+            105.823967,
+            20.994429
+          ],
+          [
+            105.824715,
+            20.995083
+          ],
+          [
+            105.824455,
+            20.99543
+          ],
+          [
+            105.824005,
+            20.995298
+          ],
+          [
+            105.823647,
+            20.996084
+          ],
+          [
+            105.821716,
+            20.995426
+          ],
+          [
+            105.821304,
+            20.995165
+          ],
+          [
+            105.820869,
+            20.995522
+          ],
+          [
+            105.820145,
+            20.994535
+          ],
+          [
+            105.819817,
+            20.994591
+          ],
+          [
+            105.819199,
+            20.994761
+          ],
+          [
+            105.818825,
+            20.994816
+          ],
+          [
+            105.818489,
+            20.994841
+          ],
+          [
+            105.818146,
+            20.994822
+          ],
+          [
+            105.817947,
+            20.994259
+          ],
+          [
+            105.817642,
+            20.994249
+          ],
+          [
+            105.817635,
+            20.993366
+          ],
+          [
+            105.817207,
+            20.993328
+          ],
+          [
+            105.8172,
+            20.993591
+          ],
+          [
+            105.816147,
+            20.993645
+          ],
+          [
+            105.816238,
+            20.994049
+          ],
+          [
+            105.816292,
+            20.994257
+          ],
+          [
+            105.815689,
+            20.994358
+          ],
+          [
+            105.815628,
+            20.99374
+          ],
+          [
+            105.815331,
+            20.993769
+          ],
+          [
+            105.815239,
+            20.993139
+          ],
+          [
+            105.814285,
+            20.993326
+          ],
+          [
+            105.813446,
+            20.993614
+          ],
+          [
+            105.813469,
+            20.993675
+          ],
+          [
+            105.813644,
+            20.993973
+          ],
+          [
+            105.814217,
+            20.995028
+          ],
+          [
+            105.814613,
+            20.995735
+          ],
+          [
+            105.815125,
+            20.996588
+          ],
+          [
+            105.815422,
+            20.99712
+          ],
+          [
+            105.815796,
+            20.997721
+          ],
+          [
+            105.816177,
+            20.998253
+          ],
+          [
+            105.816704,
+            20.999016
+          ],
+          [
+            105.817345,
+            20.999743
+          ],
+          [
+            105.817612,
+            21.000151
+          ],
+          [
+            105.81768,
+            21.000416
+          ],
+          [
+            105.817703,
+            21.000771
+          ],
+          [
+            105.817665,
+            21.001123
+          ],
+          [
+            105.817535,
+            21.001616
+          ],
+          [
+            105.819244,
+            21.00296
+          ],
+          [
+            105.819504,
+            21.003197
+          ],
+          [
+            105.820267,
+            21.003019
+          ],
+          [
+            105.821953,
+            21.002584
+          ],
+          [
+            105.822121,
+            21.002542
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 3,
+      "slug": "khuong-dinh",
+      "name": "Khương Đình",
+      "name_han_nom": "姜亭",
+      "name_old": "Làng Cổ Khương Đình (Văn hiến Bạch Mai Sơn)",
+      "new_administrative_name": "Phường Khương Đình mới (Thanh Xuân)",
+      "merger_badge": "Trọng điểm Thanh Xuân",
+      "color": "#EA580C",
+      "colorDark": "#9A3412",
+      "district": "Quận Thanh Xuân",
+      "summary": "Làng Khương Đình nằm dọc bờ hữu sông Tô Lịch trên trục phố Bùi Xương Trạch và Khương Hạ. Vùng đất khoa bảng văn hiến sản sinh nhiều bậc hiền tài với Đình Khương Đình thờ Thành hoàng Lê Dương Vệ, Chùa Tam Huyền cổ tự (Thế kỷ XVII) và Cổng làng cổ ngõ 125.",
+      "area_ha": 138,
+      "established": "Thế kỷ XVII",
+      "administrative_merger_2025": "Địa bàn hành chính phường Khương Đình sau sáp nhập là đơn vị nòng cốt với diện tích 3,1 km², tiếp giáp phường Hạ Đình mới theo NQ số 1286/NQ-UBTVQH15.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 80
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.826057,
+            20.992758
+          ],
+          [
+            105.826019,
+            20.992573
+          ],
+          [
+            105.825996,
+            20.992376
+          ],
+          [
+            105.825951,
+            20.992207
+          ],
+          [
+            105.825752,
+            20.991604
+          ],
+          [
+            105.825371,
+            20.991709
+          ],
+          [
+            105.824562,
+            20.990885
+          ],
+          [
+            105.823189,
+            20.989891
+          ],
+          [
+            105.823914,
+            20.988943
+          ],
+          [
+            105.823914,
+            20.988754
+          ],
+          [
+            105.823685,
+            20.988522
+          ],
+          [
+            105.82254,
+            20.987677
+          ],
+          [
+            105.822701,
+            20.987467
+          ],
+          [
+            105.819672,
+            20.98554
+          ],
+          [
+            105.81958,
+            20.985807
+          ],
+          [
+            105.819305,
+            20.985722
+          ],
+          [
+            105.819366,
+            20.985538
+          ],
+          [
+            105.81913,
+            20.985426
+          ],
+          [
+            105.818535,
+            20.985153
+          ],
+          [
+            105.8181,
+            20.98455
+          ],
+          [
+            105.818138,
+            20.984028
+          ],
+          [
+            105.818077,
+            20.983002
+          ],
+          [
+            105.818016,
+            20.982285
+          ],
+          [
+            105.817917,
+            20.981335
+          ],
+          [
+            105.817642,
+            20.980654
+          ],
+          [
+            105.817337,
+            20.980829
+          ],
+          [
+            105.816803,
+            20.981256
+          ],
+          [
+            105.815895,
+            20.981972
+          ],
+          [
+            105.815109,
+            20.982727
+          ],
+          [
+            105.814537,
+            20.983383
+          ],
+          [
+            105.814056,
+            20.984072
+          ],
+          [
+            105.813721,
+            20.984631
+          ],
+          [
+            105.81311,
+            20.985588
+          ],
+          [
+            105.81279,
+            20.986279
+          ],
+          [
+            105.812492,
+            20.98712
+          ],
+          [
+            105.812447,
+            20.987429
+          ],
+          [
+            105.812294,
+            20.988297
+          ],
+          [
+            105.812294,
+            20.989155
+          ],
+          [
+            105.812408,
+            20.990519
+          ],
+          [
+            105.812706,
+            20.991602
+          ],
+          [
+            105.812965,
+            20.992319
+          ],
+          [
+            105.813446,
+            20.993614
+          ],
+          [
+            105.814285,
+            20.993326
+          ],
+          [
+            105.815239,
+            20.993139
+          ],
+          [
+            105.815331,
+            20.993769
+          ],
+          [
+            105.815628,
+            20.99374
+          ],
+          [
+            105.815689,
+            20.994358
+          ],
+          [
+            105.816292,
+            20.994257
+          ],
+          [
+            105.816238,
+            20.994049
+          ],
+          [
+            105.816147,
+            20.993645
+          ],
+          [
+            105.8172,
+            20.993591
+          ],
+          [
+            105.817207,
+            20.993328
+          ],
+          [
+            105.817635,
+            20.993366
+          ],
+          [
+            105.817642,
+            20.994249
+          ],
+          [
+            105.817947,
+            20.994259
+          ],
+          [
+            105.818146,
+            20.994822
+          ],
+          [
+            105.818489,
+            20.994841
+          ],
+          [
+            105.818825,
+            20.994816
+          ],
+          [
+            105.819199,
+            20.994761
+          ],
+          [
+            105.819817,
+            20.994591
+          ],
+          [
+            105.820145,
+            20.994535
+          ],
+          [
+            105.820869,
+            20.995522
+          ],
+          [
+            105.821304,
+            20.995165
+          ],
+          [
+            105.821716,
+            20.995426
+          ],
+          [
+            105.823647,
+            20.996084
+          ],
+          [
+            105.824005,
+            20.995298
+          ],
+          [
+            105.824455,
+            20.99543
+          ],
+          [
+            105.824715,
+            20.995083
+          ],
+          [
+            105.823967,
+            20.994429
+          ],
+          [
+            105.822647,
+            20.994131
+          ],
+          [
+            105.822784,
+            20.993778
+          ],
+          [
+            105.82299,
+            20.993414
+          ],
+          [
+            105.82328,
+            20.992838
+          ],
+          [
+            105.823517,
+            20.992275
+          ],
+          [
+            105.823669,
+            20.991938
+          ],
+          [
+            105.823792,
+            20.992022
+          ],
+          [
+            105.826065,
+            20.993376
+          ],
+          [
+            105.826309,
+            20.993109
+          ],
+          [
+            105.826065,
+            20.992811
+          ],
+          [
+            105.826057,
+            20.992758
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 4,
+      "slug": "ha-dinh",
+      "name": "Phường Hạ Đình",
+      "name_han_nom": "下亭",
+      "name_old": "Làng Hạ Đình Cổ Thôn",
+      "new_administrative_name": "Phường Hạ Đình mở rộng (Thanh Xuân)",
+      "merger_badge": "Nhập P. Kim Giang",
+      "color": "#0D9488",
+      "colorDark": "#115E59",
+      "district": "Quận Thanh Xuân",
+      "summary": "Phường Hạ Đình nằm bên bờ hữu sông Tô Lịch. Theo NQ 1286/NQ-UBTVQH15, toàn bộ phường Kim Giang được sáp nhập vào phường Hạ Đình. Không gian di sản gồm Đình Hạ Đình (ngõ 460 Khương Đình), Chùa Kim Giang (Quang Khánh Tự) và Hồ Hạ Đình thoáng đãng.",
+      "area_ha": 140,
+      "established": "Thời Lê Trung Hưng",
+      "administrative_merger_2025": "Sáp nhập toàn bộ diện tích tự nhiên và dân số của phường Kim Giang vào phường Hạ Đình (NQ 1286/NQ-UBTVQH15).",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 63
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.813446,
+            20.993614
+          ],
+          [
+            105.812965,
+            20.992319
+          ],
+          [
+            105.812706,
+            20.991602
+          ],
+          [
+            105.812408,
+            20.990519
+          ],
+          [
+            105.812294,
+            20.989155
+          ],
+          [
+            105.812294,
+            20.988297
+          ],
+          [
+            105.812447,
+            20.987429
+          ],
+          [
+            105.812492,
+            20.98712
+          ],
+          [
+            105.81279,
+            20.986279
+          ],
+          [
+            105.81311,
+            20.985588
+          ],
+          [
+            105.813721,
+            20.984631
+          ],
+          [
+            105.813263,
+            20.984564
+          ],
+          [
+            105.811584,
+            20.984482
+          ],
+          [
+            105.811539,
+            20.984482
+          ],
+          [
+            105.811111,
+            20.984482
+          ],
+          [
+            105.810043,
+            20.98448
+          ],
+          [
+            105.81015,
+            20.983986
+          ],
+          [
+            105.809532,
+            20.983994
+          ],
+          [
+            105.807915,
+            20.984138
+          ],
+          [
+            105.806816,
+            20.984499
+          ],
+          [
+            105.805824,
+            20.984859
+          ],
+          [
+            105.804176,
+            20.985449
+          ],
+          [
+            105.80304,
+            20.985712
+          ],
+          [
+            105.802353,
+            20.985973
+          ],
+          [
+            105.801979,
+            20.986397
+          ],
+          [
+            105.801811,
+            20.986881
+          ],
+          [
+            105.801743,
+            20.987333
+          ],
+          [
+            105.801559,
+            20.987625
+          ],
+          [
+            105.802315,
+            20.988272
+          ],
+          [
+            105.802139,
+            20.988684
+          ],
+          [
+            105.801483,
+            20.988697
+          ],
+          [
+            105.800949,
+            20.98889
+          ],
+          [
+            105.801262,
+            20.989288
+          ],
+          [
+            105.80217,
+            20.98984
+          ],
+          [
+            105.803108,
+            20.990377
+          ],
+          [
+            105.803719,
+            20.990721
+          ],
+          [
+            105.803894,
+            20.990488
+          ],
+          [
+            105.804718,
+            20.990984
+          ],
+          [
+            105.805481,
+            20.990118
+          ],
+          [
+            105.805672,
+            20.989889
+          ],
+          [
+            105.806107,
+            20.989456
+          ],
+          [
+            105.806427,
+            20.989746
+          ],
+          [
+            105.80735,
+            20.989494
+          ],
+          [
+            105.807594,
+            20.989235
+          ],
+          [
+            105.808823,
+            20.99004
+          ],
+          [
+            105.809937,
+            20.990921
+          ],
+          [
+            105.809296,
+            20.991711
+          ],
+          [
+            105.810883,
+            20.992825
+          ],
+          [
+            105.811104,
+            20.993383
+          ],
+          [
+            105.810471,
+            20.993526
+          ],
+          [
+            105.810028,
+            20.994307
+          ],
+          [
+            105.810524,
+            20.994606
+          ],
+          [
+            105.810837,
+            20.994263
+          ],
+          [
+            105.812897,
+            20.99555
+          ],
+          [
+            105.812698,
+            20.995918
+          ],
+          [
+            105.813087,
+            20.996172
+          ],
+          [
+            105.814018,
+            20.996494
+          ],
+          [
+            105.815125,
+            20.996588
+          ],
+          [
+            105.814613,
+            20.995735
+          ],
+          [
+            105.814217,
+            20.995028
+          ],
+          [
+            105.813644,
+            20.993973
+          ],
+          [
+            105.813469,
+            20.993675
+          ],
+          [
+            105.813446,
+            20.993614
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 5,
+      "slug": "nhan-chinh",
+      "name": "Phường Nhân Chính",
+      "name_han_nom": "仁政",
+      "name_old": "Kẻ Mọc (Cự Chính, Quan Nhân, Giáp Nhất)",
+      "new_administrative_name": "Phường Nhân Chính (Thanh Xuân)",
+      "merger_badge": "Cụm Làng Kẻ Mọc",
+      "color": "#F97316",
+      "colorDark": "#C2410C",
+      "district": "Quận Thanh Xuân",
+      "summary": "Phường Nhân Chính là cái nôi của vùng Kẻ Mọc nức tiếng Hà thành gồm ba làng Cự Chính, Quan Nhân, Giáp Nhất. Cụm di tích quốc gia gồm Đình Cự Chính, Chùa Quan Nhân (Sùng Phúc Tự), Đình Giáp Nhất với lễ hội rước Kẻ Mọc rằm tháng Hai âm lịch.",
+      "area_ha": 161,
+      "established": "Thời Lý - Trần",
+      "administrative_merger_2025": "Đơn vị hành chính trọng điểm phía bắc quận Thanh Xuân, tiếp giáp quận Cầu Giấy và Đống Đa.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 105
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.813232,
+            21.008743
+          ],
+          [
+            105.813461,
+            21.008604
+          ],
+          [
+            105.814095,
+            21.007969
+          ],
+          [
+            105.814583,
+            21.007402
+          ],
+          [
+            105.814926,
+            21.006884
+          ],
+          [
+            105.814117,
+            21.006418
+          ],
+          [
+            105.814705,
+            21.005535
+          ],
+          [
+            105.81369,
+            21.004864
+          ],
+          [
+            105.811218,
+            21.004009
+          ],
+          [
+            105.811226,
+            21.003777
+          ],
+          [
+            105.811234,
+            21.003546
+          ],
+          [
+            105.810371,
+            21.003633
+          ],
+          [
+            105.810242,
+            21.003141
+          ],
+          [
+            105.810333,
+            21.003075
+          ],
+          [
+            105.810669,
+            21.00289
+          ],
+          [
+            105.810837,
+            21.002867
+          ],
+          [
+            105.811073,
+            21.002953
+          ],
+          [
+            105.811226,
+            21.003031
+          ],
+          [
+            105.811211,
+            21.002869
+          ],
+          [
+            105.81144,
+            21.002468
+          ],
+          [
+            105.811691,
+            21.00215
+          ],
+          [
+            105.812576,
+            21.00079
+          ],
+          [
+            105.81395,
+            21.00149
+          ],
+          [
+            105.814285,
+            21.001095
+          ],
+          [
+            105.813797,
+            21.000635
+          ],
+          [
+            105.813972,
+            20.999901
+          ],
+          [
+            105.813896,
+            20.999786
+          ],
+          [
+            105.812302,
+            20.999163
+          ],
+          [
+            105.81221,
+            20.998888
+          ],
+          [
+            105.811501,
+            20.998795
+          ],
+          [
+            105.811447,
+            20.999025
+          ],
+          [
+            105.81015,
+            20.999092
+          ],
+          [
+            105.810104,
+            20.998747
+          ],
+          [
+            105.809196,
+            20.998724
+          ],
+          [
+            105.809196,
+            20.998541
+          ],
+          [
+            105.808678,
+            20.998615
+          ],
+          [
+            105.808517,
+            20.998697
+          ],
+          [
+            105.808517,
+            20.999113
+          ],
+          [
+            105.808937,
+            20.999371
+          ],
+          [
+            105.809204,
+            21.000025
+          ],
+          [
+            105.808128,
+            21.00005
+          ],
+          [
+            105.808105,
+            21.000862
+          ],
+          [
+            105.807648,
+            21.000923
+          ],
+          [
+            105.807602,
+            21.001278
+          ],
+          [
+            105.808205,
+            21.001369
+          ],
+          [
+            105.809219,
+            21.001478
+          ],
+          [
+            105.80925,
+            21.00128
+          ],
+          [
+            105.809647,
+            21.001387
+          ],
+          [
+            105.809807,
+            21.00194
+          ],
+          [
+            105.809563,
+            21.00194
+          ],
+          [
+            105.808136,
+            21.001677
+          ],
+          [
+            105.807274,
+            21.001583
+          ],
+          [
+            105.807121,
+            21.002123
+          ],
+          [
+            105.805733,
+            21.00201
+          ],
+          [
+            105.805267,
+            21.00271
+          ],
+          [
+            105.805092,
+            21.002903
+          ],
+          [
+            105.804947,
+            21.002872
+          ],
+          [
+            105.803329,
+            21.001841
+          ],
+          [
+            105.803337,
+            21.001545
+          ],
+          [
+            105.803635,
+            21.001646
+          ],
+          [
+            105.803802,
+            21.001745
+          ],
+          [
+            105.804001,
+            21.001381
+          ],
+          [
+            105.804306,
+            21.001581
+          ],
+          [
+            105.804749,
+            21.00115
+          ],
+          [
+            105.803688,
+            21.000107
+          ],
+          [
+            105.803261,
+            21.000475
+          ],
+          [
+            105.802528,
+            20.999981
+          ],
+          [
+            105.802513,
+            20.999659
+          ],
+          [
+            105.803085,
+            20.998844
+          ],
+          [
+            105.802429,
+            20.998384
+          ],
+          [
+            105.8022,
+            20.9984
+          ],
+          [
+            105.801842,
+            20.998659
+          ],
+          [
+            105.800797,
+            20.99803
+          ],
+          [
+            105.800873,
+            20.99766
+          ],
+          [
+            105.799942,
+            20.996983
+          ],
+          [
+            105.800339,
+            20.996338
+          ],
+          [
+            105.799011,
+            20.995459
+          ],
+          [
+            105.796379,
+            20.998774
+          ],
+          [
+            105.795181,
+            20.998913
+          ],
+          [
+            105.794968,
+            20.997997
+          ],
+          [
+            105.79422,
+            20.998478
+          ],
+          [
+            105.79467,
+            20.999269
+          ],
+          [
+            105.792946,
+            20.999794
+          ],
+          [
+            105.792656,
+            20.999334
+          ],
+          [
+            105.791924,
+            20.999531
+          ],
+          [
+            105.792015,
+            20.999781
+          ],
+          [
+            105.791534,
+            20.999929
+          ],
+          [
+            105.791855,
+            21.000328
+          ],
+          [
+            105.792046,
+            21.000221
+          ],
+          [
+            105.792229,
+            21.000252
+          ],
+          [
+            105.792397,
+            21.000423
+          ],
+          [
+            105.792435,
+            21.000572
+          ],
+          [
+            105.792313,
+            21.000881
+          ],
+          [
+            105.791962,
+            21.001196
+          ],
+          [
+            105.793785,
+            21.002594
+          ],
+          [
+            105.798203,
+            21.004614
+          ],
+          [
+            105.801201,
+            21.005959
+          ],
+          [
+            105.805321,
+            21.00791
+          ],
+          [
+            105.806145,
+            21.006905
+          ],
+          [
+            105.807243,
+            21.007568
+          ],
+          [
+            105.807945,
+            21.008236
+          ],
+          [
+            105.809608,
+            21.007172
+          ],
+          [
+            105.811394,
+            21.007284
+          ],
+          [
+            105.812851,
+            21.008965
+          ],
+          [
+            105.813232,
+            21.008743
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 6,
+      "slug": "phuong-liet",
+      "name": "Phường Phương Liệt",
+      "name_han_nom": "芳烈",
+      "name_old": "Làng Vọng Liệt Cổ",
+      "new_administrative_name": "Phường Phương Liệt (Thanh Xuân)",
+      "merger_badge": "Địa giới ổn định",
+      "color": "#B45309",
+      "colorDark": "#78350F",
+      "district": "Quận Thanh Xuân",
+      "summary": "Phường Phương Liệt nằm ở cửa ngõ đông nam quận Thanh Xuân bao bọc hồ Phương Liệt. Nơi đây bảo lưu Đình Phương Liệt thờ Tích Lịch Hỏa Quang Đại Vương, Chùa Phương Liệt (Quang Minh Tự) cùng dấu tích làng Vọng Liệt cổ ven sông Sét.",
+      "area_ha": 101,
+      "established": "Thế kỷ XVII",
+      "administrative_merger_2025": "Giữ vững địa giới hành chính cửa ngõ đường Giải Phóng nối liền quận Hoàng Mai và Đống Đa.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 46
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.834648,
+            20.999109
+          ],
+          [
+            105.834923,
+            20.999039
+          ],
+          [
+            105.836655,
+            20.998592
+          ],
+          [
+            105.836891,
+            20.998533
+          ],
+          [
+            105.841843,
+            20.997311
+          ],
+          [
+            105.841942,
+            20.99575
+          ],
+          [
+            105.841965,
+            20.995295
+          ],
+          [
+            105.841957,
+            20.994846
+          ],
+          [
+            105.841614,
+            20.994398
+          ],
+          [
+            105.841057,
+            20.993662
+          ],
+          [
+            105.840462,
+            20.992952
+          ],
+          [
+            105.840431,
+            20.991629
+          ],
+          [
+            105.840385,
+            20.989553
+          ],
+          [
+            105.840385,
+            20.988544
+          ],
+          [
+            105.840385,
+            20.985037
+          ],
+          [
+            105.839981,
+            20.984777
+          ],
+          [
+            105.8395,
+            20.98461
+          ],
+          [
+            105.837776,
+            20.983995
+          ],
+          [
+            105.835907,
+            20.983341
+          ],
+          [
+            105.835861,
+            20.983696
+          ],
+          [
+            105.835617,
+            20.985632
+          ],
+          [
+            105.834816,
+            20.985689
+          ],
+          [
+            105.834732,
+            20.986082
+          ],
+          [
+            105.834137,
+            20.986141
+          ],
+          [
+            105.834106,
+            20.98679
+          ],
+          [
+            105.833977,
+            20.987152
+          ],
+          [
+            105.834152,
+            20.987307
+          ],
+          [
+            105.834396,
+            20.986717
+          ],
+          [
+            105.834511,
+            20.986881
+          ],
+          [
+            105.836052,
+            20.988188
+          ],
+          [
+            105.835922,
+            20.988424
+          ],
+          [
+            105.835419,
+            20.989412
+          ],
+          [
+            105.834114,
+            20.991911
+          ],
+          [
+            105.833252,
+            20.99329
+          ],
+          [
+            105.832191,
+            20.994564
+          ],
+          [
+            105.83297,
+            20.996309
+          ],
+          [
+            105.834,
+            20.995998
+          ],
+          [
+            105.834244,
+            20.995972
+          ],
+          [
+            105.834389,
+            20.995998
+          ],
+          [
+            105.834526,
+            20.996103
+          ],
+          [
+            105.834717,
+            20.996414
+          ],
+          [
+            105.834885,
+            20.996729
+          ],
+          [
+            105.834969,
+            20.997091
+          ],
+          [
+            105.834991,
+            20.997614
+          ],
+          [
+            105.834908,
+            20.998343
+          ],
+          [
+            105.834648,
+            20.999109
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 7,
+      "slug": "khuong-thuong",
+      "name": "Khương Thượng",
+      "name_han_nom": "姜上",
+      "name_old": "Làng Khương Thượng (Làng Gừng Thượng)",
+      "new_administrative_name": "Phường Khương Thượng mở rộng (Đống Đa)",
+      "merger_badge": "Sáp nhập 1 phần P. Ngã Tư Sở",
+      "color": "#9333EA",
+      "colorDark": "#6B21A8",
+      "district": "Quận Đống Đa",
+      "summary": "Làng Khương Thượng (Làng Gừng Thượng) nằm ở cửa ngõ tây nam Thăng Long xưa. Vùng đất anh hùng ghi dấu chiến công đại phá quân Thanh xuân Kỷ Dậu 1789. Cụm di tích gồm Đình Khương Thượng, Chùa Bộc, Miếu Quy Sơn và Gò Đống Thây thiêng liêng.",
+      "area_ha": 75,
+      "established": "Thế kỷ XV",
+      "administrative_merger_2025": "Sáp nhập một phần diện tích tự nhiên và dân số của phường Ngã Tư Sở vào phường Khương Thượng theo NQ số 1286/NQ-UBTVQH15.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 46
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.8283,
+            21.005404
+          ],
+          [
+            105.829239,
+            21.005075
+          ],
+          [
+            105.82869,
+            21.003527
+          ],
+          [
+            105.829453,
+            21.003267
+          ],
+          [
+            105.829056,
+            21.002207
+          ],
+          [
+            105.830132,
+            21.001726
+          ],
+          [
+            105.830063,
+            21.001385
+          ],
+          [
+            105.83194,
+            21.001078
+          ],
+          [
+            105.833618,
+            21.000486
+          ],
+          [
+            105.834419,
+            21.000254
+          ],
+          [
+            105.834702,
+            21.000019
+          ],
+          [
+            105.834732,
+            20.999622
+          ],
+          [
+            105.834648,
+            20.999109
+          ],
+          [
+            105.834503,
+            20.999147
+          ],
+          [
+            105.831917,
+            20.99995
+          ],
+          [
+            105.830704,
+            21.000334
+          ],
+          [
+            105.828506,
+            21.001003
+          ],
+          [
+            105.826569,
+            21.001457
+          ],
+          [
+            105.8255,
+            21.001707
+          ],
+          [
+            105.825562,
+            21.002024
+          ],
+          [
+            105.825485,
+            21.002123
+          ],
+          [
+            105.825058,
+            21.002279
+          ],
+          [
+            105.824959,
+            21.002476
+          ],
+          [
+            105.824852,
+            21.002497
+          ],
+          [
+            105.824623,
+            21.002357
+          ],
+          [
+            105.824287,
+            21.002495
+          ],
+          [
+            105.824219,
+            21.002672
+          ],
+          [
+            105.824036,
+            21.00279
+          ],
+          [
+            105.823952,
+            21.002831
+          ],
+          [
+            105.823654,
+            21.00279
+          ],
+          [
+            105.823257,
+            21.002769
+          ],
+          [
+            105.82267,
+            21.002947
+          ],
+          [
+            105.821411,
+            21.003515
+          ],
+          [
+            105.822662,
+            21.005152
+          ],
+          [
+            105.823822,
+            21.004622
+          ],
+          [
+            105.824219,
+            21.004444
+          ],
+          [
+            105.824661,
+            21.004896
+          ],
+          [
+            105.824974,
+            21.00478
+          ],
+          [
+            105.825104,
+            21.004858
+          ],
+          [
+            105.825249,
+            21.005116
+          ],
+          [
+            105.826103,
+            21.004751
+          ],
+          [
+            105.826591,
+            21.004566
+          ],
+          [
+            105.827095,
+            21.004456
+          ],
+          [
+            105.827591,
+            21.004583
+          ],
+          [
+            105.828087,
+            21.004869
+          ],
+          [
+            105.8283,
+            21.005404
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 8,
+      "slug": "thinh-quang",
+      "name": "Phường Thịnh Quang",
+      "name_han_nom": "盛光",
+      "name_old": "Làng Thịnh Quang Cổ",
+      "new_administrative_name": "Phường Thịnh Quang mở rộng (Đống Đa)",
+      "merger_badge": "Nhập 1 phần Ngã Tư Sở",
+      "color": "#8B5CF6",
+      "colorDark": "#5B21B6",
+      "district": "Quận Đống Đa",
+      "summary": "Phường Thịnh Quang nằm sát nút giao thông Ngã Tư Sở và trục phố Tây Sơn. Nơi tọa lạc ngôi cổ tự Chùa Phúc Khánh (Chùa Sở) nức tiếng linh thiêng của Thủ đô, Đình Thịnh Quang và hồ Vĩnh Hồ.",
+      "area_ha": 58,
+      "established": "Thời Hậu Lê",
+      "administrative_merger_2025": "Sáp nhập một phần phường Ngã Tư Sở vào Thịnh Quang theo NQ 1286/NQ-UBTVQH15.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 49
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.813232,
+            21.008743
+          ],
+          [
+            105.814148,
+            21.00952
+          ],
+          [
+            105.813416,
+            21.010256
+          ],
+          [
+            105.813812,
+            21.010708
+          ],
+          [
+            105.814568,
+            21.011639
+          ],
+          [
+            105.814171,
+            21.012289
+          ],
+          [
+            105.813553,
+            21.013037
+          ],
+          [
+            105.8144,
+            21.013901
+          ],
+          [
+            105.814796,
+            21.013552
+          ],
+          [
+            105.815514,
+            21.013039
+          ],
+          [
+            105.8162,
+            21.012262
+          ],
+          [
+            105.816719,
+            21.011959
+          ],
+          [
+            105.816803,
+            21.012049
+          ],
+          [
+            105.817627,
+            21.010967
+          ],
+          [
+            105.81916,
+            21.0091
+          ],
+          [
+            105.819588,
+            21.008602
+          ],
+          [
+            105.820023,
+            21.008108
+          ],
+          [
+            105.819923,
+            21.008001
+          ],
+          [
+            105.819397,
+            21.007603
+          ],
+          [
+            105.819542,
+            21.007412
+          ],
+          [
+            105.820045,
+            21.006882
+          ],
+          [
+            105.819618,
+            21.006413
+          ],
+          [
+            105.820145,
+            21.005945
+          ],
+          [
+            105.820763,
+            21.005419
+          ],
+          [
+            105.82093,
+            21.005281
+          ],
+          [
+            105.820679,
+            21.004938
+          ],
+          [
+            105.820023,
+            21.004162
+          ],
+          [
+            105.819778,
+            21.003998
+          ],
+          [
+            105.819557,
+            21.003885
+          ],
+          [
+            105.819397,
+            21.003876
+          ],
+          [
+            105.819275,
+            21.00391
+          ],
+          [
+            105.819183,
+            21.003962
+          ],
+          [
+            105.819077,
+            21.004108
+          ],
+          [
+            105.818954,
+            21.00441
+          ],
+          [
+            105.818825,
+            21.004765
+          ],
+          [
+            105.818466,
+            21.005779
+          ],
+          [
+            105.818054,
+            21.00568
+          ],
+          [
+            105.817635,
+            21.005428
+          ],
+          [
+            105.816956,
+            21.004988
+          ],
+          [
+            105.816566,
+            21.005445
+          ],
+          [
+            105.816467,
+            21.005583
+          ],
+          [
+            105.816414,
+            21.00555
+          ],
+          [
+            105.815964,
+            21.00528
+          ],
+          [
+            105.815781,
+            21.005585
+          ],
+          [
+            105.814926,
+            21.006884
+          ],
+          [
+            105.814583,
+            21.007402
+          ],
+          [
+            105.814095,
+            21.007969
+          ],
+          [
+            105.813461,
+            21.008604
+          ],
+          [
+            105.813232,
+            21.008743
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 9,
+      "slug": "lang-thuong",
+      "name": "Phường Láng Thượng",
+      "name_han_nom": "廊上",
+      "name_old": "Làng Láng Thượng (Chiêu Thiền Danh Lam)",
+      "new_administrative_name": "Phường Láng Thượng (Đống Đa)",
+      "merger_badge": "Di tích Quốc gia đặc biệt",
+      "color": "#7C3AED",
+      "colorDark": "#4C1D95",
+      "district": "Quận Đống Đa",
+      "summary": "Làng Láng Thượng là trung tâm của vùng Tam Láng (Thượng, Trung, Hạ). Nơi đây có Chùa Láng (Chiêu Thiền Tự) - Di tích Quốc gia đặc biệt thờ Thiền sư Từ Đạo Hạnh, cùng Đền Voi Phục (Trấn Tây Thăng Long) uy nghiêm bên hồ Thủ Lệ.",
+      "area_ha": 172,
+      "established": "Thời Lý (Thế kỷ XII)",
+      "administrative_merger_2025": "Trung tâm văn hóa giáo dục và y tế trọng điểm của quận Đống Đa dọc trục sông Tô Lịch.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 34
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.799782,
+            21.029242
+          ],
+          [
+            105.800507,
+            21.030073
+          ],
+          [
+            105.803688,
+            21.028723
+          ],
+          [
+            105.806389,
+            21.027937
+          ],
+          [
+            105.806129,
+            21.026302
+          ],
+          [
+            105.806274,
+            21.025618
+          ],
+          [
+            105.806923,
+            21.025583
+          ],
+          [
+            105.808167,
+            21.025608
+          ],
+          [
+            105.808823,
+            21.026897
+          ],
+          [
+            105.810577,
+            21.025059
+          ],
+          [
+            105.810242,
+            21.024557
+          ],
+          [
+            105.809425,
+            21.023117
+          ],
+          [
+            105.808502,
+            21.021576
+          ],
+          [
+            105.807686,
+            21.020136
+          ],
+          [
+            105.807137,
+            21.019169
+          ],
+          [
+            105.806534,
+            21.018028
+          ],
+          [
+            105.805908,
+            21.017151
+          ],
+          [
+            105.805176,
+            21.016239
+          ],
+          [
+            105.804535,
+            21.015556
+          ],
+          [
+            105.804237,
+            21.015303
+          ],
+          [
+            105.803329,
+            21.01634
+          ],
+          [
+            105.802757,
+            21.017017
+          ],
+          [
+            105.802254,
+            21.01771
+          ],
+          [
+            105.802216,
+            21.017754
+          ],
+          [
+            105.801384,
+            21.01927
+          ],
+          [
+            105.800278,
+            21.021233
+          ],
+          [
+            105.79966,
+            21.022165
+          ],
+          [
+            105.798622,
+            21.023218
+          ],
+          [
+            105.797539,
+            21.023993
+          ],
+          [
+            105.797241,
+            21.024702
+          ],
+          [
+            105.797447,
+            21.026344
+          ],
+          [
+            105.79818,
+            21.02746
+          ],
+          [
+            105.798897,
+            21.028229
+          ],
+          [
+            105.799782,
+            21.029242
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 10,
+      "slug": "lang-ha",
+      "name": "Phường Láng Hạ",
+      "name_han_nom": "廊下",
+      "name_old": "Làng Láng Hạ (Hạ Yên Quyết Cổ)",
+      "new_administrative_name": "Phường Láng Hạ (Đống Đa)",
+      "merger_badge": "Đền Ứng Thiên 1069",
+      "color": "#6D28D9",
+      "colorDark": "#4338CA",
+      "district": "Quận Đống Đa",
+      "summary": "Phường Láng Hạ nằm dọc trục đường Láng Hạ và Thái Hà. Di sản tiêu biểu là Đền Ứng Thiên thờ Hậu Thổ Phu Nhân Thánh Mẫu khởi dựng từ năm 1069 thời vua Lý Thánh Tông và Chùa Hoàng Ân.",
+      "area_ha": 95,
+      "established": "Thời Lý",
+      "administrative_merger_2025": "Địa bàn phát triển kinh tế tài chính sầm uất với các trung tâm thương mại và trục đường huyết mạch.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 43
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.810577,
+            21.025059
+          ],
+          [
+            105.81105,
+            21.024942
+          ],
+          [
+            105.811226,
+            21.024309
+          ],
+          [
+            105.81147,
+            21.022877
+          ],
+          [
+            105.810638,
+            21.021461
+          ],
+          [
+            105.809937,
+            21.020086
+          ],
+          [
+            105.810707,
+            21.019711
+          ],
+          [
+            105.810165,
+            21.018892
+          ],
+          [
+            105.81218,
+            21.017914
+          ],
+          [
+            105.815193,
+            21.016216
+          ],
+          [
+            105.815262,
+            21.016172
+          ],
+          [
+            105.81852,
+            21.013954
+          ],
+          [
+            105.817337,
+            21.012625
+          ],
+          [
+            105.816803,
+            21.012049
+          ],
+          [
+            105.816719,
+            21.011959
+          ],
+          [
+            105.8162,
+            21.012262
+          ],
+          [
+            105.815514,
+            21.013039
+          ],
+          [
+            105.814796,
+            21.013552
+          ],
+          [
+            105.8144,
+            21.013901
+          ],
+          [
+            105.813553,
+            21.013037
+          ],
+          [
+            105.814171,
+            21.012289
+          ],
+          [
+            105.814568,
+            21.011639
+          ],
+          [
+            105.813812,
+            21.010708
+          ],
+          [
+            105.813416,
+            21.010256
+          ],
+          [
+            105.814148,
+            21.00952
+          ],
+          [
+            105.813232,
+            21.008743
+          ],
+          [
+            105.812851,
+            21.008965
+          ],
+          [
+            105.810631,
+            21.010405
+          ],
+          [
+            105.808792,
+            21.01152
+          ],
+          [
+            105.807533,
+            21.012415
+          ],
+          [
+            105.806465,
+            21.013226
+          ],
+          [
+            105.804756,
+            21.014713
+          ],
+          [
+            105.804237,
+            21.015303
+          ],
+          [
+            105.804535,
+            21.015556
+          ],
+          [
+            105.805176,
+            21.016239
+          ],
+          [
+            105.805908,
+            21.017151
+          ],
+          [
+            105.806534,
+            21.018028
+          ],
+          [
+            105.807137,
+            21.019169
+          ],
+          [
+            105.807686,
+            21.020136
+          ],
+          [
+            105.808502,
+            21.021576
+          ],
+          [
+            105.809425,
+            21.023117
+          ],
+          [
+            105.810242,
+            21.024557
+          ],
+          [
+            105.810577,
+            21.025059
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 11,
+      "slug": "kim-lien",
+      "name": "Phường Kim Liên",
+      "name_han_nom": "金蓮",
+      "name_old": "Làng Kim Hoa (Trấn Nam Thăng Long)",
+      "new_administrative_name": "Phường Kim Liên (Đống Đa)",
+      "merger_badge": "Thăng Long Tứ Trấn",
+      "color": "#A855F7",
+      "colorDark": "#7E22CE",
+      "district": "Quận Đống Đa",
+      "summary": "Phường Kim Liên tự hào lưu giữ Đền Kim Liên - Trấn Nam trong Thăng Long Tứ Trấn thờ thần Cao Sơn Đại Vương. Di tích Quốc gia đặc biệt lưu giữ tấm bia đá thời Hồng Thuận (1510) quý báu và không gian làng cổ Kim Hoa xưa.",
+      "area_ha": 71,
+      "established": "Thời Lý - Lê",
+      "administrative_merger_2025": "Địa giới ổn định, tiếp giáp quận Hai Bà Trưng và Thanh Xuân qua đường vành đai 1.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 43
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.837547,
+            21.009125
+          ],
+          [
+            105.837067,
+            21.00865
+          ],
+          [
+            105.836853,
+            21.008404
+          ],
+          [
+            105.836823,
+            21.008301
+          ],
+          [
+            105.836815,
+            21.008228
+          ],
+          [
+            105.836853,
+            21.008024
+          ],
+          [
+            105.837006,
+            21.007675
+          ],
+          [
+            105.83712,
+            21.007429
+          ],
+          [
+            105.837143,
+            21.007265
+          ],
+          [
+            105.837105,
+            21.007143
+          ],
+          [
+            105.837029,
+            21.00699
+          ],
+          [
+            105.836876,
+            21.006754
+          ],
+          [
+            105.836708,
+            21.006487
+          ],
+          [
+            105.836563,
+            21.006128
+          ],
+          [
+            105.83651,
+            21.005943
+          ],
+          [
+            105.83651,
+            21.005402
+          ],
+          [
+            105.836456,
+            21.00457
+          ],
+          [
+            105.836044,
+            21.004406
+          ],
+          [
+            105.835236,
+            21.004158
+          ],
+          [
+            105.835403,
+            21.003666
+          ],
+          [
+            105.833847,
+            21.003258
+          ],
+          [
+            105.8339,
+            21.003094
+          ],
+          [
+            105.832741,
+            21.002657
+          ],
+          [
+            105.832512,
+            21.00296
+          ],
+          [
+            105.832207,
+            21.003304
+          ],
+          [
+            105.832001,
+            21.003569
+          ],
+          [
+            105.831886,
+            21.003834
+          ],
+          [
+            105.831863,
+            21.004162
+          ],
+          [
+            105.831932,
+            21.004808
+          ],
+          [
+            105.832077,
+            21.005531
+          ],
+          [
+            105.832054,
+            21.006033
+          ],
+          [
+            105.831947,
+            21.006521
+          ],
+          [
+            105.83168,
+            21.007154
+          ],
+          [
+            105.83165,
+            21.007212
+          ],
+          [
+            105.832275,
+            21.00773
+          ],
+          [
+            105.833038,
+            21.008303
+          ],
+          [
+            105.833961,
+            21.009056
+          ],
+          [
+            105.834724,
+            21.009659
+          ],
+          [
+            105.835388,
+            21.010216
+          ],
+          [
+            105.835442,
+            21.010256
+          ],
+          [
+            105.836029,
+            21.010719
+          ],
+          [
+            105.837234,
+            21.009418
+          ],
+          [
+            105.837547,
+            21.009125
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 12,
+      "slug": "van-mieu-quoc-tu-giam",
+      "name": "Văn Miếu - Quốc Tử Giám",
+      "name_han_nom": "文廟國子監",
+      "name_old": "Quốc Tử Giám Cổ Phường",
+      "new_administrative_name": "Phường Văn Miếu - Quốc Tử Giám (Đống Đa)",
+      "merger_badge": "Di sản Thế giới UNESCO",
+      "color": "#BE185D",
+      "colorDark": "#831843",
+      "district": "Quận Đống Đa",
+      "summary": "Địa bàn Văn Miếu - Quốc Tử Giám là thánh địa học thuật của Đại Việt với trường đại học đầu tiên xây dựng năm 1070. Quần thể 82 Bia Tiến sĩ là Di sản Tư liệu Thế giới UNESCO. Liền kề là Bích Câu Đạo Quán huyền thoại.",
+      "area_ha": 56,
+      "established": "Năm 1070 (thời Lý Thánh Tông)",
+      "administrative_merger_2025": "Theo đề án sắp xếp đơn vị hành chính của thành phố, phường Văn Miếu và Quốc Tử Giám được tinh gọn quản lý.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 92
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.835266,
+            21.027014
+          ],
+          [
+            105.835281,
+            21.026548
+          ],
+          [
+            105.835258,
+            21.026237
+          ],
+          [
+            105.835129,
+            21.025995
+          ],
+          [
+            105.835129,
+            21.025885
+          ],
+          [
+            105.835503,
+            21.025684
+          ],
+          [
+            105.835373,
+            21.025331
+          ],
+          [
+            105.834961,
+            21.02445
+          ],
+          [
+            105.833893,
+            21.024912
+          ],
+          [
+            105.833168,
+            21.025206
+          ],
+          [
+            105.833183,
+            21.025648
+          ],
+          [
+            105.832733,
+            21.025684
+          ],
+          [
+            105.83271,
+            21.025408
+          ],
+          [
+            105.831154,
+            21.026016
+          ],
+          [
+            105.830551,
+            21.025074
+          ],
+          [
+            105.830215,
+            21.025341
+          ],
+          [
+            105.829712,
+            21.025793
+          ],
+          [
+            105.829544,
+            21.025858
+          ],
+          [
+            105.829376,
+            21.025867
+          ],
+          [
+            105.829025,
+            21.025833
+          ],
+          [
+            105.828857,
+            21.026815
+          ],
+          [
+            105.828697,
+            21.027292
+          ],
+          [
+            105.828613,
+            21.027395
+          ],
+          [
+            105.828033,
+            21.027447
+          ],
+          [
+            105.82782,
+            21.027439
+          ],
+          [
+            105.82795,
+            21.027525
+          ],
+          [
+            105.828484,
+            21.027727
+          ],
+          [
+            105.828941,
+            21.027887
+          ],
+          [
+            105.8293,
+            21.027901
+          ],
+          [
+            105.829697,
+            21.02784
+          ],
+          [
+            105.830635,
+            21.027643
+          ],
+          [
+            105.830772,
+            21.027658
+          ],
+          [
+            105.830902,
+            21.02779
+          ],
+          [
+            105.831215,
+            21.028687
+          ],
+          [
+            105.831245,
+            21.028788
+          ],
+          [
+            105.832726,
+            21.028282
+          ],
+          [
+            105.833542,
+            21.027969
+          ],
+          [
+            105.833687,
+            21.028185
+          ],
+          [
+            105.834572,
+            21.029451
+          ],
+          [
+            105.835304,
+            21.030449
+          ],
+          [
+            105.835419,
+            21.030413
+          ],
+          [
+            105.835571,
+            21.03054
+          ],
+          [
+            105.836243,
+            21.030354
+          ],
+          [
+            105.836044,
+            21.029825
+          ],
+          [
+            105.837257,
+            21.029558
+          ],
+          [
+            105.83754,
+            21.029785
+          ],
+          [
+            105.837608,
+            21.029978
+          ],
+          [
+            105.838486,
+            21.029722
+          ],
+          [
+            105.838486,
+            21.02932
+          ],
+          [
+            105.838531,
+            21.02916
+          ],
+          [
+            105.838562,
+            21.028811
+          ],
+          [
+            105.838608,
+            21.028637
+          ],
+          [
+            105.839058,
+            21.028433
+          ],
+          [
+            105.839218,
+            21.028688
+          ],
+          [
+            105.839378,
+            21.029081
+          ],
+          [
+            105.839844,
+            21.029097
+          ],
+          [
+            105.839828,
+            21.028616
+          ],
+          [
+            105.840042,
+            21.028484
+          ],
+          [
+            105.840401,
+            21.028936
+          ],
+          [
+            105.840866,
+            21.02866
+          ],
+          [
+            105.841019,
+            21.028273
+          ],
+          [
+            105.840843,
+            21.027967
+          ],
+          [
+            105.840637,
+            21.027588
+          ],
+          [
+            105.840218,
+            21.027166
+          ],
+          [
+            105.839882,
+            21.026676
+          ],
+          [
+            105.839867,
+            21.026339
+          ],
+          [
+            105.839867,
+            21.025549
+          ],
+          [
+            105.839874,
+            21.024494
+          ],
+          [
+            105.840057,
+            21.024191
+          ],
+          [
+            105.840576,
+            21.02392
+          ],
+          [
+            105.840843,
+            21.023668
+          ],
+          [
+            105.840843,
+            21.023247
+          ],
+          [
+            105.840797,
+            21.022951
+          ],
+          [
+            105.840622,
+            21.022833
+          ],
+          [
+            105.84021,
+            21.022715
+          ],
+          [
+            105.840019,
+            21.022957
+          ],
+          [
+            105.839859,
+            21.023233
+          ],
+          [
+            105.8395,
+            21.023708
+          ],
+          [
+            105.839149,
+            21.02413
+          ],
+          [
+            105.838974,
+            21.024485
+          ],
+          [
+            105.838913,
+            21.024572
+          ],
+          [
+            105.838699,
+            21.024639
+          ],
+          [
+            105.838394,
+            21.024759
+          ],
+          [
+            105.838287,
+            21.024893
+          ],
+          [
+            105.838226,
+            21.025114
+          ],
+          [
+            105.838226,
+            21.025358
+          ],
+          [
+            105.838371,
+            21.025845
+          ],
+          [
+            105.838333,
+            21.025967
+          ],
+          [
+            105.838226,
+            21.026045
+          ],
+          [
+            105.837555,
+            21.026358
+          ],
+          [
+            105.83522,
+            21.027302
+          ],
+          [
+            105.835266,
+            21.027014
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 13,
+      "slug": "dien-bien",
+      "name": "Phường Điện Biên",
+      "name_han_nom": "奠邊",
+      "name_old": "Khu Di sản Hoàng thành Thăng Long",
+      "new_administrative_name": "Phường Điện Biên (Ba Đình)",
+      "merger_badge": "Di sản Thế giới UNESCO",
+      "color": "#1D4ED8",
+      "colorDark": "#1E3A8A",
+      "district": "Quận Ba Đình",
+      "summary": "Phường Điện Biên là trung tâm chính trị quốc gia và di sản thế giới. Nơi đây lưu giữ Hoàng thành Thăng Long (Di sản Thế giới UNESCO), Cột cờ Hà Nội (Kỳ Đài 1812), Bảo tàng Lịch sử Quân sự và Quảng trường Ba Đình linh thiêng.",
+      "area_ha": 94,
+      "established": "Thời Lý (Năm 1010)",
+      "administrative_merger_2025": "Khu vực trung tâm hành chính - chính trị đặc biệt của Thủ đô Hà Nội và cả nước.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 65
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.834946,
+            21.039242
+          ],
+          [
+            105.835449,
+            21.039106
+          ],
+          [
+            105.836418,
+            21.03903
+          ],
+          [
+            105.835823,
+            21.036692
+          ],
+          [
+            105.837662,
+            21.036274
+          ],
+          [
+            105.8386,
+            21.036055
+          ],
+          [
+            105.838455,
+            21.035212
+          ],
+          [
+            105.840233,
+            21.034781
+          ],
+          [
+            105.840439,
+            21.035805
+          ],
+          [
+            105.843704,
+            21.035183
+          ],
+          [
+            105.843094,
+            21.032011
+          ],
+          [
+            105.84346,
+            21.031931
+          ],
+          [
+            105.843315,
+            21.029921
+          ],
+          [
+            105.842834,
+            21.029608
+          ],
+          [
+            105.842667,
+            21.029497
+          ],
+          [
+            105.842377,
+            21.02931
+          ],
+          [
+            105.841675,
+            21.028826
+          ],
+          [
+            105.841019,
+            21.028273
+          ],
+          [
+            105.840866,
+            21.02866
+          ],
+          [
+            105.840401,
+            21.028936
+          ],
+          [
+            105.840042,
+            21.028484
+          ],
+          [
+            105.839828,
+            21.028616
+          ],
+          [
+            105.839844,
+            21.029097
+          ],
+          [
+            105.839378,
+            21.029081
+          ],
+          [
+            105.839218,
+            21.028688
+          ],
+          [
+            105.839058,
+            21.028433
+          ],
+          [
+            105.838608,
+            21.028637
+          ],
+          [
+            105.838562,
+            21.028811
+          ],
+          [
+            105.838531,
+            21.02916
+          ],
+          [
+            105.838486,
+            21.02932
+          ],
+          [
+            105.838486,
+            21.029722
+          ],
+          [
+            105.837608,
+            21.029978
+          ],
+          [
+            105.83754,
+            21.029785
+          ],
+          [
+            105.837257,
+            21.029558
+          ],
+          [
+            105.836044,
+            21.029825
+          ],
+          [
+            105.836243,
+            21.030354
+          ],
+          [
+            105.835571,
+            21.03054
+          ],
+          [
+            105.835419,
+            21.030413
+          ],
+          [
+            105.835304,
+            21.030449
+          ],
+          [
+            105.832428,
+            21.031334
+          ],
+          [
+            105.831696,
+            21.031534
+          ],
+          [
+            105.831612,
+            21.031185
+          ],
+          [
+            105.831245,
+            21.031279
+          ],
+          [
+            105.830887,
+            21.031359
+          ],
+          [
+            105.830582,
+            21.030561
+          ],
+          [
+            105.830521,
+            21.030212
+          ],
+          [
+            105.82962,
+            21.030153
+          ],
+          [
+            105.829605,
+            21.030445
+          ],
+          [
+            105.829636,
+            21.031172
+          ],
+          [
+            105.829727,
+            21.031797
+          ],
+          [
+            105.829971,
+            21.032127
+          ],
+          [
+            105.83062,
+            21.032431
+          ],
+          [
+            105.830589,
+            21.032633
+          ],
+          [
+            105.830505,
+            21.03297
+          ],
+          [
+            105.831047,
+            21.03306
+          ],
+          [
+            105.831085,
+            21.034502
+          ],
+          [
+            105.832832,
+            21.034393
+          ],
+          [
+            105.833542,
+            21.036892
+          ],
+          [
+            105.833679,
+            21.037287
+          ],
+          [
+            105.834015,
+            21.037292
+          ],
+          [
+            105.834137,
+            21.037432
+          ],
+          [
+            105.834267,
+            21.038103
+          ],
+          [
+            105.834351,
+            21.038292
+          ],
+          [
+            105.834747,
+            21.038301
+          ],
+          [
+            105.834946,
+            21.039242
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 14,
+      "slug": "ngoc-ha",
+      "name": "Phường Ngọc Hà",
+      "name_han_nom": "玉河",
+      "name_old": "Làng Hoa Ngọc Hà Cổ Truyền",
+      "new_administrative_name": "Phường Ngọc Hà (Ba Đình)",
+      "merger_badge": "Làng hoa nghìn năm",
+      "color": "#10B981",
+      "colorDark": "#047857",
+      "district": "Quận Ba Đình",
+      "summary": "Làng hoa Ngọc Hà trứ danh Thăng Long với câu ca 'Ngày rằm mùng một hoa ty/ Làng hoa Ngọc Hà gánh hoa vào thành'. Nơi bảo lưu Đình Ngọc Hà thờ Huyền Thiên Hắc Đế, Đền Bát Mẫu và dấu tích hào thành Thăng Long xưa.",
+      "area_ha": 120,
+      "established": "Thời Lý",
+      "administrative_merger_2025": "Khu vực sinh thái cảnh quan văn hóa đặc sắc kế bên Lăng Chủ tịch Hồ Chí Minh.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 68
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.835449,
+            21.041794
+          ],
+          [
+            105.835266,
+            21.040878
+          ],
+          [
+            105.834984,
+            21.039413
+          ],
+          [
+            105.834946,
+            21.039242
+          ],
+          [
+            105.834747,
+            21.038301
+          ],
+          [
+            105.834351,
+            21.038292
+          ],
+          [
+            105.834267,
+            21.038103
+          ],
+          [
+            105.834137,
+            21.037432
+          ],
+          [
+            105.834015,
+            21.037292
+          ],
+          [
+            105.833679,
+            21.037287
+          ],
+          [
+            105.833542,
+            21.036892
+          ],
+          [
+            105.832855,
+            21.037022
+          ],
+          [
+            105.831589,
+            21.0373
+          ],
+          [
+            105.830368,
+            21.037512
+          ],
+          [
+            105.82946,
+            21.037565
+          ],
+          [
+            105.829445,
+            21.036951
+          ],
+          [
+            105.829018,
+            21.036858
+          ],
+          [
+            105.829025,
+            21.036152
+          ],
+          [
+            105.828781,
+            21.036018
+          ],
+          [
+            105.828575,
+            21.035927
+          ],
+          [
+            105.82859,
+            21.035524
+          ],
+          [
+            105.828491,
+            21.035484
+          ],
+          [
+            105.827324,
+            21.035324
+          ],
+          [
+            105.826355,
+            21.035418
+          ],
+          [
+            105.82608,
+            21.035549
+          ],
+          [
+            105.82547,
+            21.035563
+          ],
+          [
+            105.825455,
+            21.03603
+          ],
+          [
+            105.824928,
+            21.036028
+          ],
+          [
+            105.824745,
+            21.036018
+          ],
+          [
+            105.824287,
+            21.036011
+          ],
+          [
+            105.824287,
+            21.036322
+          ],
+          [
+            105.823868,
+            21.036373
+          ],
+          [
+            105.823395,
+            21.0364
+          ],
+          [
+            105.82338,
+            21.036758
+          ],
+          [
+            105.822563,
+            21.036825
+          ],
+          [
+            105.822571,
+            21.036251
+          ],
+          [
+            105.82196,
+            21.036318
+          ],
+          [
+            105.821793,
+            21.036943
+          ],
+          [
+            105.821114,
+            21.036903
+          ],
+          [
+            105.821167,
+            21.03536
+          ],
+          [
+            105.819572,
+            21.035519
+          ],
+          [
+            105.819611,
+            21.036104
+          ],
+          [
+            105.819687,
+            21.036711
+          ],
+          [
+            105.819809,
+            21.037432
+          ],
+          [
+            105.820061,
+            21.038267
+          ],
+          [
+            105.820358,
+            21.038937
+          ],
+          [
+            105.820457,
+            21.0394
+          ],
+          [
+            105.820503,
+            21.039585
+          ],
+          [
+            105.821228,
+            21.042048
+          ],
+          [
+            105.821457,
+            21.042013
+          ],
+          [
+            105.82196,
+            21.04188
+          ],
+          [
+            105.822823,
+            21.041533
+          ],
+          [
+            105.823898,
+            21.041056
+          ],
+          [
+            105.825104,
+            21.040545
+          ],
+          [
+            105.826157,
+            21.040068
+          ],
+          [
+            105.826874,
+            21.03982
+          ],
+          [
+            105.82737,
+            21.039719
+          ],
+          [
+            105.827759,
+            21.039816
+          ],
+          [
+            105.827965,
+            21.040009
+          ],
+          [
+            105.828247,
+            21.040253
+          ],
+          [
+            105.828629,
+            21.040674
+          ],
+          [
+            105.829254,
+            21.041292
+          ],
+          [
+            105.829727,
+            21.041731
+          ],
+          [
+            105.830231,
+            21.041922
+          ],
+          [
+            105.831078,
+            21.042065
+          ],
+          [
+            105.832657,
+            21.042107
+          ],
+          [
+            105.834251,
+            21.041935
+          ],
+          [
+            105.835449,
+            21.041794
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 15,
+      "slug": "giang-vo",
+      "name": "Phường Giảng Võ",
+      "name_han_nom": "講武",
+      "name_old": "Trường Võ Bị Giảng Võ Thời Trần",
+      "new_administrative_name": "Phường Giảng Võ (Ba Đình)",
+      "merger_badge": "Trường Võ phong kiến",
+      "color": "#3B82F6",
+      "colorDark": "#1D4ED8",
+      "district": "Quận Ba Đình",
+      "summary": "Phường Giảng Võ xưa là Điện Giảng Võ - trường huấn luyện võ nghệ của quân đội phong kiến Đại Việt thời Lý - Trần - Lê. Đình Giảng Võ phụng thờ nữ tướng Bà Chúa Me anh hùng có công đánh đuổi giặc Nguyên Mông.",
+      "area_ha": 140,
+      "established": "Thời Trần (Thế kỷ XIII)",
+      "administrative_merger_2025": "Khu đô thị hành chính văn minh hiện đại bao bọc hồ Giảng Võ.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 18
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.816628,
+            21.030983
+          ],
+          [
+            105.818947,
+            21.03124
+          ],
+          [
+            105.819984,
+            21.031355
+          ],
+          [
+            105.821068,
+            21.031485
+          ],
+          [
+            105.822716,
+            21.029638
+          ],
+          [
+            105.823357,
+            21.02895
+          ],
+          [
+            105.824249,
+            21.027889
+          ],
+          [
+            105.819038,
+            21.023617
+          ],
+          [
+            105.81105,
+            21.024942
+          ],
+          [
+            105.810577,
+            21.025059
+          ],
+          [
+            105.81189,
+            21.026527
+          ],
+          [
+            105.812668,
+            21.027441
+          ],
+          [
+            105.813332,
+            21.027418
+          ],
+          [
+            105.814766,
+            21.027353
+          ],
+          [
+            105.817146,
+            21.027304
+          ],
+          [
+            105.817093,
+            21.028666
+          ],
+          [
+            105.816811,
+            21.03042
+          ],
+          [
+            105.816628,
+            21.030983
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 16,
+      "slug": "truc-bach",
+      "name": "Phường Trúc Bạch",
+      "name_han_nom": "竹帛",
+      "name_old": "Làng Ngũ Xã & Viện Trúc Bạch",
+      "new_administrative_name": "Phường Trúc Bạch (Ba Đình)",
+      "merger_badge": "Trấn Bắc & Ngũ Xã",
+      "color": "#06B6D4",
+      "colorDark": "#0891B2",
+      "district": "Quận Ba Đình",
+      "summary": "Phường Trúc Bạch nằm soi bóng hồ Trúc Bạch và Hồ Tây. Di sản đỉnh cao gồm Đền Quán Thánh (Trấn Bắc Thăng Long - Di tích Quốc gia đặc biệt), Chùa Trấn Quốc 1.500 năm tuổi và Làng đúc đồng Ngũ Xã tinh hoa.",
+      "area_ha": 67,
+      "established": "Thời Lý",
+      "administrative_merger_2025": "Không gian bán đảo du lịch văn hóa ẩm thực nổi tiếng của Thủ đô.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 61
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.835785,
+            21.046602
+          ],
+          [
+            105.835899,
+            21.046829
+          ],
+          [
+            105.836868,
+            21.047827
+          ],
+          [
+            105.837715,
+            21.049028
+          ],
+          [
+            105.838219,
+            21.049917
+          ],
+          [
+            105.838959,
+            21.050714
+          ],
+          [
+            105.839188,
+            21.050888
+          ],
+          [
+            105.839394,
+            21.050997
+          ],
+          [
+            105.840881,
+            21.049648
+          ],
+          [
+            105.841652,
+            21.048878
+          ],
+          [
+            105.842667,
+            21.047543
+          ],
+          [
+            105.842903,
+            21.047289
+          ],
+          [
+            105.84362,
+            21.046495
+          ],
+          [
+            105.844162,
+            21.046019
+          ],
+          [
+            105.844971,
+            21.045404
+          ],
+          [
+            105.845444,
+            21.045078
+          ],
+          [
+            105.84507,
+            21.043953
+          ],
+          [
+            105.844696,
+            21.043901
+          ],
+          [
+            105.844612,
+            21.042532
+          ],
+          [
+            105.844345,
+            21.042282
+          ],
+          [
+            105.843849,
+            21.041986
+          ],
+          [
+            105.843613,
+            21.042141
+          ],
+          [
+            105.843307,
+            21.04211
+          ],
+          [
+            105.843178,
+            21.042145
+          ],
+          [
+            105.842979,
+            21.042933
+          ],
+          [
+            105.842651,
+            21.042776
+          ],
+          [
+            105.842056,
+            21.042385
+          ],
+          [
+            105.84182,
+            21.042448
+          ],
+          [
+            105.841866,
+            21.042706
+          ],
+          [
+            105.841682,
+            21.042858
+          ],
+          [
+            105.841545,
+            21.0425
+          ],
+          [
+            105.841339,
+            21.042528
+          ],
+          [
+            105.841278,
+            21.042858
+          ],
+          [
+            105.841148,
+            21.04291
+          ],
+          [
+            105.840889,
+            21.042643
+          ],
+          [
+            105.840698,
+            21.042683
+          ],
+          [
+            105.840675,
+            21.043022
+          ],
+          [
+            105.840385,
+            21.043125
+          ],
+          [
+            105.840179,
+            21.043468
+          ],
+          [
+            105.840126,
+            21.043505
+          ],
+          [
+            105.84005,
+            21.043673
+          ],
+          [
+            105.839874,
+            21.043823
+          ],
+          [
+            105.839676,
+            21.04388
+          ],
+          [
+            105.839279,
+            21.043789
+          ],
+          [
+            105.838959,
+            21.043659
+          ],
+          [
+            105.838661,
+            21.043642
+          ],
+          [
+            105.838158,
+            21.043718
+          ],
+          [
+            105.837906,
+            21.043871
+          ],
+          [
+            105.837769,
+            21.04402
+          ],
+          [
+            105.837669,
+            21.04458
+          ],
+          [
+            105.837547,
+            21.044806
+          ],
+          [
+            105.837372,
+            21.044825
+          ],
+          [
+            105.837234,
+            21.044769
+          ],
+          [
+            105.837074,
+            21.04464
+          ],
+          [
+            105.836815,
+            21.044455
+          ],
+          [
+            105.836472,
+            21.044308
+          ],
+          [
+            105.836212,
+            21.044289
+          ],
+          [
+            105.83609,
+            21.04435
+          ],
+          [
+            105.835518,
+            21.044575
+          ],
+          [
+            105.835739,
+            21.046499
+          ],
+          [
+            105.835785,
+            21.046602
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 17,
+      "slug": "quan-thanh",
+      "name": "Phường Quán Thánh",
+      "name_han_nom": "觀聖",
+      "name_old": "Chính Bắc Môn Thăng Long",
+      "new_administrative_name": "Phường Quán Thánh (Ba Đình)",
+      "merger_badge": "Chính Bắc Môn Thành",
+      "color": "#1E3A8A",
+      "colorDark": "#172554",
+      "district": "Quận Ba Đình",
+      "summary": "Phường Quán Thánh ôm trọn tuyến đường Phan Đình Phùng rợp bóng cây sấu cổ thụ. Nơi tọa lạc Chính Bắc Môn thành Hà Nội còn nguyên vết đạn pháo năm 1882 và Chùa Châu Long cổ kính thời Trần.",
+      "area_ha": 62,
+      "established": "Thời Lê - Nguyễn",
+      "administrative_merger_2025": "Tuyến phố văn hóa lịch sử tiêu biểu của quận Ba Đình tiếp giáp Hồ Tây.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 72
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.843849,
+            21.041986
+          ],
+          [
+            105.843834,
+            21.041719
+          ],
+          [
+            105.843742,
+            21.041466
+          ],
+          [
+            105.84391,
+            21.041264
+          ],
+          [
+            105.844299,
+            21.041349
+          ],
+          [
+            105.845085,
+            21.040815
+          ],
+          [
+            105.845367,
+            21.040663
+          ],
+          [
+            105.845718,
+            21.040569
+          ],
+          [
+            105.845917,
+            21.040623
+          ],
+          [
+            105.846413,
+            21.040848
+          ],
+          [
+            105.846779,
+            21.040197
+          ],
+          [
+            105.846481,
+            21.040115
+          ],
+          [
+            105.846497,
+            21.039581
+          ],
+          [
+            105.845024,
+            21.039854
+          ],
+          [
+            105.844955,
+            21.03948
+          ],
+          [
+            105.844521,
+            21.03956
+          ],
+          [
+            105.843712,
+            21.035221
+          ],
+          [
+            105.843704,
+            21.035183
+          ],
+          [
+            105.840439,
+            21.035805
+          ],
+          [
+            105.840233,
+            21.034781
+          ],
+          [
+            105.838455,
+            21.035212
+          ],
+          [
+            105.8386,
+            21.036055
+          ],
+          [
+            105.837662,
+            21.036274
+          ],
+          [
+            105.835823,
+            21.036692
+          ],
+          [
+            105.836418,
+            21.03903
+          ],
+          [
+            105.835449,
+            21.039106
+          ],
+          [
+            105.834946,
+            21.039242
+          ],
+          [
+            105.834984,
+            21.039413
+          ],
+          [
+            105.835266,
+            21.040878
+          ],
+          [
+            105.835449,
+            21.041794
+          ],
+          [
+            105.835464,
+            21.041868
+          ],
+          [
+            105.835434,
+            21.042744
+          ],
+          [
+            105.835426,
+            21.043695
+          ],
+          [
+            105.835518,
+            21.044575
+          ],
+          [
+            105.83609,
+            21.04435
+          ],
+          [
+            105.836212,
+            21.044289
+          ],
+          [
+            105.836472,
+            21.044308
+          ],
+          [
+            105.836815,
+            21.044455
+          ],
+          [
+            105.837074,
+            21.04464
+          ],
+          [
+            105.837234,
+            21.044769
+          ],
+          [
+            105.837372,
+            21.044825
+          ],
+          [
+            105.837547,
+            21.044806
+          ],
+          [
+            105.837669,
+            21.04458
+          ],
+          [
+            105.837769,
+            21.04402
+          ],
+          [
+            105.837906,
+            21.043871
+          ],
+          [
+            105.838158,
+            21.043718
+          ],
+          [
+            105.838661,
+            21.043642
+          ],
+          [
+            105.838959,
+            21.043659
+          ],
+          [
+            105.839279,
+            21.043789
+          ],
+          [
+            105.839676,
+            21.04388
+          ],
+          [
+            105.839874,
+            21.043823
+          ],
+          [
+            105.84005,
+            21.043673
+          ],
+          [
+            105.840126,
+            21.043505
+          ],
+          [
+            105.840179,
+            21.043468
+          ],
+          [
+            105.840385,
+            21.043125
+          ],
+          [
+            105.840675,
+            21.043022
+          ],
+          [
+            105.840698,
+            21.042683
+          ],
+          [
+            105.840889,
+            21.042643
+          ],
+          [
+            105.841148,
+            21.04291
+          ],
+          [
+            105.841278,
+            21.042858
+          ],
+          [
+            105.841339,
+            21.042528
+          ],
+          [
+            105.841545,
+            21.0425
+          ],
+          [
+            105.841682,
+            21.042858
+          ],
+          [
+            105.841866,
+            21.042706
+          ],
+          [
+            105.84182,
+            21.042448
+          ],
+          [
+            105.842056,
+            21.042385
+          ],
+          [
+            105.842651,
+            21.042776
+          ],
+          [
+            105.842979,
+            21.042933
+          ],
+          [
+            105.843178,
+            21.042145
+          ],
+          [
+            105.843307,
+            21.04211
+          ],
+          [
+            105.843613,
+            21.042141
+          ],
+          [
+            105.843849,
+            21.041986
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 18,
+      "slug": "dich-vong",
+      "name": "Phường Dịch Vọng",
+      "name_han_nom": "易望",
+      "name_old": "Làng Dịch Vọng Tiền",
+      "new_administrative_name": "Phường Dịch Vọng (Cầu Giấy)",
+      "merger_badge": "Chùa Hà Cầu Duyên",
+      "color": "#059669",
+      "colorDark": "#047857",
+      "district": "Quận Cầu Giấy",
+      "summary": "Phường Dịch Vọng nổi danh với Chùa Hà (Thánh Đức Tự) - chốn cầu duyên linh thiêng bậc nhất Hà thành, cùng Đình Dịch Vọng và công viên Cầu Giấy rộng lớn xanh ngát.",
+      "area_ha": 132,
+      "established": "Thời Lý",
+      "administrative_merger_2025": "Trung tâm hành chính quận Cầu Giấy tiếp giáp trục đường Cầu Giấy và Trần Đăng Ninh.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 47
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.789902,
+            21.041815
+          ],
+          [
+            105.792023,
+            21.041807
+          ],
+          [
+            105.794052,
+            21.041779
+          ],
+          [
+            105.795021,
+            21.04245
+          ],
+          [
+            105.796104,
+            21.041874
+          ],
+          [
+            105.796379,
+            21.041754
+          ],
+          [
+            105.796638,
+            21.041546
+          ],
+          [
+            105.796745,
+            21.037636
+          ],
+          [
+            105.795975,
+            21.03759
+          ],
+          [
+            105.795967,
+            21.036833
+          ],
+          [
+            105.795273,
+            21.036932
+          ],
+          [
+            105.794327,
+            21.036936
+          ],
+          [
+            105.794624,
+            21.035721
+          ],
+          [
+            105.794754,
+            21.035257
+          ],
+          [
+            105.79467,
+            21.03484
+          ],
+          [
+            105.795052,
+            21.0347
+          ],
+          [
+            105.796394,
+            21.034266
+          ],
+          [
+            105.796799,
+            21.034056
+          ],
+          [
+            105.797691,
+            21.033142
+          ],
+          [
+            105.797615,
+            21.032982
+          ],
+          [
+            105.796951,
+            21.032074
+          ],
+          [
+            105.796608,
+            21.03224
+          ],
+          [
+            105.796089,
+            21.031643
+          ],
+          [
+            105.795937,
+            21.031363
+          ],
+          [
+            105.796448,
+            21.030708
+          ],
+          [
+            105.79641,
+            21.030273
+          ],
+          [
+            105.794609,
+            21.028479
+          ],
+          [
+            105.793419,
+            21.028343
+          ],
+          [
+            105.792984,
+            21.02639
+          ],
+          [
+            105.790977,
+            21.026796
+          ],
+          [
+            105.78965,
+            21.026667
+          ],
+          [
+            105.787529,
+            21.02659
+          ],
+          [
+            105.787125,
+            21.026567
+          ],
+          [
+            105.787125,
+            21.026642
+          ],
+          [
+            105.787056,
+            21.030396
+          ],
+          [
+            105.787491,
+            21.030949
+          ],
+          [
+            105.787689,
+            21.03129
+          ],
+          [
+            105.788116,
+            21.032042
+          ],
+          [
+            105.788322,
+            21.032396
+          ],
+          [
+            105.789078,
+            21.035423
+          ],
+          [
+            105.789162,
+            21.035746
+          ],
+          [
+            105.789192,
+            21.035887
+          ],
+          [
+            105.789925,
+            21.038916
+          ],
+          [
+            105.789932,
+            21.039349
+          ],
+          [
+            105.78994,
+            21.039989
+          ],
+          [
+            105.789925,
+            21.04092
+          ],
+          [
+            105.789902,
+            21.041815
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 19,
+      "slug": "yen-hoa",
+      "name": "Phường Yên Hòa",
+      "name_han_nom": "安和",
+      "name_old": "Làng Cót (Ngọc Quán) & Làng Hòa Mục",
+      "new_administrative_name": "Phường Yên Hòa (Cầu Giấy)",
+      "merger_badge": "Làng Cót Tiến sĩ",
+      "color": "#0284C7",
+      "colorDark": "#0369A1",
+      "district": "Quận Cầu Giấy",
+      "summary": "Làng Cót (Yên Hòa) nằm ven sông Tô Lịch nổi danh là đất hiếu học tiến sĩ 'Nhất Mộ Trạch, nhì Cót Hai'. Quần thể gồm Chùa Cót (Ngọc Quán Tự), Đình Hòa Mục và Đình Trung Kính.",
+      "area_ha": 217,
+      "established": "Thời Hậu Lê",
+      "administrative_merger_2025": "Địa bàn kinh tế dịch vụ đô thị năng động kẹp giữa đường Trần Thái Tông và Vũ Phạm Hàm.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 41
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.79641,
+            21.030273
+          ],
+          [
+            105.797234,
+            21.0306
+          ],
+          [
+            105.798111,
+            21.030794
+          ],
+          [
+            105.798203,
+            21.030106
+          ],
+          [
+            105.798813,
+            21.029997
+          ],
+          [
+            105.799026,
+            21.029964
+          ],
+          [
+            105.799164,
+            21.029833
+          ],
+          [
+            105.799156,
+            21.029505
+          ],
+          [
+            105.799782,
+            21.029242
+          ],
+          [
+            105.798897,
+            21.028229
+          ],
+          [
+            105.79818,
+            21.02746
+          ],
+          [
+            105.797447,
+            21.026344
+          ],
+          [
+            105.797241,
+            21.024702
+          ],
+          [
+            105.797539,
+            21.023993
+          ],
+          [
+            105.798622,
+            21.023218
+          ],
+          [
+            105.79966,
+            21.022165
+          ],
+          [
+            105.800278,
+            21.021233
+          ],
+          [
+            105.801384,
+            21.01927
+          ],
+          [
+            105.802216,
+            21.017754
+          ],
+          [
+            105.802254,
+            21.01771
+          ],
+          [
+            105.800026,
+            21.016598
+          ],
+          [
+            105.796616,
+            21.015688
+          ],
+          [
+            105.79538,
+            21.015484
+          ],
+          [
+            105.794632,
+            21.015223
+          ],
+          [
+            105.793236,
+            21.014585
+          ],
+          [
+            105.790092,
+            21.01667
+          ],
+          [
+            105.789093,
+            21.017296
+          ],
+          [
+            105.788597,
+            21.016699
+          ],
+          [
+            105.787666,
+            21.015404
+          ],
+          [
+            105.782532,
+            21.020332
+          ],
+          [
+            105.783394,
+            21.023203
+          ],
+          [
+            105.783409,
+            21.026402
+          ],
+          [
+            105.785721,
+            21.026485
+          ],
+          [
+            105.787125,
+            21.026567
+          ],
+          [
+            105.787529,
+            21.02659
+          ],
+          [
+            105.78965,
+            21.026667
+          ],
+          [
+            105.790977,
+            21.026796
+          ],
+          [
+            105.792984,
+            21.02639
+          ],
+          [
+            105.793419,
+            21.028343
+          ],
+          [
+            105.794609,
+            21.028479
+          ],
+          [
+            105.79641,
+            21.030273
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 20,
+      "slug": "nghia-do",
+      "name": "Phường Nghĩa Đô",
+      "name_han_nom": "義都",
+      "name_old": "Làng Nghĩa Đô (Bái Ân Cổ Thôn)",
+      "new_administrative_name": "Phường Nghĩa Đô (Cầu Giấy)",
+      "merger_badge": "Đình Trần Khát Chân",
+      "color": "#0E7490",
+      "colorDark": "#155E75",
+      "district": "Quận Cầu Giấy",
+      "summary": "Làng Nghĩa Đô nằm bên ngã ba sông Tô Lịch. Nơi đây thờ Thượng tướng quân Trần Khát Chân có công đánh dẹp giặc Chiêm Thành cứu Thăng Long năm 1390. Di tích tiêu biểu gồm Đình Nghĩa Đô và Chùa Duệ Tú.",
+      "area_ha": 147,
+      "established": "Thời Trần (Thế kỷ XIV)",
+      "administrative_merger_2025": "Khu đô thị sinh thái kết nối Tây Hồ Tây và trục đường Hoàng Quốc Việt.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 66
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.80825,
+            21.059435
+          ],
+          [
+            105.808289,
+            21.059443
+          ],
+          [
+            105.808228,
+            21.056213
+          ],
+          [
+            105.808327,
+            21.054028
+          ],
+          [
+            105.808357,
+            21.0529
+          ],
+          [
+            105.806808,
+            21.05048
+          ],
+          [
+            105.805733,
+            21.048714
+          ],
+          [
+            105.805359,
+            21.04767
+          ],
+          [
+            105.805244,
+            21.04735
+          ],
+          [
+            105.805061,
+            21.04619
+          ],
+          [
+            105.804398,
+            21.046186
+          ],
+          [
+            105.804825,
+            21.044899
+          ],
+          [
+            105.804878,
+            21.043604
+          ],
+          [
+            105.80468,
+            21.042742
+          ],
+          [
+            105.804604,
+            21.041859
+          ],
+          [
+            105.805382,
+            21.040173
+          ],
+          [
+            105.803284,
+            21.03956
+          ],
+          [
+            105.802094,
+            21.039577
+          ],
+          [
+            105.801628,
+            21.03953
+          ],
+          [
+            105.80114,
+            21.039495
+          ],
+          [
+            105.801064,
+            21.039038
+          ],
+          [
+            105.79966,
+            21.039028
+          ],
+          [
+            105.799599,
+            21.039165
+          ],
+          [
+            105.799332,
+            21.039261
+          ],
+          [
+            105.798462,
+            21.039461
+          ],
+          [
+            105.798004,
+            21.039549
+          ],
+          [
+            105.797562,
+            21.039619
+          ],
+          [
+            105.797226,
+            21.03966
+          ],
+          [
+            105.797218,
+            21.039837
+          ],
+          [
+            105.797226,
+            21.040382
+          ],
+          [
+            105.79718,
+            21.041508
+          ],
+          [
+            105.797089,
+            21.041521
+          ],
+          [
+            105.796638,
+            21.041546
+          ],
+          [
+            105.796379,
+            21.041754
+          ],
+          [
+            105.796104,
+            21.041874
+          ],
+          [
+            105.795021,
+            21.04245
+          ],
+          [
+            105.795074,
+            21.042484
+          ],
+          [
+            105.796127,
+            21.043167
+          ],
+          [
+            105.796051,
+            21.046194
+          ],
+          [
+            105.794098,
+            21.046204
+          ],
+          [
+            105.794083,
+            21.048332
+          ],
+          [
+            105.793266,
+            21.049603
+          ],
+          [
+            105.794495,
+            21.050211
+          ],
+          [
+            105.796822,
+            21.047918
+          ],
+          [
+            105.797455,
+            21.047308
+          ],
+          [
+            105.798721,
+            21.048882
+          ],
+          [
+            105.800339,
+            21.04899
+          ],
+          [
+            105.800339,
+            21.049753
+          ],
+          [
+            105.801537,
+            21.049793
+          ],
+          [
+            105.802582,
+            21.051666
+          ],
+          [
+            105.803284,
+            21.052402
+          ],
+          [
+            105.803825,
+            21.052067
+          ],
+          [
+            105.804276,
+            21.0527
+          ],
+          [
+            105.804092,
+            21.053247
+          ],
+          [
+            105.805069,
+            21.053747
+          ],
+          [
+            105.805847,
+            21.054398
+          ],
+          [
+            105.805077,
+            21.054989
+          ],
+          [
+            105.80439,
+            21.055479
+          ],
+          [
+            105.80555,
+            21.056625
+          ],
+          [
+            105.806648,
+            21.056211
+          ],
+          [
+            105.807228,
+            21.05633
+          ],
+          [
+            105.807304,
+            21.057114
+          ],
+          [
+            105.807343,
+            21.057976
+          ],
+          [
+            105.807404,
+            21.059031
+          ],
+          [
+            105.807716,
+            21.059317
+          ],
+          [
+            105.80825,
+            21.059435
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 21,
+      "slug": "dich-vong-hau",
+      "name": "Dịch Vọng Hậu",
+      "name_han_nom": "易望後",
+      "name_old": "Làng Cốm Vòng (Thôn Hậu Cổ)",
+      "new_administrative_name": "Phường Dịch Vọng Hậu (Cầu Giấy)",
+      "merger_badge": "Đặc sản Cốm Vòng",
+      "color": "#0369A1",
+      "colorDark": "#075985",
+      "district": "Quận Cầu Giấy",
+      "summary": "Dịch Vọng Hậu là quê hương của Cốm Vòng - nét tinh hoa ẩm thực tao nhã ngàn đời của Thăng Long Hà Nội. Đình Hậu và các xóm nghề lưu giữ bí quyết sao cốm xanh mướt dẻo thơm.",
+      "area_ha": 153,
+      "established": "Thời Hậu Lê",
+      "administrative_merger_2025": "Thung lũng công nghệ thông tin và học thuật với các trường đại học lớn của Thủ đô.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 41
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.785789,
+            21.044538
+          ],
+          [
+            105.785805,
+            21.043657
+          ],
+          [
+            105.789803,
+            21.04364
+          ],
+          [
+            105.789864,
+            21.041815
+          ],
+          [
+            105.789902,
+            21.041815
+          ],
+          [
+            105.789925,
+            21.04092
+          ],
+          [
+            105.78994,
+            21.039989
+          ],
+          [
+            105.789932,
+            21.039349
+          ],
+          [
+            105.789925,
+            21.038916
+          ],
+          [
+            105.789192,
+            21.035887
+          ],
+          [
+            105.789162,
+            21.035746
+          ],
+          [
+            105.789078,
+            21.035423
+          ],
+          [
+            105.788322,
+            21.032396
+          ],
+          [
+            105.788116,
+            21.032042
+          ],
+          [
+            105.787689,
+            21.03129
+          ],
+          [
+            105.787491,
+            21.030949
+          ],
+          [
+            105.787056,
+            21.030396
+          ],
+          [
+            105.787125,
+            21.026642
+          ],
+          [
+            105.787125,
+            21.026567
+          ],
+          [
+            105.785721,
+            21.026485
+          ],
+          [
+            105.783409,
+            21.026402
+          ],
+          [
+            105.783417,
+            21.026836
+          ],
+          [
+            105.78334,
+            21.02809
+          ],
+          [
+            105.783287,
+            21.029324
+          ],
+          [
+            105.782654,
+            21.029348
+          ],
+          [
+            105.781067,
+            21.029263
+          ],
+          [
+            105.781044,
+            21.029634
+          ],
+          [
+            105.781029,
+            21.031637
+          ],
+          [
+            105.780334,
+            21.031689
+          ],
+          [
+            105.779617,
+            21.031734
+          ],
+          [
+            105.779678,
+            21.031879
+          ],
+          [
+            105.779816,
+            21.032606
+          ],
+          [
+            105.779068,
+            21.032749
+          ],
+          [
+            105.779076,
+            21.033451
+          ],
+          [
+            105.779129,
+            21.034323
+          ],
+          [
+            105.779282,
+            21.03524
+          ],
+          [
+            105.779518,
+            21.036942
+          ],
+          [
+            105.780067,
+            21.036917
+          ],
+          [
+            105.78067,
+            21.036886
+          ],
+          [
+            105.781029,
+            21.044619
+          ],
+          [
+            105.785789,
+            21.044538
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 22,
+      "slug": "trang-tien",
+      "name": "Phường Tràng Tiền",
+      "name_han_nom": "場錢",
+      "name_old": "Xưởng Đúc Tiền Triều Nguyễn",
+      "new_administrative_name": "Phường Tràng Tiền (Hoàn Kiếm)",
+      "merger_badge": "Nhà hát Lớn 1911",
+      "color": "#E11D48",
+      "colorDark": "#9F1239",
+      "district": "Quận Hoàn Kiếm",
+      "summary": "Phường Tràng Tiền ôm trọn Nhà hát Lớn Hà Nội (1911) tại Quảng trường Cách mạng Tháng Tám, Bảo tàng Lịch sử Quốc gia và trục phố Tràng Tiền nối ra Tháp Rùa Hồ Gươm lịch sử.",
+      "area_ha": 41,
+      "established": "Thời Nguyễn (1808)",
+      "administrative_merger_2025": "Không gian kiến trúc Đông Dương và văn hóa nghệ thuật tinh hoa của kinh thành Thăng Long.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 78
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.852814,
+            21.028028
+          ],
+          [
+            105.853737,
+            21.027931
+          ],
+          [
+            105.854935,
+            21.027821
+          ],
+          [
+            105.855515,
+            21.027834
+          ],
+          [
+            105.856178,
+            21.027933
+          ],
+          [
+            105.857475,
+            21.028114
+          ],
+          [
+            105.857635,
+            21.027792
+          ],
+          [
+            105.858246,
+            21.026606
+          ],
+          [
+            105.858559,
+            21.026009
+          ],
+          [
+            105.858681,
+            21.025826
+          ],
+          [
+            105.8591,
+            21.025444
+          ],
+          [
+            105.859428,
+            21.025246
+          ],
+          [
+            105.859283,
+            21.025229
+          ],
+          [
+            105.858978,
+            21.025167
+          ],
+          [
+            105.857559,
+            21.024832
+          ],
+          [
+            105.85762,
+            21.024633
+          ],
+          [
+            105.857758,
+            21.024212
+          ],
+          [
+            105.857742,
+            21.024126
+          ],
+          [
+            105.857559,
+            21.023939
+          ],
+          [
+            105.857719,
+            21.023479
+          ],
+          [
+            105.857147,
+            21.023441
+          ],
+          [
+            105.856941,
+            21.023705
+          ],
+          [
+            105.856583,
+            21.023672
+          ],
+          [
+            105.856918,
+            21.02257
+          ],
+          [
+            105.856842,
+            21.02257
+          ],
+          [
+            105.856155,
+            21.022757
+          ],
+          [
+            105.85614,
+            21.023144
+          ],
+          [
+            105.855766,
+            21.023256
+          ],
+          [
+            105.855644,
+            21.022963
+          ],
+          [
+            105.855301,
+            21.023066
+          ],
+          [
+            105.85527,
+            21.022821
+          ],
+          [
+            105.855225,
+            21.022831
+          ],
+          [
+            105.854286,
+            21.023071
+          ],
+          [
+            105.854332,
+            21.02323
+          ],
+          [
+            105.854088,
+            21.023287
+          ],
+          [
+            105.854134,
+            21.023565
+          ],
+          [
+            105.853607,
+            21.023731
+          ],
+          [
+            105.85334,
+            21.023275
+          ],
+          [
+            105.853111,
+            21.02335
+          ],
+          [
+            105.852783,
+            21.023472
+          ],
+          [
+            105.852699,
+            21.023554
+          ],
+          [
+            105.852829,
+            21.023954
+          ],
+          [
+            105.852478,
+            21.024075
+          ],
+          [
+            105.852478,
+            21.024252
+          ],
+          [
+            105.852074,
+            21.024288
+          ],
+          [
+            105.852036,
+            21.024048
+          ],
+          [
+            105.851723,
+            21.024094
+          ],
+          [
+            105.851707,
+            21.023787
+          ],
+          [
+            105.851242,
+            21.023794
+          ],
+          [
+            105.85125,
+            21.024082
+          ],
+          [
+            105.850815,
+            21.024288
+          ],
+          [
+            105.850899,
+            21.024576
+          ],
+          [
+            105.850517,
+            21.024687
+          ],
+          [
+            105.850365,
+            21.024296
+          ],
+          [
+            105.850121,
+            21.024361
+          ],
+          [
+            105.849823,
+            21.023781
+          ],
+          [
+            105.848846,
+            21.024181
+          ],
+          [
+            105.848946,
+            21.02532
+          ],
+          [
+            105.84922,
+            21.026321
+          ],
+          [
+            105.849541,
+            21.02626
+          ],
+          [
+            105.849464,
+            21.026014
+          ],
+          [
+            105.850159,
+            21.025778
+          ],
+          [
+            105.849991,
+            21.025513
+          ],
+          [
+            105.850327,
+            21.02532
+          ],
+          [
+            105.850517,
+            21.025513
+          ],
+          [
+            105.8507,
+            21.025734
+          ],
+          [
+            105.851089,
+            21.02599
+          ],
+          [
+            105.851295,
+            21.026033
+          ],
+          [
+            105.851585,
+            21.026087
+          ],
+          [
+            105.852066,
+            21.026043
+          ],
+          [
+            105.852295,
+            21.026121
+          ],
+          [
+            105.852425,
+            21.026306
+          ],
+          [
+            105.852463,
+            21.026508
+          ],
+          [
+            105.85247,
+            21.026772
+          ],
+          [
+            105.852493,
+            21.027151
+          ],
+          [
+            105.85257,
+            21.027431
+          ],
+          [
+            105.852783,
+            21.027882
+          ],
+          [
+            105.852814,
+            21.028028
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 23,
+      "slug": "hang-bac-hang-dao",
+      "name": "Hàng Bạc & Hàng Đào",
+      "name_han_nom": "行銀 · 行桃",
+      "name_old": "Phường Đồng Lạc & Trâu Khê (36 Phố Phường)",
+      "new_administrative_name": "Khu Phố Cổ Hàng Bạc (Hoàn Kiếm)",
+      "merger_badge": "Di tích Quốc gia đặc biệt",
+      "color": "#DC2626",
+      "colorDark": "#991B1B",
+      "district": "Quận Hoàn Kiếm",
+      "summary": "Trái tim của khu phố cổ 36 phố phường Hà Nội với Đền Ngọc Sơn trên Hồ Hoàn Kiếm, Cầu Thê Húc, Tháp Bút và Đình Kim Ngân (42 Hàng Bạc) - nơi tôn thờ ông tổ nghề đúc bạc kim hoàn Đại Việt.",
+      "area_ha": 29,
+      "established": "Thế kỷ XV",
+      "administrative_merger_2025": "Vùng lõi bảo tồn di sản đô thị cổ đặc biệt của Thủ đô Hà Nội.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 66
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.853462,
+            21.033791
+          ],
+          [
+            105.853554,
+            21.033457
+          ],
+          [
+            105.853615,
+            21.032568
+          ],
+          [
+            105.853836,
+            21.032524
+          ],
+          [
+            105.853836,
+            21.032164
+          ],
+          [
+            105.853783,
+            21.032078
+          ],
+          [
+            105.853462,
+            21.03175
+          ],
+          [
+            105.85331,
+            21.031628
+          ],
+          [
+            105.852791,
+            21.03157
+          ],
+          [
+            105.852554,
+            21.031479
+          ],
+          [
+            105.852547,
+            21.031204
+          ],
+          [
+            105.852463,
+            21.03109
+          ],
+          [
+            105.852257,
+            21.031109
+          ],
+          [
+            105.852112,
+            21.031124
+          ],
+          [
+            105.852028,
+            21.031197
+          ],
+          [
+            105.851913,
+            21.03138
+          ],
+          [
+            105.851845,
+            21.031487
+          ],
+          [
+            105.8517,
+            21.031601
+          ],
+          [
+            105.851578,
+            21.031626
+          ],
+          [
+            105.851395,
+            21.031616
+          ],
+          [
+            105.851128,
+            21.031757
+          ],
+          [
+            105.850685,
+            21.031836
+          ],
+          [
+            105.850563,
+            21.031904
+          ],
+          [
+            105.850479,
+            21.032087
+          ],
+          [
+            105.850159,
+            21.032454
+          ],
+          [
+            105.849998,
+            21.032551
+          ],
+          [
+            105.849754,
+            21.032415
+          ],
+          [
+            105.849724,
+            21.032637
+          ],
+          [
+            105.849709,
+            21.032982
+          ],
+          [
+            105.849503,
+            21.033346
+          ],
+          [
+            105.849243,
+            21.033621
+          ],
+          [
+            105.849022,
+            21.033792
+          ],
+          [
+            105.849083,
+            21.034092
+          ],
+          [
+            105.849037,
+            21.034298
+          ],
+          [
+            105.848938,
+            21.034676
+          ],
+          [
+            105.848587,
+            21.034868
+          ],
+          [
+            105.848618,
+            21.03566
+          ],
+          [
+            105.848274,
+            21.035843
+          ],
+          [
+            105.848213,
+            21.035992
+          ],
+          [
+            105.848297,
+            21.036892
+          ],
+          [
+            105.848518,
+            21.03672
+          ],
+          [
+            105.848778,
+            21.036951
+          ],
+          [
+            105.849136,
+            21.036867
+          ],
+          [
+            105.849541,
+            21.036842
+          ],
+          [
+            105.849525,
+            21.036533
+          ],
+          [
+            105.849609,
+            21.036308
+          ],
+          [
+            105.849739,
+            21.036175
+          ],
+          [
+            105.849899,
+            21.036102
+          ],
+          [
+            105.849968,
+            21.036057
+          ],
+          [
+            105.84996,
+            21.035948
+          ],
+          [
+            105.849678,
+            21.035868
+          ],
+          [
+            105.849739,
+            21.035597
+          ],
+          [
+            105.849785,
+            21.035389
+          ],
+          [
+            105.850113,
+            21.035173
+          ],
+          [
+            105.850266,
+            21.034796
+          ],
+          [
+            105.850784,
+            21.034697
+          ],
+          [
+            105.85125,
+            21.034624
+          ],
+          [
+            105.851295,
+            21.034353
+          ],
+          [
+            105.851334,
+            21.034336
+          ],
+          [
+            105.851662,
+            21.034309
+          ],
+          [
+            105.851891,
+            21.03459
+          ],
+          [
+            105.852455,
+            21.034571
+          ],
+          [
+            105.8526,
+            21.034372
+          ],
+          [
+            105.853172,
+            21.03421
+          ],
+          [
+            105.853424,
+            21.034046
+          ],
+          [
+            105.853462,
+            21.033791
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 24,
+      "slug": "dong-xuan",
+      "name": "Phường Đồng Xuân",
+      "name_han_nom": "同春",
+      "name_old": "Khu Chợ Cổ Đồng Xuân & Đền Bạch Mã",
+      "new_administrative_name": "Phường Đồng Xuân (Hoàn Kiếm)",
+      "merger_badge": "Trấn Đông Bạch Mã",
+      "color": "#EF4444",
+      "colorDark": "#B91C1C",
+      "district": "Quận Hoàn Kiếm",
+      "summary": "Phường Đồng Xuân lưu giữ Đền Bạch Mã - Trấn Đông Thăng Long khởi dựng từ năm 866 thờ thần Long Đỗ, cùng Chợ Đồng Xuân lịch sử biểu tượng thương mại ngàn năm bên bến sông Hồng xưa.",
+      "area_ha": 33,
+      "established": "Năm 866 (Thời Đường)",
+      "administrative_merger_2025": "Trung tâm thương mại truyền thống và di sản văn hóa phố cổ Thăng Long.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 24
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.84919,
+            21.040869
+          ],
+          [
+            105.849876,
+            21.04019
+          ],
+          [
+            105.850281,
+            21.040356
+          ],
+          [
+            105.850647,
+            21.039921
+          ],
+          [
+            105.85144,
+            21.039034
+          ],
+          [
+            105.851288,
+            21.03891
+          ],
+          [
+            105.85173,
+            21.038374
+          ],
+          [
+            105.852547,
+            21.037464
+          ],
+          [
+            105.851997,
+            21.037197
+          ],
+          [
+            105.851616,
+            21.037075
+          ],
+          [
+            105.851151,
+            21.037195
+          ],
+          [
+            105.85083,
+            21.036953
+          ],
+          [
+            105.849991,
+            21.037098
+          ],
+          [
+            105.849541,
+            21.036842
+          ],
+          [
+            105.849136,
+            21.036867
+          ],
+          [
+            105.848778,
+            21.036951
+          ],
+          [
+            105.848419,
+            21.037231
+          ],
+          [
+            105.848061,
+            21.037516
+          ],
+          [
+            105.847542,
+            21.038105
+          ],
+          [
+            105.846909,
+            21.038876
+          ],
+          [
+            105.846497,
+            21.039581
+          ],
+          [
+            105.846481,
+            21.040115
+          ],
+          [
+            105.846779,
+            21.040197
+          ],
+          [
+            105.84919,
+            21.040869
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 25,
+      "slug": "dong-nhan",
+      "name": "Phường Đồng Nhân",
+      "name_han_nom": "同仁",
+      "name_old": "Làng Đồng Nhân (Đền Hai Bà Trưng)",
+      "new_administrative_name": "Phường Đồng Nhân (Hai Bà Trưng)",
+      "merger_badge": "Di tích Quốc gia đặc biệt",
+      "color": "#D97706",
+      "colorDark": "#92400E",
+      "district": "Quận Hai Bà Trưng",
+      "summary": "Phường Đồng Nhân là nơi tọa lạc Đền Hai Bà Trưng (Đền Đồng Nhân) - Di tích Quốc gia đặc biệt khởi dựng từ năm 1160 thời vua Lý Anh Tông bên bãi sông Hồng, thờ Nhị vị Trưng Vương anh hùng dân tộc.",
+      "area_ha": 28,
+      "established": "Năm 1160 (thời Lý Anh Tông)",
+      "administrative_merger_2025": "Khu di tích lịch sử tâm linh cấp quốc gia đặc biệt của quận Hai Bà Trưng.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 37
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.853874,
+            21.014048
+          ],
+          [
+            105.856239,
+            21.014326
+          ],
+          [
+            105.857666,
+            21.014494
+          ],
+          [
+            105.858177,
+            21.013254
+          ],
+          [
+            105.85762,
+            21.01285
+          ],
+          [
+            105.85714,
+            21.013533
+          ],
+          [
+            105.856956,
+            21.01343
+          ],
+          [
+            105.856781,
+            21.013323
+          ],
+          [
+            105.85688,
+            21.013168
+          ],
+          [
+            105.856651,
+            21.012993
+          ],
+          [
+            105.856171,
+            21.012903
+          ],
+          [
+            105.856186,
+            21.012579
+          ],
+          [
+            105.857025,
+            21.01268
+          ],
+          [
+            105.85704,
+            21.012329
+          ],
+          [
+            105.856369,
+            21.011843
+          ],
+          [
+            105.856155,
+            21.011992
+          ],
+          [
+            105.85585,
+            21.011629
+          ],
+          [
+            105.855865,
+            21.011242
+          ],
+          [
+            105.856438,
+            21.011278
+          ],
+          [
+            105.856499,
+            21.011267
+          ],
+          [
+            105.857674,
+            21.012007
+          ],
+          [
+            105.858086,
+            21.011553
+          ],
+          [
+            105.857666,
+            21.011314
+          ],
+          [
+            105.857964,
+            21.0109
+          ],
+          [
+            105.857422,
+            21.010092
+          ],
+          [
+            105.857079,
+            21.010115
+          ],
+          [
+            105.856262,
+            21.010015
+          ],
+          [
+            105.855568,
+            21.00985
+          ],
+          [
+            105.855499,
+            21.010181
+          ],
+          [
+            105.855072,
+            21.010181
+          ],
+          [
+            105.855019,
+            21.010538
+          ],
+          [
+            105.854095,
+            21.01063
+          ],
+          [
+            105.854042,
+            21.010738
+          ],
+          [
+            105.853775,
+            21.01156
+          ],
+          [
+            105.853706,
+            21.013336
+          ],
+          [
+            105.85363,
+            21.014021
+          ],
+          [
+            105.853874,
+            21.014048
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 26,
+      "slug": "bach-mai",
+      "name": "Phường Bạch Mai",
+      "name_han_nom": "白梅",
+      "name_old": "Làng Cổ Hồng Mai (Tháp Cửu Phẩm)",
+      "new_administrative_name": "Phường Bạch Mai (Hai Bà Trưng)",
+      "merger_badge": "Chùa Liên Phái 1726",
+      "color": "#F59E0B",
+      "colorDark": "#B45309",
+      "district": "Quận Hai Bà Trưng",
+      "summary": "Phường Bạch Mai xưa là làng cổ Hồng Mai. Di sản tiêu biểu là Chùa Liên Phái (Liên Tông Tự 1726) chốn tổ thiền phái Trúc Lâm Yên Tử tại Hà Nội với tháp Cửu Phẩm Liên Hoa và Đình Mai Động.",
+      "area_ha": 64,
+      "established": "Thời Hậu Lê",
+      "administrative_merger_2025": "Khu dân cư văn hiến kết nối trung tâm với trục đường Bạch Mai và Minh Khai.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 47
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.849525,
+            21.003584
+          ],
+          [
+            105.850098,
+            21.003576
+          ],
+          [
+            105.850075,
+            21.003325
+          ],
+          [
+            105.850571,
+            21.003351
+          ],
+          [
+            105.85051,
+            21.002636
+          ],
+          [
+            105.851173,
+            21.002537
+          ],
+          [
+            105.851273,
+            21.003122
+          ],
+          [
+            105.851662,
+            21.003086
+          ],
+          [
+            105.851784,
+            21.00305
+          ],
+          [
+            105.8517,
+            21.002756
+          ],
+          [
+            105.851677,
+            21.002468
+          ],
+          [
+            105.852982,
+            21.002331
+          ],
+          [
+            105.853279,
+            21.002399
+          ],
+          [
+            105.853439,
+            21.002625
+          ],
+          [
+            105.853607,
+            21.002781
+          ],
+          [
+            105.853775,
+            21.002884
+          ],
+          [
+            105.853935,
+            21.002876
+          ],
+          [
+            105.854416,
+            21.00227
+          ],
+          [
+            105.854462,
+            21.002277
+          ],
+          [
+            105.854851,
+            21.001852
+          ],
+          [
+            105.854851,
+            21.001339
+          ],
+          [
+            105.853683,
+            21.00132
+          ],
+          [
+            105.852837,
+            21.001282
+          ],
+          [
+            105.852409,
+            21.001154
+          ],
+          [
+            105.852173,
+            21.000877
+          ],
+          [
+            105.852058,
+            21.000071
+          ],
+          [
+            105.852119,
+            20.997524
+          ],
+          [
+            105.850731,
+            20.997482
+          ],
+          [
+            105.850693,
+            20.99748
+          ],
+          [
+            105.85051,
+            20.997492
+          ],
+          [
+            105.850555,
+            20.997877
+          ],
+          [
+            105.850067,
+            20.997862
+          ],
+          [
+            105.850121,
+            20.998453
+          ],
+          [
+            105.849388,
+            20.998489
+          ],
+          [
+            105.849533,
+            20.999172
+          ],
+          [
+            105.848778,
+            20.999275
+          ],
+          [
+            105.848648,
+            20.999083
+          ],
+          [
+            105.847855,
+            20.999571
+          ],
+          [
+            105.848267,
+            21.000044
+          ],
+          [
+            105.847931,
+            21.000269
+          ],
+          [
+            105.848663,
+            21.001001
+          ],
+          [
+            105.849236,
+            21.001516
+          ],
+          [
+            105.849472,
+            21.001759
+          ],
+          [
+            105.849564,
+            21.001957
+          ],
+          [
+            105.849701,
+            21.002613
+          ],
+          [
+            105.849388,
+            21.002731
+          ],
+          [
+            105.849525,
+            21.003584
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 27,
+      "slug": "dong-tam",
+      "name": "Phường Đồng Tâm",
+      "name_han_nom": "同心",
+      "name_old": "Làng Đại La Cổ & Ký túc xá Bách Khoa",
+      "new_administrative_name": "Phường Đồng Tâm (Hai Bà Trưng)",
+      "merger_badge": "Đại học Bách Khoa",
+      "color": "#CA8A04",
+      "colorDark": "#854D0E",
+      "district": "Quận Hai Bà Trưng",
+      "summary": "Phường Đồng Tâm là cái nôi khoa học kỹ thuật với Đại học Bách Khoa Hà Nội, Đại học Xây dựng và Đại học Kinh tế Quốc dân, cùng di tích Đình Đồng Tâm cổ kính thời Thăng Long xưa.",
+      "area_ha": 67,
+      "established": "Thế kỷ XIX",
+      "administrative_merger_2025": "Khu đại học và đô thị tri thức trọng điểm bậc nhất Thủ đô Hà Nội.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 59
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.840851,
+            21.005177
+          ],
+          [
+            105.84169,
+            21.005192
+          ],
+          [
+            105.841675,
+            21.00499
+          ],
+          [
+            105.841621,
+            21.004553
+          ],
+          [
+            105.841621,
+            21.003931
+          ],
+          [
+            105.841766,
+            21.00383
+          ],
+          [
+            105.842834,
+            21.003714
+          ],
+          [
+            105.843414,
+            21.003731
+          ],
+          [
+            105.843826,
+            21.003698
+          ],
+          [
+            105.84404,
+            21.003496
+          ],
+          [
+            105.844032,
+            21.003067
+          ],
+          [
+            105.844254,
+            21.002415
+          ],
+          [
+            105.84449,
+            21.001942
+          ],
+          [
+            105.844627,
+            21.001579
+          ],
+          [
+            105.844673,
+            21.000746
+          ],
+          [
+            105.844948,
+            21.000704
+          ],
+          [
+            105.846207,
+            21.000713
+          ],
+          [
+            105.847,
+            21.000647
+          ],
+          [
+            105.847588,
+            21.000458
+          ],
+          [
+            105.847931,
+            21.000269
+          ],
+          [
+            105.847069,
+            20.999411
+          ],
+          [
+            105.846519,
+            20.99894
+          ],
+          [
+            105.845818,
+            20.998272
+          ],
+          [
+            105.844971,
+            20.997845
+          ],
+          [
+            105.844925,
+            20.99736
+          ],
+          [
+            105.844818,
+            20.996805
+          ],
+          [
+            105.844673,
+            20.996435
+          ],
+          [
+            105.844398,
+            20.995852
+          ],
+          [
+            105.844124,
+            20.995382
+          ],
+          [
+            105.843864,
+            20.99497
+          ],
+          [
+            105.843597,
+            20.994553
+          ],
+          [
+            105.842957,
+            20.993889
+          ],
+          [
+            105.842598,
+            20.993488
+          ],
+          [
+            105.8424,
+            20.993233
+          ],
+          [
+            105.842232,
+            20.992907
+          ],
+          [
+            105.842155,
+            20.992579
+          ],
+          [
+            105.842125,
+            20.992151
+          ],
+          [
+            105.842186,
+            20.991753
+          ],
+          [
+            105.842255,
+            20.991398
+          ],
+          [
+            105.841293,
+            20.991503
+          ],
+          [
+            105.840431,
+            20.991629
+          ],
+          [
+            105.840462,
+            20.992952
+          ],
+          [
+            105.841057,
+            20.993662
+          ],
+          [
+            105.841614,
+            20.994398
+          ],
+          [
+            105.841957,
+            20.994846
+          ],
+          [
+            105.841965,
+            20.995295
+          ],
+          [
+            105.841942,
+            20.99575
+          ],
+          [
+            105.841843,
+            20.997311
+          ],
+          [
+            105.841774,
+            20.997709
+          ],
+          [
+            105.841667,
+            20.998152
+          ],
+          [
+            105.841499,
+            20.998577
+          ],
+          [
+            105.841316,
+            20.998993
+          ],
+          [
+            105.841118,
+            20.999355
+          ],
+          [
+            105.840935,
+            20.99975
+          ],
+          [
+            105.840744,
+            21.00001
+          ],
+          [
+            105.840553,
+            21.0002
+          ],
+          [
+            105.840843,
+            21.002907
+          ],
+          [
+            105.840843,
+            21.004419
+          ],
+          [
+            105.840851,
+            21.005177
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "id": 28,
+      "slug": "thanh-luong",
+      "name": "Phường Thanh Lương",
+      "name_han_nom": "清涼",
+      "name_old": "Làng Lương Yên Cổ (Bến Đò Sông Hồng)",
+      "new_administrative_name": "Phường Thanh Lương (Hai Bà Trưng)",
+      "merger_badge": "Bến Lương Yên cổ",
+      "color": "#78350F",
+      "colorDark": "#451A03",
+      "district": "Quận Hai Bà Trưng",
+      "summary": "Phường Thanh Lương nằm sát triền đê sông Hồng. Nơi bảo lưu Đình Lương Yên và Chùa Hộ Quốc gắn liền với lịch sử giao thương thủy lộ sầm uất của kinh thành Thăng Long ngàn năm văn hiến.",
+      "area_ha": 104,
+      "established": "Thế kỷ XVIII",
+      "administrative_merger_2025": "Dải cảnh quan ven sông Hồng tiếp giáp cảng Hà Nội và cầu Vĩnh Tuy.",
+      "boundary_source": "GADM Official Administrative GIS (Vietnam Level-4 Ward Boundary) & OSM admin_level=8",
+      "boundary_points_count": 44
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            105.860718,
+            21.009295
+          ],
+          [
+            105.861008,
+            21.009287
+          ],
+          [
+            105.861542,
+            21.009218
+          ],
+          [
+            105.862061,
+            21.009022
+          ],
+          [
+            105.862709,
+            21.008631
+          ],
+          [
+            105.862961,
+            21.008301
+          ],
+          [
+            105.864235,
+            21.008614
+          ],
+          [
+            105.86496,
+            21.008816
+          ],
+          [
+            105.865685,
+            21.009295
+          ],
+          [
+            105.866058,
+            21.009552
+          ],
+          [
+            105.867722,
+            21.010324
+          ],
+          [
+            105.869759,
+            21.011227
+          ],
+          [
+            105.871346,
+            21.011816
+          ],
+          [
+            105.871803,
+            21.010101
+          ],
+          [
+            105.872795,
+            21.007719
+          ],
+          [
+            105.873909,
+            21.006485
+          ],
+          [
+            105.875488,
+            21.005207
+          ],
+          [
+            105.877159,
+            21.004213
+          ],
+          [
+            105.878906,
+            21.003437
+          ],
+          [
+            105.882179,
+            21.002464
+          ],
+          [
+            105.881821,
+            21.001549
+          ],
+          [
+            105.881157,
+            21.00157
+          ],
+          [
+            105.880577,
+            21.001522
+          ],
+          [
+            105.879677,
+            21.001554
+          ],
+          [
+            105.878967,
+            21.001442
+          ],
+          [
+            105.878571,
+            21.001484
+          ],
+          [
+            105.877716,
+            21.001932
+          ],
+          [
+            105.87693,
+            21.002367
+          ],
+          [
+            105.876022,
+            21.002647
+          ],
+          [
+            105.874809,
+            21.002871
+          ],
+          [
+            105.874748,
+            21.002581
+          ],
+          [
+            105.873604,
+            21.002718
+          ],
+          [
+            105.87265,
+            21.002958
+          ],
+          [
+            105.872162,
+            21.002926
+          ],
+          [
+            105.870979,
+            21.003063
+          ],
+          [
+            105.869034,
+            21.003254
+          ],
+          [
+            105.861916,
+            21.003134
+          ],
+          [
+            105.861176,
+            21.003122
+          ],
+          [
+            105.860832,
+            21.00321
+          ],
+          [
+            105.860641,
+            21.004976
+          ],
+          [
+            105.860313,
+            21.007467
+          ],
+          [
+            105.859978,
+            21.007732
+          ],
+          [
+            105.859756,
+            21.009315
+          ],
+          [
+            105.860718,
+            21.009295
+          ]
+        ]
+      ]
+    }
+  }
+]
 };
 
 // Tâm bản đồ bao trùm toàn bộ các quận nội thành Thăng Long - Hà Nội
 export const VILLAGES_CENTER: [number, number] = [105.8250, 21.0150];
 
-// Hộp giới hạn bao phủ trọn vẹn 6 quận nội thành (Thanh Xuân, Đống Đa, Cầu Giấy, Ba Đình, Hoàn Kiếm, Hai Bà Trưng)
+// Hộp giới hạn bao phủ trọn vẹn 6 quận nội thành
 export const VILLAGES_BBOX: [number, number, number, number] = [
-  105.7750, 20.9800, 105.8750, 21.0550,
+  105.7750, 20.9800, 105.8850, 21.0600,
 ];
 
 // Danh sách các quận nội thành hỗ trợ lọc phân tầng

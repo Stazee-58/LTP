@@ -42,3 +42,6 @@ next-env.d.ts
 
 # scratch
 scratch/
+scripts/gadm_data/
+scripts/official_hanoi_wards/
+scripts/*.json
