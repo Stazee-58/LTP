@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Funnel, X, Check } from "@phosphor-icons/react";
-import { CATEGORY_LABELS } from "@/data/places";
+import { CATEGORY_LABELS, SAMPLE_PLACES } from "@/data/places";
 
 interface FilterBarProps {
   active: Set<string>;
@@ -10,16 +10,10 @@ interface FilterBarProps {
   lang: "vi" | "en";
 }
 
-const CATEGORY_COUNTS: Record<string, number> = {
-  dinh: 5,
-  chua: 7,
-  mieu: 11,
-  gieng: 8,
-  ao: 8,
-  cong_lang: 20,
-  truong_hoc: 19,
-  nha_tho_ho: 15,
-};
+const CATEGORY_COUNTS: Record<string, number> = SAMPLE_PLACES.reduce<Record<string, number>>((acc, p) => {
+  acc[p.category] = (acc[p.category] || 0) + 1;
+  return acc;
+}, {});
 
 export default function FilterBar({ active, onToggle, lang }: FilterBarProps) {
   const [mobileExpanded, setMobileExpanded] = useState(false);
@@ -60,13 +54,13 @@ export default function FilterBar({ active, onToggle, lang }: FilterBarProps) {
           className={`filter-pill filter-pill-all${isAll ? " active" : ""}`}
           onClick={handleClearAll}
           aria-pressed={isAll}
-          title={lang === "en" ? "Show all heritage sites" : "Hiện tất cả 93 di tích"}
+          title={lang === "en" ? `Show all ${SAMPLE_PLACES.length} heritage sites` : `Hiện tất cả ${SAMPLE_PLACES.length} di tích`}
         >
           <span className="filter-pill-check">
             {isAll ? <Check size={12} weight="bold" /> : null}
           </span>
           <span className="filter-pill-name">{lang === "en" ? "All Heritage" : "Tất cả di tích"}</span>
-          <span className="filter-pill-count">93</span>
+          <span className="filter-pill-count">{SAMPLE_PLACES.length}</span>
         </button>
 
         {Object.entries(CATEGORY_LABELS).map(([key, label]) => {
