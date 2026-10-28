@@ -9,7 +9,6 @@ import {
   Star, 
   BookOpen, 
   MusicNotes, 
-  Compass, 
   ArrowSquareOut 
 } from "@phosphor-icons/react";
 import { CATEGORY_LABELS, type Place } from "@/data/places";
@@ -18,7 +17,6 @@ interface PlacePanelProps {
   place: Place;
   lang: "vi" | "en";
   onClose: () => void;
-  onOpenStreetView?: (place: Place) => void;
 }
 
 const CONFIDENCE_LABELS = {
@@ -40,7 +38,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   nha_tho_ho: "#d4a0c0",
 };
 
-export default function PlacePanel({ place, lang, onClose, onOpenStreetView }: PlacePanelProps) {
+export default function PlacePanel({ place, lang, onClose }: PlacePanelProps) {
   const [panelLang, setPanelLang] = useState<"vi" | "en">(lang);
 
   useEffect(() => {
@@ -126,19 +124,8 @@ export default function PlacePanel({ place, lang, onClose, onOpenStreetView }: P
             <p className="panel-name-han">{place.name_han_nom}</p>
           )}
 
-          {/* Quick Action Buttons: Street View + Google Maps */}
+          {/* Quick Action Buttons: Google Maps */}
           <div className="panel-actions-row">
-            {onOpenStreetView && (
-              <button
-                id="btn-place-streetview"
-                className="panel-btn-primary"
-                onClick={() => onOpenStreetView(place)}
-                title="Mở Street View dạo quanh di tích"
-              >
-                <Compass size={16} weight="bold" />
-                <span>{lang === "en" ? "Explore 360° View" : "Khám phá Street View 360°"}</span>
-              </button>
-            )}
             <a
               id="btn-place-google-maps"
               className="panel-btn-secondary"

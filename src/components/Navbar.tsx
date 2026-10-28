@@ -1,8 +1,8 @@
 "use client";
 
-import { Globe, Info, MapTrifold, Buildings, Compass } from "@phosphor-icons/react";
+import { Globe, Info, MapTrifold, Buildings } from "@phosphor-icons/react";
 
-export type ViewMode = "2d" | "3d" | "street";
+export type ViewMode = "2d" | "3d";
 
 interface NavbarProps {
   lang: "vi" | "en";
@@ -41,8 +41,8 @@ export default function Navbar({
 
       {/* Right controls */}
       <div className="navbar-right">
-        {/* 2D / 3D / Street View Mode Switcher */}
-        <div className="nav-view-toggle" role="group" aria-label="Chuyển chế độ hiển thị 2D / 3D / Street View">
+        {/* 2D / 3D Mode Switcher */}
+        <div className="nav-view-toggle" role="group" aria-label="Chuyển chế độ hiển thị 2D / 3D">
           <button
             id="btn-nav-2d"
             className={`nav-view-tab${viewMode === "2d" ? " active" : ""}`}
@@ -62,16 +62,6 @@ export default function Navbar({
           >
             <Buildings size={15} weight={viewMode === "3d" ? "bold" : "regular"} />
             <span>3D</span>
-          </button>
-          <button
-            id="btn-nav-street"
-            className={`nav-view-tab nav-tab-street${viewMode === "street" ? " active" : ""}`}
-            onClick={() => onSetViewMode("street")}
-            aria-pressed={viewMode === "street"}
-            title="Chế độ Street View dạo phố tầm mắt"
-          >
-            <Compass size={15} weight={viewMode === "street" ? "bold" : "regular"} />
-            <span>Street View</span>
           </button>
         </div>
 
